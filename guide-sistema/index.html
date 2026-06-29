@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Все системы продуктивности одним файлом</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent_ink:#14150f;--accent_soft:#4e6b00;--hdr_bg:#14150f;--hdr_text:#ffffff;--hdr_accent:#bff03a;--dark_bg:#14150f;--dark_text:#eef0e4;--dark_muted:#c3c6b3;--copy_bg:#14150f;--copy_text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:sticky;top:0;z-index:9;background:var(--hdr-bg);border-bottom:1px solid rgba(255,255,255,.08)}
+.top .in{max-width:880px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text)}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.nav a{color:var(--hdr-text);opacity:.82;text-decoration:none;font-size:14px;font-weight:600}
+.nav a:hover{opacity:1;color:var(--hdr-accent)}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 15px;border-radius:11px;font-size:13.5px}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a href="/">Материалы</a><a href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a href="/about/">Обо мне</a><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-produktivnost">Продуктивность</a></div>
+<h1>Все системы продуктивности одним файлом</h1>
+<p class="lead">Скриншоты, которые миллиардеры не хотят тебе показывать. За их спокойствием и результатами стоят простые системы, которые ты можешь поставить себе уже сегодня.</p>
+<p class="meta">Внутри: 6 систем продуктивности, метод Дэна Коу как обогнать 99%, как делать 8 часов работы за 4, система P.A.R.A., 8 правил продаж Джобса.</p>
+<div class="sec"><h2>6 систем продуктивности</h2><div class="grid"><div class="cardb"><h3>Техника «Помодоро»</h3><ol><li>Выпиши свои задачи.</li><li>Поставь таймер на 25 минут.</li><li>Сфокусируйся и работай.</li><li>Сделай перерыв 5 минут.</li><li>Повтори 4 раза, потом отдохни подольше.</li></ol></div><div class="cardb"><h3>Метод 3/3/3</h3><ul><li>3 часа на один важный проект.</li><li>3 коротких срочных задачи или встречи.</li><li>3 бытовых дела, чтобы жизнь шла гладко.</li></ul></div><div class="cardb"><h3>Матрица Эйзенхауэра</h3><ul><li>Срочное и важное: сделай это.</li><li>Важное, но не срочное: запланируй.</li><li>Срочное, но не важное: делегируй.</li><li>Не срочное и не важное: убери.</li></ul></div><div class="cardb"><h3>Съешь лягушку</h3><p>Сделай самую трудную задачу первой, остальное пойдёт легче.</p><div class="quote">«Если надо съесть двух лягушек, начни с той, что побольше.» Марк Твен</div></div><div class="cardb"><h3>Стратегия Сайнфелда</h3><ol><li>Поставь себе цель.</li><li>Отмечай в календаре каждый день, когда сделал шаг.</li><li>Тяни цепочку как можно дольше.</li><li>Никогда не пропускай два дня подряд.</li></ol></div><div class="cardb"><h3>Тайм-блокинг</h3><ol><li>Определи, что нужно сделать.</li><li>Сгруппируй похожие дела.</li><li>Выдели под задачи слоты времени.</li><li>Разнеси блоки по календарю.</li><li>Держись расписания, делай перерывы между блоками.</li></ol></div></div></div>
+<div class="sec"><h2>Как обогнать 99% людей (метод Дэна Коу)</h2><h3>1. Создай своё анти-видение</h3><p>Подробно опиши всё, чего ты НЕ хочешь в жизни: бессмысленную рутину, хаос, неудовлетворённость. Сядь с блокнотом на 30 минут и выпиши это. Дискомфорт станет топливом, чтобы понять, чего хочешь по-настоящему, через контраст.</p><h3>2. Исчезни на полгода</h3><p>Убери отвлечения: соцсети, токсичные отношения, привычки, что высасывают энергию. Сосредоточься целиком на построении систем и рутин, которые ведут к твоему видению. Никому ничего не объясняй, просто отдайся своим целям.</p><h3>3. Освой основы</h3><p>Скучные основы это и есть главное. Успех приходит из повторяющихся действий: писать каждый день, регулярно тренироваться, оттачивать базовые навыки ремесла. Маленькие действия складываются и дают экспоненциальный рост.</p><h3>4. Прими метод проб и ошибок</h3><p>Думай как учёный: относись к жизни как к проекту, который требует постоянных экспериментов и корректировок. Успех не мгновенный, нужны годы стабильных усилий и обучения на ошибках.</p><div class="quote">«Построй фундамент, который выведет тебя к той жизни, которую ты хочешь.» Дэн Коу</div></div>
+<div class="sec"><h2>Как сделать 8 часов работы за 4 часа</h2><h3>Разбей день на блоки</h3><p>Фокусируйся на одной задаче внутри выделенного блока. Группируй похожие дела, чтобы меньше переключаться. Держись расписания, чтобы набирать темп и эффективность.</p><h3>Ставь искусственные дедлайны</h3><p>Дроби задачи на мелкие шаги и ставь к каждому жёсткий срок. По закону Паркинсона работа занимает всё отведённое время, поэтому короткие сроки заставляют сфокусироваться и не дают прокрастинировать.</p><h3>Найди свой стиль работы</h3><p>Пробуй разные подходы, чтобы понять, что держит тебя в продуктивности. Подстрой рутину под свои сильные стороны. И помни: всё это не работает, если ты постоянно отвлекаешься. Выключи уведомления, расчисти стол, выстрой здоровые границы.</p></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2>Система P.A.R.A. (порядок в идеях и проектах)</h2><p>Смысл «второго мозга» в том, чтобы информация была не просто складом, а реально полезной и доступной тогда, когда нужна. Всё, что собираешь, раскладывай по четырём папкам:</p><div class="grid"><div class="cardb"><h3>P. Projects (Проекты)</h3><p>Наборы задач с конкретной целью и дедлайном. Пример: подготовка презентации к конференции.</p></div><div class="cardb"><h3>A. Areas (Сферы)</h3><p>Аспекты жизни, требующие постоянного внимания. Пример: здоровье, личные финансы.</p></div><div class="cardb"><h3>R. Resources (Ресурсы)</h3><p>Подборки тематической информации, которая тебе интересна. Пример: статьи про продуктивность, курсы.</p></div><div class="cardb"><h3>A. Archive (Архив)</h3><p>Ценная прошлая информация, которая нужна, но не используется активно. Пример: завершённые проекты.</p></div></div><h3>Как применять</h3><ul><li>Инструменты: Notion, Obsidian или Evernote, чтобы захватывать и упорядочивать.</li><li>Раз в неделю пересматривай и пересобирай систему, дай ей меняться вместе с задачами.</li><li>Не просто складывай информацию, осмысляй её и ищи, как применить.</li></ul></div>
+<div class="sec"><h2>8 правил продаж от Стива Джобса</h2><ol><li>Создай уникальное ценностное предложение. Подчеркни, как именно твой продукт решает проблему по-своему. Доноси страсть к тому, что делаешь.</li><li>Фокус на выгодах, а не на функциях. Показывай, как продукт улучшает жизнь. Продавай впечатление.</li><li>Держи послание простым. Ясные лаконичные презентации, без перегруза техническими деталями. «Простое бывает сложнее сложного.»</li><li>Рассказывай цепляющую историю. Соединяйся с аудиторией эмоционально, делись яркими историями успеха.</li><li>Знай свою аудиторию. Глубоко изучай клиентов, их боли и потребности, подстраивай подход под профиль.</li><li>Создавай впечатление, а не просто продукт. Думай обо всём пути клиента, делай каждую точку контакта приятной.</li><li>Не бойся поляризовать. Уверенно подчёркивай свои сильные стороны. «Часто люди не знают, чего хотят, пока ты им это не покажешь.»</li><li>Упорство перед лицом отказа. Используй отказ как урок, корректируй подход и продолжай. Половина того, что отличает успешных, это чистое упорство.</li></ol></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>
