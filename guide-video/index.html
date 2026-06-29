@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>5 видео по ИИ, которые заменяют платный курс</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent-ink:#14150f;--accent-soft:#4e6b00;--hdr-bg:#14150f;--hdr-text:#ffffff;--hdr-accent:#bff03a;--dark-bg:#14150f;--dark-text:#eef0e4;--dark-muted:#c3c6b3;--copy-bg:#14150f;--copy-text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:-webkit-sticky;position:sticky;top:0;z-index:50;background:var(--hdr-bg);background:color-mix(in srgb,var(--hdr-bg) 90%,transparent);-webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 6px 22px rgba(0,0,0,.20)}
+.top .in{max-width:880px;margin:0 auto;padding:11px 20px;padding-top:max(11px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text);white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 16px;border-radius:11px;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav a.btn:hover{filter:brightness(1.06)}
+.catbar{display:flex;gap:8px;align-items:center;max-width:880px;margin:0 auto;padding:0 20px 11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;color:var(--hdr-text);opacity:.85;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s,opacity .15s}
+.catbar a:hover{opacity:1;border-color:var(--hdr-accent);color:var(--hdr-accent)}
+.catbar a.active{opacity:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:700px){.brand{font-size:14px}.brand span{display:none}.nav a.btn{padding:8px 13px;font-size:12.5px}.top .in{padding-left:16px;padding-right:16px;gap:10px}.catbar{padding-left:16px;padding-right:16px}}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px;scroll-margin-top:100px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><nav class="catbar"><a href="/">Все материалы</a><a href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a class="active" href="/#cat-obucenie">Обучение</a><a href="/#cat-marketing">Маркетинг</a><a href="/about/">Обо мне</a></nav></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-obucenie">Обучение</a></div>
+<h1>5 видео по ИИ, которые заменяют платный курс</h1>
+<p class="lead">YouTube тихо убивает индустрию платных курсов по ИИ. То, за что просят десятки тысяч, уже лежит в открытом доступе у практиков, которые объясняют лучше большинства школ. Вот 5 роликов, которые заменяют платный курс. Все ссылки рабочие, проверены вручную.</p>
+<p class="meta">5 видео, отобранных по делу: не хайп, а практика. По каждому: кто автор, прямая ссылка, что внутри и главный вывод, ради которого стоит смотреть. Открывай по порядку или хватай то, что ближе к твоей задаче сейчас.</p>
+<div class="sec"><h2>1. Jeff Su: стать AI-native за 9 минут</h2><p>Продуктовый маркетолог, который годами собирает рабочие системы из ИИ-инструментов. Это самый быстрый вход без перегруза.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="https://www.youtube.com/watch?v=E7YiKBeOneo">Скопировать</button></div><div class="box">https://www.youtube.com/watch?v=E7YiKBeOneo</div><p>Внутри: какие привычки и инструменты реально делают тебя AI-native, а не просто пользователем чат-бота. Без воды, сразу на практику в ChatGPT, Gemini и Claude.</p><div class="note">Главный вывод: дело не в количестве инструментов, а в нескольких привычках, которые встраивают ИИ в каждую задачу дня.</div></div>
+<div class="sec"><h2>2. Varun Mayya: 99% промптят неправильно</h2><p>Предприниматель и один из самых трезвых голосов про ИИ. Объясняет, почему большинство получает слабые ответы.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="https://www.youtube.com/watch?v=VnEoS2eQXsw">Скопировать</button></div><div class="box">https://www.youtube.com/watch?v=VnEoS2eQXsw</div><p>Внутри: разбор, почему обычный промпт даёт пустой ответ, и как мыслить промптинг как мини-проектирование задачи, а не как вопрос в поисковик.</p><div class="note">Главный вывод: ты управляешь не словами, а контекстом и рамкой. Дай модели роль, вводные и нужный формат, и ответ меняется кардинально.</div></div>
+<div class="sec"><h2>3. Sandeep Swadia (The MIT Monk): выучить ИИ за 17 минут</h2><p>Выпускник MIT, который учился и на монаха. Объясняет, как реально мыслить в эпоху ИИ, для тех, кто чувствует, что отстаёт.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="https://www.youtube.com/watch?v=EWFFaKxsz_s">Скопировать</button></div><div class="box">https://www.youtube.com/watch?v=EWFFaKxsz_s</div><p>Внутри: не список инструментов, а карта понимания, как ИИ работает под капотом ровно настолько, чтобы перестать его бояться и начать применять.</p><div class="note">Главный вывод: люди буксуют не потому что ИИ сложный, а потому что не разобрались, как он устроен. 17 минут закрывают этот пробел.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2>4. AI Edge: геймификация жизни с ИИ за 30 минут</h2><p>Канал про прикладной ИИ. Этот ролик про то, как применять ИИ в обычной жизни, а не только болтать о нём.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="https://www.youtube.com/watch?v=PzLcdIpjYCM">Скопировать</button></div><div class="box">https://www.youtube.com/watch?v=PzLcdIpjYCM</div><p>Внутри: как за полчаса превратить свои цели и рутину в игру с уровнями и наградами, где ИИ ведёт счёт и держит тебя в тонусе.</p><div class="note">Главный вывод: ИИ полезен не только в работе. Он отлично держит дисциплину и привычки, если правильно поставить ему роль тренера.</div></div>
+<div class="sec"><h2>5. Dan Martell: 9 ИИ-навыков, чтобы обойти 99%</h2><p>Серийный предприниматель и инвестор. Самый прикладной из пяти: навыки, которые дают реальный рычаг.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="https://www.youtube.com/watch?v=BuwPnrMmhzQ">Скопировать</button></div><div class="box">https://www.youtube.com/watch?v=BuwPnrMmhzQ</div><p>Внутри: 9 конкретных навыков работы с ИИ, которые отделяют тех, кто получает результат, от тех, кто просто играется с чат-ботом.</p><div class="note">Главный вывод: преимущество дают не игрушки, а навыки. Освой несколько по-настоящему, и обойдёшь большинство, кто прыгает по верхам.</div></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>
