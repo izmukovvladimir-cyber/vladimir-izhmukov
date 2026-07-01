@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Низший ум против высшего: 7 вопросов, что меняют мышление</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent-ink:#14150f;--accent-soft:#4e6b00;--hdr-bg:#14150f;--hdr-text:#ffffff;--hdr-accent:#bff03a;--dark-bg:#14150f;--dark-text:#eef0e4;--dark-muted:#c3c6b3;--copy-bg:#14150f;--copy-text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:-webkit-sticky;position:sticky;top:0;z-index:50;background:var(--hdr-bg);background:color-mix(in srgb,var(--hdr-bg) 90%,transparent);-webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 6px 22px rgba(0,0,0,.20)}
+.top .in{max-width:880px;margin:0 auto;padding:11px 20px;padding-top:max(11px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text);white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 16px;border-radius:11px;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav a.btn:hover{filter:brightness(1.06)}
+.catbar{display:flex;gap:8px;align-items:center;max-width:880px;margin:0 auto;padding:0 20px 11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;color:var(--hdr-text);opacity:.85;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s,opacity .15s}
+.catbar a:hover{opacity:1;border-color:var(--hdr-accent);color:var(--hdr-accent)}
+.catbar a.active{opacity:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:700px){.brand{font-size:14px}.brand span{display:none}.nav a.btn{padding:8px 13px;font-size:12.5px}.top .in{padding-left:16px;padding-right:16px;gap:10px}.catbar{padding-left:16px;padding-right:16px}}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.linkbtn{display:inline-block;margin:12px 0 4px;color:var(--accent-soft);text-decoration:none;font-weight:800;font-size:15px;word-break:break-all;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.8}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px;scroll-margin-top:100px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><nav class="catbar"><a href="/">Все материалы</a><a href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a class="active" href="/#cat-obucenie">Обучение</a><a href="/#cat-marketing">Маркетинг</a><a href="/#cat-obraz-i-vnesnost">Образ и внешность</a><a href="/about/">Обо мне</a></nav></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-obucenie">Обучение</a></div>
+<h1>Низший ум против высшего: 7 вопросов, что меняют мышление</h1>
+<p class="lead">Одна и та же ситуация. Два разных вопроса к себе. И жизнь идёт по двум разным сценариям. Низший ум спрашивает, как получить больше. Высший спрашивает, как создать ценность. Вопрос, который ты задаёшь себе первым, задаёт направление всему остальному. Вот 7 вопросов, которые переключают мышление с выживания на рост.</p>
+<p class="meta">7 вопросов. По каждому: старая формулировка, которая держит на месте, новая, которая двигает вперёд, почему это меняет результат, и промпт, чтобы применить к своей ситуации прямо сейчас.</p>
+<div class="how">Открой ChatGPT, подойдёт и Gemini. Иди по вопросам сверху вниз. Сначала лови себя на старой формулировке в реальной ситуации, потом переформулируй и вставляй готовый промпт, чтобы разобрать свой случай. Это тренажёр мышления, работает только на твоих реальных примерах.</div>
+<div class="sec"><h2>Вопрос 1. От денег к ценности</h2><p>Низший ум: «Как мне получить больше денег?». Высший ум: «Какую ценность я могу создать, чтобы деньги пришли как результат?». Деньги идут туда, где решают чужую проблему. Гонка за суммой без ценности упирается в потолок быстро.</p><p>Разверни фокус с того, что хочешь получить, на то, что можешь дать. Ценность первична, деньги приходят следом за ней.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты стратег по продукту. Вот чем я занимаюсь или хочу заниматься: [опиши]. Помоги переключиться с вопроса как заработать на вопрос какую ценность создать. Назови 5 конкретных проблем моей аудитории, которые я могу решить, и по каждой скажи, за что человек реально готов платить. В конце выбери одну, с которой стоит начать, и объясни почему.">Скопировать</button></div><div class="box">Ты стратег по продукту. Вот чем я занимаюсь или хочу заниматься: [опиши]. Помоги переключиться с вопроса как заработать на вопрос какую ценность создать. Назови 5 конкретных проблем моей аудитории, которые я могу решить, и по каждой скажи, за что человек реально готов платить. В конце выбери одну, с которой стоит начать, и объясни почему.</div></div>
+<div class="sec"><h2>Вопрос 2. От зависти к обучению</h2><p>Низший ум: «Почему они успешнее меня?». Высший ум: «Чему я могу научиться у их успеха?». Первый вопрос жжёт энергию впустую. Второй превращает чужой результат в твою инструкцию.</p><p>Каждого, кто вызывает укол зависти, переводи в учителя. Разбирай, что именно он сделал, и забирай механику себе.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Помоги мне учиться у сильных вместо того, чтобы сравнивать себя с ними. Вот человек или проект в моей нише, чей результат меня цепляет: [опиши, что видишь: контент, цифры, поведение]. Разбери по шагам, за счёт чего это работает, какие приёмы он использует и что из этого я могу повторить уже на этой неделе. Дай список конкретных действий.">Скопировать</button></div><div class="box">Помоги мне учиться у сильных вместо того, чтобы сравнивать себя с ними. Вот человек или проект в моей нише, чей результат меня цепляет: [опиши, что видишь: контент, цифры, поведение]. Разбери по шагам, за счёт чего это работает, какие приёмы он использует и что из этого я могу повторить уже на этой неделе. Дай список конкретных действий.</div></div>
+<div class="sec"><h2>Вопрос 3. От жертвы к ответственности</h2><p>Низший ум: «Почему это вечно случается со мной?». Высший ум: «Что во мне должно измениться, чтобы сценарий изменился?». Пока причина снаружи, ты ничего не можешь. Как только берёшь свою часть, появляется рычаг.</p><p>В повторяющейся проблеме ищи свой вклад, даже маленький. Твоя часть это единственное, что ты можешь поменять.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Будь честным коучем, без утешений. Вот ситуация, которая повторяется в моей жизни или работе: [опиши]. Помоги увидеть мой собственный вклад в неё, даже неочевидный: какие мои действия, привычки или решения раз за разом приводят к этому результату. Задай мне 3 неудобных вопроса и предложи одно изменение в моём поведении, которое разорвёт цикл.">Скопировать</button></div><div class="box">Будь честным коучем, без утешений. Вот ситуация, которая повторяется в моей жизни или работе: [опиши]. Помоги увидеть мой собственный вклад в неё, даже неочевидный: какие мои действия, привычки или решения раз за разом приводят к этому результату. Задай мне 3 неудобных вопроса и предложи одно изменение в моём поведении, которое разорвёт цикл.</div></div>
+<div class="sec"><h2>Вопрос 4. От страха провала к росту</h2><p>Низший ум: «Лишь бы не провалиться». Высший ум: «Чему меня научит любой исход?». Установка на защиту сужает действия до безопасных и мелких. Установка на рост позволяет пробовать и забирать урок из любого результата.</p><p>Перед новым шагом спрашивай себя, что ты вынесешь, даже если не выйдет. Когда любой исход даёт опыт, страх теряет власть.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Я откладываю шаг из страха, что не получится. Вот что я боюсь сделать: [опиши]. Помоги переключиться со страха провала на установку роста. Разбери, какой максимальный урок и опыт я получу в каждом из сценариев, включая неудачный. Покажи, что даже плохой исход двигает меня вперёд, и предложи самый маленький безопасный шаг, чтобы начать сегодня.">Скопировать</button></div><div class="box">Я откладываю шаг из страха, что не получится. Вот что я боюсь сделать: [опиши]. Помоги переключиться со страха провала на установку роста. Разбери, какой максимальный урок и опыт я получу в каждом из сценариев, включая неудачный. Покажи, что даже плохой исход двигает меня вперёд, и предложи самый маленький безопасный шаг, чтобы начать сегодня.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2>Вопрос 5. От охвата к пользе</h2><p>Низший ум: «Как набрать подписчиков?». Высший ум: «Как быть настолько полезным, чтобы люди сами звали других?». Погоня за цифрой подписчиков рождает пустой контент. Фокус на пользе рождает тех, кто остаётся и приводит своих.</p><p>Считай не сколько людей пришло, а скольким ты реально помог. Польза это то, что заставляет делиться и возвращаться.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты редактор и стратег контента. Моя тема и аудитория: [опиши]. Помоги переключиться с вопроса как набрать подписчиков на вопрос как быть настолько полезным, чтобы мной делились. Дай 7 идей контента, каждая из которых закрывает реальную боль моей аудитории и вызывает желание переслать другу. По каждой скажи, какую именно пользу человек уносит.">Скопировать</button></div><div class="box">Ты редактор и стратег контента. Моя тема и аудитория: [опиши]. Помоги переключиться с вопроса как набрать подписчиков на вопрос как быть настолько полезным, чтобы мной делились. Дай 7 идей контента, каждая из которых закрывает реальную боль моей аудитории и вызывает желание переслать другу. По каждой скажи, какую именно пользу человек уносит.</div></div>
+<div class="sec"><h2>Вопрос 6. От нехватки времени к приоритету</h2><p>Низший ум: «Где взять на это время?». Высший ум: «Что я могу перестать делать, чтобы освободить время на главное?». Время не находят, его освобождают. Вопрос не в объёме часов, а в том, чем они заняты.</p><p>Вместо поиска лишних часов ищи, что отнимает их зря. Убери одно пожирающее время дело, и главное получит свой слот.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Помоги освободить время на главное. Вот на что уходит мой день сейчас: [перечисли основные дела и примерное время]. А вот что для меня по-настоящему важно, но не доходят руки: [опиши]. Найди в моём списке 3 дела, которые дают меньше всего результата, и предложи, что с ними сделать: убрать, сократить, делегировать или отдать нейросети. Собери мне новый режим дня под главное.">Скопировать</button></div><div class="box">Помоги освободить время на главное. Вот на что уходит мой день сейчас: [перечисли основные дела и примерное время]. А вот что для меня по-настоящему важно, но не доходят руки: [опиши]. Найди в моём списке 3 дела, которые дают меньше всего результата, и предложи, что с ними сделать: убрать, сократить, делегировать или отдать нейросети. Собери мне новый режим дня под главное.</div></div>
+<div class="sec"><h2>Вопрос 7. От проблемы к возможности</h2><p>Низший ум: «Как избавиться от этой проблемы?». Высший ум: «Какую возможность прячет эта проблема?». Проблема, которая бесит тебя, бесит и тысячи других. В ней часто лежит идея продукта, контента или роста.</p><p>Свою боль разворачивай в возможность. То, что мешает тебе и многим, это готовый запрос рынка.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты предприниматель с мышлением на возможности. Вот проблема, которая раздражает меня в моей сфере: [опиши]. Помоги увидеть в ней возможность. Разбери: кто ещё сталкивается с этим, какой продукт, услуга или контент могли бы это решить, и как лично я мог бы на этом вырасти или заработать. Дай 3 конкретных варианта, от самого простого к самому амбициозному.">Скопировать</button></div><div class="box">Ты предприниматель с мышлением на возможности. Вот проблема, которая раздражает меня в моей сфере: [опиши]. Помоги увидеть в ней возможность. Разбери: кто ещё сталкивается с этим, какой продукт, услуга или контент могли бы это решить, и как лично я мог бы на этом вырасти или заработать. Дай 3 конкретных варианта, от самого простого к самому амбициозному.</div></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>
