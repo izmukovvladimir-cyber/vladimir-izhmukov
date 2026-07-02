@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Постеры уровня дизайнера: метод Reve и 6 промптов</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent-ink:#14150f;--accent-soft:#4e6b00;--hdr-bg:#14150f;--hdr-text:#ffffff;--hdr-accent:#bff03a;--dark-bg:#14150f;--dark-text:#eef0e4;--dark-muted:#c3c6b3;--copy-bg:#14150f;--copy-text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:-webkit-sticky;position:sticky;top:0;z-index:50;background:var(--hdr-bg);background:color-mix(in srgb,var(--hdr-bg) 90%,transparent);-webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 6px 22px rgba(0,0,0,.20)}
+.top .in{max-width:880px;margin:0 auto;padding:11px 20px;padding-top:max(11px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text);white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 16px;border-radius:11px;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav a.btn:hover{filter:brightness(1.06)}
+.catbar{display:flex;gap:8px;align-items:center;max-width:880px;margin:0 auto;padding:0 20px 11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;color:var(--hdr-text);opacity:.85;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s,opacity .15s}
+.catbar a:hover{opacity:1;border-color:var(--hdr-accent);color:var(--hdr-accent)}
+.catbar a.active{opacity:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:700px){.brand{font-size:14px}.brand span{display:none}.nav a.btn{padding:8px 13px;font-size:12.5px}.top .in{padding-left:16px;padding-right:16px;gap:10px}.catbar{padding-left:16px;padding-right:16px}}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.linkbtn{display:inline-block;margin:12px 0 4px;color:var(--accent-soft);text-decoration:none;font-weight:800;font-size:15px;word-break:break-all;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.8}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px;scroll-margin-top:100px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><nav class="catbar"><a href="/">Все материалы</a><a class="active" href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a href="/#cat-obucenie">Обучение</a><a href="/#cat-marketing">Маркетинг</a><a href="/#cat-obraz-i-vnesnost">Образ и внешность</a><a href="/#cat-samopoznanie">Самопознание</a><a href="/about/">Обо мне</a></nav></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-video-i-montaj">Видео и монтаж</a></div>
+<h1>Постеры уровня дизайнера: метод Reve и 6 промптов</h1>
+<p class="lead">Почти все постеры из нейросетей выглядят одинаково: шаблонная композиция, кривой текст, сразу видно генерацию. Проблема не в нейросетях, а в том, что люди просят «сделай красиво» без референса и роли. Здесь метод из вирусного приёма: даёшь модели постер-референс как ориентир по типографике и композиции, а тему свою. Плюс 5 готовых промптов под задачи, которые у блогера возникают каждую неделю: обложка рилса, слайд карусели, афиша эфира, обложка хайлайтс и постер под пост.</p>
+<p class="meta">Метод работы в Reve: вход, мастер-промпт «дизайнер мирового класса» целиком и 5 промптов под конкретные задачи блогера. Подстановки в [квадратных скобках].</p>
+<div class="how">Как пользоваться: зайди на reve.com (откроется app.reve.com), создай проект с чистого листа. Загрузи референс: любой постер, чья подача тебе нравится, из Pinterest или сохранённых. Вставь мастер-промпт, подставь свою тему и получи постер в высоком качестве. Главная сила Reve в правках: текст лежит отдельным слоем, тапаешь по заголовку и переписываешь, остальное не съезжает. Фон можно выделить и перекрасить отдельно. То есть не перегенерируешь всё заново из-за одной кривой буквы, а правишь как в редакторе. Эти же промпты работают и в других генераторах с референсом, но без послойной правки.</div>
+<div class="p"><span class="num">1 из 6</span><h2>Мастер-промпт: дизайнер мирового класса</h2><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты дизайнер мирового класса. Используй приложенный постер как визуальный ориентир по типографике, композиции, палитре и общей энергии, но только как вдохновение, не копируй его содержание. Моя тема: [о чём постер, например запуск бесплатного эфира про рост в соцсетях]. Заголовок на постере: [точный текст заголовка]. Подзаголовок: [одна строка, если нужна]. Собери постер так, будто его делал топовый дизайнер для печати: чёткая иерархия текста, воздух, один визуальный акцент, ничего лишнего. Текст на русском, без ошибок в буквах.">Скопировать</button></div><div class="box">Ты дизайнер мирового класса. Используй приложенный постер как визуальный ориентир по типографике, композиции, палитре и общей энергии, но только как вдохновение, не копируй его содержание. Моя тема: [о чём постер, например запуск бесплатного эфира про рост в соцсетях]. Заголовок на постере: [точный текст заголовка]. Подзаголовок: [одна строка, если нужна]. Собери постер так, будто его делал топовый дизайнер для печати: чёткая иерархия текста, воздух, один визуальный акцент, ничего лишнего. Текст на русском, без ошибок в буквах.</div><p class="ex"><b>Пример:</b> референс прикрепи файлом, тему и заголовок впиши свои.</p></div>
+<div class="p"><span class="num">2 из 6</span><h2>Обложка рилса, которую видно в ленте</h2><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай вертикальную обложку 9:16 для короткого видео. Тема ролика: [тема]. Крупный заголовок: [от 3 до 5 слов, интрига или боль зрителя]. Требования: заголовок читается с экрана телефона даже в миниатюре, занимает верхнюю треть, контраст текста и фона максимальный, один визуальный образ по центру без мелких деталей, стиль современный и дорогой, без стоковой пластиковой картинки. Нижнюю треть оставь спокойной, туда ляжет интерфейс приложения.">Скопировать</button></div><div class="box">Сделай вертикальную обложку 9:16 для короткого видео. Тема ролика: [тема]. Крупный заголовок: [от 3 до 5 слов, интрига или боль зрителя]. Требования: заголовок читается с экрана телефона даже в миниатюре, занимает верхнюю треть, контраст текста и фона максимальный, один визуальный образ по центру без мелких деталей, стиль современный и дорогой, без стоковой пластиковой картинки. Нижнюю треть оставь спокойной, туда ляжет интерфейс приложения.</div><p class="ex"><b>Пример:</b> заголовок: «Охваты умерли?» или «3 ролика в день без съёмок».</p></div>
+<div class="p"><span class="num">3 из 6</span><h2>Слайд карусели в едином стиле</h2><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай квадратный слайд 4:5 для карусели в соцсети. Это слайд номер [2] из [7], серия должна выглядеть единой. Стиль серии: [фон, цвет акцента, шрифтовое настроение, например тёмный фон и лаймовый акцент]. Заголовок слайда: [текст]. Под ним [3] коротких тезиса: [перечисли]. Требования: заголовок крупно сверху, тезисы списком с воздухом между строк, номер слайда мелко в углу, никаких декоративных элементов, которые воюют с текстом. Читабельность важнее красоты.">Скопировать</button></div><div class="box">Сделай квадратный слайд 4:5 для карусели в соцсети. Это слайд номер [2] из [7], серия должна выглядеть единой. Стиль серии: [фон, цвет акцента, шрифтовое настроение, например тёмный фон и лаймовый акцент]. Заголовок слайда: [текст]. Под ним [3] коротких тезиса: [перечисли]. Требования: заголовок крупно сверху, тезисы списком с воздухом между строк, номер слайда мелко в углу, никаких декоративных элементов, которые воюют с текстом. Читабельность важнее красоты.</div><p class="ex"><b>Пример:</b> опиши стиль один раз и вставляй его во все слайды серии.</p></div>
+<div class="p"><span class="num">4 из 6</span><h2>Афиша эфира или воркшопа</h2><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай афишу события в формате 4:5. Событие: [название, например открытый эфир «Как расти без съёмок»]. Дата и время: [подставь]. Спикер: [имя и одна строка регалий]. Требования: композиция как у афиши концерта, а не как у скучного вебинара: название события самое крупное, дата вторым уровнем, внизу строка «участие по слову [кодовое слово] в директ». Один сильный визуальный образ по теме события, палитра [твои цвета], настроение дорогого мероприятия, на которое жалко не прийти.">Скопировать</button></div><div class="box">Сделай афишу события в формате 4:5. Событие: [название, например открытый эфир «Как расти без съёмок»]. Дата и время: [подставь]. Спикер: [имя и одна строка регалий]. Требования: композиция как у афиши концерта, а не как у скучного вебинара: название события самое крупное, дата вторым уровнем, внизу строка «участие по слову [кодовое слово] в директ». Один сильный визуальный образ по теме события, палитра [твои цвета], настроение дорогого мероприятия, на которое жалко не прийти.</div><p class="ex"><b>Пример:</b> если есть фото спикера, приложи референсом и попроси вписать.</p></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="p"><span class="num">5 из 6</span><h2>Обложки хайлайтс одним набором</h2><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай набор из [5] обложек для хайлайтс в профиле, формат 1:1, единый стиль. Названия разделов: [например Старт, Кейсы, Отзывы, Инструменты, Обо мне]. Требования: один фон и одна палитра на весь набор [опиши цвета], в центре каждой обложки один простой символ по смыслу раздела, без текста на самой картинке, символы одинаковой толщины линий и размера. Стиль минималистичный и дорогой, как у брендов одежды, а не как клипарт.">Скопировать</button></div><div class="box">Сделай набор из [5] обложек для хайлайтс в профиле, формат 1:1, единый стиль. Названия разделов: [например Старт, Кейсы, Отзывы, Инструменты, Обо мне]. Требования: один фон и одна палитра на весь набор [опиши цвета], в центре каждой обложки один простой символ по смыслу раздела, без текста на самой картинке, символы одинаковой толщины линий и размера. Стиль минималистичный и дорогой, как у брендов одежды, а не как клипарт.</div><p class="ex"><b>Пример:</b> сгенерируй первую, зафиксируй стиль, остальные проси «в том же стиле».</p></div>
+<div class="p"><span class="num">6 из 6</span><h2>Постер-цитата под пост</h2><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай квадратный постер 1:1 с одной фразой для поста. Фраза: [твоя мысль одной строкой, например «Магия не в видео, магия в тексте под ним»]. Требования: фраза единственный герой постера, типографика как у обложки дорогого журнала: игра размеров слов, одно слово выделено цветом [твой акцентный цвет], фон почти однотонный с лёгкой фактурой, подпись автора мелко внизу: [твой ник]. Никаких картинок и иллюстраций, только текст и воздух.">Скопировать</button></div><div class="box">Сделай квадратный постер 1:1 с одной фразой для поста. Фраза: [твоя мысль одной строкой, например «Магия не в видео, магия в тексте под ним»]. Требования: фраза единственный герой постера, типографика как у обложки дорогого журнала: игра размеров слов, одно слово выделено цветом [твой акцентный цвет], фон почти однотонный с лёгкой фактурой, подпись автора мелко внизу: [твой ник]. Никаких картинок и иллюстраций, только текст и воздух.</div><p class="ex"><b>Пример:</b> бери фразы из своих постов, которые собрали больше всего реакций.</p></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>
