@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Личный бренд на Claude: 4 промпта, по которым тебя запомнят</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent-ink:#14150f;--accent-soft:#4e6b00;--hdr-bg:#14150f;--hdr-text:#ffffff;--hdr-accent:#bff03a;--dark-bg:#14150f;--dark-text:#eef0e4;--dark-muted:#c3c6b3;--copy-bg:#14150f;--copy-text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:-webkit-sticky;position:sticky;top:0;z-index:50;background:var(--hdr-bg);background:color-mix(in srgb,var(--hdr-bg) 90%,transparent);-webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 6px 22px rgba(0,0,0,.20)}
+.top .in{max-width:880px;margin:0 auto;padding:11px 20px;padding-top:max(11px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text);white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 16px;border-radius:11px;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav a.btn:hover{filter:brightness(1.06)}
+.catbar{display:flex;gap:8px;align-items:center;max-width:880px;margin:0 auto;padding:0 20px 11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;color:var(--hdr-text);opacity:.85;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s,opacity .15s}
+.catbar a:hover{opacity:1;border-color:var(--hdr-accent);color:var(--hdr-accent)}
+.catbar a.active{opacity:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:700px){.brand{font-size:14px}.brand span{display:none}.nav a.btn{padding:8px 13px;font-size:12.5px}.top .in{padding-left:16px;padding-right:16px;gap:10px}.catbar{padding-left:16px;padding-right:16px}}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.linkbtn{display:inline-block;margin:12px 0 4px;color:var(--accent-soft);text-decoration:none;font-weight:800;font-size:15px;word-break:break-all;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.8}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px;scroll-margin-top:100px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><nav class="catbar"><a href="/">Все материалы</a><a href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a href="/#cat-obucenie">Обучение</a><a class="active" href="/#cat-marketing">Маркетинг</a><a href="/#cat-obraz-i-vnesnost">Образ и внешность</a><a href="/#cat-samopoznanie">Самопознание</a><a href="/about/">Обо мне</a></nav></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-marketing">Маркетинг</a></div>
+<h1>Личный бренд на Claude: 4 промпта, по которым тебя запомнят</h1>
+<p class="lead">Личный бренд это не логотип и не красивая аватарка. Это символ, фраза и одна идея, по которым тебя узнают и рекомендуют, даже когда тебя нет в комнате. Ниже четыре готовых промпта. Каждый вытаскивает из тебя один слой бренда и отдаёт готовый результат, а не пустой совет. Ставишь их по порядку и к концу вечера у тебя собран узнаваемый образ под твою нишу.</p>
+<p class="meta">4 промпта личного бренда: фирменный символ, фраза-слоган, цепляющая идея и главный смысл. Каждый выдаёт готовый артефакт.</p>
+<div class="how">Как пользоваться. Открой Claude или ChatGPT, вставляй промпты строго по порядку с первого по четвёртый. Первый собирает вводные о тебе, остальные опираются на его ответы, поэтому не перепрыгивай. В квадратных скобках впиши свои данные. Если нейросеть выдала общее и пресное, попроси её задать тебе три уточняющих вопроса и переделать. Финал сохрани в отдельный файл, это твоя карта бренда на год вперёд.</div>
+<div class="sec"><h2>Промпт 1. Фирменный символ</h2><p>Находит один визуальный образ, который невозможно спутать с конкурентом. Не логотип за деньги, а узнаваемая деталь, которую ты сможешь повторять в каждом ролике, обложке и сторис.</p><p>Зачем он нужен. Люди запоминают картинку быстрее слов. Один повторяющийся символ склеивает весь твой контент в единый бренд, и тебя начинают узнавать по обложке, ещё не прочитав имя.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты бренд-дизайнер, который придумывает узнаваемые визуальные символы для личных брендов. Твоя цель найти один образ, по которому меня будут узнавать в ленте.
+
+Мои вводные:
+Ниша: [что я делаю]
+Аудитория: [для кого]
+Характер бренда: [3 слова, например дерзкий, тёплый, точный]
+Что я не хочу транслировать: [чего избегать]
+
+Сделай по шагам:
+1. Задай мне 3 вопроса, если данных мало.
+2. Предложи 5 вариантов фирменного символа: цвет, форма, деталь или приём, которые я смогу повторять в каждом посте.
+3. По каждому объясни в одной строке, почему он бьётся с моим характером и нишей.
+4. Отметь один самый сильный и покажи, как применить его на обложке ролика, в аватарке и в сторис.
+
+Без абстракций. Каждый вариант должен быть таким, чтобы я мог собрать его сам сегодня.">Скопировать</button></div><div class="box">Ты бренд-дизайнер, который придумывает узнаваемые визуальные символы для личных брендов. Твоя цель найти один образ, по которому меня будут узнавать в ленте.
+
+Мои вводные:
+Ниша: [что я делаю]
+Аудитория: [для кого]
+Характер бренда: [3 слова, например дерзкий, тёплый, точный]
+Что я не хочу транслировать: [чего избегать]
+
+Сделай по шагам:
+1. Задай мне 3 вопроса, если данных мало.
+2. Предложи 5 вариантов фирменного символа: цвет, форма, деталь или приём, которые я смогу повторять в каждом посте.
+3. По каждому объясни в одной строке, почему он бьётся с моим характером и нишей.
+4. Отметь один самый сильный и покажи, как применить его на обложке ролика, в аватарке и в сторис.
+
+Без абстракций. Каждый вариант должен быть таким, чтобы я мог собрать его сам сегодня.</div></div>
+<div class="sec"><h2>Промпт 2. Фраза, с которой тебя запомнят</h2><p>Собирает короткий слоган, который люди повторяют сами, без просьбы, и сразу понимают, чей это бренд.</p><p>Зачем она нужна. Пока у тебя нет своей фразы, тебя пересказывают чужими словами и забывают. Фраза, которую хочется повторить, работает как сарафан: аудитория разносит её за тебя.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты специалист по фирменным фразам личного бренда. Твоя цель найти слоган, который люди повторяют сами и по которому сразу понятно, чей это бренд.
+
+Мои вводные:
+Чем я занимаюсь: [суть]
+Во что я верю в своей теме: [твоя позиция]
+Чем я хочу быть известен: [результат для людей]
+
+Сделай по шагам:
+1. Найди одну самую точную истину о том, что я делаю или во что верю.
+2. Придумай 5 вариантов фразы: коротких, конкретных, которые невозможно перепутать с другим экспертом.
+3. Проверь каждую вопросом: повторит ли её человек в разговоре без подсказки? Оставь только те, что прошли.
+4. Выбери сильнейшую и покажи, как встроить её в шапку профиля, конец ролика и первый экран лендинга.
+
+Правила: не длиннее 6 слов, понятно даже незнакомцу, без модных пустышек вроде прорывной и меняющий правила.">Скопировать</button></div><div class="box">Ты специалист по фирменным фразам личного бренда. Твоя цель найти слоган, который люди повторяют сами и по которому сразу понятно, чей это бренд.
+
+Мои вводные:
+Чем я занимаюсь: [суть]
+Во что я верю в своей теме: [твоя позиция]
+Чем я хочу быть известен: [результат для людей]
+
+Сделай по шагам:
+1. Найди одну самую точную истину о том, что я делаю или во что верю.
+2. Придумай 5 вариантов фразы: коротких, конкретных, которые невозможно перепутать с другим экспертом.
+3. Проверь каждую вопросом: повторит ли её человек в разговоре без подсказки? Оставь только те, что прошли.
+4. Выбери сильнейшую и покажи, как встроить её в шапку профиля, конец ролика и первый экран лендинга.
+
+Правила: не длиннее 6 слов, понятно даже незнакомцу, без модных пустышек вроде прорывной и меняющий правила.</div></div>
+<div class="sec"><h2>Промпт 3. Идея, которая цепляет внимание</h2><p>Вытаскивает неожиданную мысль в твоей нише, ту, ради которой на тебя подписываются и которой хочется поделиться.</p><p>Зачем она нужна. Экспертов много, все говорят правильное и одинаковое. Цепляет только тот, у кого есть своя точка зрения, с которой хочется спорить или соглашаться. Это твой крючок на холодную аудиторию.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты стратег по личным брендам. Твоя цель сформулировать мою большую идею, из-за которой люди подписываются и делятся моим контентом.
+
+Мои вводные:
+Ниша: [что я делаю]
+Что в моей теме все повторяют как аксиому: [общее место]
+В чём я вижу это иначе: [моя правда, даже если спорная]
+
+Сделай по шагам:
+1. Сформулируй мою идею одним утверждением, которое спорит с общепринятым.
+2. Дай 3 варианта, от мягкого до дерзкого, чтобы я выбрал по своему характеру.
+3. К каждому дай короткое обоснование, почему это правда, а не поза.
+4. Покажи 3 темы для роликов, которые раскрывают эту идею с разных сторон.
+
+Идея должна быть такой, чтобы под ней хотелось написать комментарий, а не пройти мимо.">Скопировать</button></div><div class="box">Ты стратег по личным брендам. Твоя цель сформулировать мою большую идею, из-за которой люди подписываются и делятся моим контентом.
+
+Мои вводные:
+Ниша: [что я делаю]
+Что в моей теме все повторяют как аксиому: [общее место]
+В чём я вижу это иначе: [моя правда, даже если спорная]
+
+Сделай по шагам:
+1. Сформулируй мою идею одним утверждением, которое спорит с общепринятым.
+2. Дай 3 варианта, от мягкого до дерзкого, чтобы я выбрал по своему характеру.
+3. К каждому дай короткое обоснование, почему это правда, а не поза.
+4. Покажи 3 темы для роликов, которые раскрывают эту идею с разных сторон.
+
+Идея должна быть такой, чтобы под ней хотелось написать комментарий, а не пройти мимо.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2>Промпт 4. Причина, почему выбирают тебя</h2><p>Находит единственный главный смысл, ради которого клиент возвращается именно к тебе, а не к соседнему эксперту с такой же услугой.</p><p>Зачем он нужен. Символ, фраза и идея приводят людей. Смысл удерживает и продаёт. Когда ты чётко понимаешь, за чем к тебе идут, ты перестаёшь конкурировать ценой и начинаешь собирать своих людей.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты бренд-стратег. Твоя цель найти главный смысл моего бренда, ту единственную причину, по которой клиент выбирает меня снова.
+
+Мои вводные:
+Что я продаю или чему учу: [продукт]
+Какой результат получает человек: [до и после]
+Что говорят те, кому со мной было хорошо: [реальные слова, если есть]
+
+Сделай по шагам:
+1. Собери из этого 5 возможных смыслов бренда, каждый одной фразой.
+2. Отбрось те, что подходят любому конкуренту. Оставь только мои.
+3. Выбери один центральный смысл, вокруг которого можно строить весь контент и продукты.
+4. Покажи, как этот смысл звучит в трёх точках: в первой строке профиля, в закрепе и в оффере.
+
+В финале собери всё вместе: символ, фраза, идея и смысл на одном экране. Это моя карта бренда.">Скопировать</button></div><div class="box">Ты бренд-стратег. Твоя цель найти главный смысл моего бренда, ту единственную причину, по которой клиент выбирает меня снова.
+
+Мои вводные:
+Что я продаю или чему учу: [продукт]
+Какой результат получает человек: [до и после]
+Что говорят те, кому со мной было хорошо: [реальные слова, если есть]
+
+Сделай по шагам:
+1. Собери из этого 5 возможных смыслов бренда, каждый одной фразой.
+2. Отбрось те, что подходят любому конкуренту. Оставь только мои.
+3. Выбери один центральный смысл, вокруг которого можно строить весь контент и продукты.
+4. Покажи, как этот смысл звучит в трёх точках: в первой строке профиля, в закрепе и в оффере.
+
+В финале собери всё вместе: символ, фраза, идея и смысл на одном экране. Это моя карта бренда.</div></div>
+<div class="sec"><h2>Что дальше</h2><p>Четыре промпта дают тебе собранный образ: по чему тебя узнают, что о тебе повторяют, за какую мысль подписываются и ради чего возвращаются. Дальше задача одна: повторять это в каждом ролике и посте, пока аудитория не начнёт узнавать тебя с первой секунды. Один и тот же символ, одна фраза, одна идея. Стабильность и есть бренд.</p></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>
