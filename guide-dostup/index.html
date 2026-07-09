@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Claude без VPN: своя схема доступа по шагам</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent-ink:#14150f;--accent-soft:#4e6b00;--hdr-bg:#14150f;--hdr-text:#ffffff;--hdr-accent:#bff03a;--dark-bg:#14150f;--dark-text:#eef0e4;--dark-muted:#c3c6b3;--copy-bg:#14150f;--copy-text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:-webkit-sticky;position:sticky;top:0;z-index:50;background:var(--hdr-bg);background:color-mix(in srgb,var(--hdr-bg) 90%,transparent);-webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 6px 22px rgba(0,0,0,.20)}
+.top .in{max-width:880px;margin:0 auto;padding:11px 20px;padding-top:max(11px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text);white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 16px;border-radius:11px;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav a.btn:hover{filter:brightness(1.06)}
+.catbar{display:flex;gap:8px;align-items:center;max-width:880px;margin:0 auto;padding:0 20px 11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;color:var(--hdr-text);opacity:.85;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s,opacity .15s}
+.catbar a:hover{opacity:1;border-color:var(--hdr-accent);color:var(--hdr-accent)}
+.catbar a.active{opacity:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:700px){.brand{font-size:14px}.brand span{display:none}.nav a.btn{padding:8px 13px;font-size:12.5px}.top .in{padding-left:16px;padding-right:16px;gap:10px}.catbar{padding-left:16px;padding-right:16px}}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.linkbtn{display:inline-block;margin:12px 0 4px;color:var(--accent-soft);text-decoration:none;font-weight:800;font-size:15px;word-break:break-all;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.8}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px;scroll-margin-top:100px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><nav class="catbar"><a href="/">Все материалы</a><a href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a href="/#cat-obucenie">Обучение</a><a href="/#cat-marketing">Маркетинг</a><a href="/#cat-obraz-i-vnesnost">Образ и внешность</a><a href="/#cat-samopoznanie">Самопознание</a><a class="active" href="/#cat-ai-instrumenty">AI-инструменты</a><a href="/about/">Обо мне</a></nav></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>Claude без VPN: своя схема доступа по шагам</h1>
+<p class="lead">Многие уверены, что без VPN к Claude из России не подступиться. Это не так. Ты поднимаешь себе Claude на собственном сервере в Европе, заходишь к нему как на обычный сайт claude.твоё-имя.ru, и для Claude ты обычный европейский пользователь. VPN на телефоне не нужен вообще, аккаунт не банят за прыгающий IP, история и проекты не слетают. Ниже вся схема по шагам: аренда сервера, домен, установка, три команды и готовый промпт, который сам закрывает самую сложную часть настройки.</p>
+<p class="meta">6 шагов, примерно полчаса времени и два личных кабинета. Писать и понимать код не нужно. Всё по кнопкам плюс три команды скопировать и один готовый промпт вставить.</p>
+<div class="how">Иди строго по порядку сверху вниз. Сначала арендуешь сервер и домен, потом ставишь Claude тремя командами, логинишься один раз через VPN и удаляешь его, а последнюю сложную часть (веб-доступ, домен, защита) делает сам Claude по готовому промпту, ты только жмёшь Yes. В конце сохраняешь панель на экран Домой, и Claude открывается как приложение.</div>
+<div class="sec"><h2>Почему это работает</h2><p>Claude в России зажат с двух сторон: операторы душат VPN-протоколы, а сам Claude банит аккаунты за подозрительную активность, и чаще всего под раздачу попадают пользователи из РФ с прыгающими IP. Вместе с аккаунтом сгорает вся история.</p><div class="note">Решение другое: твой Claude стоит на собственном сервере в Европе, у него стабильный европейский IP, и ты заходишь к нему как на обычный сайт. Такой трафик не блокируется в принципе, а стабильный IP снимает риск бана. VPN на телефоне включать не нужно.</div></div>
+<div class="sec"><h2>Шаг 1. Арендуй сервер</h2><p>Сервер, это обычный компьютер, который ты арендуешь в Европе за пару кликов. Выбираешь готовую конфигурацию на Ubuntu, и через минуту он работает.</p><ol><li>Timeweb Cloud, если платишь обычной российской картой. Бери Ubuntu 22.04, минимальный тариф с 2 ГБ памяти подойдёт для старта.</li><li>Hetzner, заметно дешевле, если есть зарубежная карта. Тоже Ubuntu 22.04, тариф CX22.</li><li>После создания сервера ты получишь его IP-адрес и root-пароль. Держи их под рукой, они нужны на шаге 3.</li></ol></div>
+<div class="sec"><h2>Шаг 2. Купи домен</h2><p>Домен, это твой адрес в интернете вида claude.твоё-имя.ru. Стоит около 179 рублей в год.</p><ol><li>Купи домен у любого регистратора: reg.ru, timeweb, nic.ru.</li><li>В настройках домена создай A-запись и укажи в ней IP-адрес своего сервера из шага 1.</li><li>Готово, теперь твой адрес указывает на сервер. Привязку к нему Claude настроит сам на шаге 5.</li></ol></div>
+<div class="sec"><h2>Шаг 3. Поставь Claude (три команды)</h2><p>Подключись к серверу через SSH (на телефоне подойдёт приложение Termius, на компьютере встроенный терминал). Дальше три команды: копируешь, вставляешь по одной, ждёшь минуту. Писать код не нужно.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo npm install -g @anthropic-ai/claude-code">Скопировать</button></div><div class="box">curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo npm install -g @anthropic-ai/claude-code</div><div class="note">Первая строка подключает Node.js, вторая ставит его, третья ставит сам Claude Code. Если терминал спросит подтверждение, жми Enter.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2>Шаг 4. Залогинься (VPN нужен один раз)</h2><p>Теперь надо один раз войти в свой аккаунт Claude. Только здесь и понадобится VPN, ровно на минуту.</p><ol><li>Включи на телефоне любой обычный VPN.</li><li>На сервере в терминале набери команду claude и следуй ссылке для входа в аккаунт.</li><li>После входа доступ сохраняется на сервере навсегда. VPN можно выключать и удалять, больше он не нужен.</li></ol><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="claude">Скопировать</button></div><div class="box">claude</div></div>
+<div class="sec"><h2>Шаг 5. Готовый промпт: Claude сам ставит веб-доступ</h2><p>Самая сложная часть, веб-доступ через домен, шифрование и защита сервера, делается одним сообщением. Вставляешь Claude этот готовый промпт, он всё настраивает сам, а ты только подтверждаешь его действия кнопкой Yes.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты работаешь на моём сервере Ubuntu. Настрой на нём безопасный веб-доступ к терминалу через мой домен, чтобы я заходил к тебе из браузера как на обычный сайт. Сделай по шагам, каждый разрушающий шаг подтверждай у меня: 1. Поставь ttyd как веб-оболочку терминала. 2. Поставь Caddy как веб-сервер и настрой его на мой домен ДОМЕН с автоматическим бесплатным HTTPS-сертификатом Let&#x27;s Encrypt. 3. Проксируй ttyd через Caddy на домене, закрой прямой доступ к порту ttyd. 4. Поставь надёжный логин и пароль на вход. 5. Настрой файрвол ufw: оставь открытыми только порты 22, 80 и 443, остальное закрой. 6. Сделай так, чтобы веб-оболочка сама поднималась после перезагрузки сервера. В конце дай мне адрес, по которому я захожу, логин и пароль. Объясняй каждый шаг простыми словами.">Скопировать</button></div><div class="box">Ты работаешь на моём сервере Ubuntu. Настрой на нём безопасный веб-доступ к терминалу через мой домен, чтобы я заходил к тебе из браузера как на обычный сайт. Сделай по шагам, каждый разрушающий шаг подтверждай у меня: 1. Поставь ttyd как веб-оболочку терминала. 2. Поставь Caddy как веб-сервер и настрой его на мой домен ДОМЕН с автоматическим бесплатным HTTPS-сертификатом Let&#x27;s Encrypt. 3. Проксируй ttyd через Caddy на домене, закрой прямой доступ к порту ttyd. 4. Поставь надёжный логин и пароль на вход. 5. Настрой файрвол ufw: оставь открытыми только порты 22, 80 и 443, остальное закрой. 6. Сделай так, чтобы веб-оболочка сама поднималась после перезагрузки сервера. В конце дай мне адрес, по которому я захожу, логин и пароль. Объясняй каждый шаг простыми словами.</div><div class="note">Перед отправкой замени в промпте слово ДОМЕН на свой адрес из шага 2. Claude выполнит всё сам, тебе останется жать Yes и в конце сохранить выданные адрес, логин и пароль.</div></div>
+<div class="sec"><h2>Шаг 6. Сохрани как приложение и забери бонус</h2><p>Открой выданный адрес в браузере телефона и сохрани страницу на экран Домой.</p><div class="note">Теперь Claude открывается как приложение: тот же чат, те же проекты, файлы и история. Ничего не слетает, потому что блокировать нечего. И бонус, который окажется ценнее самого доступа: у тебя остаётся свой сервер. На таком же можно поднимать телеграм-ботов, сайты и целые контент-заводы.</div></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>
