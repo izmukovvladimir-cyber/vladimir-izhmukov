@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ИИ-ресёрчер виралок: 4 промпта, которые находят рабочие идеи</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent-ink:#14150f;--accent-soft:#4e6b00;--hdr-bg:#14150f;--hdr-text:#ffffff;--hdr-accent:#bff03a;--dark-bg:#14150f;--dark-text:#eef0e4;--dark-muted:#c3c6b3;--copy-bg:#14150f;--copy-text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:-webkit-sticky;position:sticky;top:0;z-index:50;background:var(--hdr-bg);background:color-mix(in srgb,var(--hdr-bg) 90%,transparent);-webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 6px 22px rgba(0,0,0,.20)}
+.top .in{max-width:880px;margin:0 auto;padding:11px 20px;padding-top:max(11px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text);white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 16px;border-radius:11px;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav a.btn:hover{filter:brightness(1.06)}
+.catbar{display:flex;gap:8px;align-items:center;max-width:880px;margin:0 auto;padding:0 20px 11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;color:var(--hdr-text);opacity:.85;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s,opacity .15s}
+.catbar a:hover{opacity:1;border-color:var(--hdr-accent);color:var(--hdr-accent)}
+.catbar a.active{opacity:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:700px){.brand{font-size:14px}.brand span{display:none}.nav a.btn{padding:8px 13px;font-size:12.5px}.top .in{padding-left:16px;padding-right:16px;gap:10px}.catbar{padding-left:16px;padding-right:16px}}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.linkbtn{display:inline-block;margin:12px 0 4px;color:var(--accent-soft);text-decoration:none;font-weight:800;font-size:15px;word-break:break-all;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.8}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px;scroll-margin-top:100px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><nav class="catbar"><a href="/">Все материалы</a><a href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a href="/#cat-obucenie">Обучение</a><a class="active" href="/#cat-marketing">Маркетинг</a><a href="/#cat-obraz-i-vnesnost">Образ и внешность</a><a href="/#cat-samopoznanie">Самопознание</a><a href="/#cat-ai-instrumenty">AI-инструменты</a><a href="/about/">Обо мне</a></nav></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-marketing">Маркетинг</a></div>
+<h1>ИИ-ресёрчер виралок: 4 промпта, которые находят рабочие идеи</h1>
+<p class="lead">Идеи для роликов можно перестать искать вручную. Ниже связка из четырёх промптов, которые превращают Claude или ChatGPT в твоего ресёрчера виралок. Они разбирают, что уже выстрелило в твоей нише, вытаскивают формулу успеха и переписывают чужую идею твоим голосом. Не пересказ чужого, а твой хук, твой стиль, твой призыв. Вставляешь, подставляешь свои данные и получаешь готовый материал.</p>
+<p class="meta">4 промпта, которые делают из Claude ресёрчера виральных Reels: карта заходящих форматов ниши, разбор почему они выстрелили, перенос удачной механики на твою тему и адаптация под твой голос. Сами промпты внутри, не оглавление.</p>
+<div class="how">Как пользоваться. Открой Claude или ChatGPT. Промпты идут по порядку: сначала собери карту виральных форматов ниши, потом разбери механику, потом перенеси её на свою тему, потом отполируй под свой голос. В квадратных скобках впиши свои данные. Если ответ вышел общим, попроси нейросеть задать тебе три уточняющих вопроса и переделать. Рабочие версии сохрани в отдельный файл, это твой конвейер идей на каждый день.</div>
+<div class="sec"><h2>Промпт 1. Карта форматов, которые уже заходят в нише</h2><p>Собирает виральные углы и форматы твоей ниши в одну ленту и ранжирует их по потенциалу.</p><p>Зачем он нужен. Ты перестаёшь листать чужие аккаунты вечерами. Нейросеть сама раскладывает нишу на понятные форматы и показывает, что тянет охваты именно здесь и сейчас.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как аналитик виральных Reels. Разложи мою нишу на 15 форматов коротких видео, которые сейчас лучше всего заходят у похожих блогов.
+
+По каждому формату дай: суть механики, типичный хук первой секунды, почему он удерживает внимание, для какой боли аудитории он работает и оценку виральности от 1 до 10 с обоснованием.
+
+Отсортируй по убыванию потенциала и в конце выдели топ-5, с которых мне стоит начать.
+
+Ниша: [НИША]
+Аудитория: [АУДИТОРИЯ]
+Моя цель: [ЦЕЛЬ]">Скопировать</button></div><div class="box">Действуй как аналитик виральных Reels. Разложи мою нишу на 15 форматов коротких видео, которые сейчас лучше всего заходят у похожих блогов.
+
+По каждому формату дай: суть механики, типичный хук первой секунды, почему он удерживает внимание, для какой боли аудитории он работает и оценку виральности от 1 до 10 с обоснованием.
+
+Отсортируй по убыванию потенциала и в конце выдели топ-5, с которых мне стоит начать.
+
+Ниша: [НИША]
+Аудитория: [АУДИТОРИЯ]
+Моя цель: [ЦЕЛЬ]</div></div>
+<div class="sec"><h2>Промпт 2. Разбор, почему конкретный ролик выстрелил</h2><p>Берёт реальный виральный ролик и раскладывает его на детали, которые дали охваты.</p><p>Зачем он нужен. Виральность это не случайность, а набор решений. Когда ты видишь скелет чужого успеха, ты можешь повторить механику, а не копировать картинку.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как реверс-инженер вирального контента. Я опишу ролик, который набрал много просмотров. Разбери его по косточкам.
+
+Выдай: какой хук в первой секунде и почему он останавливает скролл, какая эмоция ведёт зрителя, как построено удержание до конца, что заставляет сохранять и пересылать, какой призыв в конце. Затем сформулируй универсальную формулу этого ролика в 3 строках, которую можно повторить на другой теме.
+
+Описание ролика: [ЧТО ПРОИСХОДИТ, ХУК, О ЧЁМ]
+Ниша ролика: [НИША]">Скопировать</button></div><div class="box">Действуй как реверс-инженер вирального контента. Я опишу ролик, который набрал много просмотров. Разбери его по косточкам.
+
+Выдай: какой хук в первой секунде и почему он останавливает скролл, какая эмоция ведёт зрителя, как построено удержание до конца, что заставляет сохранять и пересылать, какой призыв в конце. Затем сформулируй универсальную формулу этого ролика в 3 строках, которую можно повторить на другой теме.
+
+Описание ролика: [ЧТО ПРОИСХОДИТ, ХУК, О ЧЁМ]
+Ниша ролика: [НИША]</div></div>
+<div class="sec"><h2>Промпт 3. Перенос удачной механики на твою тему</h2><p>Берёт формулу выстрелившего ролика и строит из неё новый сценарий под твой продукт и нишу.</p><p>Зачем он нужен. Самое ценное в чужой виралке это структура, а не тема. Ты берёшь рабочий каркас и наполняешь его своим смыслом, поэтому ролик выглядит свежим, а не как копия.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как сценарист коротких видео. Возьми эту виральную формулу и собери по ней новый сценарий Reels под мою тему, чтобы он не выглядел как копия оригинала.
+
+Дай: 3 варианта хука на первую секунду, покадровую раскадровку на 15 секунд, текст на экране, закадровый текст и призыв в конце. Хук и структуру сохрани, тему и примеры сделай моими.
+
+Формула-оригинал: [ФОРМУЛА ИЗ ПРОМПТА 2]
+Моя тема: [ТЕМА]
+Моя аудитория: [АУДИТОРИЯ]
+Куда веду зрителя: [ЦЕЛЬ]">Скопировать</button></div><div class="box">Действуй как сценарист коротких видео. Возьми эту виральную формулу и собери по ней новый сценарий Reels под мою тему, чтобы он не выглядел как копия оригинала.
+
+Дай: 3 варианта хука на первую секунду, покадровую раскадровку на 15 секунд, текст на экране, закадровый текст и призыв в конце. Хук и структуру сохрани, тему и примеры сделай моими.
+
+Формула-оригинал: [ФОРМУЛА ИЗ ПРОМПТА 2]
+Моя тема: [ТЕМА]
+Моя аудитория: [АУДИТОРИЯ]
+Куда веду зрителя: [ЦЕЛЬ]</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2>Промпт 4. Довести текст до своего голоса</h2><p>Переписывает готовый сценарий так, чтобы он звучал как ты, а не как нейросеть.</p><p>Зачем он нужен. Готовый сценарий часто звучит гладко и безлично. Этот промпт возвращает тексту живую интонацию и твои словечки, чтобы зритель чувствовал человека, а не шаблон.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как редактор, который сохраняет авторский голос. Перепиши этот сценарий так, чтобы он звучал живо и по-человечески, моей интонацией.
+
+Убери гладкие штампы и обороты, по которым виден искусственный текст. Оставь короткие живые фразы, сохрани смысл и структуру. Не используй длинные тире и противопоставления вида «не то, а это».
+
+Затем дай финальную версию и коротко скажи, что изменил.
+
+Сценарий: [ВСТАВЬ ТЕКСТ]
+Как я обычно говорю: [2-3 ТВОИ ТИПИЧНЫЕ ФРАЗЫ]
+Аудитория: [АУДИТОРИЯ]">Скопировать</button></div><div class="box">Действуй как редактор, который сохраняет авторский голос. Перепиши этот сценарий так, чтобы он звучал живо и по-человечески, моей интонацией.
+
+Убери гладкие штампы и обороты, по которым виден искусственный текст. Оставь короткие живые фразы, сохрани смысл и структуру. Не используй длинные тире и противопоставления вида «не то, а это».
+
+Затем дай финальную версию и коротко скажи, что изменил.
+
+Сценарий: [ВСТАВЬ ТЕКСТ]
+Как я обычно говорю: [2-3 ТВОИ ТИПИЧНЫЕ ФРАЗЫ]
+Аудитория: [АУДИТОРИЯ]</div></div>
+<div class="sec"><h2>Что дальше</h2><p>Четыре промпта работают в связке: карта форматов ниши, разбор чужого успеха, перенос механики на свою тему и доводка под свой голос. Прогоняй через них каждую новую идею, и поиск тем перестанет съедать вечера. Собирай сильные сценарии в отдельный файл, это твой банк виральных заготовок на каждый день.</p></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>

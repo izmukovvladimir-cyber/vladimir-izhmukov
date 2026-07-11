@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Сильная шапка профиля: формула трёх строк и 3 промпта</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent-ink:#14150f;--accent-soft:#4e6b00;--hdr-bg:#14150f;--hdr-text:#ffffff;--hdr-accent:#bff03a;--dark-bg:#14150f;--dark-text:#eef0e4;--dark-muted:#c3c6b3;--copy-bg:#14150f;--copy-text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:-webkit-sticky;position:sticky;top:0;z-index:50;background:var(--hdr-bg);background:color-mix(in srgb,var(--hdr-bg) 90%,transparent);-webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 6px 22px rgba(0,0,0,.20)}
+.top .in{max-width:880px;margin:0 auto;padding:11px 20px;padding-top:max(11px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text);white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 16px;border-radius:11px;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav a.btn:hover{filter:brightness(1.06)}
+.catbar{display:flex;gap:8px;align-items:center;max-width:880px;margin:0 auto;padding:0 20px 11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;color:var(--hdr-text);opacity:.85;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s,opacity .15s}
+.catbar a:hover{opacity:1;border-color:var(--hdr-accent);color:var(--hdr-accent)}
+.catbar a.active{opacity:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:700px){.brand{font-size:14px}.brand span{display:none}.nav a.btn{padding:8px 13px;font-size:12.5px}.top .in{padding-left:16px;padding-right:16px;gap:10px}.catbar{padding-left:16px;padding-right:16px}}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.linkbtn{display:inline-block;margin:12px 0 4px;color:var(--accent-soft);text-decoration:none;font-weight:800;font-size:15px;word-break:break-all;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.8}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px;scroll-margin-top:100px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><nav class="catbar"><a href="/">Все материалы</a><a href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a href="/#cat-obucenie">Обучение</a><a class="active" href="/#cat-marketing">Маркетинг</a><a href="/#cat-obraz-i-vnesnost">Образ и внешность</a><a href="/#cat-samopoznanie">Самопознание</a><a href="/#cat-ai-instrumenty">AI-инструменты</a><a href="/about/">Обо мне</a></nav></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-marketing">Маркетинг</a></div>
+<h1>Сильная шапка профиля: формула трёх строк и 3 промпта</h1>
+<p class="lead">Человек приходит с рилса, читает твою шапку профиля за пару секунд и решает, остаться или уйти. Если за это время он не понял, кто ты и чем полезен, весь охват ролика утекает вместе с ним. Ниже разбор формулы сильной шапки и три промпта, которые пишут её под твою нишу, проверяют текущую и собирают цепляющую первую строку. Не советы, а готовые инструменты.</p>
+<p class="meta">Формула сильной шапки профиля из трёх строк плюс 3 промпта для Claude и ChatGPT: генератор шапки под нишу, аудит текущей шапки и конструктор первой строки. Сами промпты внутри, не оглавление.</p>
+<div class="how">Как пользоваться. Сначала прочитай формулу, чтобы понимать, что делает шапку рабочей. Потом открой Claude или ChatGPT и прогони свой профиль через промпт-аудит, чтобы увидеть слабые места. Затем собери новую шапку промптом-генератором и отполируй первую строку. В квадратных скобках впиши свои данные. Готовую шапку проверь на телефоне: понятно ли за 2 секунды, кто ты и чем полезен.</div>
+<div class="sec"><h2>Формула сильной шапки</h2><p>Три строки, на которых держится вся конверсия профиля в подписку.</p><p>Строка 1. Что ты делаешь и кому помогаешь. Не должность, а результат для человека. Не «психолог», а «помогаю мамам вернуть спокойствие без таблеток». Ясное обещание всегда сильнее размытого образа.</p><p>Строка 2. Доказательство. Цифра, результат, знакомое имя или факт, который снимает вопрос «а ты вообще кто». Одна конкретная деталь работает лучше десяти общих слов.</p><p>Строка 3. Призыв и следующий шаг. Скажи прямо, что делать дальше, и сделай этот шаг лёгким: забрать гайд, написать слово, перейти по ссылке. Профиль без призыва теряет тёплого человека, который уже готов был остаться.</p></div>
+<div class="sec"><h2>Промпт 1. Аудит текущей шапки</h2><p>Показывает, за что цепляется взгляд, а что отталкивает или остаётся непонятным.</p><p>Зачем он нужен. Свою шапку ты уже не видишь свежим взглядом. Нейросеть смотрит на неё глазами холодного человека с рилса и показывает, где он теряет нить.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как эксперт по упаковке блогов в Instagram. Оцени мою шапку профиля глазами холодного человека, который впервые зашёл с рилса и даёт ей 2 секунды.
+
+Разбери построчно: понятно ли, кто я и кому полезен, есть ли доказательство, есть ли ясный следующий шаг. Отметь слабые места и объясни, почему они мешают подписке. Поставь оценку от 1 до 10 и дай список конкретных правок.
+
+Моя шапка: [ВСТАВЬ ТЕКСТ ШАПКИ]
+Ниша: [НИША]
+Кого хочу привлекать: [АУДИТОРИЯ]">Скопировать</button></div><div class="box">Действуй как эксперт по упаковке блогов в Instagram. Оцени мою шапку профиля глазами холодного человека, который впервые зашёл с рилса и даёт ей 2 секунды.
+
+Разбери построчно: понятно ли, кто я и кому полезен, есть ли доказательство, есть ли ясный следующий шаг. Отметь слабые места и объясни, почему они мешают подписке. Поставь оценку от 1 до 10 и дай список конкретных правок.
+
+Моя шапка: [ВСТАВЬ ТЕКСТ ШАПКИ]
+Ниша: [НИША]
+Кого хочу привлекать: [АУДИТОРИЯ]</div></div>
+<div class="sec"><h2>Промпт 2. Генератор шапки под нишу</h2><p>Собирает несколько готовых вариантов шапки по формуле трёх строк.</p><p>Зачем он нужен. Ты получаешь не одну шапку, а набор рабочих версий под разные акценты и выбираешь ту, что бьёт точнее. Экономит часы правок формулировок.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как копирайтер, который пишет продающие шапки профиля для Instagram. Собери 5 вариантов шапки по формуле трёх строк: первая про то, что я делаю и кому помогаю через результат, вторая с доказательством, третья с ясным призывом и лёгким следующим шагом.
+
+Делай варианты разными по акценту: один на боль, один на результат, один на экспертность, один на эмоцию, один самый короткий. Каждая строка не длиннее одной короткой фразы. Без канцелярита, без длинных тире.
+
+Ниша: [НИША]
+Кому помогаю: [АУДИТОРИЯ]
+Мой результат или факт для доказательства: [ЦИФРА ИЛИ КЕЙС]
+Куда веду: [ГАЙД, СЛОВО В КОММЕНТАРИЯХ, ССЫЛКА]">Скопировать</button></div><div class="box">Действуй как копирайтер, который пишет продающие шапки профиля для Instagram. Собери 5 вариантов шапки по формуле трёх строк: первая про то, что я делаю и кому помогаю через результат, вторая с доказательством, третья с ясным призывом и лёгким следующим шагом.
+
+Делай варианты разными по акценту: один на боль, один на результат, один на экспертность, один на эмоцию, один самый короткий. Каждая строка не длиннее одной короткой фразы. Без канцелярита, без длинных тире.
+
+Ниша: [НИША]
+Кому помогаю: [АУДИТОРИЯ]
+Мой результат или факт для доказательства: [ЦИФРА ИЛИ КЕЙС]
+Куда веду: [ГАЙД, СЛОВО В КОММЕНТАРИЯХ, ССЫЛКА]</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2>Промпт 3. Конструктор цепляющей первой строки</h2><p>Докручивает самую важную строку, по которой человек решает читать дальше или нет.</p><p>Зачем он нужен. Первую строку видят все, остальное дочитывают не всегда. Отдельная проработка этой строки поднимает конверсию всей шапки.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как специалист по позиционированию. Придумай 10 вариантов первой строки для шапки моего профиля, которые за секунду объясняют, кто я и чем полезен, и вызывают желание читать дальше.
+
+Сделай варианты разными: через результат, через конкретную боль, через неожиданный угол, через число. Без пустых слов вроде «помогаю стать лучшей версией себя». Потом выбери топ-3 и объясни, почему они сильнее.
+
+Ниша: [НИША]
+Результат, который я даю: [РЕЗУЛЬТАТ]
+Аудитория: [АУДИТОРИЯ]">Скопировать</button></div><div class="box">Действуй как специалист по позиционированию. Придумай 10 вариантов первой строки для шапки моего профиля, которые за секунду объясняют, кто я и чем полезен, и вызывают желание читать дальше.
+
+Сделай варианты разными: через результат, через конкретную боль, через неожиданный угол, через число. Без пустых слов вроде «помогаю стать лучшей версией себя». Потом выбери топ-3 и объясни, почему они сильнее.
+
+Ниша: [НИША]
+Результат, который я даю: [РЕЗУЛЬТАТ]
+Аудитория: [АУДИТОРИЯ]</div></div>
+<div class="sec"><h2>Что дальше</h2><p>Сначала прогони профиль через аудит, потом собери новую шапку генератором и отдельно докрути первую строку. Проверь итог на телефоне: за 2 секунды должно быть ясно, кто ты, чем полезен и что делать дальше. Сильная шапка превращает случайный охват рилса в подписчиков, а не в утекающие просмотры.</p></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>
