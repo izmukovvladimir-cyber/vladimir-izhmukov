@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Карта 42 навыков для Claude по 6 слоям</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent-ink:#14150f;--accent-soft:#4e6b00;--hdr-bg:#14150f;--hdr-text:#ffffff;--hdr-accent:#bff03a;--dark-bg:#14150f;--dark-text:#eef0e4;--dark-muted:#c3c6b3;--copy-bg:#14150f;--copy-text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:-webkit-sticky;position:sticky;top:0;z-index:50;background:var(--hdr-bg);background:color-mix(in srgb,var(--hdr-bg) 90%,transparent);-webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 6px 22px rgba(0,0,0,.20)}
+.top .in{max-width:880px;margin:0 auto;padding:11px 20px;padding-top:max(11px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text);white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 16px;border-radius:11px;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav a.btn:hover{filter:brightness(1.06)}
+.catbar{display:flex;gap:8px;align-items:center;max-width:880px;margin:0 auto;padding:0 20px 11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;color:var(--hdr-text);opacity:.85;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s,opacity .15s}
+.catbar a:hover{opacity:1;border-color:var(--hdr-accent);color:var(--hdr-accent)}
+.catbar a.active{opacity:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:700px){.brand{font-size:14px}.brand span{display:none}.nav a.btn{padding:8px 13px;font-size:12.5px}.top .in{padding-left:16px;padding-right:16px;gap:10px}.catbar{padding-left:16px;padding-right:16px}}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.linkbtn{display:inline-block;margin:12px 0 4px;color:var(--accent-soft);text-decoration:none;font-weight:800;font-size:15px;word-break:break-all;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.8}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px;scroll-margin-top:100px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><nav class="catbar"><a href="/">Все материалы</a><a href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a href="/#cat-obucenie">Обучение</a><a href="/#cat-marketing">Маркетинг</a><a href="/#cat-obraz-i-vnesnost">Образ и внешность</a><a href="/#cat-samopoznanie">Самопознание</a><a class="active" href="/#cat-ai-instrumenty">AI-инструменты</a><a href="/about/">Обо мне</a></nav></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>Карта 42 навыков для Claude по 6 слоям</h1>
+<p class="lead">Держи полную карту навыков (skills) для Claude, как обещал. 42 навыка разложены по 6 слоям, у каждого своя задача. Это система: видишь, за что отвечает каждый навык, с каких начать под контент и маркетинг, как их поставить себе, а внизу лежит промпт, который соберёт тебе новый навык под твою задачу, если готового в карте не нашлось.</p>
+<p class="meta">Полная карта из 42 навыков для Claude по 6 слоям: фронтенд и дизайн, графика и видео, продукт и взаимодействие, поведение промптов, доверие и безопасность. Плюс как установить навыки в Claude Code, с каких пяти начать под контент, и промпт для сборки своего навыка.</p>
+<div class="how">Как пользоваться картой. Сначала пройди по шести слоям ниже и найди навыки под свою задачу, у каждого одна строка про то, что он делает. Потом открой раздел про установку и поставь нужные удобным способом. Если только начинаешь, возьми блок про то, с каких начать, и поставь эти пять, они закрывают контент и маркетинг. В самом низу лежит промпт, который собирает новый навык под конкретную задачу.</div>
+<div class="sec"><h2>Слой 1. Frontend и UI-дизайн, 10 навыков</h2><p>Включай этот слой, когда собираешь лендинг, страницу, презентацию или любой визуальный интерфейс и хочешь премиальный результат без шаблонного вида по умолчанию. Эти навыки держат сетку, цвет, анимацию и чистую передачу дизайна в код.</p><ul><li>01. Frontend-design. Принудительное создание смелых макетов.</li><li>02. Impeccable. Строгое соблюдение цветов OKLCH и сетки 4px.</li><li>03. Taste-skill. Высокоуровневая художественная анимация.</li><li>04. Animate. Кривые микро-переходов.</li><li>05. Design-motion. Трёхступенчатый аудит движения.</li><li>06. Theme-factory. Автогенерация цветовых палитр.</li><li>07. Figma-implement. Прямая трансляция дизайна.</li><li>08. Playwright-mcp. Обратная связь от живого браузера через скриншоты.</li><li>09. Brandkit. Создание гайдлайнов бренда за один подход.</li><li>10. Designer-skills. Профессиональные спецификации для передачи в разработку.</li></ul></div>
+<div class="sec"><h2>Слой 2. Изображения, графика и видео, 8 навыков</h2><p>Включай, когда нужна картинка, обложка, инфографика или видеоролик прямо из терминала, без ручной возни в редакторах. Этот слой отвечает за генерацию визуала и анимацию.</p><ul><li>11. Nano-banana. Генерация текста в изображение через терминал.</li><li>12. Banana-claude. Формула промптов из 5 компонентов.</li><li>13. Canvas-design. Вывод редактируемых векторных PNG.</li><li>14. Animate. Потоковые поля, основанные на математике.</li><li>15. Remotion-superpowers. Полноценная видеостудия на React.</li><li>16. Claude-remotion. Настройка таймингов и каскадов заголовков.</li><li>17. Blender-motion. 3D-сцены на Python.</li><li>18. Ae-motion. Скрипты JSX для After Effects.</li></ul></div>
+<div class="sec"><h2>Слои 3 и 4. Продукт и взаимодействие, 10 навыков</h2><p>Включай, когда собираешь цельную систему из многих частей: макеты, презентации, адаптивные виджеты, единый бренд, поведение интерфейса при долгих диалогах. Этот слой про то, чтобы результат был собран воедино и держался вместе.</p><ul><li>19. Hi-fi-mockups. Высокоточные интерактивные макеты интерфейса.</li><li>20. Brandkit-sync. Переиспользуемые гайдлайны бренда.</li><li>21. Slide-decks. Системы шаблонов для презентаций.</li><li>22. Figma-mcp. Чтение фреймов и фиксация изменений кода.</li><li>23. Token-budgets. Расчёт токенов контекстного окна.</li><li>24. Turn-repair. Восстановление прерванных диалогов.</li><li>25. Generative-ui. Рендеринг адаптивных виджетов.</li><li>26. Progressive-reveal. Поэтапная подача контента для пользователя.</li><li>27. Frustration-checks. Адаптивный код для смягчения негатива.</li><li>28. Feedback-loops. Лог принятых правок внутри кода.</li></ul></div>
+<div class="sec"><h2>Слой 5. Структурное поведение промптов, 8 навыков</h2><p>Включай всегда, когда пишешь промпт, от которого зависит стабильность ответа. Эти навыки делают промпт предсказуемым: чёткая структура, роль, тон, формат вывода и обучение на примерах. База для всего остального.</p><ul><li>29. System-structure. Чистая анатомия промпта.</li><li>30. Persona-architecture. Ограничения черт характера и голоса.</li><li>31. Tone-calibration. Настройка тона от формального до тёплого.</li><li>32. Emotional-design. Деэскалация конфликтов.</li><li>33. Template-design. Параметризованные форматы скобок.</li><li>34. Few-shot-patterns. Обучение на граничных случаях.</li><li>35. Chain-of-thought. Отслеживание пошаговых рассуждений.</li><li>36. Constraint-spec. Строгие границы форматирования.</li></ul></div>
+<div class="sec"><h2>Слой 6. Доверие, оценка и безопасность, 6 навыков</h2><p>Включай, когда отдаёшь работу ИИ на поток и нужна страховка от ошибок: границы отказов, проверка фактов, оценка качества, разбивка задачи между агентами и аккуратная передача работы человеку.</p><ul><li>37. Guardrails. Пуленепробиваемые границы отказов.</li><li>38. Trust-calibration. Ссылки и сигналы подтверждения данных.</li><li>39. Transparency-patterns. Отслеживание уровня уверенности ИИ.</li><li>40. Quality-rubrics. Матрицы оценки «прошёл / не прошёл».</li><li>41. Task-decomposition. Разделение целей на роли агентов.</li><li>42. Handoff-protocols. Конвейеры передачи контекста людям.</li></ul></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2>Как установить навыки в Claude Code</h2><p>Навык (skill) в Claude Code это папка с файлом инструкций, которую Claude сам подхватывает и включает, когда задача под неё подходит. Есть два рабочих способа поставить навык себе.</p><h3>Способ 1. Через маркетплейс плагинов</h3><ol><li>В окне Claude Code введи команду /plugin marketplace add и укажи репозиторий с навыками, в формате /plugin marketplace add owner/repo.</li><li>Дальше набери /plugin install и имя нужного навыка из этого набора.</li><li>Готово, набор навыков ставится одним подходом и обновляется той же командой.</li></ol><h3>Способ 2. Файлом в проект</h3><ol><li>Внутри своего проекта создай папку .claude/skills, а в ней папку с именем навыка, например frontend-design.</li><li>Положи туда файл SKILL.md с инструкциями навыка, это и есть его тело.</li><li>Claude Code подхватит навык автоматически при следующем запуске. Чтобы навык работал во всех проектах, положи ту же папку в ~/.claude/skills.</li></ol><div class="note">Честная деталь. Часть пунктов карты это MCP-серверы, их видно по хвосту mcp в названии: Playwright-mcp и Figma-mcp. Они подключаются отдельным способом, через настройку MCP: команда claude mcp add либо запись сервера в файл .mcp.json проекта. Смысл тот же, механизм подключения другой.</div></div>
+<div class="sec"><h2>С каких навыков начать под контент и маркетинг</h2><p>Если ставить всё сразу незачем, вот пятёрка, которая закрывает основную работу над контентом: страницы, картинки, презентации, видео и крепкие промпты. Начни с них.</p><div class="grid"><div class="cardb"><h3>Frontend-design, под лендинги и страницы</h3><p>Собирает смелые макеты вместо дефолтного шаблонного вида. Твой первый инструмент под посадочные и продающие страницы. Начни с него: попроси Claude сверстать страницу под конкретный оффер и сразу увидишь разницу с обычной генерацией.</p></div><div class="cardb"><h3>Nano-banana и Banana-claude, картинки из терминала</h3><p>Первый генерирует изображение из текста прямо в терминале, второй даёт формулу промпта из пяти частей, чтобы картинка выходила с первого раза. Пара под обложки, инфографику и визуал постов.</p></div><div class="cardb"><h3>Slide-decks, презентации на шаблонах</h3><p>Система шаблонов под презентации. Нужен, когда собираешь продающую колоду или разбор для канала. Один раз задаёшь стиль, дальше собираешь слайды в нём.</p></div><div class="cardb"><h3>Remotion-superpowers, видео в коде</h3><p>Полноценная видеостудия на React, собирает ролики и анимацию программно. Под динамичные вставки, титры и короткие видео без ручного монтажа.</p></div><div class="cardb"><h3>System-structure и Template-design, крепкие промпты</h3><p>База под все твои промпты: чистая анатомия промпта и параметризованные шаблоны со скобками для подстановки. Ставят промпты на поток, чтобы результат не плавал от раза к разу.</p></div></div></div>
+<div class="sec"><h2>Промпт, который соберёт нужный навык под тебя</h2><p>Если в карте нет готового навыка под твою задачу, не ищи его вручную. Открой Claude и попроси собрать навык этим промптом. Он вернёт готовый файл SKILL.md, который останется положить в проект.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как инженер по навыкам для Claude Code. Собери мне готовый навык (skill) под конкретную задачу, чтобы я мог сразу положить его файлом в проект и пользоваться.
+
+Задача навыка: [ЧТО НАВЫК ДОЛЖЕН ДЕЛАТЬ]
+Где применяю: [КОНТЕКСТ, НАПРИМЕР КОНТЕНТ, ДИЗАЙН, ВИДЕО]
+Что я даю на входе: [ЧТО ПОЛУЧАЕТ НАВЫК]
+Какой результат хочу на выходе: [ГОТОВЫЙ АРТЕФАКТ]
+
+Верни готовый файл SKILL.md в таком виде:
+1. Блок метаданных сверху: name из короткого английского имени через дефис, и description с триггерами, когда навык вызывать.
+2. Разделы «Когда использовать» и «Когда не использовать».
+3. Пошаговый алгоритм работы навыка.
+4. Формат вывода, который навык обязан выдавать каждый раз.
+5. Один заполненный пример на моих данных.
+6. Обработка краёв: что делать, если данных мало или задача шире.
+
+Пиши на русском, технические названия оставляй английскими. Не ставь длинные тире и обороты вида «не то, а это». Сначала выведи сам файл в блоке кода, потом одну строку, куда его положить в проекте.">Скопировать</button></div><div class="box">Действуй как инженер по навыкам для Claude Code. Собери мне готовый навык (skill) под конкретную задачу, чтобы я мог сразу положить его файлом в проект и пользоваться.
+
+Задача навыка: [ЧТО НАВЫК ДОЛЖЕН ДЕЛАТЬ]
+Где применяю: [КОНТЕКСТ, НАПРИМЕР КОНТЕНТ, ДИЗАЙН, ВИДЕО]
+Что я даю на входе: [ЧТО ПОЛУЧАЕТ НАВЫК]
+Какой результат хочу на выходе: [ГОТОВЫЙ АРТЕФАКТ]
+
+Верни готовый файл SKILL.md в таком виде:
+1. Блок метаданных сверху: name из короткого английского имени через дефис, и description с триггерами, когда навык вызывать.
+2. Разделы «Когда использовать» и «Когда не использовать».
+3. Пошаговый алгоритм работы навыка.
+4. Формат вывода, который навык обязан выдавать каждый раз.
+5. Один заполненный пример на моих данных.
+6. Обработка краёв: что делать, если данных мало или задача шире.
+
+Пиши на русском, технические названия оставляй английскими. Не ставь длинные тире и обороты вида «не то, а это». Сначала выведи сам файл в блоке кода, потом одну строку, куда его положить в проекте.</div></div>
+<div class="sec"><h2>Что дальше</h2><p>Поставь пятёрку из блока про старт, прогони через них ближайший контент и посмотри, что реально экономит время. Дальше добирай навыки по слоям под конкретные задачи. Когда упрёшься в задачу, под которую готового навыка нет, собери свой промптом сверху. Так у тебя вместо кучи разрозненных подсказок появится собранная система, где у каждого навыка своя роль.</p></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>

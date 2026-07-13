@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Настрой Claude под свой контент за 10 минут</title><style>:root{--bg:#f6f4ec;--ink:#16180f;--muted:#8a8b73;--card:#ffffff;--line:#e4e0cf;--soft:#f1efe2;--accent:#bff03a;--accent-ink:#14150f;--accent-soft:#4e6b00;--hdr-bg:#14150f;--hdr-text:#ffffff;--hdr-accent:#bff03a;--dark-bg:#14150f;--dark-text:#eef0e4;--dark-muted:#c3c6b3;--copy-bg:#14150f;--copy-text:#bff03a}h1,h2,h3,.cath{font-family:inherit}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:-webkit-sticky;position:sticky;top:0;z-index:50;background:var(--hdr-bg);background:color-mix(in srgb,var(--hdr-bg) 90%,transparent);-webkit-backdrop-filter:saturate(150%) blur(12px);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 6px 22px rgba(0,0,0,.20)}
+.top .in{max-width:880px;margin:0 auto;padding:11px 20px;padding-top:max(11px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;font-size:15px;color:var(--hdr-text);white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--hdr-accent)}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a.btn{opacity:1;background:var(--accent);color:var(--accent-ink);font-weight:800;padding:9px 16px;border-radius:11px;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav a.btn:hover{filter:brightness(1.06)}
+.catbar{display:flex;gap:8px;align-items:center;max-width:880px;margin:0 auto;padding:0 20px 11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar a{flex:0 0 auto;color:var(--hdr-text);opacity:.85;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s,opacity .15s}
+.catbar a:hover{opacity:1;border-color:var(--hdr-accent);color:var(--hdr-accent)}
+.catbar a.active{opacity:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:700px){.brand{font-size:14px}.brand span{display:none}.nav a.btn{padding:8px 13px;font-size:12.5px}.top .in{padding-left:16px;padding-right:16px;gap:10px}.catbar{padding-left:16px;padding-right:16px}}
+.wrap{max-width:760px;margin:0 auto;padding:30px 22px 70px}
+.crumb{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-soft);font-weight:800;margin-bottom:8px}
+.crumb a{text-decoration:none}
+h1{font-size:33px;line-height:1.16;margin:6px 0 10px;font-weight:800}
+.lead{font-size:18px;margin:10px 0;color:var(--ink);opacity:.82}
+.meta{font-size:14px;color:var(--muted);margin:6px 0 4px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:18px 0;font-size:15px;color:var(--ink);opacity:.92}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.p .num{display:inline-block;font-size:13px;font-weight:800;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.p h2{font-size:20px;margin:0 0 6px;font-weight:800}
+.p .when{font-size:14px;color:var(--muted);margin:0 0 8px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 5px}
+.lbl{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.box{background:var(--soft);border-radius:10px;padding:14px;font-size:14.5px;white-space:pre-wrap;line-height:1.5;color:var(--ink)}
+.copy{background:var(--copy-bg);color:var(--copy-text);border:0;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.copy.done{filter:brightness(1.15)}
+.ex{font-size:14px;color:var(--ink);opacity:.78;margin-top:10px}
+.ex b{opacity:1}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.sec h2{font-size:22px;margin:0 0 8px;font-weight:800}
+.sec h3{font-size:17px;margin:16px 0 4px;font-weight:800}
+.sec p{margin:8px 0}.sec ol,.sec ul{margin:6px 0;padding-left:20px}.sec li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.cardb{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cardb h3{margin:0 0 6px;font-size:16px}.cardb ul,.cardb ol{padding-left:18px;margin:4px 0}
+.quote{font-style:italic;color:var(--ink);opacity:.78;border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+.note{font-size:14px;color:var(--ink);opacity:.82;background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.up{background:var(--dark-bg);color:var(--dark-text);border-radius:18px;padding:26px;margin:26px 0;border:1px solid var(--line)}
+.up h3{margin:0 0 8px;font-size:22px}
+.up p{margin:8px 0 16px;color:var(--dark-muted);font-size:15.5px}
+.up a{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;padding:14px 26px;border-radius:13px;font-size:16px}
+.mid{margin:22px 0}
+.mid a{display:inline-block;background:var(--copy-bg);color:var(--copy-text);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:13px;font-size:15px}
+.linkbtn{display:inline-block;margin:12px 0 4px;color:var(--accent-soft);text-decoration:none;font-weight:800;font-size:15px;word-break:break-all;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.8}
+.foot{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}
+.cath{font-size:24px;font-weight:800;margin:28px 0 6px;padding-top:8px;scroll-margin-top:100px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card:hover{border-color:var(--accent)}
+.card .cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft);font-weight:800}
+.card h2{font-size:18px;margin:6px 0;font-weight:800}
+.card p{font-size:14px;color:var(--muted);margin:0}
+.code{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--muted)}
+</style></head><body><div class="top"><div class="in"><a class="brand" href="/" style="text-decoration:none">Владимир Ижмуков <span>@reelsmentor_ai</span></a><nav class="nav"><a class="btn" href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><nav class="catbar"><a href="/">Все материалы</a><a href="/#cat-video-i-montaj">Видео и монтаж</a><a href="/#cat-produktivnost">Продуктивность</a><a href="/#cat-privatnost">Приватность</a><a class="active" href="/#cat-obucenie">Обучение</a><a href="/#cat-marketing">Маркетинг</a><a href="/#cat-obraz-i-vnesnost">Образ и внешность</a><a href="/#cat-samopoznanie">Самопознание</a><a href="/#cat-ai-instrumenty">AI-инструменты</a><a href="/about/">Обо мне</a></nav></div>
+<div class="wrap">
+<div class="crumb"><a href="/#cat-obucenie">Обучение</a></div>
+<h1>Настрой Claude под свой контент за 10 минут</h1>
+<p class="lead">Держи готовую систему из карусели. Это 4 шага с точными промптами, которые за 10 минут настройки перенастраивают Claude под тебя. Он перестаёт писать шаблонно, начинает понимать твою нишу и выдаёт контент, который хочется опубликовать. Сначала ты один раз задаёшь ему роль и свой голос, дальше все 4 шага идут уже в твоём стиле. В самом низу разбор, как гонять эту систему каждую неделю за 15 минут, и бонус-промпт, который доводит готовый пост до финального вида под нужный формат.</p>
+<p class="meta">Готовая система из 4 шагов с точными промптами: за 10 минут настроить Claude под свою нишу и голос, чтобы он выдавал вирусные темы, форматы и готовые тексты для Instagram. Плюс промпт-настройка роли в начале чата и бонус-промпт для доводки поста.</p>
+<div class="how">Как пользоваться. Открой Claude или ChatGPT, начни новый чат и первым делом вставь промпт-настройку роли из блока ниже. Он один раз задаёт Claude, кем он для тебя работает и каким голосом пишет, чтобы все следующие шаги шли в твоём стиле. Дальше иди по шагам с первого по четвёртый, вставляя промпты по очереди в этот же чат. Каждый шаг опирается на результат предыдущего, поэтому порядок важен. На всё про всё уходит около 10 минут, на выходе у тебя готовые темы, разложенные по форматам, и первые три поста текстом.</div>
+<div class="sec"><h2>Шаг 0. Сначала задай Claude роль и свой голос</h2><p>Один раз в начале чата. Без этого шага Claude пишет усреднённо и шаблонно, потому что не знает, кто ты и как ты звучишь.</p><p>Зачем это нужно. Claude по умолчанию отвечает нейтральным гладким текстом, который сразу читается как машинный. Ты сначала объясняешь ему, что он твой контент-маркетолог, показываешь свой голос и запрещаешь типичные признаки ИИ-письма. После этого все 4 шага он делает уже в твоей манере, и тебе не приходится каждый раз переписывать за ним вручную. Вставь этот промпт первым сообщением в новый чат.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты мой личный контент-маркетолог для Instagram. Работаешь на меня, знаешь мою нишу и пишешь моим голосом.
+
+Моя ниша: [ЧЕМ ТЫ ЗАНИМАЕШЬСЯ]
+Мой продукт: [ЧТО ПРОДАЁШЬ]
+Мой голос, 2-3 мои типичные фразы: [ВСТАВЬ ПРИМЕРЫ КАК ТЫ ГОВОРИШЬ]
+
+Правила письма, соблюдай во всех ответах:
+1. Живой человеческий русский, короткие понятные предложения.
+2. Никаких длинных тире. Вместо них точка или запятая.
+3. Не используй обороты вида «не то, а это» и клише вроде «в современном мире», «важно понимать».
+4. Никакой воды и вступлений, сразу по делу.
+5. Пиши так, как говорит живой эксперт своей аудитории, а не как реклама.
+
+Запомни это на весь наш разговор. Если понял, ответь одной строкой «Готов» и жди первую задачу.">Скопировать</button></div><div class="box">Ты мой личный контент-маркетолог для Instagram. Работаешь на меня, знаешь мою нишу и пишешь моим голосом.
+
+Моя ниша: [ЧЕМ ТЫ ЗАНИМАЕШЬСЯ]
+Мой продукт: [ЧТО ПРОДАЁШЬ]
+Мой голос, 2-3 мои типичные фразы: [ВСТАВЬ ПРИМЕРЫ КАК ТЫ ГОВОРИШЬ]
+
+Правила письма, соблюдай во всех ответах:
+1. Живой человеческий русский, короткие понятные предложения.
+2. Никаких длинных тире. Вместо них точка или запятая.
+3. Не используй обороты вида «не то, а это» и клише вроде «в современном мире», «важно понимать».
+4. Никакой воды и вступлений, сразу по делу.
+5. Пиши так, как говорит живой эксперт своей аудитории, а не как реклама.
+
+Запомни это на весь наш разговор. Если понял, ответь одной строкой «Готов» и жди первую задачу.</div><p>Как усилить. Не поленись вставить в поле голоса реальные куски своих старых постов или то, как ты говоришь в сторис. Чем живее пример, тем точнее Claude ловит интонацию. Если после первого ответа он всё равно звучит гладко и безлико, напиши ему «стало слишком причёсано, добавь живой разговорной интонации и порви ритм короткими фразами», и он подстроится.</p></div>
+<div class="sec"><h2>Шаг 1. Загрузи в Claude свою аудиторию</h2><p>Достаём страхи, желания и скрытые сомнения твоей аудитории. Это фундамент, из которого потом растут все темы.</p><p>Зачем это нужно. Контент цепляет, когда попадает в реальную боль человека, а не в то, что ты сам про него придумал. На этом шаге Claude собирает тебе карту аудитории: чего она боится, чего хочет и что мешает ей купить. Дальше вся система опирается именно на этот список, поэтому чем честнее опишешь аудиторию, тем сильнее будет всё остальное.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Представь, что ты сильный маркетолог. Моя аудитория: [ОПИСАНИЕ]. Определи 10 главных страхов, 10 желаний и 10 скрытых сомнений, которые мешают купить мой продукт [НАЗВАНИЕ].">Скопировать</button></div><div class="box">Представь, что ты сильный маркетолог. Моя аудитория: [ОПИСАНИЕ]. Определи 10 главных страхов, 10 желаний и 10 скрытых сомнений, которые мешают купить мой продукт [НАЗВАНИЕ].</div><p>Что делать с результатом. Прочитай список глазами своего клиента и отметь 5-7 пунктов, от которых внутри ёкает сильнее всего. Это твои золотые точки, вокруг них зайдёт лучший контент. Как усилить: попроси Claude «переформулируй эти пункты дословными фразами, которые сам клиент говорит вслух или пишет в личку». Дословные формулировки боли потом становятся готовыми хуками для роликов.</p></div>
+<div class="sec"><h2>Шаг 2. Преврати боли в вирусные темы</h2><p>Из карты аудитории собираем банк из 30 заголовков, которые хочется открыть.</p><p>Зачем это нужно. Тема решает судьбу поста ещё до того, как человек досмотрит первую секунду. На этом шаге ты превращаешь сухой список болей в 30 конкретных заголовков с интригой и цифрами. Один заход, и у тебя закрыт вопрос «а что вообще снимать» на ближайшие недели.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Используя этот список болей и желаний, придумай 30 заголовков для Instagram. Используй интригу, цифры, неожиданные мысли и любопытство. Заголовки должны вызывать желание открыть публикацию и не выглядеть как реклама.">Скопировать</button></div><div class="box">Используя этот список болей и желаний, придумай 30 заголовков для Instagram. Используй интригу, цифры, неожиданные мысли и любопытство. Заголовки должны вызывать желание открыть публикацию и не выглядеть как реклама.</div><p>Что делать с результатом. Пробегись по 30 заголовкам и выброси те, что звучат банально или как у всех. Оставь 12-15 самых цепких. Как усилить: возьми 5 лучших и попроси «дай к каждому заголовку по 3 варианта первой строки для ролика, чтобы человек не смог пролистнуть». Так у тебя на руках уже не просто темы, а готовые хуки на старт видео.</p></div>
+<div class="sec"><h2>Шаг 3. Разложи контент по форматам</h2><p>Раскидываем темы по Reels, каруселям и Stories, чтобы каждая работала на свою задачу.</p><p>Зачем это нужно. Одна и та же тема по-разному живёт в разных форматах. Reels тянут охваты, карусели копят экспертность и сохранения, Stories греют тех, кто уже подписан. Когда темы разложены по местам, ты перестаёшь пихать всё подряд в один формат и начинаешь строить осмысленную ленту, где каждый пост делает свою работу.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Раздели эти темы на три группы: 10 для Reels (охваты), 10 для каруселей (экспертность и сохранения) и 10 для Stories (прогрев аудитории). Представь результат в виде удобной таблицы.">Скопировать</button></div><div class="box">Раздели эти темы на три группы: 10 для Reels (охваты), 10 для каруселей (экспертность и сохранения) и 10 для Stories (прогрев аудитории). Представь результат в виде удобной таблицы.</div><p>Что делать с результатом. Скопируй таблицу к себе в заметки или в Google-таблицу, это твой контент-план. Как усилить: попроси Claude «расставь темы по дням на две недели так, чтобы охватные Reels чередовались с прогревом, и первым шёл самый сильный заголовок». На выходе получаешь готовое расписание, по которому просто идёшь сверху вниз, не думая каждый день, что публиковать.</p></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2>Шаг 4. Получи готовые публикации</h2><p>Берём первые темы и превращаем их в готовые тексты, которые можно публиковать сегодня.</p><p>Зачем это нужно. План без текстов легко откладывается на потом. На этом шаге Claude собирает тебе готовые публикации с правильной структурой: сильный первый экран, польза по слайдам и призыв в конце. Тебе остаётся вычитать, поправить под себя и выложить.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Возьми первые три темы для каруселей и подготовь готовые тексты. Структура: сильный первый экран, затем 4-5 слайдов практической пользы без воды и финальный призыв к действию. Пиши короткими, понятными предложениями.">Скопировать</button></div><div class="box">Возьми первые три темы для каруселей и подготовь готовые тексты. Структура: сильный первый экран, затем 4-5 слайдов практической пользы без воды и финальный призыв к действию. Пиши короткими, понятными предложениями.</div><p>Что делать с результатом. Прочитай вслух первый экран каждого текста. Если после него хочется листать дальше, тема рабочая. Если нет, попроси «усиль первый экран, дай 3 более острых варианта захода». Как усилить: добавь «в конце каждой карусели вставь простой призыв написать кодовое слово ОБУЧЕНИЕ в комментариях, чтобы получить эту систему целиком». Так контент не просто радует людей, а собирает тебе отклики.</p></div>
+<div class="sec"><h2>Как гонять эту систему каждую неделю за 15 минут</h2><p>Один раз настроил, дальше повторяешь по кругу и держишь ленту забитой контентом.</p><p>Ритуал простой. Раз в неделю открывай тот же чат с настроенным Claude, где уже лежит карта аудитории. Первый раз шаги 1 и 2 отняли время, теперь основа готова, ты просто просишь новую партию тем и раскидываешь по форматам. На это уходит около 15 минут, а на руках у тебя банк контента на следующую неделю.</p><p>Порядок повтора по шагам. Раз, пишешь «дай ещё 30 свежих заголовков по тем же болям, не повторяй прошлые». Два, просишь разложить их по Reels, каруселям и Stories таблицей. Три, берёшь 3 темы недели и просишь готовые тексты. Четыре, прогоняешь каждый через бонус-промпт снизу под нужный формат. Всё, неделя закрыта.</p><p>Раз в месяц возвращайся к шагу 1 и обновляй карту аудитории. Люди меняются, появляются новые страхи и возражения, свежая карта держит темы актуальными. Так система не выдыхается и продолжает попадать в боль.</p></div>
+<div class="sec"><h2>Бонус. Промпт, который доводит пост до финального вида</h2><p>Берёт сырой текст и собирает из него чистовик под конкретный формат, готовый к публикации.</p><p>Зачем он нужен. Готовый текст из шага 4 почти всегда требует доводки под площадку. У Reels свои законы первой секунды, у карусели своя логика слайдов, у Stories свой темп. Этот промпт превращает черновик в чистовик под нужный формат за один заход. Вставь его в тот же чат после того, как получил тексты.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Доведи этот пост до финального вида под формат [REELS / КАРУСЕЛЬ / STORIES].
+
+Сделай так:
+1. Первый экран или первая секунда должны цеплять с ходу, дай 3 варианта захода на выбор.
+2. Разбей текст на понятные части под формат: для Reels закадровый текст плюс текст на экране, для карусели слайды по одной мысли, для Stories короткие кадры с крючком в следующий.
+3. В конце оставь один простой призыв, без давления.
+4. Пиши моим голосом, короткими живыми предложениями, без длинных тире и без оборотов вида «не то, а это».
+
+Вот черновик поста: [ВСТАВЬ ТЕКСТ ИЗ ШАГА 4]
+Формат: [REELS / КАРУСЕЛЬ / STORIES]">Скопировать</button></div><div class="box">Доведи этот пост до финального вида под формат [REELS / КАРУСЕЛЬ / STORIES].
+
+Сделай так:
+1. Первый экран или первая секунда должны цеплять с ходу, дай 3 варианта захода на выбор.
+2. Разбей текст на понятные части под формат: для Reels закадровый текст плюс текст на экране, для карусели слайды по одной мысли, для Stories короткие кадры с крючком в следующий.
+3. В конце оставь один простой призыв, без давления.
+4. Пиши моим голосом, короткими живыми предложениями, без длинных тире и без оборотов вида «не то, а это».
+
+Вот черновик поста: [ВСТАВЬ ТЕКСТ ИЗ ШАГА 4]
+Формат: [REELS / КАРУСЕЛЬ / STORIES]</div><p>Что делать дальше. Прогони через этот промпт все три текста недели, каждый под свой формат. На выходе у тебя готовые к публикации посты, отдельно хуки, отдельно тело, отдельно призыв. Останется вставить в ленту и выложить по расписанию из шага 3.</p></div>
+<div class="up"><h3>Хочешь так же, но под свой блог и продукт?</h3><p>Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать</a></div>
+<p class="foot">Владимир Ижмуков · @reelsmentor_ai · подписывайся на @Ai_realshift</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+</body></html>
