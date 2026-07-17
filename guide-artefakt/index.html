@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Claude Code Artifacts: работа Клода как живая веб-страница</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>Claude Code Artifacts: работа Клода как живая веб-страница</h1>
+<p class="lead">Обычно работу Claude показывают скриншотом или простынёй текста в терминале. Артефакт делает иначе: Claude берёт то, что насчитал и собрал, и превращает это в настоящую живую веб-страницу. Ты получаешь ссылку, открываешь её в браузере как обычный сайт, кидаешь команде. Пока Claude продолжает работать, страница обновляется сама, ты ничего не переписываешь руками. Хочешь дашборд, который сам ведёт статус проекта. Или отчёт клиенту, который сам наполняется по ходу работы. Ниже вся механика: что это на самом деле, как получить доступ, как создать первую страницу тремя действиями и три готовых промпта под реальные задачи.</p>
+<p class="meta">Разберёшься за 10 минут. Код писать не нужно. Нужен только вход в аккаунт Claude и свежая версия Claude Code. Внутри пошаговый запуск и три готовых промпта, которые собирают дашборд, отчёт и статус-борд с первого вставления.</p>
+<div class="how">Иди по порядку. Сначала проверяешь доступ (тариф, вход, версия), потом одной фразой просишь Claude собрать артефакт и жмёшь Yes на публикацию, дальше учишься держать страницу живой и делиться ссылкой. В конце три готовых промпта под конкретные сценарии, бери любой, подставляй своё и вставляй в Claude.</div>
+<div class="sec"><h2 id="sec-0">Что такое артефакт на самом деле</h2><p>Это не файл, не скриншот и не приложение. Это одна живая веб-страница, которую Claude публикует прямо из твоей рабочей сессии на приватный адрес на claude.ai.</p><ul><li>Claude собирает страницу из всего, до чего дотягивается в сессии: твой код, данные из подключённых сервисов, история вашего разговора.</li><li>Ты открываешь её в браузере по ссылке. Пока Claude продолжает работать над задачей, страница обновляется прямо на глазах, в том же адресе.</li><li>Каждая публикация становится отдельной версией. Есть история версий, можно откатиться назад, и есть галерея всех твоих артефактов на claude.ai.</li></ul><div class="note">Важное ограничение честно: артефакт фиксирует работу как страницу, полноценным приложением он не становится. Это одна самодостаточная страница без базы данных на бэкенде. Она не хранит то, что ввели в форму, и не тянет данные из интернета напрямую. Живые данные приходят только через подключённые сервисы (об этом в конце). Если нужен полноценный внутренний сервис с базой, его поднимают отдельно, артефакт для другого.</div></div>
+<div class="sec"><h2 id="sec-1">Шаг 1. Проверь доступ</h2><p>Функция вышла в бете. На момент ролика она была доступна для тарифов Claude Team и Enterprise. Сейчас Anthropic открыла её также на Pro и Max. Проверь, что у тебя сходятся четыре условия, иначе Claude просто напишет локальный HTML-файл без ссылки.</p><ol><li>Тариф Pro, Max, Team или Enterprise. На Team функция включена по умолчанию. На Enterprise её включает владелец в админ-настройках claude.ai. На Pro и Max артефакт по умолчанию виден только тебе, пока сам не поделишься.</li><li>Вход именно через аккаунт Claude, команда /login в Claude Code. Если сессия работает на API-ключе или токене-шлюзе, публикация не сработает, это частая причина осечки.</li><li>Claude Code версии 2.1.183 или новее, либо десктоп-приложение Claude. Старые версии функцию не знают.</li><li>Провайдер Anthropic API. На Amazon Bedrock, Google Vertex и Microsoft Foundry не работает. Также недоступно, если в организации включены CMEK, HIPAA или режим Zero Data Retention.</li></ol><div class="note">Быстрая самопроверка: если после просьбы собрать артефакт Claude выдал ссылку вида claude.ai/code/artifact/... и открыл браузер, доступ есть. Если написал локальный html-файл без ссылки, значит одно из условий выше не выполнено.</div></div>
+<div class="sec"><h2 id="sec-2">Шаг 2. Создай первый артефакт</h2><p>Отдельной кнопки нет. Ты просто просишь Claude обычными словами собрать страницу вместо вывода текста в терминал. Хорошая заявка, это всё, что удобнее посмотреть глазами, чем читать построчно: дашборд, разбор изменений, набор вариантов рядом.</p><ol><li>Напиши Claude в сессии, что хочешь получить именно артефакт-страницу. Пример простой фразы: «Собери артефакт-дашборд по нашим задачам за неделю и держи его в актуальном состоянии, пока работаешь».</li><li>Claude запишет страницу в HTML или Markdown файл в твоём проекте и спросит разрешение на публикацию. Он покажет что-то вроде «Claude wants to publish ... to a private page on claude.ai».</li><li>Нажми Yes. Claude напечатает ссылку, браузер откроется на новой странице. Всё, артефакт живой.</li><li>Чтобы в любой момент заново открыть последний артефакт из терминала, нажми Ctrl и правую квадратную скобку.</li></ol><div class="note">Claude сам придумывает заголовок страницы и иконку для вкладки браузера. Хочешь конкретный заголовок, попроси прямо в промпте. Повторная публикация уже одобренного артефакта разрешения больше не спрашивает.</div></div>
+<div class="sec"><h2 id="sec-3">Шаг 3. Держи страницу живой и делись</h2><p>Сила артефакта в том, что он обновляется сам и живёт по одной ссылке. Вот как этим управлять.</p><ol><li>Обновление. Просто попроси Claude переделать страницу, например «Добавь разбивку по регионам под сводным графиком и опубликуй заново». Claude правит тот же файл и публикует в тот же адрес. Каждый, у кого открыта страница, видит изменение сразу.</li><li>Обновление из другой сессии. Дай Claude ссылку на артефакт и попроси обновить: «Обнови https://claude.ai/code/artifact/... сегодняшними цифрами». Без ссылки новая сессия создаст новый артефакт вместо обновления старого.</li><li>Как поделиться. Открой артефакт в браузере и нажми Share в шапке страницы. Там же видно, кто автор, и ссылка на твою галерею всех артефактов.</li></ol><div class="note">С кем можно делиться, зависит от тарифа. На Team и Enterprise даёшь доступ конкретным людям из твоей организации или всей организации разом, они заходят под своим аккаунтом claude.ai и видят приватную страницу. На Pro и Max единственный способ поделиться, это публичная ссылка, которую откроет кто угодно без входа. Приватная командная ссылка из ролика, это возможность именно Team и Enterprise. На Team и Enterprise коллегу можно сделать не только зрителем, но и редактором.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-4">Три готовых промпта под реальные задачи</h2><p>Бери любой, подставь своё в квадратные скобки, вставь целиком в Claude Code в нужном проекте. Каждый собирает готовую страницу с первого раза.</p><div class="grid2"><div class="cardb"><h3>Дашборд статуса проекта</h3><p>Живая панель, которая сама ведёт статус вместо того, чтобы руками писать апдейты. Claude берёт задачи и изменения из кода и истории сессии и держит страницу актуальной по ходу работы.</p></div><div class="cardb"><h3>Живой отчёт клиенту</h3><p>Страница-отчёт понятным языком для человека без технического бэкграунда. Наполняется по мере работы, клиенту уходит одна ссылка вместо длинных писем.</p></div><div class="cardb"><h3>Статус-борд команды</h3><p>План работ как чеклист, который отмечается сам. Вся команда видит прогресс в реальном времени по одной ссылке, не читая терминал.</p></div></div><p>1. Дашборд статуса проекта. Собирает панель, которая обновляется сама.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты работаешь в моём проекте в Claude Code. Собери артефакт-дашборд статуса проекта [название проекта]. Возьми данные из репозитория и из истории нашей сессии. Покажи на одной странице четыре блока: 1) список задач со статусом (сделано, в работе, ждёт) и прогрессом в процентах, 2) последние изменения в коде за неделю коротким списком, 3) риски и блокеры, 4) что делаем следующим шагом. Оформи чисто, цифры крупно, заголовки понятные. Обновляй эту страницу по мере работы и каждый раз публикуй в тот же адрес. Заголовок страницы: Статус проекта [название проекта].">Скопировать</button></div><div class="box">Ты работаешь в моём проекте в Claude Code. Собери артефакт-дашборд статуса проекта [название проекта]. Возьми данные из репозитория и из истории нашей сессии. Покажи на одной странице четыре блока: 1) список задач со статусом (сделано, в работе, ждёт) и прогрессом в процентах, 2) последние изменения в коде за неделю коротким списком, 3) риски и блокеры, 4) что делаем следующим шагом. Оформи чисто, цифры крупно, заголовки понятные. Обновляй эту страницу по мере работы и каждый раз публикуй в тот же адрес. Заголовок страницы: Статус проекта [название проекта].</div><p>2. Живой отчёт клиенту. Пишет простым языком, наполняется по ходу.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Собери артефакт-страницу отчёта для клиента по проекту [название] за [период]. Клиент не программист, пиши простым человеческим языком, без технического жаргона. Раздели на блоки: 1) что сделали за период, понятными формулировками списком, 2) что это даёт клиенту на деле, 3) что в планах на следующий период, 4) экран с ключевыми цифрами крупно. Оформи наглядно и спокойно, без пестроты. По мере работы обновляй страницу и публикуй в тот же адрес, чтобы клиент открывал одну ссылку и видел свежее. Заголовок: Отчёт по проекту [название].">Скопировать</button></div><div class="box">Собери артефакт-страницу отчёта для клиента по проекту [название] за [период]. Клиент не программист, пиши простым человеческим языком, без технического жаргона. Раздели на блоки: 1) что сделали за период, понятными формулировками списком, 2) что это даёт клиенту на деле, 3) что в планах на следующий период, 4) экран с ключевыми цифрами крупно. Оформи наглядно и спокойно, без пестроты. По мере работы обновляй страницу и публикуй в тот же адрес, чтобы клиент открывал одну ссылку и видел свежее. Заголовок: Отчёт по проекту [название].</div><p>3. Статус-борд команды. Чеклист, который сам отмечает выполненное.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Преврати наш план работ по проекту [название] в артефакт-чеклист. Каждый пункт отдельной строкой со статусом. По мере выполнения отмечай пункты сделанными, для пропущенных добавляй короткую заметку почему. После каждого шага публикуй заново в тот же адрес, чтобы вся команда видела прогресс в реальном времени по одной ссылке. Сверху добавь строку общего прогресса в процентах. Заголовок: План работ [название].">Скопировать</button></div><div class="box">Преврати наш план работ по проекту [название] в артефакт-чеклист. Каждый пункт отдельной строкой со статусом. По мере выполнения отмечай пункты сделанными, для пропущенных добавляй короткую заметку почему. После каждого шага публикуй заново в тот же адрес, чтобы вся команда видела прогресс в реальном времени по одной ссылке. Сверху добавь строку общего прогресса в процентах. Заголовок: План работ [название].</div></div>
+<div class="sec"><h2 id="sec-5">Живые данные и границы страницы</h2><p>Чтобы страница при каждом открытии показывала свежие данные, есть один рабочий приём. И пара честных ограничений, чтобы ты не ждал от артефакта лишнего.</p><p>Живые данные через подключённые сервисы. Артефакт может дёргать твои подключённые коннекторы (например GitHub) каждый раз, когда кто-то открывает страницу. Тогда там всегда актуальные цифры на момент открытия. Назови коннектор прямо в промпте:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Собери артефакт-дашборд наших открытых пулл-реквестов, который подтягивает живой список через мой коннектор GitHub при загрузке страницы. Добавь запасное сообщение в каждый живой блок с названием коннектора, который ему нужен, на случай если у зрителя он не подключён.">Скопировать</button></div><div class="box">Собери артефакт-дашборд наших открытых пулл-реквестов, который подтягивает живой список через мой коннектор GitHub при загрузке страницы. Добавь запасное сообщение в каждый живой блок с названием коннектора, который ему нужен, на случай если у зрителя он не подключён.</div><div class="note">Тонкость про зрителей: живые данные тянутся через аккаунт того, кто открыл страницу, под его собственным входом. Значит у каждого зрителя должен быть свой такой же подключённый коннектор, и claude.ai один раз спросит у него разрешение. Поэтому запасное сообщение в промпте выше не лишнее.</div><ul><li>Одна страница без бэкенда. Форму она не сохранит, внешние запросы к сторонним сайтам закрыты политикой безопасности, картинки и стили Claude вшивает прямо внутрь.</li><li>Размер страницы до 16 МБ. Если публикация падает по размеру, обычно виноваты тяжёлые встроенные картинки, попроси заменить их на схемы или лёгкую графику.</li><li>Файл только .html, .htm или .md. Markdown отрисуется как оформленная страница.</li></ul><div class="note">Итог. Артефакт закрывает ровно ту боль, с которой начинали: показать работу живой страницей и держать её в актуальном виде по одной ссылке, без ручных апдейтов. Проверь доступ, попроси Claude собрать первый дашборд по промпту выше и нажми Yes.</div></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Что такое артефакт на самом деле</a><a href="#sec-1">Шаг 1. Проверь доступ</a><a href="#sec-2">Шаг 2. Создай первый артефакт</a><a href="#sec-3">Шаг 3. Держи страницу живой и делись</a><a href="#sec-4">Три готовых промпта под реальные задачи</a><a href="#sec-5">Живые данные и границы страницы</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
