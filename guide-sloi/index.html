@@ -1,0 +1,363 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Система двух слоёв: широкий слой растит, нишевый продаёт</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-marketing">Маркетинг</a></div>
+<h1>Система двух слоёв: широкий слой растит, нишевый продаёт</h1>
+<p class="lead">Тебе сказали сузить нишу, и рост встал. Это не случайность. Один нишевый слой контента упирает твой ох:ват в потолок, потому что платформе некому тебя показывать за пределами узкой группы. Один широкий слой набирает про:смотры, но не приводит клиентов, потому что не понятно за что тебе платить. Работает связка из двух слоёв. Верхний, широкий слой приводит новых незнакомых людей: это темы, к которым подключается любой человек с улицы. Нижний, нишевый слой превращает этих людей в под:писчиков и клиентов: это твоя конкретная экспертиза, которая греет и продаёт. Большинство публикуют только нижний слой, поэтому у них есть продажи, но почти нет роста. Ниже полная система: как собрать широкий слой честно, как собрать нишевый, в какой пропорции их чередовать, как связать их в одну воронку, готовый недельный план-скелет и промпт, который соберёт твой личный двухслойный план под твою нишу. Прочитал, встал, собрал.</p>
+<p class="meta">Разбор на один заход, читается за 12 минут. Внутри механика двух слоёв, банк из 9 широких заходов и 7 нишевых форматов с примерами, конкретные пропорции и пороги, схема связки слоёв в воронку, заполняемый недельный план и готовый промпт-генератор двухслойного плана. Кодить и снимать по-новому не нужно, нужно перераспределить то что ты уже делаешь.</p>
+<div class="how">Читай сверху вниз. Сначала пойми механику: почему один слой всегда упирается, а два вместе работают. Потом собери верхний слой по банку заходов и нижний по банку форматов. Дальше выставь пропорцию и ритм по числам из раздела 4, свяжи слои в воронку по шагам из раздела 5, заполни недельный скелет из раздела 6 под себя. В конце запусти промпт из раздела 7, он выдаст твой личный банк тем и недельный план по двум слоям.</div>
+<div class="sec"><h2 id="sec-0">Почему один слой всегда упирается в потолок</h2><p>Разберём механику, а не лозунги. У платформы одна задача: держать людей в ленте подольше. Она показывает твой контент новым людям только тогда, когда видит, что незнакомцы на нём залипают. Отсюда растёт вся логика двух слоёв.</p><p>Когда ты говоришь только на свою узкую тему, платформе физически некому тебя раздавать. Круг людей, которым это заходит без контекста, маленький. Алгоритм показывает ролик небольшой тёплой группе, видит, что за её пределами удержания нет, и перестаёт расширять показ. Ты растёшь на скорости сарафана, то есть почти не растёшь. Продажи при этом идут, потому что те немногие, кто дошёл, это целевые люди. Отсюда типичная картина: заявки есть, а блог стоит на месте.</p><p>Обратная крайность тоже не работает. Если ты снимаешь только широкое и развлекательное, к тебе приходит толпа случайных людей. Ох:ваты большие, а денег нет, потому что человеку не понятно, кто ты, какую его боль закрываешь и за что тебе платить. Аудитория пухнет, счёт не растёт.</p><div class="grid2"><div class="cardb"><h3>Верхний слой отвечает за вход</h3><p>Широкие темы, к которым подключается незнакомец без контекста. Их платформа охотно раздаёт новым людям, потому что удержание высокое у всех, не только у твоей ниши. Задача слоя: привести новую аудиторию и внимание.</p></div><div class="cardb"><h3>Нижний слой отвечает за деньги</h3><p>Твоя конкретная экспертиза: разборы, кейсы, метод, ответы на боли клиента. Ох:ваты тут скромнее, зато сюда приходят те, кто готов платить. Задача слоя: превратить пришедшее внимание в под:писчиков, заявки и продажи.</p></div><div class="cardb"><h3>Работает только связка</h3><p>Верхний слой без нижнего это пустой трафик без денег. Нижний без верхнего это деньги без роста. Вместе они дают и приток новых людей, и конверсию этих людей в клиентов. Один без другого всегда упирается.</p></div></div><div class="note">Ключевая мысль: тебе не надо выбирать между ох:ватом и продажами. Ты распределяешь их по слоям. Широкий слой сознательно берёт на себя приток людей, нишевый сознательно берёт на себя деньги. Дальше вся система про то, как собрать каждый слой и как их состыковать.</div></div>
+<div class="sec"><h2 id="sec-1">Верхний слой: как собрать широкий заход честно</h2><p>Широкий слой это темы, к которым подключается любой человек, даже тот, кто про твою нишу никогда не слышал. Важно делать это честно, без кликбейта-пустышки. Честный широкий заход всегда несёт второй смысл, который ведёт к твоей нише. Ниже банк из 9 типов заходов с примерами.</p><div class="grid2"><div class="cardb"><h3>1. Общечеловеческая боль</h3><p>Тема, которую переживал каждый: выгорание, страх осуждения, прокрастинация, самозванец, сравнение с другими. Пример для психолога: «Почему ты откладываешь важное и винишь себя за лень». Подключается любой, а внутри твоя экспертиза про механику этого состояния.</p></div><div class="cardb"><h3>2. Разбор чужого кейса или новости</h3><p>Берёшь громкую историю, тренд, поступок известного человека и разбираешь его со своей экспертной оптики. Пример для маркетолога: почему один ролик блогера собрал миллионы, а похожий провалился. Заходит всем, кто видел новость, ценность несёшь ты.</p></div><div class="cardb"><h3>3. Наблюдение о жизни и людях</h3><p>Меткое жизненное наблюдение, в котором человек узнаёт себя или близких. Про отношения, деньги, привычки, характеры. Внутрь зашивается угол твоей темы. Такие вещи люди пересылают, потому что это про них.</p></div><div class="cardb"><h3>4. До и после, трансформация</h3><p>Визуальная или смысловая история изменения: как было плохо и как стало иначе. Формат универсально притягивает внимание. В твоём случае трансформация ведёт к тому, что ты умеешь делать для клиента.</p></div><div class="cardb"><h3>5. Ошибка, которую совершают почти все</h3><p>«9 из 10 делают вот так и теряют результат». Широко, потому что каждый примеряет на себя. Ошибка выбирается из твоей ниши, поэтому разбор естественно уходит в экспертизу.</p></div><div class="cardb"><h3>6. Просто и наглядно про сложное</h3><p>Берёшь то, что многие боятся или не понимают, и объясняешь на пальцах за минуту. Финансы, нейросети, юридические штуки, здоровье. Человек залипает от ясности, а эксперт тут очевидно ты.</p></div><div class="cardb"><h3>7. Спорное мнение и позиция</h3><p>Честное «я считаю иначе, и вот почему» по теме, которая многих задевает. Даёт обсуждение и репосты. Позиция берётся из твоей профессиональной картины мира, поэтому спор идёт по твоему полю.</p></div><div class="cardb"><h3>8. Закулисье и человек за делом</h3><p>Как всё устроено изнутри, твой день, твои сомнения, твоя кухня. Люди подключаются к живому человеку, а не к бренду. Внутри честно видно, чем ты занимаешься и на чём разбираешься.</p></div><div class="cardb"><h3>9. Список и подборка на широкую тему</h3><p>«7 вещей, которые», «5 признаков того что». Формат легко потребляется и сохраняется. Тема широкая на входе, а пункты подводят к тому, что решает уже твоя экспертиза.</p></div></div><div class="note">Правило честности: широкий заход даёт реальную пользу или эмоцию сам по себе, даже если человек не пойдёт в твою нишу. Пустой кликбейт приводит людей, которые отваливаются на второй секунде, и платформа это считывает как обман. Второй смысл, ведущий к нише, зашивается в подачу и в подпись, но верх работает как самостоятельный ценный контент.</div><p>Как связать широкое с нишей за один смысловой мостик: заканчивай широкий заход фразой, которая мягко открывает твою тему. Пример для эксперта по трафику: ролик про то, как мозг цепляется за первые 3 секунды видео (широко, про психологию внимания), закрывается мыслью «на этом же держится любой продающий ролик, и это можно собрать по формуле». Человек пришёл на широкое, а ушёл с мыслью про твою экспертизу.</p></div>
+<div class="sec"><h2 id="sec-2">Нижний слой: экспертиза, которая продаёт</h2><p>Нишевый слой это твоя конкретная тема для тех, кто уже пришёл. Здесь ох:ваты меньше, зато конверсия в заявки выше. Задача этого слоя: показать, что ты решаешь боль, и мягко позвать к следующему шагу. Ниже банк из 7 форматов, которые продают.</p><div class="grid2"><div class="cardb"><h3>1. Разбор боли клиента с решением</h3><p>Берёшь одну конкретную боль своей аудитории и показываешь, откуда она и что с ней делать. Пример: «Почему заявки есть, а продаж нет, и как это чинится». Человек узнаёт свою ситуацию и видит, что ты понимаешь её глубже него.</p></div><div class="cardb"><h3>2. Кейс: до, после, как</h3><p>Реальная история клиента или своя: точка А, точка Б, механика перехода. Цифры вплетаешь в речь. Это самый сильный продающий формат, потому что показывает результат без обещаний в лоб.</p></div><div class="cardb"><h3>3. Метод и мини-система по шагам</h3><p>Отдаёшь кусок своего подхода как готовую последовательность. «Вот 4 шага, как я это делаю». Ценность настоящая, а глубину и сопровождение человек добирает уже в продукте.</p></div><div class="cardb"><h3>4. Ошибки в твоей нише разбор</h3><p>«Три ошибки, из-за которых у тебя не растёт X». Узко и точно по боли. Человек видит у себя эти ошибки и хочет, чтобы ты помог их закрыть.</p></div><div class="cardb"><h3>5. Ответ на возражение</h3><p>Прямо снимаешь то, что мешает купить: «дорого», «у меня не сработает», «уже пробовал». Один ролик на одно возражение. Это греет тех, кто почти готов, но сомневается.</p></div><div class="cardb"><h3>6. Разбор инструмента или приёма</h3><p>Показываешь на деле конкретный рабочий приём из своей темы. Человек видит уровень твоей экспертизы и понимает, что сам столько не соберёт, проще прийти к тебе.</p></div><div class="cardb"><h3>7. Продающий пост с мягким призывом</h3><p>Прямой контент про твой продукт или следующий шаг, но через пользу и историю, не через давление. Тут живёт призыв: написать кодовое слово, забрать материал, прийти на разбор.</p></div></div><p>Как встроить мягкий призыв, чтобы он не отпугивал. Призыв идёт после ценности, а не вместо неё. Сначала ты реально помог: дал разбор, показал механику, снял возражение. Потом одно конкретное действие: «если хочешь, чтобы я разобрал твой случай, напиши слово в лич:ку» или «забери подробный чек-лист, отправлю в ответ». Одно касание, одно действие, без списка из пяти призывов.</p><div class="note">Порог по нишевому слою: он должен вести к деньгам, но не превращать блог в непрерывную продажу. На каждый прямой продающий пост давай два-три полезных нишевых, где ты просто помогаешь без призыва купить. Тогда аудитория не устаёт и доверяет, а продающий пост срабатывает сильнее.</div></div>
+<div class="sec"><h2 id="sec-3">Пропорция и ритм: сколько чего в неделю</h2><p>Здесь конкретные числа, а не «балансируй». Пропорция зависит от того, что тебе сейчас нужнее: рост аудитории или выжимание денег из имеющейся. Ниже рабочие соотношения и пороги.</p><div class="grid2"><div class="cardb"><h3>База для роста: 30 на 70</h3><p>Из 7 единиц контента в неделю делай 2 широких и 5 нишевых. Это стартовая пропорция для большинства экспертов. Два осознанных широких захода в неделю приводят новых людей, пять нишевых их греют и продают. Не перекашивай в широкое, пока не наладил конверсию нижнего слоя.</p></div><div class="cardb"><h3>Режим разгона: 40 на 60</h3><p>Если аудитория маленькая и надо быстрее набрать людей, подними широкое до 3 из 7. Больше половины в широкое не уводи: приведёшь толпу, которую нечем удержать и некому продать. Как только пошёл приток, возвращайся к 30 на 70.</p></div><div class="cardb"><h3>Режим продаж: 20 на 80</h3><p>Во время активной продажи или запуска временно снижай широкое до 1-2 в неделю и грузи нишевый слой, чтобы дожать тёплых. После запуска обязательно вернись к росту, иначе аудитория выгорит и приток встанет.</p></div></div><p>Ритм чередования. Не ставь все широкие ролики подряд и все нишевые подряд. Разложи их так, чтобы после широкого захода, который привёл новых людей, шёл нишевый, который их подхватывает и греет. Пример недельного ритма при 30 на 70: широкий, нишевый, нишевый, широкий, нишевый, нишевый, нишевый. Новый человек пришёл на широкое и тут же видит рядом твою экспертизу.</p><ul><li>Перекос в широкое: ох:ваты скачут вверх, под:писчики приходят, а заявок и продаж нет. Сигнал вернуть нишевый слой и усилить призывы в нём.</li><li>Перекос в нишевое: продажи идут ровно, но блог не растёт, новых людей почти нет. Сигнал добавить 1-2 осознанных широких захода в неделю.</li><li>Широкое без мостика к нише: люди приходят и отваливаются, конверсия в под:писку низкая. Сигнал зашивать второй смысл и связку с нишей в каждый широкий заход.</li><li>Нишевое без пауз на пользу: сплошная продажа, аудитория остывает и отписывается. Сигнал давать два-три полезных нишевых на один прямой продающий.</li></ul><div class="note">Минимальный жизнеспособный ритм, если совсем нет времени: 1 сильный широкий заход и 2 нишевых в неделю. Три единицы, но осознанно распределённых по слоям, работают лучше, чем семь хаотичных постов из одного слоя. Осознанность распределения важнее количества.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-4">Как связать слои в одну воронку</h2><p>Два слоя работают только тогда, когда между ними есть мост. Широкое приводит внимание, но само по себе внимание утекает. Нужна цепочка, по которой случайный зритель становится под:писчиком, а под:писчик клиентом. Собираем её по шагам.</p><ol><li>Широкий заход ловит внимание. Незнакомец видит твой широкий контент в рекомендациях, залипает, досматривает. На этом шаге твоя задача только удержать, ничего не продавать.</li><li>Мостик уводит мысль к нише. В конце широкого захода и в подписи ты одной фразой открываешь свою тему: «на этом же строится то, чем я занимаюсь». Человек начинает подозревать, что ты эксперт в чём-то конкретном.</li><li>Профиль и шапка ловят. Заинтересованный человек идёт в профиль. За 5 секунд по шапке и закрепу должно быть ясно: кто ты, кому и какую боль закрываешь, что делать дальше. Если тут туман, человек уходит. Это узкое горло всей воронки.</li><li>Закреп и первые посты греют. Сверху профиля стоит сильный нишевый контент: кейс, разбор боли, мини-система. Пришедший с широкого сразу видит твою экспертизу и подписывается ради неё.</li><li>Нишевый слой в ленте догревает. Дальше человек регулярно видит твои нишевые посты, привыкает, начинает доверять. Каждый разбор и кейс поднимает готовность к покупке.</li><li>Продающий пост и призыв закрывают. В нужный момент нишевый продающий контент даёт одно конкретное действие: кодовое слово, заявка, разбор. Тёплый человек доходит до денег.</li></ol><div class="note">Слабое звено почти всегда шаг 3, профиль и шапка. Ты можешь идеально собрать оба слоя, но если пришедший с широкого не понимает за 5 секунд, кто ты и зачем подписываться, вся воронка течёт здесь. Перед тем как гнать ох:ват в широкое, доведи шапку и закреп до ясности. Иначе ты наполняешь дырявое ведро.</div><p>Куда именно вести с широкого. Три рабочих варианта, выбирай под задачу. Первый: в профиль, если у тебя сильная шапка и закреп, человек сам разберётся и подпишется. Второй: на конкретный нишевый пост или закреп через прямую отсылку «полный разбор у меня в закрепе». Третий: сразу в лич:ку или бота через кодовое слово, если у тебя настроена воронка захвата. Чем горячее момент, тем прямее уводи к следующему шагу.</p></div>
+<div class="sec"><h2 id="sec-5">Готовый недельный план-скелет</h2><p>Вот заполняемый шаблон недели по двум слоям в пропорции 30 на 70. Возьми его как рыбу, подставь свои темы из банков выше. Чередование уже расставлено так, чтобы после широкого захода шёл подхват нишевым.</p><div class="grid2"><div class="cardb"><h3>Понедельник. Верхний слой</h3><p>Формат: широкий заход (общечеловеческая боль или разбор новости). Цель: привести новых людей, дать мостик к нише в финале. Пример темы: «Почему мы откладываем важное». Подставь свою широкую тему.</p></div><div class="cardb"><h3>Вторник. Нижний слой</h3><p>Формат: разбор боли клиента с решением. Цель: подхватить пришедших вчера, показать экспертизу. Пример: «Заявки есть, продаж нет, вот почему». Подставь свою боль.</p></div><div class="cardb"><h3>Среда. Нижний слой</h3><p>Формат: кейс до и после. Цель: доказать результат без обещаний, поднять доверие. Пример: клиент из точки А в точку Б. Подставь свой кейс.</p></div><div class="cardb"><h3>Четверг. Верхний слой</h3><p>Формат: широкий заход (наблюдение о жизни или спорное мнение). Цель: второй приток новых людей за неделю. Пример: меткое наблюдение про твою большую тему. Подставь широкую тему.</p></div><div class="cardb"><h3>Пятница. Нижний слой</h3><p>Формат: метод или мини-система по шагам. Цель: отдать пользу, показать глубину подхода. Пример: «4 шага, как я делаю X». Подставь свой метод.</p></div><div class="cardb"><h3>Суббота. Нижний слой</h3><p>Формат: ответ на возражение или разбор ошибок. Цель: снять сомнение у тёплых. Пример: «Почему у тебя не растёт X». Подставь возражение аудитории.</p></div><div class="cardb"><h3>Воскресенье. Нижний слой</h3><p>Формат: продающий пост с мягким призывом. Цель: перевести тёплых в действие. Пример: польза плюс одно действие с кодовым словом. Подставь свой оффер.</p></div></div><div class="note">Как пользоваться скелетом: раз в неделю садишься, подставляешь конкретные темы в семь ячеек из своих банков широких и нишевых тем. Пятнадцать минут планирования снимают ежедневный вопрос «что снимать». Пропорцию меняй по разделу 4: нужен разгон, поставь третий широкий заход вместо одного нишевого; идёт продажа, убери широкое и добавь продающее.</div></div>
+<div class="sec"><h2 id="sec-6">Готовый промпт: генератор твоего двухслойного плана</h2><p>Вставь этот промпт в Claude или ChatGPT, подставь свою нишу и аудиторию в квадратные скобки. На выходе получишь банк широких тем, банк нишевых тем и готовый недельный план по двум слоям под себя. Промпт возвращает заполненную карту контента, а не общие советы.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как стратег по контенту, который специализируется на двухслойной модели: широкий верхний слой приводит новую аудиторию, нишевый нижний слой превращает её в под:писчиков и клиентов. Твоя задача собрать мне готовую систему контента по двум слоям под мою нишу.
+
+Мои вводные:
+- Моя ниша и экспертиза: [чем ты занимаешься, в чём разбираешься]
+- Моя аудитория: [кто эти люди, чем живут, сколько им лет]
+- Их главные боли: [3-5 болей их словами]
+- Что я продаю или к чему веду: [продукт, услуга, следующий шаг]
+- Мой ресурс: [сколько единиц контента в неделю тяну]
+- Что сейчас нужнее: [рост аудитории / больше продаж с имеющейся]
+
+Сделай строго по формату:
+
+1. БАНК ШИРОКИХ ЗАХОДОВ. Дай 8 конкретных широких тем, к которым подключается незнакомец без контекста. Для каждой: сама тема одной фразой, тип захода (боль, разбор новости, наблюдение, до-после, ошибка, простое про сложное, мнение, закулисье, список), и мостик к моей нише одной фразой. Никаких пустых кликбейтов, каждая тема несёт пользу сама по себе.
+
+2. БАНК НИШЕВЫХ ТЕМ. Дай 8 конкретных тем моей экспертизы, которые греют и продают. Для каждой: тема одной фразой, формат (разбор боли, кейс, метод, ошибки, возражение, приём, продающий пост), и какое одно действие предлагаем в финале.
+
+3. НЕДЕЛЬНЫЙ ПЛАН. Собери таблицу на 7 дней в пропорции, которая подходит под мою задачу (рост 30 на 70, продажи 20 на 80). Для каждого дня: слой (широкий или нишевый), конкретная тема из банков выше, формат, цель дня. Чередование расставь так, чтобы после широкого захода шёл подхват нишевым.
+
+4. МОСТИК И ВОРОНКА. Напиши, что должно быть в моей шапке профиля и закрепе, чтобы пришедший с широкого за 5 секунд понял кто я и подписался. Одна короткая формула шапки под мою нишу.
+
+5. ГЛАВНЫЙ ПЕРЕКОС. Назови, в какую сторону я скорее всего перекошу (в широкое или нишевое) при моих вводных, и как это поймать по цифрам.
+
+Если моих вводных мало для честного ответа, сначала задай мне не больше трёх уточняющих вопросов, потом выдавай систему. Не выдумывай за меня боли и не подставляй чужие цифры.">Скопировать</button></div><div class="box">Действуй как стратег по контенту, который специализируется на двухслойной модели: широкий верхний слой приводит новую аудиторию, нишевый нижний слой превращает её в под:писчиков и клиентов. Твоя задача собрать мне готовую систему контента по двум слоям под мою нишу.
+
+Мои вводные:
+- Моя ниша и экспертиза: [чем ты занимаешься, в чём разбираешься]
+- Моя аудитория: [кто эти люди, чем живут, сколько им лет]
+- Их главные боли: [3-5 болей их словами]
+- Что я продаю или к чему веду: [продукт, услуга, следующий шаг]
+- Мой ресурс: [сколько единиц контента в неделю тяну]
+- Что сейчас нужнее: [рост аудитории / больше продаж с имеющейся]
+
+Сделай строго по формату:
+
+1. БАНК ШИРОКИХ ЗАХОДОВ. Дай 8 конкретных широких тем, к которым подключается незнакомец без контекста. Для каждой: сама тема одной фразой, тип захода (боль, разбор новости, наблюдение, до-после, ошибка, простое про сложное, мнение, закулисье, список), и мостик к моей нише одной фразой. Никаких пустых кликбейтов, каждая тема несёт пользу сама по себе.
+
+2. БАНК НИШЕВЫХ ТЕМ. Дай 8 конкретных тем моей экспертизы, которые греют и продают. Для каждой: тема одной фразой, формат (разбор боли, кейс, метод, ошибки, возражение, приём, продающий пост), и какое одно действие предлагаем в финале.
+
+3. НЕДЕЛЬНЫЙ ПЛАН. Собери таблицу на 7 дней в пропорции, которая подходит под мою задачу (рост 30 на 70, продажи 20 на 80). Для каждого дня: слой (широкий или нишевый), конкретная тема из банков выше, формат, цель дня. Чередование расставь так, чтобы после широкого захода шёл подхват нишевым.
+
+4. МОСТИК И ВОРОНКА. Напиши, что должно быть в моей шапке профиля и закрепе, чтобы пришедший с широкого за 5 секунд понял кто я и подписался. Одна короткая формула шапки под мою нишу.
+
+5. ГЛАВНЫЙ ПЕРЕКОС. Назови, в какую сторону я скорее всего перекошу (в широкое или нишевое) при моих вводных, и как это поймать по цифрам.
+
+Если моих вводных мало для честного ответа, сначала задай мне не больше трёх уточняющих вопросов, потом выдавай систему. Не выдумывай за меня боли и не подставляй чужие цифры.</div></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Почему один слой всегда упирается в потолок</a><a href="#sec-1">Верхний слой: как собрать широкий заход честно</a><a href="#sec-2">Нижний слой: экспертиза, которая продаёт</a><a href="#sec-3">Пропорция и ритм: сколько чего в неделю</a><a href="#sec-4">Как связать слои в одну воронку</a><a href="#sec-5">Готовый недельный план-скелет</a><a href="#sec-6">Готовый промпт: генератор твоего двухслойного плана</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>

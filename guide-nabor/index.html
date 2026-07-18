@@ -1,0 +1,359 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Карта 100 ИИ-инструментов по задачам + пак 15 навыков Claude</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>Карта 100 ИИ-инструментов по задачам + пак 15 навыков Claude</h1>
+<p class="lead">Это твоя рабочая карта. Ниже разложены реальные ИИ-инструменты по задачам контент-мейкера: текст, картинки, видео, говорящие аватары, дизайн, монтаж, звук, ресёрч виралок, транскрибация, автоматизация. По каждой задаче три уровня: с чего начать бесплатно, крепкий рабочий середняк и лучший инструмент на сегодня, чтобы ты сразу понимал, что брать под что. Дальше идёт пак из 15 навыков Claude под контент: каждый навык это функция, которую ты один раз объясняешь Claude готовым мини-промптом, а потом зовёшь снова и снова. В конце старт для новичка на первый вечер и промпт-навигатор, в который ты вставляешь свою задачу, а он говорит, каким инструментом её закрыть и с чего начать. Прочитал только эту страницу, и у тебя на руках готовая карта плюс понимание, что включать. Кодить не нужно.</p>
+<p class="meta">Читается за 12 минут. Внутри карта на 30+ реальных инструментов по 10 задачам с тремя уровнями каждый, пак из 15 навыков Claude с готовыми инструкциями включения, чек-лист первого вечера и промпт-навигатор. Честно помечено, где нужен зарубежный доступ.</p>
+<div class="how">Не пытайся освоить всё сразу. Найди в карте свою текущую задачу, возьми из неё ОДИН инструмент своего уровня и начни с него. Пак навыков Claude подключай по одному: скопировал мини-промпт, вставил в Claude, проверил на своей теме, оставил в заметках. Новичку: сразу иди в блок «Старт на первый вечер», он даёт результат раньше всего. Промпт-навигатор в конце держи под рукой, он подскажет инструмент под любую новую задачу.</div>
+<div class="sec"><h2 id="sec-0">Карта инструментов по задачам</h2><p>Десять задач контент-мейкера, по каждой три уровня. Начальный это бесплатный или почти бесплатный вход, чтобы попробовать сегодня. Крепкий середняк это рабочая лошадка на каждый день. Лучший это топ на сегодня, когда нужен максимум качества. Бери один инструмент под свой уровень и свою конкретную задачу. Всё подряд осваивать смысла нет.</p><div class="grid2"><div class="cardb"><h3>Текст, посты, сценарии</h3><p>Начальный: ChatGPT (бесплатный тир), быстрый старт для черновиков и идей. Крепкий середняк: Gemini, большой контекст, удобно закидывать длинные материалы и просить разбор. Лучший: Claude (Opus), сильнее всех держит смысл на длинном тексте и пишет живым человеческим голосом без канцелярита. Для контента текст это твой главный инструмент, начни отсюда.</p></div><div class="cardb"><h3>Картинки, обложки</h3><p>Начальный: Nano Banana внутри Gemini, бесплатно и быстро, хорошо правит и дорисовывает по фото. Крепкий середняк: Leonardo или Ideogram, Ideogram чисто ставит текст на картинку (обложки, баннеры). Лучший: Midjourney v7 за эстетику плюс GPT Image в ChatGPT за точное следование описанию. Midjourney требует зарубежный доступ.</p></div><div class="cardb"><h3>Видео, клипы</h3><p>Начальный: Kling, есть бесплатные кредиты, оживляет фото в короткий клип. Крепкий середняк: Pika или Hailuo (MiniMax), живое движение и стиль. Лучший: Google Veo, Runway Gen-4, Seedance или Higgsfield для кинокачества и реализма. Топ-видеомодели почти все требуют зарубежную почту, карту и часто VPN.</p></div><div class="cardb"><h3>Аватары, говорящие лица</h3><p>Начальный: D-ID, оживляет фото в говорящую голову по тексту, простой вход. Крепкий середняк: HeyGen, качественная озвучка и липсинк, есть перевод видео в другой язык. Лучший: HeyGen Avatar IV или Synthesia для студийного цифрового двойника под ролики без съёмки. Доступ зарубежный.</p></div><div class="cardb"><h3>Дизайн, графика</h3><p>Начальный: Canva, тысячи шаблонов постов, сторис, презентаций, встроенный ИИ. Крепкий середняк: Figma, точная вёрстка макетов и каруселей под свой стиль. Лучший: Canva Magic Studio плюс Recraft для векторной айдентики и брендовых наборов. Canva и Figma работают из России.</p></div><div class="cardb"><h3>Монтаж видео</h3><p>Начальный: CapCut, бесплатный монтаж с субтитрами и эффектами, база для Reels. Крепкий середняк: Descript, правишь видео как текст, вырезаешь слова из транскрипта. Лучший: DaVinci Resolve или Premiere для полного контроля плюс Opus Clip, который сам нарезает длинное видео на вертикальные клипы с субтитрами.</p></div><div class="cardb"><h3>Музыка, звук</h3><p>Начальный: Suno, бесплатный тир, генерит трек по описанию под ролик. Крепкий середняк: Udio, чище звучание и больше контроля над стилем. Лучший: ElevenLabs для озвучки и клонирования голоса плюс Suno v4 для фоновой музыки. ElevenLabs и Suno чаще требуют зарубежный доступ.</p></div><div class="cardb"><h3>Ресёрч виралок</h3><p>Начальный: ручной разбор через встроенный поиск Instagram и вкладку Reels конкурентов, бесплатно и честно. Крепкий середняк: ContHunt или Predis, показывают, какие ролики выстрелили в нише и почему. Лучший: Virlo для автопилот-отчётов по аутлайерам плюс HikerAPI для точных метрик по аккаунтам. Часть сервисов требует зарубежную карту.</p></div><div class="cardb"><h3>Транскрибация</h3><p>Начальный: встроенные автосубтитры CapCut или YouTube, ноль затрат, годится для черновика. Крепкий середняк: Whisper (open source), гоняешь бесплатно, точный русский. Лучший: Groq Whisper large за скорость плюс ElevenLabs Scribe за максимальную точность и разметку по спикерам. Whisper через Groq требует зарубежную почту.</p></div><div class="cardb"><h3>Автоматизация рутины</h3><p>Начальный: конструкторы ботов и воронок ChatPlace, BotHelp или SaleBot, собираешь сценарий без кода. Крепкий середняк: Make или n8n, связываешь сервисы в цепочки (заявка, ответ, рассылка, отчёт). Лучший: Claude Code плюс n8n под свои сценарии любой сложности. ChatPlace, BotHelp, SaleBot и n8n работают из России.</p></div></div><div class="note">Про доступ честно. Инструменты, помеченные как зарубежные (Midjourney, Runway, Veo, Synthesia, HeyGen, ElevenLabs, Suno, часть ресёрч-сервисов), обычно просят зарубежную почту, иностранную карту и иногда VPN. Если этого пока нет, спокойно живёшь на бесплатных и середняках из России: ChatGPT, Gemini, Claude, Nano Banana, Canva, Figma, CapCut, Kling, Whisper, ChatPlace. Их хватает, чтобы собрать полный контент-цикл.</div></div>
+<div class="sec"><h2 id="sec-1">Пак навыков Claude: тексты и контент</h2><p>Навык это конкретная многоразовая функция, которую ты один раз объясняешь Claude готовым промптом-инструкцией, сохраняешь себе в заметки и потом зовёшь снова, просто подставляя свежие данные. Ниже восемь навыков под ежедневный контент. По каждому: что делает и что вставить в Claude, чтобы включить. Скопировал текст в скобках, подставил своё, отправил.</p><div class="grid2"><div class="cardb"><h3>Генератор хуков под нишу</h3><p>Что делает: выдаёт пачку первых строк, которые бьют в боль твоей аудитории. Как включить, вставь в Claude: «Действуй как редактор вирального контента. Моя ниша [ниша], аудитория [кто], их главные боли [3 боли их словами]. Дай 15 хуков для первой строки Reels: 5 через боль, 5 через любопытство, 5 через дерзкое утверждение. Коротко, живым языком, без длинных тире и клише.»</p></div><div class="cardb"><h3>Разбор виральных рилсов</h3><p>Что делает: раскладывает чужой залетевший ролик на механику, чтобы ты повторил приём. Как включить: «Разбери этот виральный Reels по структуре. Транскрипт или описание: [вставь]. Дай: 1) какой хук в первые 3 секунды и почему держит, 2) структуру по секундам, 3) за счёт чего досматривают, 4) какой приём я могу забрать в свою нишу [ниша]. Без воды.»</p></div><div class="cardb"><h3>Нейроописание на 1900 символов</h3><p>Что делает: пишет длинное описание под ролик, чтобы человек читал его, пока клип играет на повторе, и алгоритм видел удержание. Как включить: «Напиши описание к Reels на 1800 плюс символов. Тема ролика [тема], аудитория [кто], их боль [боль]. Держи внимание до конца, живой ритм, в конце мягкий призыв написать кодовое слово [слово]. Без длинных тире, без канцелярита.»</p></div><div class="cardb"><h3>Контент-план на неделю</h3><p>Что делает: собирает сетку постов на 7 дней за один заход. Как включить: «Собери контент-план на неделю для [ниша]. Аудитория [кто], цель [прогрев или заявки]. Дай таблицу: день, формат (Reels, карусель, сторис, пост), тема, хук первой строки, призыв. 7 разных болей, без повторов смысла.»</p></div><div class="cardb"><h3>Переписать пост живым голосом</h3><p>Что делает: убирает из текста ИИ-почерк и делает его человеческим. Как включить: «Перепиши этот текст живым разговорным русским, как будто рассказываю другу. Убери длинные тире, обороты вида не X а Y, канцелярит и клише. Сохрани смысл и структуру. Текст: [вставь].»</p></div><div class="cardb"><h3>Кодовые слова под карусель</h3><p>Что делает: подбирает слово-триггер для воронки прямо из темы контента. Как включить: «Тема моей карусели [тема], что человек получит по кодовому слову [что за материал]. Предложи 7 коротких кодовых слов на русском, которые логично вытекают из темы, легко пишутся в комментарии и не пересекаются со словами общего употребления. По каждому одна строка почему подходит.»</p></div><div class="cardb"><h3>Чек-лист пре-флайта поста</h3><p>Что делает: проверяет черновик перед публикацией по твоим правилам. Как включить: «Проверь мой пост перед публикацией. Правила: 1) нет длинных тире, 2) нет оборотов не X а Y, 3) обещание в призыве совпадает с тем, что реально отдаём, 4) хук в первой строке бьёт в боль, 5) есть один понятный следующий шаг. Пройдись по каждому пункту, скажи да или нет и что поправить. Пост: [вставь].»</p></div><div class="cardb"><h3>Сценарий Reels</h3><p>Что делает: пишет короткий сценарий с хуком, серединой и призывом под съёмку или озвучку. Как включить: «Напиши сценарий Reels на 30 секунд. Тема [тема], аудитория [кто], боль [боль], цель [что должен сделать зритель]. Дай: хук на 3 секунды, тело по репликам, финальный призыв. Разговорно, чтобы легко произнести вслух.»</p></div></div></div>
+<div class="sec"><h2 id="sec-2">Пак навыков Claude: форматы и продажи</h2><p>Ещё семь навыков: под визуал, продажи и генерацию идей. Механика та же, скопировал инструкцию, подставил своё, вызвал. Держи весь пак в одной заметке, чтобы под любую задачу дня у тебя уже был готовый навык под рукой.</p><div class="grid2"><div class="cardb"><h3>Карусель по референсу</h3><p>Что делает: превращает понравившуюся чужую карусель в твою по смыслу. Как включить: «Вот карусель конкурента по слайдам: [опиши или вставь текст слайдов]. Пересобери её под мою нишу [ниша] и аудиторию [кто]: тот же формат и логика, но мои примеры, мой голос и моя тема. Дай текст по слайдам: обложка плюс тезисы, в конце призыв.»</p></div><div class="cardb"><h3>Ответы на возражения</h3><p>Что делает: готовит убедительные ответы на то, из-за чего люди не покупают. Как включить: «Аудитория [кто], продукт [что], цена [сколько]. Выпиши 7 главных возражений их словами (дорого, не получится у меня, нет времени и т.п.) и по каждому дай короткий честный ответ через выгоду и снятие страха, без давления и без обещаний, которых мы не выполним.»</p></div><div class="cardb"><h3>Идеи форматов</h3><p>Что делает: выдаёт свежие форматы контента, когда идей нет. Как включить: «Ниша [ниша], аудитория [кто]. Дай 20 идей форматов контента под неё: разборы, до и после, ошибки, закулисье, мини-инструкции, реакции на новость. По каждой одна строка: формат плюс конкретная тема. Без банальщины уровня как я провёл день.»</p></div><div class="cardb"><h3>Адаптация чужого хука</h3><p>Что делает: берёт сильный хук из другой ниши и переносит на твою. Как включить: «Вот хук, который залетел в другой нише: [вставь]. Сохрани его механику и эмоцию, но перенеси на мою нишу [ниша] и боль [боль]. Дай 5 вариантов адаптации, чтобы звучало естественно для моей аудитории.»</p></div><div class="cardb"><h3>Разбор конкурента</h3><p>Что делает: раскладывает аккаунт или воронку конкурента на приёмы, которые можно забрать. Как включить: «Разбери контент конкурента по вводным: [ссылка или описание, топ-посты, оффер]. Дай: 1) какие темы у него залетают, 2) какой оффер и воронка, 3) в чём он силён, 4) где дыра, которую я могу закрыть лучше в нише [ниша]. Конкретно, с выводом что забрать.»</p></div><div class="cardb"><h3>Конструктор заголовков</h3><p>Что делает: собирает варианты заголовка под пост, статью или обложку. Как включить: «Тема [тема], аудитория [кто], главная выгода [что человек получит]. Дай 15 заголовков разными приёмами: вопрос в боль, число и результат, интрига, прямая выгода, вызов. Коротко, чтобы читалось за секунду, без кликбейта, которого не подтверждает содержание.»</p></div><div class="cardb"><h3>Сторис как связная история</h3><p>Что делает: пишет цепочку сторис, где каждый слайд тянет к следующему. Как включить: «Собери 6 сторис на тему [тема] для аудитории [кто]. Сделай связный мини-фильм: слайд 1 крючок, слайды 2-5 раскрытие с одной мыслью на слайд, слайд 6 призыв [действие]. Живая речь от первого лица, каждый слайд заканчивай зацепкой к следующему.»</p></div></div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-3">Старт на первый вечер</h2><p>Если только начинаешь, не хватай всю карту. Пройди эти пять шагов за один вечер, они дают результат раньше всего. Каждый закрывается за один присест.</p><ol><li>Заведи один текстовый инструмент и работай в нём. Новичку хватит Claude или ChatGPT для всех текстов. Открыл, проверил на своей теме, оставил вкладку открытой.</li><li>Подключи три навыка из пака, которые нужны прямо сейчас: генератор хуков, нейроописание и контент-план на неделю. Скопируй их инструкции в отдельную заметку, это твой рабочий набор.</li><li>Сгенерируй план на неделю навыком контент-плана. За 15 минут у тебя сетка тем на 7 дней, и утром ты уже знаешь, что снимать, без залипания в пустой экран.</li><li>Собери первый ролик по кругу: хук через генератор хуков, длинное описание через нейроописание, картинку или клип через Nano Banana или Kling, монтаж и субтитры в CapCut. Всё из бесплатного уровня карты.</li><li>Опубликуй и посмотри на удержание и охват. Цель первого вечера простая: пройти полный круг по системе, качество ролика подтянешь потом. Дальше просто повторяешь и подключаешь навыки по одному.</li></ol><div class="note">Правило старта: один инструмент под задачу, три навыка в работе, один опубликованный ролик. Не расширяй набор, пока не прошёл полный круг хотя бы раз. Скорость входа важнее полноты арсенала, инструменты доберёшь по ходу.</div></div>
+<div class="sec"><h2 id="sec-4">Промпт-навигатор: чем закрыть задачу</h2><p>Универсальный помощник по этой карте. Вставь промпт в Claude или ChatGPT, впиши свою задачу и уровень, и он скажет, какой инструмент взять, с чего начать и как собрать связку. Возвращает конкретную схему под тебя с точными шагами.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как наставник по ИИ-инструментам для контент-мейкера. У тебя есть карта инструментов по задачам, где под каждую задачу три уровня: начальный (бесплатный вход), крепкий середняк (на каждый день), лучший (топ на сегодня). Задачи: текст и посты, картинки и обложки, видео и клипы, аватары и говорящие лица, дизайн и графика, монтаж, музыка и звук, ресёрч виралок, транскрибация, автоматизация.
+
+Мои вводные:
+- Задача, которую хочу закрыть: [опиши, что нужно сделать]
+- Мой уровень: [новичок, есть база или уверенно]
+- Мой доступ: [только российские сервисы или есть зарубежная карта и VPN]
+- Бюджет: [ноль, немного или готов платить за топ]
+- Что уже умею и чем пользуюсь: [перечисли]
+
+Сделай строго по формату:
+
+1. КАКАЯ ЭТО ЗАДАЧА. Определи, к какой из десяти задач относится мой запрос. Если сразу к нескольким, разбей на этапы.
+
+2. ЧЕМ ЗАКРЫТЬ. Назови конкретный инструмент под мой уровень и доступ. Учитывай ограничение: не предлагай зарубежные сервисы, если у меня только российский доступ. По каждому одна строка почему именно он.
+
+3. СВЯЗКА ПО ШАГАМ. Если задача из нескольких этапов, дай цепочку инструментов по порядку: чем сделать текст, чем визуал, чем собрать. Стрелками, коротко.
+
+4. С ЧЕГО НАЧАТЬ СЕГОДНЯ. Один первый конкретный шаг на ближайший час, самый простой рабочий вход.
+
+5. КАКОЙ НАВЫК CLAUDE ПОДКЛЮЧИТЬ. Если под задачу подходит один из навыков (хуки, нейроописание, контент-план, сценарий, карусель, разбор виралок и т.п.), назови его и напомни, что его нужно один раз задать промптом и потом переиспользовать.
+
+Если моих вводных мало, задай не больше трёх уточняющих вопросов, потом выдавай ответ. Не советуй платные топ-инструменты, если у меня ноль бюджета или нет зарубежного доступа, всегда давай рабочую альтернативу из доступного.">Скопировать</button></div><div class="box">Действуй как наставник по ИИ-инструментам для контент-мейкера. У тебя есть карта инструментов по задачам, где под каждую задачу три уровня: начальный (бесплатный вход), крепкий середняк (на каждый день), лучший (топ на сегодня). Задачи: текст и посты, картинки и обложки, видео и клипы, аватары и говорящие лица, дизайн и графика, монтаж, музыка и звук, ресёрч виралок, транскрибация, автоматизация.
+
+Мои вводные:
+- Задача, которую хочу закрыть: [опиши, что нужно сделать]
+- Мой уровень: [новичок, есть база или уверенно]
+- Мой доступ: [только российские сервисы или есть зарубежная карта и VPN]
+- Бюджет: [ноль, немного или готов платить за топ]
+- Что уже умею и чем пользуюсь: [перечисли]
+
+Сделай строго по формату:
+
+1. КАКАЯ ЭТО ЗАДАЧА. Определи, к какой из десяти задач относится мой запрос. Если сразу к нескольким, разбей на этапы.
+
+2. ЧЕМ ЗАКРЫТЬ. Назови конкретный инструмент под мой уровень и доступ. Учитывай ограничение: не предлагай зарубежные сервисы, если у меня только российский доступ. По каждому одна строка почему именно он.
+
+3. СВЯЗКА ПО ШАГАМ. Если задача из нескольких этапов, дай цепочку инструментов по порядку: чем сделать текст, чем визуал, чем собрать. Стрелками, коротко.
+
+4. С ЧЕГО НАЧАТЬ СЕГОДНЯ. Один первый конкретный шаг на ближайший час, самый простой рабочий вход.
+
+5. КАКОЙ НАВЫК CLAUDE ПОДКЛЮЧИТЬ. Если под задачу подходит один из навыков (хуки, нейроописание, контент-план, сценарий, карусель, разбор виралок и т.п.), назови его и напомни, что его нужно один раз задать промптом и потом переиспользовать.
+
+Если моих вводных мало, задай не больше трёх уточняющих вопросов, потом выдавай ответ. Не советуй платные топ-инструменты, если у меня ноль бюджета или нет зарубежного доступа, всегда давай рабочую альтернативу из доступного.</div></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Карта инструментов по задачам</a><a href="#sec-1">Пак навыков Claude: тексты и контент</a><a href="#sec-2">Пак навыков Claude: форматы и продажи</a><a href="#sec-3">Старт на первый вечер</a><a href="#sec-4">Промпт-навигатор: чем закрыть задачу</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
