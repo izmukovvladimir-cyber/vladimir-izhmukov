@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Первый подарок для подписчиков: система лид-магнита за один вечер</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-marketing">Маркетинг</a></div>
+<h1>Первый подарок для подписчиков: система лид-магнита за один вечер</h1>
+<p class="lead">Здесь лежит готовая система первого подарка для подписчиков. Того самого лид-магнита, который человек получает за подписку и из-за которого нажимает «подписаться» и остаётся с тобой. Ты берёшь свою нишу и за один вечер собираешь подарок, который реально конвертит зрителя рилса в подписчика. Внутри лежит сама механика: какие типы подарков заходят и под какую нишу, пошаговая сборка с ИИ, три готовых промпта под копирование (придумать идеи подарка под твою аудиторию, собрать сам подарок с содержанием, написать текст рилса и закреп-комментария с призывом забрать), схема выдачи через слово в комментариях и разбор частых ошибок, из-за которых подарок скачивают и сразу забывают. Нужны только твоя ниша и один свободный вечер. На выходе у тебя лежит готовый файл-подарок и связка, которая ловит подписчиков на автомате.</p>
+<p class="meta">Система первого лид-магнита для подписчиков за один вечер. Внутри: какие подарки конвертят под какую нишу, пошаговая сборка с ИИ, три готовых промпта (идеи подарка, сборка содержания, текст рилса и закреп-коммента), схема выдачи через слово в комментариях и разбор частых ошибок.</p>
+<div class="how">Читай сверху вниз и собирай по ходу. Сначала во втором разделе за пять минут определись с типом подарка под свою нишу. Потом иди по трём промптам в третьем разделе строго по порядку в одном диалоге ИИ: сначала выбираешь идею, потом собираешь сам подарок с содержанием, потом получаешь текст рилса и закреп-комментария. Дальше по разделу про выдачу оформляешь связку рилс, слово в комментариях, автоотправка подарка. Перед запуском прогоняешь финальный чек-лист. К концу вечера подарок готов и стоит на раздаче.</div>
+<div class="sec"><h2 id="sec-0">Какой подарок реально превращает зрителя в подписчика</h2><p>Люди подписываются за конкретную пользу, которую человек получит прямо сейчас и бесплатно. Сильный подарок закрывает одну узкую боль твоей аудитории за десять минут её времени. Ниже рабочие форматы и под какую нишу что заходит лучше всего.</p><div class="grid2"><div class="cardb"><h3>Чек-лист</h3><p>Короткий список шагов или проверок, по которому человек делает дело без ошибок. Заходит почти в любой нише: чек-лист запуска рилса, проверки квартиры перед покупкой, сборов ребёнка в лагерь. Собирается быстрее всего, поэтому это лучший первый подарок для новичка.</p></div><div class="cardb"><h3>Шаблон или готовый документ</h3><p>То, что человек скопировал и сразу использует: шаблон контент-плана, структура продающего поста, бланк финансовой таблицы, скрипт ответа на возражение. Сильно заходит у экспертов по продажам, маркетингу, финансам, у тех, чья работа состоит из повторяющихся документов.</p></div><div class="cardb"><h3>Подборка с пояснениями</h3><p>Список инструментов, сервисов, книг, каналов с короткой пометкой, зачем каждый и кому. Работает у ниш про технологии, ИИ, саморазвитие, путешествия. Важно к каждому пункту дать по одной живой строке, зачем он и кому. Голый список ссылок без пояснений ценность теряет.</p></div><div class="cardb"><h3>Мини-гайд на одну задачу</h3><p>Пошаговый разбор одного узкого результата: как сделать первую натальную карту, как собрать капсульный гардероб, как настроить сон ребёнка за неделю. Заходит у психологов, коучей, астрологов, нутрициологов. Держи его узким: одна задача, один результат, никакой энциклопедии.</p></div><div class="cardb"><h3>Промпт-пак</h3><p>Набор из трёх, пяти готовых промптов под конкретную задачу аудитории, которые человек копирует и вставляет в ИИ. Мощно заходит там, где аудитория уже трогает нейросети: маркетинг, копирайтинг, дизайн, обучение. Каждый промпт настрой так, чтобы он выдавал готовый результат под задачу. Общий совет на выходе тут бесполезен.</p></div><div class="cardb"><h3>Разбор или мини-урок</h3><p>Короткий разбор одного кейса или приёма с выводом, что повторить у себя. Формат для ниш, где ценится экспертиза и глубина: инвестиции, бизнес, отношения. Держи его на один приём и заканчивай конкретным шагом, который человек сделает сегодня.</p></div></div><div class="note">Главное правило выбора: подарок должен вести к твоему платному продукту. Если ты продаёшь курс по рилсам, подари чек-лист вирусного рилса, тогда подписчик уже прогрет под твою тему. Подарок про отвлечённое соберёт скачивания, но приведёт людей, которым твой продукт не нужен.</div></div>
+<div class="sec"><h2 id="sec-1">Как за один вечер выбрать и собрать свой первый подарок</h2><p>Порядок, который стабильно доводит от пустого места до готового файла за один вечер. Не пытайся сделать идеально и на сто страниц. Первый подарок должен быть маленьким, полезным и живым. Сила его в узости и применимости, объём тут вторичен.</p><ol><li>Назови свою нишу и главную боль аудитории одной фразой. Например: помогаю психологам находить клиентов, боль в том, что нет заявок из блога. Эта фраза понадобится во всех трёх промптах ниже, держи её под рукой.</li><li>Выбери тип подарка под свою нишу из первого раздела. Если сомневаешься, бери чек-лист. Он собирается быстрее всего и заходит везде, а первый подарок важнее сделать законченным, чем идеальным.</li><li>Прогони первый промпт и выбери идею. ИИ даст пять идей подарка под твою нишу и аудиторию с пометкой, какую боль каждый закрывает и как ведёт к продукту. Выбери одну, которая ближе всего к тому, что ты продаёшь.</li><li>Прогони второй промпт и собери само содержание. В том же диалоге ИИ соберёт структуру и наполнит подарок реальным содержанием: пункты чек-листа, текст шаблона, сами промпты. На выходе готовый текст, который остаётся оформить.</li><li>Оформи подарок в файл за двадцать минут. Перенеси текст в один PDF или в аккуратную заметку на Telegraph. Заголовок, чистые блоки, твоё имя и ссылка на канал внизу. Красота вторична, читаемость и польза первичны.</li><li>Прогони третий промпт и получи текст рилса с закреп-комментарием. ИИ напишет короткий сценарий рилса под этот подарок и текст закреплённого комментария с призывом забрать подарок за подписку по кодовому слову.</li><li>Поставь связку на раздачу. Настрой, чтобы по кодовому слову в комментариях человеку автоматически прилетал подарок в личку. Как именно, разобрано в разделе про выдачу ниже. После этого можешь публиковать рилс.</li></ol><div class="note">Один вечер это реально, если не расползаться. Идея и сборка через ИИ занимают минут сорок, оформление в файл ещё двадцать, текст рилса десять. Всё, что дольше, обычно перфекционизм: ты полируешь подарок, который и так готов конвертить. Лучше выпустить простой сегодня, чем идеальный никогда.</div></div>
+<div class="sec"><h2 id="sec-2">Готовые промпты: генерируешь подарок под свою нишу</h2><p>Три промпта по порядку, работают в одном диалоге ИИ (ChatGPT или Claude). Первым сообщением опиши свою нишу и боль аудитории, дальше прогоняй промпты по очереди, модель будет помнить контекст. В квадратных скобках подставляешь своё. Каждый промпт возвращает готовый артефакт, который сразу идёт в дело.</p><p>1. Пять идей подарка под твою нишу. Первый шаг, он задаёт, что вообще собирать. Подставь свою нишу, аудиторию и то, что продаёшь.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как маркетолог, который собрал десятки конвертящих лид-магнитов для экспертов. Твоя задача придумать мне первый подарок для подписчиков, который человек получает за подписку на мой блог и из-за которого решает подписаться.
+
+МОЯ НИША: [например, я психолог, помогаю мамам справляться с тревогой]
+МОЯ АУДИТОРИЯ И ЕЁ ГЛАВНАЯ БОЛЬ: [например, молодые мамы, боль в том, что срываются на ребёнка и потом винят себя]
+ЧТО Я ПРОДАЮ ИЛИ БУДУ ПРОДАВАТЬ: [например, курс по эмоциональной устойчивости для мам]
+
+Сделай строго по формату, без вступлений:
+1. ПЯТЬ ИДЕЙ. Дай ровно пять идей подарка под мою нишу. Для каждой укажи: название подарка, формат (чек-лист, шаблон, подборка, мини-гайд, промпт-пак, разбор), какую конкретную боль аудитории он закрывает за десять минут её времени, и как он логически ведёт человека к моему платному продукту.
+2. РЕКОМЕНДАЦИЯ. Отметь одну идею, которую стоит собрать первой, и в одну строку объясни почему: она проще в сборке и ближе всего к тому, что я продаю.
+3. ЧЕГО ИЗБЕГАТЬ. Назови один тип подарка, который в моей нише соберёт скачивания, но приведёт нецелевых людей, которым мой продукт не нужен.
+
+Не предлагай абстрактное вроде гайда обо всём. Каждая идея должна быть узкой, применимой и вести к продаже. Если данных о моей нише мало, задай мне максимум два уточняющих вопроса, потом отвечай.">Скопировать</button></div><div class="box">Действуй как маркетолог, который собрал десятки конвертящих лид-магнитов для экспертов. Твоя задача придумать мне первый подарок для подписчиков, который человек получает за подписку на мой блог и из-за которого решает подписаться.
+
+МОЯ НИША: [например, я психолог, помогаю мамам справляться с тревогой]
+МОЯ АУДИТОРИЯ И ЕЁ ГЛАВНАЯ БОЛЬ: [например, молодые мамы, боль в том, что срываются на ребёнка и потом винят себя]
+ЧТО Я ПРОДАЮ ИЛИ БУДУ ПРОДАВАТЬ: [например, курс по эмоциональной устойчивости для мам]
+
+Сделай строго по формату, без вступлений:
+1. ПЯТЬ ИДЕЙ. Дай ровно пять идей подарка под мою нишу. Для каждой укажи: название подарка, формат (чек-лист, шаблон, подборка, мини-гайд, промпт-пак, разбор), какую конкретную боль аудитории он закрывает за десять минут её времени, и как он логически ведёт человека к моему платному продукту.
+2. РЕКОМЕНДАЦИЯ. Отметь одну идею, которую стоит собрать первой, и в одну строку объясни почему: она проще в сборке и ближе всего к тому, что я продаю.
+3. ЧЕГО ИЗБЕГАТЬ. Назови один тип подарка, который в моей нише соберёт скачивания, но приведёт нецелевых людей, которым мой продукт не нужен.
+
+Не предлагай абстрактное вроде гайда обо всём. Каждая идея должна быть узкой, применимой и вести к продаже. Если данных о моей нише мало, задай мне максимум два уточняющих вопроса, потом отвечай.</div><p>2. Сборка самого подарка с содержанием. Берёшь выбранную идею и получаешь полностью наполненный подарок с реальным содержанием, готовый перенести в файл. Модель уже помнит твою нишу из первого промпта.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Отлично. Собираем подарок по идее номер [впиши номер выбранной идеи].
+
+Твоя задача собрать сам подарок целиком, с реальным содержанием, готовый к копированию в файл. Не описывай, что будет внутри, сразу выдавай наполнение.
+
+Сделай так:
+1. ЗАГОЛОВОК. Дай цепляющий заголовок подарка, по которому сразу понятно, какой результат человек получит.
+2. КОРОТКОЕ ВСТУПЛЕНИЕ. Два, три предложения: для кого это, какую боль закрывает, что человек получит, если применит. Живым языком, без воды.
+3. САМО СОДЕРЖАНИЕ. Собери полное наполнение подарка. Если это чек-лист, напиши все пункты словами, готовые к применению. Если шаблон, напиши сам текст шаблона с подстановками в квадратных скобках. Если промпт-пак, напиши сами промпты целиком. Если мини-гайд, распиши все шаги с конкретикой и примерами. Не пиши список названий разделов, пиши само содержание.
+4. ЗАВЕРШЕНИЕ. Одна фраза с мягким следующим шагом: что человеку сделать дальше и намёк, что у меня есть решение глубже (мой продукт).
+
+Пиши живым человеческим языком, без канцелярита, без общих советов уровня бесплатного поиска. Конкретика, примеры, цифры где уместно. Держи подарок узким и применимым: одна задача, один результат, человек прочитал и сразу может сделать. Выдай всё одним готовым текстом, который я перенесу в файл без правок.">Скопировать</button></div><div class="box">Отлично. Собираем подарок по идее номер [впиши номер выбранной идеи].
+
+Твоя задача собрать сам подарок целиком, с реальным содержанием, готовый к копированию в файл. Не описывай, что будет внутри, сразу выдавай наполнение.
+
+Сделай так:
+1. ЗАГОЛОВОК. Дай цепляющий заголовок подарка, по которому сразу понятно, какой результат человек получит.
+2. КОРОТКОЕ ВСТУПЛЕНИЕ. Два, три предложения: для кого это, какую боль закрывает, что человек получит, если применит. Живым языком, без воды.
+3. САМО СОДЕРЖАНИЕ. Собери полное наполнение подарка. Если это чек-лист, напиши все пункты словами, готовые к применению. Если шаблон, напиши сам текст шаблона с подстановками в квадратных скобках. Если промпт-пак, напиши сами промпты целиком. Если мини-гайд, распиши все шаги с конкретикой и примерами. Не пиши список названий разделов, пиши само содержание.
+4. ЗАВЕРШЕНИЕ. Одна фраза с мягким следующим шагом: что человеку сделать дальше и намёк, что у меня есть решение глубже (мой продукт).
+
+Пиши живым человеческим языком, без канцелярита, без общих советов уровня бесплатного поиска. Конкретика, примеры, цифры где уместно. Держи подарок узким и применимым: одна задача, один результат, человек прочитал и сразу может сделать. Выдай всё одним готовым текстом, который я перенесу в файл без правок.</div><p>3. Текст рилса и закреп-комментария под этот подарок. Финал: получаешь короткий сценарий рилса и текст закреплённого комментария с призывом забрать подарок за подписку по кодовому слову.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Теперь напиши мне текст рилса и закреплённого комментария, чтобы люди приходили за этим подарком и подписывались.
+
+КОДОВОЕ СЛОВО, по которому будет выдаваться подарок: [впиши одно простое слово, например ПОДАРОК или по теме, например ТРЕВОГА]
+ССЫЛКА ИЛИ БОТ, куда ведём: [например, мой Telegram-канал и бот-привратник]
+
+Сделай по формату:
+1. СЦЕНАРИЙ РИЛСА. Короткий текст на 15, 25 секунд, который я скажу на камеру. Первая фраза цепляет болью аудитории её же словами. Середина обещает конкретный результат от подарка. Финал зовёт написать кодовое слово в комментариях, чтобы забрать подарок. Пиши разговорно, как живой человек, короткими фразами, без пафоса и клише.
+2. ТЕКСТ НА ЭКРАН. Дай короткий цепляющий текст-хук из трёх, пяти слов, который вынесем поверх первых секунд видео.
+3. ЗАКРЕПЛЁННЫЙ КОММЕНТАРИЙ. Напиши текст закреплённого комментария под рилсом: коротко подтверди, что подарок бесплатный и полезный, и позови написать кодовое слово в комментариях или в личку, чтобы его получить. Добавь одну фразу мягкого дожима, зачем подписаться на канал прямо сейчас.
+4. ТРИ ЗАПАСНЫХ ХУКА. Дай три альтернативные первые фразы для рилса на случай, если основная не зайдёт.
+
+Важно: не пиши слова про деньги и заработок в лоб, площадка это режет. Не обещай того, чего в подарке нет. Тон живой, человеческий.">Скопировать</button></div><div class="box">Теперь напиши мне текст рилса и закреплённого комментария, чтобы люди приходили за этим подарком и подписывались.
+
+КОДОВОЕ СЛОВО, по которому будет выдаваться подарок: [впиши одно простое слово, например ПОДАРОК или по теме, например ТРЕВОГА]
+ССЫЛКА ИЛИ БОТ, куда ведём: [например, мой Telegram-канал и бот-привратник]
+
+Сделай по формату:
+1. СЦЕНАРИЙ РИЛСА. Короткий текст на 15, 25 секунд, который я скажу на камеру. Первая фраза цепляет болью аудитории её же словами. Середина обещает конкретный результат от подарка. Финал зовёт написать кодовое слово в комментариях, чтобы забрать подарок. Пиши разговорно, как живой человек, короткими фразами, без пафоса и клише.
+2. ТЕКСТ НА ЭКРАН. Дай короткий цепляющий текст-хук из трёх, пяти слов, который вынесем поверх первых секунд видео.
+3. ЗАКРЕПЛЁННЫЙ КОММЕНТАРИЙ. Напиши текст закреплённого комментария под рилсом: коротко подтверди, что подарок бесплатный и полезный, и позови написать кодовое слово в комментариях или в личку, чтобы его получить. Добавь одну фразу мягкого дожима, зачем подписаться на канал прямо сейчас.
+4. ТРИ ЗАПАСНЫХ ХУКА. Дай три альтернативные первые фразы для рилса на случай, если основная не зайдёт.
+
+Важно: не пиши слова про деньги и заработок в лоб, площадка это режет. Не обещай того, чего в подарке нет. Тон живой, человеческий.</div><div class="note">Все три промпта работают в одном диалоге по цепочке, потому что модель держит контекст твоей ниши и подарка. Если начнёшь каждый в новом чате, придётся заново объяснять нишу, и связка развалится. Прогнал три промпта по порядку, и у тебя на руках подарок, рилс и закреп.</div></div>
+<div class="sec"><h2 id="sec-3">Как оформить выдачу: связка рилс, слово, подарок</h2><p>Подарок без правильной выдачи не работает. Задача собрать связку, где зритель посмотрел рилс, написал кодовое слово, и подарок прилетел ему в личку сам, а ты в этот момент спишь. Ниже как это устроить просто и надёжно.</p><ol><li>Положи подарок туда, откуда его удобно отдавать ссылкой. Проще всего один PDF на облаке с открытым доступом по ссылке, либо статья на Telegraph, либо файл, который отдаёт твой бот. Проверь, что ссылка открывается с телефона у постороннего человека.</li><li>Выбери одно кодовое слово и держи его коротким. Одно слово, простое, по теме подарка. Оно же станет триггером выдачи и словом, которое человек пишет в комментариях. Разные подарки, разные слова, чтобы не путать выдачу.</li><li>Настрой автоответ на кодовое слово. В твоём боте-привратнике или в сервисе автоворонок задай правило: пришло это слово в комментарии или в личку, человеку уходит сообщение с подарком. Так выдача идёт на автомате круглые сутки без тебя.</li><li>Поставь гейт на подписку, если нужен рост канала. Свяжи выдачу с подпиской: бот проверяет, что человек подписан на канал, и только потом отдаёт подарок. Так подарок превращается в машину подписчиков, каждая выдача даёт тебе нового человека на канале.</li><li>Продублируй призыв в трёх местах. Кодовое слово должно звучать голосом в самом рилсе, стоять текстом в подписи и лежать в закреплённом комментарии. Люди заходят по-разному, и один пропущенный призыв это потерянные подписчики.</li></ol><div class="note">Связка простыми словами выглядит так: рилс ловит внимание, закреп зовёт написать слово, автоответ выдаёт подарок за подписку. Дальше человек уже в твоём канале и греется под продукт. Один раз собрал связку под подарок, и она работает на каждом новом рилсе по этой теме.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-4">Частые ошибки и как их избежать</h2><p>Почему одни подарки набирают подписчиков, а другие скачивают и сразу забывают. Ниже типовые провалы первого подарка и что сделать, чтобы их обойти, прежде чем запускать рилс.</p><div class="grid2"><div class="cardb"><h3>Подарок ни о чём</h3><p>Общий файл про всё сразу, из которого человек не выносит конкретного результата. Такое скачивают из вежливости и не открывают. Лечится узостью: одна задача, один результат за десять минут. Лучше маленький подарок, который человек применил, чем большой, который он отложил на потом.</p></div><div class="cardb"><h3>Подарок не связан с продуктом</h3><p>Ты продаёшь одно, а даришь про другое, потому что тема виральнее. Приходят люди, которым твой продукт не нужен, конверсия в продажу нулевая. Подарок должен вести к тому, что ты продаёшь: закрывает соседнюю боль и мягко подводит к платному решению.</p></div><div class="cardb"><h3>Слишком большой подарок</h3><p>Гайд на пятьдесят страниц, который ты собираешь неделю и который никто не дочитывает. Объём пугает и тебя на старте, и человека на входе. Держи первый подарок маленьким и законченным. Глубину прибережёшь для платного продукта.</p></div><div class="cardb"><h3>Обещал одно, внутри другое</h3><p>В рилсе пообещал разбор, а внутри пара общих советов. Человек чувствует обман и отписывается сразу. Правило простое: что обещал голосом в рилсе, ровно то и лежит в подарке. Проверь совпадение перед запуском.</p></div><div class="cardb"><h3>Оглавление вместо содержания</h3><p>Внутри написано, что будет чек-лист и пять промптов, а самих пунктов и промптов нет. Это самый частый провал. Подарок должен отдавать сам инструмент, готовый к применению. Список названий того, что человек якобы получит, это и есть вода.</p></div><div class="cardb"><h3>Нет призыва забрать</h3><p>Подарок собран, а сказать про него забыли. Человек досмотрел рилс и ушёл, потому что не понял, что и как забрать. Призыв с кодовым словом обязан звучать в рилсе, в подписи и в закрепе. Без явного призыва подарок не работает.</p></div></div></div>
+<div class="sec"><h2 id="sec-5">Чек-лист перед запуском</h2><p>Последняя проверка за минуту перед тем, как публиковать рилс с подарком. Пройди по пунктам глазами, каждое нет это причина не запускать, пока не починишь.</p><ol><li>Подарок отдаёт сам инструмент: внутри лежат готовые пункты, промпты, шаблон, готовые к применению прямо сейчас.</li><li>Подарок узкий и применимый: закрывает одну конкретную боль аудитории за десять минут её времени.</li><li>Подарок ведёт к твоему продукту и закрывает соседнюю боль аудитории. Отвлечённая тема приведёт нецелевых людей.</li><li>То, что обещано голосом в рилсе, ровно то и лежит внутри подарка. Совпадение проверено.</li><li>Подарок оформлен в файл, ссылка открывается с телефона у постороннего человека.</li><li>Автовыдача по кодовому слову настроена и проверена: написал слово, подарок прилетел в личку.</li><li>Призыв с кодовым словом звучит в рилсе, стоит в подписи и лежит в закреплённом комментарии.</li></ol></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Какой подарок реально превращает зрителя в подписчика</a><a href="#sec-1">Как за один вечер выбрать и собрать свой первый подарок</a><a href="#sec-2">Готовые промпты: генерируешь подарок под свою нишу</a><a href="#sec-3">Как оформить выдачу: связка рилс, слово, подарок</a><a href="#sec-4">Частые ошибки и как их избежать</a><a href="#sec-5">Чек-лист перед запуском</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
