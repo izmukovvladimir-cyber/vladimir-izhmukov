@@ -1,0 +1,532 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Seedance 2.0: доступ к модели и промпты под реалистичное видео</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-video-i-montaj">Видео и монтаж</a></div>
+<h1>Seedance 2.0: доступ к модели и промпты под реалистичное видео</h1>
+<p class="lead">Это та самая модель из ролика. Правильно она пишется Seedance 2.0, её сделала ByteDance, те же люди, что делают TikTok. Дальше по порядку: где модель реально живёт и как до неё дойти из России, чем версия Fast отличается от обычной, как устроен промпт, который выдаёт кадр уровня настоящей съёмки, семь готовых промптов копируемыми блоками под разные задачи, и как чинить типовой брак, когда лицо поплыло пластиком или фон поехал. В конце сборка готового Reels из этих клипов. Всё проверено по официальным источникам 20 июля 2026 года, где данные могут устареть, я это отдельно помечаю. Прочитал только эту страницу, встал и снял первый ролик без камеры.</p>
+<p class="meta">Читается за 20 минут. Внутри: пошаговый доступ к Seedance 2.0 и Seedance 2.0 Fast с честной картиной по России, разбор анатомии видеопромпта в том порядке, который модель реально понимает, семь готовых промптов под сцену с человеком, товар, движение камеры, атмосферу и динамику, таблица починки типового брака и схема сборки Reels под удержание.</p>
+<div class="how">Не читай всё подряд перед первой генерацией. Открой раздел про доступ, дойди до площадки, потом возьми промпт номер один, подставь свою тему в квадратные скобки и отправь как есть. Получишь первый клип и сразу поймёшь, что модель умеет. После этого возвращайся к разделу про анатомию промпта и правь свой текст по порядку блоков, там объяснено, почему один и тот же смысл в разном порядке даёт разный результат. Раздел про брак читай, когда брак появится, там он разложен по симптомам.</div>
+<div class="sec"><h2 id="sec-0">Что такое Seedance 2.0 на самом деле</h2><p>Короткая правда о модели, чтобы ты понимал, с чем работаешь и почему часть запросов она отказывается выполнять. Автоматические расшифровки роликов часто пишут название как Sedans, Sidance или Сиданс, правильное написание одно: Seedance 2.0.</p><ul><li>Разработчик: ByteDance, китайская компания, которой принадлежит TikTok. Первая версия Seedance вышла в июне 2025 года, вторая в феврале 2026 года.</li><li>Что умеет: генерирует видео из текста, из картинки, из видео и из аудио. За одну генерацию выдаёт до 15 секунд и внутри этих секунд умеет несколько кадров подряд с монтажными склейками, то есть маленькую сцену со сменой планов.</li><li>Звук родной. Модель генерирует картинку и звук за один проход: реплики с попаданием в губы, шумы окружения, музыку под ритм сцены. Отдельно озвучивать не нужно.</li><li>Персонаж держится. Загружаешь референс лица, и лицо, одежда и стиль сохраняются от кадра к кадру. Это то, ради чего модель и берут под серийный контент.</li><li>Длительность клипа: от 4 до 15 секунд. Разрешение зависит от площадки и версии, обычно 480p и 720p, на части площадок заявлено выше.</li><li>Ограничения по правам. После иска Disney в феврале 2026 года ByteDance вшила защиту: реальных знаменитостей, защищённых персонажей и фирменные логотипы модель генерировать отказывается, а на выходе стоит служебная метка C2PA о том, что видео сгенерировано. Если промпт с именем звезды не проходит, причина именно в этом.</li></ul><div class="note">Практический вывод из ограничений: имена знаменитостей и названия брендов из промпта убирай. Описывай типаж и предмет словами, тогда генерация проходит. Этот приём дальше зашит во все семь промптов.</div></div>
+<div class="sec"><h2 id="sec-1">Как получить доступ и снять первый ролик</h2><p>В ролике сказано «зайди в AI Playground и поставь Seedance 2.0». Площадок, где эта модель лежит под таким интерфейсом, несколько, и цена входа у них разная. Разбираю честно, включая ситуацию с Россией, потому что это главный вопрос на входе.</p><h3>Где модель реально живёт</h3><div class="grid2"><div class="cardb"><h3>Higgsfield</h3><p>Самый удобный вход для контентщика. Логинишься, в списке моделей выбираешь Seedance 2.0, пишешь промпт, жмёшь генерацию. Тут же лежит версия Fast. Порядок цены на момент проверки около двух долларов за клип 8 секунд в 720p, стартовый тариф от 15 долларов в месяц. Это площадка, на которой работаю я сам.</p></div><div class="cardb"><h3>fal.ai</h3><p>Дешевле всех и есть открытый плейграунд: заходишь на страницу модели, пишешь сцену, генерируешь без ключа и без настройки. Порядок цены на версии Fast около 0,022 доллара за секунду видео, то есть примерно 22 цента за десятисекундный клип. Годится, когда нужно много черновых прогонов.</p></div><div class="cardb"><h3>Dreamina и CapCut</h3><p>Родные площадки ByteDance, обновления модели приезжают сюда первыми. Новичкам дают пробный запас: у CapCut это стартовые кредиты, у Dreamina пара бесплатных генераций. Цена за клип тут выше остальных, зато можно потрогать модель до любой оплаты.</p></div><div class="cardb"><h3>Runway, Magnific, Picsart</h3><p>Модель встроена в чужие редакторы, поверх неё лежат монтаж и обработка. Берёшь, если уже сидишь на одном из этих сервисов и не хочешь заводить новый аккаунт. Цена за клип сопоставима с Higgsfield или чуть выше.</p></div></div><h3>Доступ из России, без прикрас</h3><ul><li>С российского IP ни одна из этих площадок не открывается. Нужен VPN, и лучше со стабильной европейской или американской точкой, потому что генерация занимает несколько минут и обрыв соединения роняет очередь.</li><li>Российские карты Visa и Mastercard на оплате не проходят, это отсекается на стороне платёжного процессора. Рабочих путей три: иностранная карта, оплата через сервис-посредник, либо подписку оплачивает знакомый за границей, а ты пользуешься аккаунтом.</li><li>Если платишь иностранной картой, держи VPN той же страны, к которой привязана карта. Разнобой между страной карты и страной подключения ловит антифрод, и платёж отбивается.</li><li>Пробовать модель до всякой оплаты проще всего на пробных кредитах CapCut или Dreamina, либо на открытом плейграунде fal.ai. Этого хватает, чтобы понять, нужна ли тебе подписка вообще.</li></ul><div class="note">Про акцию из ролика. Безлимит на Seedance 2.0 Fast был реальным: Higgsfield продавал доступ на 30 дней без списания кредитов за генерацию, продажи шли до 12 июля, само окно доступа закрывалось 17 июля 2026 года. На момент проверки этой страницы, 20 июля 2026, окно уже закрыто. Площадка это окно один раз уже продлевала, поэтому смотри раздел тарифов и дополнений в своём кабинете, прежде чем рассчитывать на безлимит. Обещать его я тебе не буду.</div><h3>Первый ролик за пять шагов</h3><ol><li>Включи VPN, заведи аккаунт на выбранной площадке и разберись с оплатой заранее, до того как сядешь генерировать. Иначе упрёшься в стену на самом интересном месте.</li><li>В разделе генерации видео открой список моделей и выбери Seedance 2.0. Если рядом стоит Seedance 2.0 Fast, для первых прогонов бери именно её, она дешевле и быстрее.</li><li>Поставь параметры до промпта: соотношение сторон 9:16 под Reels, длительность для первого раза 5 секунд, разрешение 720p.</li><li>Скопируй первый промпт из следующего раздела, замени всё в квадратных скобках на своё и отправь. Ничего не дописывай сверху, промпт уже собран в том порядке, который модель понимает.</li><li>Дождись результата, генерация обычно занимает от четырёх до пяти минут. Скачай файл и посмотри его на телефоне со звуком. На компьютере картинка всегда выглядит лучше, чем в ленте. Дальше правь одну вещь за прогон, так ты поймёшь, что именно влияет на кадр.</li></ol></div>
+<div class="sec"><h2 id="sec-2">Анатомия промпта, который выдаёт настоящую съёмку</h2><p>Главная причина пластиковых роликов в том, что человек пишет модели пожелание вместо режиссёрского задания. Seedance читает промпт по слоям и в определённом порядке, и если порядок сбит, модель сама решает за тебя, как всё выглядит. Ниже порядок, который работает, и слова, которые ломают результат.</p><h3>Восемь блоков в правильном порядке</h3><ol><li>Структура. Первой строкой скажи, сколько кадров в клипе, сколько всего секунд и какое соотношение сторон. Модель раскладывает хронометраж заранее, и без этой строки она сама нарежет склейки там, где ты их не просил.</li><li>Стиль изображения. Плёнка, зерно, цветокор, тип камеры и оптики. Общие слова про красивый свет модель понимает плохо, конкретика вроде кинокамеры, 35 мм плёнки и мягкой цветокоррекции работает.</li><li>Место и время. Где мы, какое время суток, откуда идёт свет, что на фоне. Фон, который ты описал словами один раз в начале, дальше держится стабильно.</li><li>Герой и действие по тактам. Кто в кадре и что он делает по шагам: сначала одно, потом другое. Одна фраза про то, что человек что-то делает, даёт вялое размытое движение.</li><li>Камера. Отдельным предложением: одно движение, скорость, за кем закреплена, чем стабилизирована. Смешивать движение камеры с движением героя в одной фразе значит получить трясущийся кадр.</li><li>Свет и объектив. Тип света, направление, длина объектива и глубина резкости. Это то, что отличает картинку с телефона от картинки с площадки.</li><li>Звук. Перечисли, что слышно: реплика героя дословно, шумы, есть ли музыка. Если музыка не нужна, скажи прямо, что только живые шумы.</li><li>Итоговая строка. Повтори в конце длительность, число кадров и соотношение сторон. Это финальный якорь для модели.</li></ol><h3>Слова и приёмы, которые ломают результат</h3><ul><li>Слово «быстро» в описании движения. Оно чаще всего роняет качество картинки, модель начинает мазать кадр. Скорость описывай через характер движения: плавно, размеренно, с лёгким рывком.</li><li>Пять движений камеры в одном промпте. Одно основное движение на клип, остальное режь. Хочешь смену ракурса, пропиши это как второй кадр в структуре.</li><li>Имена знаменитостей, названия брендов и описание надписей на вывесках. Первое и второе блокирует защита прав, третье выходит нечитаемыми закорючками. Описывай типаж и предмет, надписи не проси вовсе.</li><li>Просьба сделать красиво, кинематографично и реалистично без конкретики. Эти слова модель уже слышала миллион раз, они не несут информации. Вместо них давай параметры съёмки.</li><li>Смешение в одном предложении того, что делает герой, и того, что делает камера. Разводи по разным предложениям всегда.</li></ul><div class="quote">Правило, которое экономит больше всего денег на генерациях: одна правка за прогон. Поменял сразу свет, камеру и текст реплики, получил другой ролик и не понял, что именно сработало.</div></div>
+<div class="sec"><h2 id="sec-3">Семь готовых промптов</h2><p>Все семь собраны по порядку из предыдущего раздела и рассчитаны на вставку целиком. Заменяешь то, что в квадратных скобках, остальное оставляешь как есть. Промпты написаны по-русски, модель понимает русский, при желании прогони через переводчик, английский на сложных сценах даёт чуть более точный результат.</p><h3>1. Реалистичная сцена с человеком</h3><p>Базовый промпт под говорящего героя в кадре. Годится под экспертный контент, когда снимать себя не хочешь или нужен второй персонаж. Реплику держи короткой, в пять секунд помещается примерно одна фраза на десять слов.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Структура: 1 кадр, 5 секунд, соотношение сторон 9:16.
+
+Стиль: съёмка на кинокамеру, оптика 50 мм, тонкое плёночное зерно, мягкая натуральная цветокоррекция, живая фактура кожи с порами и лёгкой асимметрией лица, без глянцевой ретуши, без 3D, без мультяшности.
+
+Место: [опиши место, например светлая кухня в квартире утром], свет из окна слева, мягкие тени, в глубине кадра размытый бытовой фон.
+
+Герой: [опиши человека: пол, возраст, телосложение, одежда, причёска], стоит вполоборота к камере. По тактам: сначала смотрит в сторону и делает короткий выдох, затем поворачивается в камеру и говорит одну фразу, в конце коротко кивает и замолкает.
+
+Камера: медленный наезд на героя, движение ровное, штативная стабилизация, без рывков и без зума в конце.
+
+Свет и объектив: мягкий рассеянный дневной свет, глубина резкости средняя, фон читается, но не спорит с лицом.
+
+Звук: герой говорит спокойным живым голосом фразу «[твоя фраза на русском, до десяти слов]», попадание в артикуляцию, тихие бытовые шумы комнаты, музыки нет.
+
+Итого: 5 секунд, 1 кадр, 9:16.">Скопировать</button></div><div class="box">Структура: 1 кадр, 5 секунд, соотношение сторон 9:16.
+
+Стиль: съёмка на кинокамеру, оптика 50 мм, тонкое плёночное зерно, мягкая натуральная цветокоррекция, живая фактура кожи с порами и лёгкой асимметрией лица, без глянцевой ретуши, без 3D, без мультяшности.
+
+Место: [опиши место, например светлая кухня в квартире утром], свет из окна слева, мягкие тени, в глубине кадра размытый бытовой фон.
+
+Герой: [опиши человека: пол, возраст, телосложение, одежда, причёска], стоит вполоборота к камере. По тактам: сначала смотрит в сторону и делает короткий выдох, затем поворачивается в камеру и говорит одну фразу, в конце коротко кивает и замолкает.
+
+Камера: медленный наезд на героя, движение ровное, штативная стабилизация, без рывков и без зума в конце.
+
+Свет и объектив: мягкий рассеянный дневной свет, глубина резкости средняя, фон читается, но не спорит с лицом.
+
+Звук: герой говорит спокойным живым голосом фразу «[твоя фраза на русском, до десяти слов]», попадание в артикуляцию, тихие бытовые шумы комнаты, музыки нет.
+
+Итого: 5 секунд, 1 кадр, 9:16.</div><h3>2. Предметная съёмка товара</h3><p>Промпт под карточку товара, распаковку или рекламную вставку. Логотип и надписи на упаковке не описывай, чисто модель их не нарисует. Свой логотип наложишь на монтаже поверх готового клипа, там он получится резким.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Структура: 1 кадр, 6 секунд, соотношение сторон 9:16.
+
+Стиль: студийная рекламная съёмка, оптика 85 мм макро, высокая детализация фактуры, чистая цветокоррекция, честные отражения и блики, без пластиковой глянцевости.
+
+Место: [опиши поверхность и фон, например матовый камень тёплого оттенка, однотонный градиентный фон], предмет по центру композиции.
+
+Предмет: [опиши товар: форма, материал, цвет, размер относительно руки]. Надписей и логотипов на предмете нет, поверхность чистая.
+
+Действие по тактам: сначала предмет стоит неподвижно, затем в кадр входит рука [опиши руку: чья, с каким маникюром или рукавом] и медленно поворачивает предмет к камере, в конце рука выходит из кадра, предмет остаётся в центре.
+
+Камера: плавный облёт вокруг предмета на четверть оборота, движение медленное, стабилизация штативная.
+
+Свет и объектив: основной мягкий свет сверху слева, тонкий контровой свет по контуру предмета, малая глубина резкости, фон размыт.
+
+Звук: тихий шорох движения руки по поверхности, лёгкий призвук соприкосновения, музыки нет.
+
+Итого: 6 секунд, 1 кадр, 9:16.">Скопировать</button></div><div class="box">Структура: 1 кадр, 6 секунд, соотношение сторон 9:16.
+
+Стиль: студийная рекламная съёмка, оптика 85 мм макро, высокая детализация фактуры, чистая цветокоррекция, честные отражения и блики, без пластиковой глянцевости.
+
+Место: [опиши поверхность и фон, например матовый камень тёплого оттенка, однотонный градиентный фон], предмет по центру композиции.
+
+Предмет: [опиши товар: форма, материал, цвет, размер относительно руки]. Надписей и логотипов на предмете нет, поверхность чистая.
+
+Действие по тактам: сначала предмет стоит неподвижно, затем в кадр входит рука [опиши руку: чья, с каким маникюром или рукавом] и медленно поворачивает предмет к камере, в конце рука выходит из кадра, предмет остаётся в центре.
+
+Камера: плавный облёт вокруг предмета на четверть оборота, движение медленное, стабилизация штативная.
+
+Свет и объектив: основной мягкий свет сверху слева, тонкий контровой свет по контуру предмета, малая глубина резкости, фон размыт.
+
+Звук: тихий шорох движения руки по поверхности, лёгкий призвук соприкосновения, музыки нет.
+
+Итого: 6 секунд, 1 кадр, 9:16.</div><h3>3. Движение камеры: проезд, облёт, наезд</h3><p>Отдельный промпт под кадр, где главный герой это само движение. Внутри выбери одну строку камеры из трёх и удали остальные, комбинировать их в одном клипе нельзя.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Структура: 1 кадр, 7 секунд, соотношение сторон 9:16.
+
+Стиль: кинематографическая съёмка на широкоугольную оптику 24 мм, естественная цветокоррекция, лёгкое плёночное зерно, честная перспектива без искажений по краям.
+
+Место: [опиши пространство: улица, интерьер, природа, время суток, погода], в кадре есть передний план, средний план и глубина.
+
+Объект внимания: [что или кто в центре кадра], остаётся в фокусе всё время.
+
+Камера, оставь одну строку из трёх:
+Проезд: камера едет вперёд вдоль [чего] на постоянной скорости, движение ровное, стабилизация на тележке, объект удерживается в центре кадра.
+Облёт: камера обходит объект по дуге примерно на половину оборота, движение размеренное, стабилизация на подвесе, объект удерживается в центре кадра.
+Наезд: камера медленно приближается к объекту от общего плана к среднему, движение ровное, стабилизация штативная, зума нет, приближение физическое.
+
+Свет и объектив: [опиши источник и направление света], глубина резкости большая, детали фона читаются.
+
+Звук: живые шумы пространства [перечисли: шаги, ветер, город, вода], музыки нет.
+
+Итого: 7 секунд, 1 кадр, 9:16.">Скопировать</button></div><div class="box">Структура: 1 кадр, 7 секунд, соотношение сторон 9:16.
+
+Стиль: кинематографическая съёмка на широкоугольную оптику 24 мм, естественная цветокоррекция, лёгкое плёночное зерно, честная перспектива без искажений по краям.
+
+Место: [опиши пространство: улица, интерьер, природа, время суток, погода], в кадре есть передний план, средний план и глубина.
+
+Объект внимания: [что или кто в центре кадра], остаётся в фокусе всё время.
+
+Камера, оставь одну строку из трёх:
+Проезд: камера едет вперёд вдоль [чего] на постоянной скорости, движение ровное, стабилизация на тележке, объект удерживается в центре кадра.
+Облёт: камера обходит объект по дуге примерно на половину оборота, движение размеренное, стабилизация на подвесе, объект удерживается в центре кадра.
+Наезд: камера медленно приближается к объекту от общего плана к среднему, движение ровное, стабилизация штативная, зума нет, приближение физическое.
+
+Свет и объектив: [опиши источник и направление света], глубина резкости большая, детали фона читаются.
+
+Звук: живые шумы пространства [перечисли: шаги, ветер, город, вода], музыки нет.
+
+Итого: 7 секунд, 1 кадр, 9:16.</div><h3>4. Атмосферный кадр под фон и перебивку</h3><p>Кадры, которые ложатся под голос за кадром, под текст на экране и в паузы между смысловыми блоками. Самый дешёвый в производстве тип клипа, потому что тут нет лица и нет речи, и брак почти не вылезает.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Структура: 1 кадр, 6 секунд, соотношение сторон 9:16.
+
+Стиль: медленное созерцательное кино, оптика 35 мм, плёночное зерно заметное, приглушённая цветокоррекция с холодными тенями и тёплыми светами.
+
+Место: [опиши сцену: например пустая улица после дождя перед рассветом], свет один основной источник [откуда], в воздухе есть фактура: пыль, пар, влага или дым.
+
+Что происходит по тактам: сначала кадр почти статичен, затем в кадре начинается одно медленное движение [что именно движется: занавеска, пар над чашкой, отражение в луже, ветка], в конце движение затихает.
+
+Камера: очень медленный дрейф вбок, движение почти незаметное, стабилизация на подвесе, без наезда.
+
+Свет и объектив: контрастный направленный свет, малая глубина резкости, передний план мягко расфокусирован.
+
+Звук: только живые шумы среды [перечисли два или три], без музыки, без голосов.
+
+Итого: 6 секунд, 1 кадр, 9:16.">Скопировать</button></div><div class="box">Структура: 1 кадр, 6 секунд, соотношение сторон 9:16.
+
+Стиль: медленное созерцательное кино, оптика 35 мм, плёночное зерно заметное, приглушённая цветокоррекция с холодными тенями и тёплыми светами.
+
+Место: [опиши сцену: например пустая улица после дождя перед рассветом], свет один основной источник [откуда], в воздухе есть фактура: пыль, пар, влага или дым.
+
+Что происходит по тактам: сначала кадр почти статичен, затем в кадре начинается одно медленное движение [что именно движется: занавеска, пар над чашкой, отражение в луже, ветка], в конце движение затихает.
+
+Камера: очень медленный дрейф вбок, движение почти незаметное, стабилизация на подвесе, без наезда.
+
+Свет и объектив: контрастный направленный свет, малая глубина резкости, передний план мягко расфокусирован.
+
+Звук: только живые шумы среды [перечисли два или три], без музыки, без голосов.
+
+Итого: 6 секунд, 1 кадр, 9:16.</div><h3>5. Динамичная сцена со сменой кадров</h3><p>Тут используется главная сила модели: несколько планов внутри одной генерации со склейками. Это готовое начало ролика, которое держит внимание в первые секунды. Держи по одному простому действию на кадр.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Структура: 3 кадра, 12 секунд, соотношение сторон 9:16.
+
+Стиль: динамичное репортажное кино, оптика 28 мм, лёгкая ручная тряска, живой контраст, натуральная кожа с порами, без глянца, без 3D.
+
+Место: [опиши локацию и время суток], фон одинаковый во всех трёх кадрах.
+
+Герой: [опиши человека], одежда и внешность не меняются от кадра к кадру.
+
+Кадр 1, четыре секунды, общий план: герой [действие: например резко встаёт из-за стола и идёт к двери], камера ведёт его сбоку, движение ровное, подвес.
+
+Кадр 2, четыре секунды, средний план: герой [второе действие: например останавливается и оглядывается через плечо], камера статична, лёгкая ручная тряска.
+
+Кадр 3, четыре секунды, крупный план: лицо героя, он [третье действие: например коротко выдыхает и говорит одну фразу], камера медленно наезжает на лицо.
+
+Свет и объектив: [источник света и направление], глубина резкости средняя, фон читаемый.
+
+Звук: живые шумы места, шаги, дыхание, в третьем кадре реплика героя «[короткая фраза до восьми слов]» с попаданием в артикуляцию, музыки нет.
+
+Итого: 12 секунд, 3 кадра, 9:16.">Скопировать</button></div><div class="box">Структура: 3 кадра, 12 секунд, соотношение сторон 9:16.
+
+Стиль: динамичное репортажное кино, оптика 28 мм, лёгкая ручная тряска, живой контраст, натуральная кожа с порами, без глянца, без 3D.
+
+Место: [опиши локацию и время суток], фон одинаковый во всех трёх кадрах.
+
+Герой: [опиши человека], одежда и внешность не меняются от кадра к кадру.
+
+Кадр 1, четыре секунды, общий план: герой [действие: например резко встаёт из-за стола и идёт к двери], камера ведёт его сбоку, движение ровное, подвес.
+
+Кадр 2, четыре секунды, средний план: герой [второе действие: например останавливается и оглядывается через плечо], камера статична, лёгкая ручная тряска.
+
+Кадр 3, четыре секунды, крупный план: лицо героя, он [третье действие: например коротко выдыхает и говорит одну фразу], камера медленно наезжает на лицо.
+
+Свет и объектив: [источник света и направление], глубина резкости средняя, фон читаемый.
+
+Звук: живые шумы места, шаги, дыхание, в третьем кадре реплика героя «[короткая фраза до восьми слов]» с попаданием в артикуляцию, музыки нет.
+
+Итого: 12 секунд, 3 кадра, 9:16.</div><h3>6. Оживление своего фото</h3><p>Самый практичный режим для эксперта. Загружаешь своё фото как референс и получаешь себя в движении, с собственным лицом и без съёмки. В интерфейсе это режим генерации из изображения или из референса, промпт вставляешь тот же.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Структура: 1 кадр, 5 секунд, соотношение сторон 9:16. Лицо и одежда героя строго как на приложенном изображении, черты лица не меняются ни на кадр.
+
+Стиль: съёмка на кинокамеру, оптика 50 мм, тонкое плёночное зерно, натуральная кожа с порами и лёгкой асимметрией, без бьюти-обработки, без сглаживания, без 3D.
+
+Место: [опиши место, куда помещаешь героя], свет [откуда и какой], фон живой, в глубине есть движение [люди, транспорт, листва].
+
+Герой: человек с приложенного изображения. По тактам: сначала стоит спокойно и смотрит в сторону, затем поворачивается в камеру, в конце коротко улыбается закрытыми губами и замолкает.
+
+Камера: очень медленный наезд, движение ровное, штативная стабилизация, без зума.
+
+Свет и объектив: [тип света], средняя глубина резкости, фон мягко размыт.
+
+Звук: живые шумы места, дыхание, музыки нет.
+
+Итого: 5 секунд, 1 кадр, 9:16.">Скопировать</button></div><div class="box">Структура: 1 кадр, 5 секунд, соотношение сторон 9:16. Лицо и одежда героя строго как на приложенном изображении, черты лица не меняются ни на кадр.
+
+Стиль: съёмка на кинокамеру, оптика 50 мм, тонкое плёночное зерно, натуральная кожа с порами и лёгкой асимметрией, без бьюти-обработки, без сглаживания, без 3D.
+
+Место: [опиши место, куда помещаешь героя], свет [откуда и какой], фон живой, в глубине есть движение [люди, транспорт, листва].
+
+Герой: человек с приложенного изображения. По тактам: сначала стоит спокойно и смотрит в сторону, затем поворачивается в камеру, в конце коротко улыбается закрытыми губами и замолкает.
+
+Камера: очень медленный наезд, движение ровное, штативная стабилизация, без зума.
+
+Свет и объектив: [тип света], средняя глубина резкости, фон мягко размыт.
+
+Звук: живые шумы места, дыхание, музыки нет.
+
+Итого: 5 секунд, 1 кадр, 9:16.</div><h3>7. Промпт-сборщик, если сцену придумывать лень</h3><p>Этот промпт живёт в текстовой нейросети вроде ChatGPT или Claude. Он собирает тебе готовый видеопромпт по структуре из этого гайда под конкретную тему ролика, чтобы ты не держал восемь блоков в голове каждый раз.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как режиссёр и оператор, который пишет технические задания для генеративной видеомодели Seedance 2.0. Я дам тему, ты соберёшь готовый промпт, который я вставлю в модель без правок.
+
+Вводные:
+- Тема и смысл кадра: [что должно происходить и зачем]
+- Кто в кадре: [человек, предмет, пространство]
+- Настроение: [спокойное, тревожное, энергичное]
+- Длительность: [5, 7 или 12 секунд]
+- Формат: 9:16 под вертикальное видео
+
+Собери промпт строго в этом порядке, каждый блок с новой строки: структура кадров и хронометраж, стиль изображения с типом камеры и оптики, место и свет, герой и действие по тактам, камера отдельным предложением с одним движением, свет и глубина резкости, звук с перечислением шумов и репликой при необходимости, итоговая строка с длительностью и форматом.
+
+Жёсткие ограничения: одно движение камеры на клип, движение камеры и движение героя описывай разными предложениями, слово «быстро» не используй, имена реальных знаменитостей и названия брендов не вставляй, надписи и логотипы в кадре не описывай, вместо общих слов о красоте давай параметры съёмки.
+
+Выдай только готовый промпт одним блоком, без пояснений и без вариантов.">Скопировать</button></div><div class="box">Действуй как режиссёр и оператор, который пишет технические задания для генеративной видеомодели Seedance 2.0. Я дам тему, ты соберёшь готовый промпт, который я вставлю в модель без правок.
+
+Вводные:
+- Тема и смысл кадра: [что должно происходить и зачем]
+- Кто в кадре: [человек, предмет, пространство]
+- Настроение: [спокойное, тревожное, энергичное]
+- Длительность: [5, 7 или 12 секунд]
+- Формат: 9:16 под вертикальное видео
+
+Собери промпт строго в этом порядке, каждый блок с новой строки: структура кадров и хронометраж, стиль изображения с типом камеры и оптики, место и свет, герой и действие по тактам, камера отдельным предложением с одним движением, свет и глубина резкости, звук с перечислением шумов и репликой при необходимости, итоговая строка с длительностью и форматом.
+
+Жёсткие ограничения: одно движение камеры на клип, движение камеры и движение героя описывай разными предложениями, слово «быстро» не используй, имена реальных знаменитостей и названия брендов не вставляй, надписи и логотипы в кадре не описывай, вместо общих слов о красоте давай параметры съёмки.
+
+Выдай только готовый промпт одним блоком, без пояснений и без вариантов.</div></div>
+<div class="sec"><h2 id="sec-4">Fast против обычной версии</h2><p>Обе версии это одна и та же модель, разница в скорости, цене и потолке качества. Правильная стратегия в том, чтобы черновики гонять на Fast, а финальный кадр перегенерировать на обычной, когда промпт уже вылизан.</p><div class="grid2"><div class="cardb"><h3>Seedance 2.0 Fast</h3><ul><li>Быстрее, обычно около четырёх минут на генерацию против пяти у обычной</li><li>Дешевле примерно на треть, на разных площадках экономия от 20 до 33 процентов</li><li>Разрешение до 720p, полного HD в этом режиме нет</li><li>Всё остальное на месте: несколько кадров в клипе, родной звук, стабильный персонаж</li><li>Берёшь: когда подбираешь промпт, тестируешь сцену, гонишь серию черновиков</li></ul></div><div class="cardb"><h3>Seedance 2.0 обычная</h3><ul><li>Дороже и медленнее, зато выше потолок разрешения, на части площадок заявлено до 2K и выше</li><li>Тоньше отрабатывает сложное движение, физику и мелкую мимику</li><li>Стабильнее держит сложные многокадровые сцены</li><li>Берёшь: когда промпт уже проверен на Fast и нужен финальный кадр в ленту</li><li>Порядок цены на момент проверки около двух долларов за восемь секунд в 720p</li></ul></div></div><div class="note">Рабочий цикл, который экономит деньги: три или четыре прогона на Fast, пока промпт не начнёт давать нужный кадр, потом один прогон того же самого промпта на обычной версии. Так один готовый клип обходится дешевле, чем пять слепых попыток на дорогом режиме.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-5">Починка типового брака</h2><p>Брак у генеративного видео повторяется от человека к человеку. Ниже пять симптомов, которые встречаются чаще всего, с причиной и точной правкой в промпте. Правь по одному пункту за прогон.</p><h3>Пластиковое лицо и кукольная кожа</h3><p>Причина в том, что модель без указаний по умолчанию тянет картинку в рекламный глянец. Лечится описанием фактуры и прямым запретом на обработку. Добавь в блок стиля строку с запретами, она работает как ограничитель.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="натуральная кожа с видимыми порами и лёгкой асимметрией лица, живая мимика, тонкое плёночное зерно, без бьюти-обработки, без сглаживания кожи, без глянца, без 3D, без мультяшности, без пластиковых бликов">Скопировать</button></div><div class="box">натуральная кожа с видимыми порами и лёгкой асимметрией лица, живая мимика, тонкое плёночное зерно, без бьюти-обработки, без сглаживания кожи, без глянца, без 3D, без мультяшности, без пластиковых бликов</div><h3>Дёрганое движение и трясущийся кадр</h3><ul><li>Убери слово «быстро» и все синонимы резкой скорости, они разваливают плавность.</li><li>Оставь одно движение камеры на клип, вычеркни остальные.</li><li>Раздели движение героя и движение камеры на два разных предложения.</li><li>Допиши в блок камеры стабилизацию явно: штативная стабилизация или стабилизация на подвесе, движение ровное, без рывков.</li><li>Если тряска нужна по задумке, проси её честно: лёгкая ручная тряска, живая репортажная съёмка. Сочетание слов про плавную стабилизированную ручную камеру модель понимает как противоречие и выдаёт кашу.</li></ul><h3>Фон плывёт и меняется по ходу клипа</h3><p>Модель дорисовывает пространство на ходу, если оно не закреплено словами в начале. Опиши место один раз подробно в блоке места и больше к нему не возвращайся в других блоках. В многокадровой сцене добавь строку о том, что фон во всех кадрах одинаковый, а одежда и внешность героя не меняются. Отдельно помогает уменьшить длительность: на 5 секундах фон держится заметно лучше, чем на 15.</p><h3>Закорючки вместо текста, кривые логотипы</h3><p>Надписи это слабое место всех видеомоделей, а фирменные знаки вдобавок режет защита прав. Решение простое: не описывай надписи вовсе, пусть в кадре будут чистые поверхности. Свой логотип, заголовок и подпись накладывай сверху на монтаже, там они получатся резкими и читаемыми. Если вывеска в кадре нужна для достоверности, проси размытую вывеску на дальнем плане вне фокуса.</p><h3>Модель отказалась генерировать</h3><p>Чаще всего причина одна из трёх: в промпте имя реального человека, узнаваемый персонаж или название бренда. Замени имя на описание типажа, например вместо конкретного футболиста опиши спортсмена определённого телосложения в форме без опознавательных знаков. Бренд замени описанием предмета. После такой замены запрос обычно проходит.</p></div>
+<div class="sec"><h2 id="sec-6">Как собрать из клипов Reels, который досматривают</h2><p>Готовые клипы сами по себе просмотров не дают. Работает связка: сильный хук в первые секунды и длинное описание под роликом, которое человек читает, пока ролик крутится по кругу. Это та же механика, на которой я разогнал аккаунт с нуля до тридцати с лишним тысяч под:писчиков за два с половиной месяца.</p><ol><li>Собери ролик из трёх клипов по 5 секунд. Первый это самый сильный кадр, который останавливает палец. Второй раскрывает мысль. Третий закрывает и подводит к призыву. Пятнадцать секунд общего хронометража это рабочий минимум.</li><li>Первые три секунды решают всё. Поверх первого клипа положи текстовый хук в четыре или пять слов, который бьёт в боль или ломает ожидание. Хук на экране обязателен, потому что большинство смотрит без звука.</li><li>Звук из модели оставь. Родные шумы и реплика дают ощущение настоящей съёмки, а тишина сразу выдаёт генерацию. Музыку подкладывай тихо и только фоном.</li><li>Опиши ролик длинно. Полторы тысячи символов и больше, живым текстом, чтобы человек читал описание, пока видео играет по кругу. Алгоритм видит высокое удержание и несёт ролик в рекомендации, а длинное описание это самый дешёвый способ это удержание получить.</li><li>Заверши призывом на одно действие. Одно кодовое слово в ком:ментариях, за которым лежит конкретный материал. Обещание из ролика и то, что человек получит, должны совпадать буква в букву, иначе теряешь доверие на входе.</li><li>Замерь через сутки и через трое суток. Смотри удержание и досмотры, а не лайки. Формат, который дал досмотр выше половины, повторяй ещё три раза с другой темой, прежде чем придумывать новый.</li></ol><div class="quote">Магия не в видео. Магия в тексте, который человек читает, пока твой ролик играет на повторе. Алгоритм видит максимальное удержание и выкидывает тебя в рекомендации.</div><div class="note">Порядок на первый вечер: заведи аккаунт и разберись с оплатой, прогони промпт номер один на версии Fast, потом промпт номер шесть со своим фото, собери из двух клипов один пятнадцатисекундный ролик с текстовым хуком и длинным описанием. Один вечер, ноль съёмок, готовый ролик в ленте.</div></div>
+<div class="sec"><h2 id="sec-7">Соседний гайд, если пришёл за рекламным роликом</h2><p>По слову ВИДЕО ко мне приходят с двух разных роликов. Если ты шёл за системой сборки рекламы, тебе сюда.</p><p>В соседнем гайде лежит система сборки рекламного ролика на нейросетях без единой съёмки: сценарий, раскадровка, герой, озвучка и финальная сборка по шагам. Здесь у тебя инструмент, там у тебя готовый производственный процесс. Одно дополняет другое.</p><a class="linkbtn" href="https://vladimir-izhmukov.ru/guide-video/" target="_blank" rel="noopener">Открыть гайд: рекламный ролик на ИИ без съёмок</a></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Что такое Seedance 2.0 на самом деле</a><a href="#sec-1">Как получить доступ и снять первый ролик</a><a href="#sec-2">Анатомия промпта, который выдаёт настоящую съёмку</a><a href="#sec-3">Семь готовых промптов</a><a href="#sec-4">Fast против обычной версии</a><a href="#sec-5">Починка типового брака</a><a href="#sec-6">Как собрать из клипов Reels, который досматривают</a><a href="#sec-7">Соседний гайд, если пришёл за рекламным роликом</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
