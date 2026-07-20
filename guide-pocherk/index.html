@@ -1,0 +1,511 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Как убрать машинный почерк из текста: семь промптов и десять пар до-после</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-kopirajting">Копирайтинг</a></div>
+<h1>Как убрать машинный почерк из текста: семь промптов и десять пар до-после</h1>
+<p class="lead">Здесь лежат все семь промптов из карусели целиком, и к каждому пара живых примеров «как было и как стало» на обычном тексте блогера. Признаков машинного почерка шесть: длинные тире, противопоставления через отрицание, формулы-утешения, канцелярит, рубленые обрубки по три слова и перечисление, размазанное внутри абзаца. Под каждый признак свой промпт, седьмой это финальная вычитка, которая прогоняет весь материал разом и возвращает чистовой вариант. Всё это выросло из моей рабочей практики: я пишу посты каждый день, и у меня в правилах прошито жёсткое условие проверять текст по этим шести точкам перед публикацией. Прочитав только эту страницу, ты уже можешь взять свой вчерашний пост, прогнать его по порядку и увидеть разницу на своём тексте, а не на абстрактном примере из интернета.</p>
+<p class="meta">Читается за 12 минут. Внутри семь готовых промптов копируемыми блоками, десять пар примеров «до и после» на живом русском тексте, порядок применения с объяснением, почему финальный аудит идёт последним, и отдельный блок про то, как вернуть живую интонацию, если после чистки текст стал сухим.</p>
+<div class="how">Возьми свой реальный текст, который ещё не публиковал, и работай по порядку с первого промпта по шестой, по одному за раз, каждый раз подставляя в промпт результат предыдущего шага. Не запускай все шесть одной пачкой, потому что модель начнёт переписывать текст целиком и потеряет твой голос. Седьмой промпт запускай последним, когда шесть предыдущих уже отработали, он ловит остатки и показывает таблицу «признак, цитата, правка». После этого прочитай текст вслух: если он стал ровным и сухим, вернись к последнему разделу, там четыре приёма и отдельный промпт, который возвращает интонацию, не занося признаки обратно.</div>
+<div class="sec"><h2 id="sec-0">Откуда взялись эти шесть признаков</h2><p>Список собран не из статей про нейросети, он собран на моих собственных черновиках. Я пишу посты в канал каждый день, часть текстов проходит через модель, и каждый раз, когда текст возвращался с ощущением пластмассы, я выписывал, что именно резануло. Через несколько месяцев набралось шесть устойчивых точек, которые повторяются почти в каждой генерации. Сейчас это прошито у меня в правилах как условие публикации: текст не уходит в канал, пока эти шесть точек не вычищены.</p><div class="grid2"><div class="cardb"><h3>Почему читатель чувствует машину раньше, чем понимает</h3><p>Человек не анализирует текст по признакам, он ловит ритм. Машинный текст ровный: одинаковая длина предложений, одинаковые связки, симметричные конструкции. Живая речь рваная и неровная, там длинное предложение сменяется коротким выдохом, вставляется личная реакция, всплывает конкретная цифра. Шесть признаков ниже это как раз то, что делает текст ровным. Убираешь их, и возвращается неровность, по которой читатель узнаёт человека.</p></div><div class="cardb"><h3>Шесть точек, которые ловим</h3><p>Раз, длинные тире там, где живой человек поставил бы точку или запятую. Два, противопоставления через отрицание, когда мысль строится от того, чем она не является. Три, формулы-утешения вроде «дело не в тебе» и вся их родня. Четыре, канцелярит: осуществляет, в рамках, является, на сегодняшний день. Пять, рубленые обрубки по три слова подряд, из-за которых текст читается как телеграмма. Шесть, перечисление, размазанное чередой фраз внутри абзаца.</p></div><div class="cardb"><h3>Почему один промпт на всё сразу работает хуже</h3><p>Если попросить модель «убрать нейросетевой стиль», она перепишет текст целиком своим голосом, и ты получишь другую генерацию вместо своей. Поэтому промптов семь, и каждый бьёт по одной точке с узкой инструкцией. Модель правит только то, что названо, и оставляет твои формулировки на месте. Твой голос выживает, уходит только машинный налёт.</p></div></div></div>
+<div class="sec"><h2 id="sec-1">Промпт 1. Длинные тире</h2><p>Самый заметный признак и самый лёгкий для правки. Модель ставит длинное тире там, где человек в живой речи просто делает паузу точкой или запятой. Одно тире на текст никто не заметит, но генерация ставит их по три штуки на абзац, и текст сразу выдаёт себя.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Прочитай текст ниже и убери из него все длинные тире. Каждое замени точкой или запятой так, чтобы фраза читалась естественно вслух. Там, где перед союзом «а» напрашивается тире, ставь запятую. Верни готовый текст, а отдельной строкой напиши, сколько тире ты убрал.
+
+Текст: [вставь свой]">Скопировать</button></div><div class="box">Прочитай текст ниже и убери из него все длинные тире. Каждое замени точкой или запятой так, чтобы фраза читалась естественно вслух. Там, где перед союзом «а» напрашивается тире, ставь запятую. Верни готовый текст, а отдельной строкой напиши, сколько тире ты убрал.
+
+Текст: [вставь свой]</div><div class="note" data-allow-dash="1">Пара 1. ВНИМАНИЕ: в строке «было» тире стоят намеренно, это образец брака.
+
+БЫЛО: «Рилсы не набирают — и дело здесь не в камере — первые три секунды просто не держат внимание.»
+
+СТАЛО: «Рилсы не набирают, и камера тут ни при чём. Первые три секунды просто не держат внимание.»</div><div class="note" data-allow-dash="1">Пара 2. ВНИМАНИЕ: в строке «было» тире стоит намеренно, это образец брака.
+
+БЫЛО: «Мой первый аккаунт вырос за два с половиной месяца — с тысячи подписчиков до тридцати двух тысяч.»
+
+СТАЛО: «Мой первый аккаунт вырос за два с половиной месяца, с тысячи подписчиков до тридцати двух тысяч.»
+
+Смысл не поменялся, но фраза легла в дыхание. Проверка простая: прочитай вслух и услышь, куда сама просится пауза.</div></div>
+<div class="sec"><h2 id="sec-2">Промпт 2. Противопоставления через отрицание</h2><p>Самый частый и самый липкий признак. Конструкции «не X, а Y» звучат красиво и умно, поэтому модель лепит их в каждый второй абзац. Читатель устаёт от того, что мысль всё время объясняется через то, чем она не является, вместо простого прямого утверждения.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Найди в тексте все противопоставления через отрицание: «не X, а Y», «это не X, это Y», «X, а не Y». Перепиши каждое простым утверждением, где остаётся только то, что я хочу сказать, без отрицания. Смысл сохрани, длину не увеличивай. Покажи таблицу замен: было и стало.
+
+Текст: [вставь свой]">Скопировать</button></div><div class="box">Найди в тексте все противопоставления через отрицание: «не X, а Y», «это не X, это Y», «X, а не Y». Перепиши каждое простым утверждением, где остаётся только то, что я хочу сказать, без отрицания. Смысл сохрани, длину не увеличивай. Покажи таблицу замен: было и стало.
+
+Текст: [вставь свой]</div><div class="note">Пара 3. ВНИМАНИЕ: конструкция в строке «было» приведена намеренно, это образец брака.
+
+БЫЛО: «Результат дают не количество роликов, а система. Это не про талант, это про режим.»
+
+СТАЛО: «Результат даёт система. Ты снимаешь по плану каждый день, и через месяц у тебя тридцать роликов и понятная статистика, по которой видно, что заходит.»</div><div class="note">Пара 4. ВНИМАНИЕ: конструкция в строке «было» приведена намеренно, это образец брака.
+
+БЫЛО: «Клиенты приходят не из красивого профиля, а из регулярного контента.»
+
+СТАЛО: «Клиенты приходят из регулярного контента. Красивый профиль их только дожимает, когда они уже пришли посмотреть, кто ты такой.»
+
+Обрати внимание, что во втором варианте появилась новая мысль про роль профиля. Так и должно быть: когда убираешь отрицание, освобождается место под конкретику.</div></div>
+<div class="sec"><h2 id="sec-3">Промпт 3. Формулы-утешения</h2><p>«Дело не в тебе», «дело не в таланте, дело в системе», «ты не один такой». Эти обороты выглядят как поддержка, но читатель узнаёт в них шаблон, потому что это и есть шаблон. Поддержка работает, когда за ней идёт конкретное действие, а не когда она заканчивается сама на себе.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Вычисти из текста все формулы-утешения вида «дело не в тебе», «дело не в таланте, дело в системе» и любые похожие обороты. На их место поставь конкретику: что человек делает сейчас и что ему стоит сделать вместо этого. Никакой философии, только действие.
+
+Текст: [вставь свой]">Скопировать</button></div><div class="box">Вычисти из текста все формулы-утешения вида «дело не в тебе», «дело не в таланте, дело в системе» и любые похожие обороты. На их место поставь конкретику: что человек делает сейчас и что ему стоит сделать вместо этого. Никакой философии, только действие.
+
+Текст: [вставь свой]</div><div class="note">Пара 5. ВНИМАНИЕ: формула в строке «было» приведена намеренно, это образец брака.
+
+БЫЛО: «Если ролики не залетают, дело не в тебе. Дело в подходе.»
+
+СТАЛО: «Если ролики не залетают, открой три последних и посмотри на первую строку. Скорее всего ты начинаешь с приветствия, а зритель уходит на второй секунде. Поставь на это место вопрос про его боль и сними те же три ролика заново.»
+
+Вот чем отличается живой текст: человек после него встаёт и идёт делать. После утешения человек просто кивает и листает дальше.</div></div>
+<div class="sec"><h2 id="sec-4">Промпт 4. Канцелярит</h2><p>Слова, которые никто не произносит вслух, но которые обожает генерация. Осуществляет, является, в рамках, данный, с целью, на сегодняшний день. Отдельная беда это отглагольные существительные: «осуществляет привлечение» вместо простого «приводит». Каждое такое слово добавляет тексту казённый привкус.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Найди в тексте канцелярит и штампы: «осуществляет», «в рамках», «является», «данный», «с целью», «на сегодняшний день». Перепиши каждое место живой разговорной фразой, как сказал бы человек вслух. Отглагольные существительные преврати в глаголы. Верни текст и список того, что заменил.
+
+Текст: [вставь свой]">Скопировать</button></div><div class="box">Найди в тексте канцелярит и штампы: «осуществляет», «в рамках», «является», «данный», «с целью», «на сегодняшний день». Перепиши каждое место живой разговорной фразой, как сказал бы человек вслух. Отглагольные существительные преврати в глаголы. Верни текст и список того, что заменил.
+
+Текст: [вставь свой]</div><div class="note">Пара 6.
+
+БЫЛО: «Данный метод является эффективным инструментом, который осуществляет привлечение целевой аудитории в рамках короткого временного горизонта.»
+
+СТАЛО: «Метод приводит подписчиков за неделю. Работает так: снимаешь короткий ролик, ставишь хук в первые три секунды и вешаешь длинное описание, чтобы человек читал его, пока ролик крутится по кругу.»
+
+Было двенадцать слов ни о чём, стало объяснение механики. Канцелярит почти всегда прикрывает пустоту, и когда его убираешь, приходится дописывать смысл. Это нормально, так и надо.</div></div>
+<div class="sec"><h2 id="sec-5">Промпт 5. Рубленые обрубки</h2><p>Обратная крайность. Автор начитался советов про короткие предложения и рубит текст в лапшу по три слова. Модель этот приём подхватывает мгновенно, и получается телеграмма. Живой человек говорит длинными, договорёнными до конца фразами, а короткую рубит только там, где нужен удар.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Проверь ритм текста. Если он идёт сплошными короткими обрубками по три слова, собери их в нормальные, договорённые до конца предложения с придаточными. Короткую фразу оставь только там, где нужен акцент, максимум одну на абзац. Читаться должно как живая речь.
+
+Текст: [вставь свой]">Скопировать</button></div><div class="box">Проверь ритм текста. Если он идёт сплошными короткими обрубками по три слова, собери их в нормальные, договорённые до конца предложения с придаточными. Короткую фразу оставь только там, где нужен акцент, максимум одну на абзац. Читаться должно как живая речь.
+
+Текст: [вставь свой]</div><div class="note">Пара 7.
+
+БЫЛО: «Снимай каждый день. Без выходных. Просто снимай. Результат придёт. Проверено.»
+
+СТАЛО: «Снимай каждый день без выходных, даже когда тема кажется слабой и снимать не хочется, потому что результат собирается из объёма, и один удачный ролик тут ничего не решает. Проверено на тридцати двух тысячах подписчиков.»
+
+Одна короткая фраза в конце осталась как акцент, и теперь она работает, потому что вокруг неё есть воздух.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-6">Промпт 6. Перечисление без списка</h2><p>Когда в абзаце подряд идут пять вещей через запятую, читатель их не запоминает и глаз соскальзывает. Перечисление просит список: раз, два, три. Это самая механическая правка из шести, и она сильнее всего меняет то, как текст выглядит на экране телефона.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Найди места, где перечисление идёт чередой фраз подряд внутри абзаца. Переделай их в маркированный или нумерованный список: раз, два, три. Каждый пункт с новой строки, одна мысль на пункт, формулировки сохрани. Остальной текст не трогай.
+
+Текст: [вставь свой]">Скопировать</button></div><div class="box">Найди места, где перечисление идёт чередой фраз подряд внутри абзаца. Переделай их в маркированный или нумерованный список: раз, два, три. Каждый пункт с новой строки, одна мысль на пункт, формулировки сохрани. Остальной текст не трогай.
+
+Текст: [вставь свой]</div><div class="note">Пара 8.
+
+БЫЛО: «Тебе нужен сильный хук в первые три секунды, длинное описание под роликом, один понятный призыв в конце, обложка с лицом и регулярность хотя бы три ролика в неделю.»
+
+СТАЛО: «Тебе нужно пять вещей:
+1. Сильный хук в первые три секунды.
+2. Длинное описание под роликом, от полутора тысяч символов.
+3. Один понятный призыв в конце.
+4. Обложка с лицом.
+5. Регулярность, минимум три ролика в неделю.»
+
+Текст тот же, но теперь человек может вернуться к нему глазами и найти нужный пункт. В посте это ещё и добавляет сохранений.</div></div>
+<div class="sec"><h2 id="sec-7">Промпт 7. Финальная вычитка по шести признакам</h2><p>Седьмой промпт работает по всему тексту разом и проверяет его по всем шести точкам. Он выдаёт таблицу «признак, цитата, правка», чтобы ты видел, что именно правится и почему, и только потом отдаёт чистовой вариант. Таблица здесь важнее чистовика: через десяток прогонов ты начинаешь ловить эти шесть точек сам, ещё на этапе написания.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты редактор, который ловит нейросетевой почерк. Проверь текст по шести признакам: длинные тире, противопоставления через отрицание, формулы-утешения, канцелярит, рубленые обрубки, перечисление без списка. Выдай таблицу: признак, цитата, правка. Потом верни чистовой вариант целиком.
+
+Текст: [вставь свой]">Скопировать</button></div><div class="box">Ты редактор, который ловит нейросетевой почерк. Проверь текст по шести признакам: длинные тире, противопоставления через отрицание, формулы-утешения, канцелярит, рубленые обрубки, перечисление без списка. Выдай таблицу: признак, цитата, правка. Потом верни чистовой вариант целиком.
+
+Текст: [вставь свой]</div><div class="note" data-allow-dash="1">Пара 9, полный прогон абзаца. ВНИМАНИЕ: тире и конструкция «не X, а Y» в строке «было» стоят намеренно, это образец брака.
+
+БЫЛО: «Многие эксперты сегодня осуществляют ведение блога — и не получают заявок. Дело не в тебе. Просто контент бессистемный. Хаотичный. Без плана. Нужен хук, описание, призыв, регулярность.»
+
+ТАБЛИЦА, которую вернёт промпт:
+Тире: «блога — и не получают» → точка.
+Утешение: «Дело не в тебе» → конкретное действие.
+Канцелярит: «осуществляют ведение» → «ведут».
+Обрубки: «Хаотичный. Без плана.» → собрать в предложение.
+Перечисление: «хук, описание, призыв, регулярность» → список.
+
+СТАЛО: «Эксперты ведут блог годами и не получают заявок, потому что выкладывают то, что придумалось утром. Возьми лист и собери план на неделю по четырём точкам:
+1. Хук в первые три секунды.
+2. Описание под роликом.
+3. Один призыв в конце.
+4. Три выхода в неделю.»</div></div>
+<div class="sec"><h2 id="sec-8">В каком порядке гонять и почему аудит последний</h2><p>Порядок не случайный. Шесть промптов идут от самой механической правки к самой смысловой, и каждый следующий работает по тексту, который уже почистил предыдущий. Седьмой стоит в конце, потому что у него другая работа.</p><div class="grid2"><div class="cardb"><h3>Порядок шести</h3><p>Раз, тире, это чистая механика, текст от неё не меняется по смыслу. Два, противопоставления, тут уже переписываются целые фразы. Три, формулы-утешения, на их место приходит новая конкретика. Четыре, канцелярит, вместо пустых слов появляется механика. Пять, ритм, собираем то, что после четырёх правок могло рассыпаться. Шесть, списки, финальная сборка того, как текст выглядит на экране. Идёшь строго по одному промпту за раз, подставляя в следующий результат предыдущего.</p></div><div class="cardb"><h3>Почему аудит идёт последним</h3><p>Правки заносят новые признаки. Когда убираешь тире, на их месте появляются короткие обрубки. Когда переписываешь противопоставления, вылезает канцелярит, потому что модель тянется к нейтральным оборотам. Аудит по шести признакам ловит ровно этот вторичный мусор, который сами промпты и занесли. Запускать его первым бессмысленно: он найдёт всё разом, вывалит гору правок и перепишет текст целиком своим голосом.</p></div><div class="cardb"><h3>Когда можно срезать угол</h3><p>Если текст короткий, до тысячи знаков, гони только седьмой промпт и правь руками по его таблице, этого хватает. Полный проход по шести нужен на длинных постах, лонгридах, описаниях под ролики и продающих страницах, где машинный ритм заметнее всего. И ещё правило из практики: последнее слово всегда за тобой, чистовик от модели надо прочитать вслух целиком, прежде чем публиковать.</p></div></div><div class="note">Быстрая самопроверка без всяких промптов, тридцать секунд. Поиском по тексту ищешь символ длинного тире, счётчик обязан показать ноль. Потом ищешь связку «не» рядом с «а», это ловит противопоставления. Потом ищешь «дело не в». Три поиска закрывают половину проблемы, я делаю их перед каждой публикацией.</div></div>
+<div class="sec"><h2 id="sec-9">Если после чистки текст стал сухим</h2><p>Так бывает почти всегда после первого прогона, и это нормально. Промпты убирают лишнее, но ничего не добавляют взамен, поэтому текст выходит правильным и плоским. Живая интонация возвращается четырьмя приёмами, все они добавляют в текст тебя, а не стиль.</p><div class="grid2"><div class="cardb"><h3>Приём 1. Личная вставка-реакция</h3><p>Одна короткая фраза от себя прямо посреди абзаца: «и вот тут у меня просто слов нет», «честно, я сам не верил, пока не проверил», «до сих пор жалею, что не начал раньше». Такие вставки модель не генерирует сама, потому что у неё нет твоего опыта. Одна на абзац, больше не надо.</p></div><div class="cardb"><h3>Приём 2. Конкретная цифра или деталь</h3><p>Вместо «быстро вырос» пиши «за две с половиной недели». Вместо «дорогой сервис» пиши «двадцать долларов в месяц». Детали работают даже неудобные и мелкие: сколько дублей ты снял, во сколько встал, что сломалось. Именно конкретика отличает человека, который делал, от текста, который пересказывает.</p></div><div class="cardb"><h3>Приём 3. Прямая речь в кавычках</h3><p>Вставь реальную фразу клиента, подписчика или свою собственную мысль в кавычках: «опять пятьдесят просмотров, я что, фейк?». Кавычки ломают ровный ритм абзаца и сразу показывают, что ты слышал живого человека, а не придумал усреднённого.</p></div><div class="cardb"><h3>Приём 4. Честное сомнение</h3><p>Признание, что ты чего-то не знаешь или ещё проверяешь, работает сильнее любой уверенной формулировки. «Это не финал, я только начинаю собирать этот процесс». Генерация всегда звучит уверенно на сто процентов, поэтому честное сомнение читается как подпись живого автора.</p></div></div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты редактор, который возвращает тексту живую интонацию после вычистки, не занося обратно машинный почерк.
+
+Запрещено: длинные тире, противопоставления через отрицание («не X, а Y»), формулы вида «дело не в тебе», канцелярит, рубленые обрубки по три слова, перечисление внутри абзаца без списка.
+
+Сделай с текстом ниже четыре вещи:
+1. Добавь одну личную вставку-реакцию автора на абзац, короткой фразой. Если материала для неё нет, пометь место как [нужна твоя реакция] и не придумывай.
+2. Найди все размытые оценки («быстро», «много», «дорого») и пометь их как [нужна цифра], предложив рядом, какая именно цифра сюда просится.
+3. Предложи одно место, куда хорошо ляжет прямая речь клиента или читателя в кавычках, и напиши вариант такой реплики.
+4. Проверь, что предложения разной длины и текст не звучит ровно.
+
+Верни результат в двух частях: сначала правленый текст, потом список того, что ты пометил и почему.
+
+Текст: [вставь свой]">Скопировать</button></div><div class="box">Ты редактор, который возвращает тексту живую интонацию после вычистки, не занося обратно машинный почерк.
+
+Запрещено: длинные тире, противопоставления через отрицание («не X, а Y»), формулы вида «дело не в тебе», канцелярит, рубленые обрубки по три слова, перечисление внутри абзаца без списка.
+
+Сделай с текстом ниже четыре вещи:
+1. Добавь одну личную вставку-реакцию автора на абзац, короткой фразой. Если материала для неё нет, пометь место как [нужна твоя реакция] и не придумывай.
+2. Найди все размытые оценки («быстро», «много», «дорого») и пометь их как [нужна цифра], предложив рядом, какая именно цифра сюда просится.
+3. Предложи одно место, куда хорошо ляжет прямая речь клиента или читателя в кавычках, и напиши вариант такой реплики.
+4. Проверь, что предложения разной длины и текст не звучит ровно.
+
+Верни результат в двух частях: сначала правленый текст, потом список того, что ты пометил и почему.
+
+Текст: [вставь свой]</div><div class="note">Пара 10, возврат интонации.
+
+ПОСЛЕ ЧИСТКИ, правильно и плоско: «Я тестировал разные подходы к первым секундам ролика. Вопрос в начале работает лучше приветствия. Удержание выросло.»
+
+ПОСЛЕ ВОЗВРАТА ИНТОНАЦИИ: «Я месяц тестировал первые секунды ролика, менял только начало и больше ничего не трогал. Вопрос в начале держит человека заметно лучше приветствия, удержание поднялось с сорока процентов до шестидесяти двух. Честно, я и сам не ожидал, что одна строка столько решает.»
+
+Признаков нет ни одного, а человек в тексте появился.</div></div>
+<div class="sec"><h2 id="sec-10">Все семь промптов одним блоком</h2><p>Собранный файл для копирования разом. Сохрани его в заметки на телефоне или в закреп в своём чате с моделью, чтобы не искать заново перед каждой публикацией. Внутри те же семь промптов в рабочем порядке.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="ПРОМПТ 1. ТИРЕ
+Прочитай текст ниже и убери из него все длинные тире. Каждое замени точкой или запятой так, чтобы фраза читалась естественно вслух. Там, где перед союзом «а» напрашивается тире, ставь запятую. Верни готовый текст, а отдельной строкой напиши, сколько тире ты убрал.
+
+Текст: [вставь свой]
+
+ПРОМПТ 2. КОНТРАСТЫ
+Найди в тексте все противопоставления через отрицание: «не X, а Y», «это не X, это Y», «X, а не Y». Перепиши каждое простым утверждением, где остаётся только то, что я хочу сказать, без отрицания. Смысл сохрани, длину не увеличивай. Покажи таблицу замен: было и стало.
+
+Текст: [вставь свой]
+
+ПРОМПТ 3. УТЕШЕНИЯ
+Вычисти из текста все формулы-утешения вида «дело не в тебе», «дело не в таланте, дело в системе» и любые похожие обороты. На их место поставь конкретику: что человек делает сейчас и что ему стоит сделать вместо этого. Никакой философии, только действие.
+
+Текст: [вставь свой]
+
+ПРОМПТ 4. КАНЦЕЛЯРИТ
+Найди в тексте канцелярит и штампы: «осуществляет», «в рамках», «является», «данный», «с целью», «на сегодняшний день». Перепиши каждое место живой разговорной фразой, как сказал бы человек вслух. Отглагольные существительные преврати в глаголы. Верни текст и список того, что заменил.
+
+Текст: [вставь свой]
+
+ПРОМПТ 5. РИТМ
+Проверь ритм текста. Если он идёт сплошными короткими обрубками по три слова, собери их в нормальные, договорённые до конца предложения с придаточными. Короткую фразу оставь только там, где нужен акцент, максимум одну на абзац. Читаться должно как живая речь.
+
+Текст: [вставь свой]
+
+ПРОМПТ 6. СПИСКИ
+Найди места, где перечисление идёт чередой фраз подряд внутри абзаца. Переделай их в маркированный или нумерованный список: раз, два, три. Каждый пункт с новой строки, одна мысль на пункт, формулировки сохрани. Остальной текст не трогай.
+
+Текст: [вставь свой]
+
+ПРОМПТ 7. АУДИТ
+Ты редактор, который ловит нейросетевой почерк. Проверь текст по шести признакам: длинные тире, противопоставления через отрицание, формулы-утешения, канцелярит, рубленые обрубки, перечисление без списка. Выдай таблицу: признак, цитата, правка. Потом верни чистовой вариант целиком.
+
+Текст: [вставь свой]">Скопировать</button></div><div class="box">ПРОМПТ 1. ТИРЕ
+Прочитай текст ниже и убери из него все длинные тире. Каждое замени точкой или запятой так, чтобы фраза читалась естественно вслух. Там, где перед союзом «а» напрашивается тире, ставь запятую. Верни готовый текст, а отдельной строкой напиши, сколько тире ты убрал.
+
+Текст: [вставь свой]
+
+ПРОМПТ 2. КОНТРАСТЫ
+Найди в тексте все противопоставления через отрицание: «не X, а Y», «это не X, это Y», «X, а не Y». Перепиши каждое простым утверждением, где остаётся только то, что я хочу сказать, без отрицания. Смысл сохрани, длину не увеличивай. Покажи таблицу замен: было и стало.
+
+Текст: [вставь свой]
+
+ПРОМПТ 3. УТЕШЕНИЯ
+Вычисти из текста все формулы-утешения вида «дело не в тебе», «дело не в таланте, дело в системе» и любые похожие обороты. На их место поставь конкретику: что человек делает сейчас и что ему стоит сделать вместо этого. Никакой философии, только действие.
+
+Текст: [вставь свой]
+
+ПРОМПТ 4. КАНЦЕЛЯРИТ
+Найди в тексте канцелярит и штампы: «осуществляет», «в рамках», «является», «данный», «с целью», «на сегодняшний день». Перепиши каждое место живой разговорной фразой, как сказал бы человек вслух. Отглагольные существительные преврати в глаголы. Верни текст и список того, что заменил.
+
+Текст: [вставь свой]
+
+ПРОМПТ 5. РИТМ
+Проверь ритм текста. Если он идёт сплошными короткими обрубками по три слова, собери их в нормальные, договорённые до конца предложения с придаточными. Короткую фразу оставь только там, где нужен акцент, максимум одну на абзац. Читаться должно как живая речь.
+
+Текст: [вставь свой]
+
+ПРОМПТ 6. СПИСКИ
+Найди места, где перечисление идёт чередой фраз подряд внутри абзаца. Переделай их в маркированный или нумерованный список: раз, два, три. Каждый пункт с новой строки, одна мысль на пункт, формулировки сохрани. Остальной текст не трогай.
+
+Текст: [вставь свой]
+
+ПРОМПТ 7. АУДИТ
+Ты редактор, который ловит нейросетевой почерк. Проверь текст по шести признакам: длинные тире, противопоставления через отрицание, формулы-утешения, канцелярит, рубленые обрубки, перечисление без списка. Выдай таблицу: признак, цитата, правка. Потом верни чистовой вариант целиком.
+
+Текст: [вставь свой]</div></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Откуда взялись эти шесть признаков</a><a href="#sec-1">Промпт 1. Длинные тире</a><a href="#sec-2">Промпт 2. Противопоставления через отрицание</a><a href="#sec-3">Промпт 3. Формулы-утешения</a><a href="#sec-4">Промпт 4. Канцелярит</a><a href="#sec-5">Промпт 5. Рубленые обрубки</a><a href="#sec-6">Промпт 6. Перечисление без списка</a><a href="#sec-7">Промпт 7. Финальная вычитка по шести признакам</a><a href="#sec-8">В каком порядке гонять и почему аудит последний</a><a href="#sec-9">Если после чистки текст стал сухим</a><a href="#sec-10">Все семь промптов одним блоком</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>

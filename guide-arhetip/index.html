@@ -1,0 +1,463 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Двенадцать архетипов под блог: каким голосом ты говоришь с аудиторией</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-marketing">Маркетинг</a></div>
+<h1>Двенадцать архетипов под блог: каким голосом ты говоришь с аудиторией</h1>
+<p class="lead">Это рабочий разбор двенадцати архетипов по Юнгу под одну задачу: понять, каким голосом говорит твой блог, и упаковать его так, чтобы человек с первого ролика понимал, кто ты и зачем на тебя подписываться. Внутри лежит тест из двенадцати вопросов с понятной механикой подсчёта, по которому ты за десять минут вытащишь свой архетип и поддерживающий второй. Дальше по каждому из двенадцати идёт разбор именно про блог: каким тоном он говорит, какие темы его, какие форматы роликов на нём работают, о чём он молчит, и какая типовая ошибка убивает упаковку именно этого архетипа. К каждому архетипу приложены готовые связки для контента, то есть конкретные идеи роликов и постов, которые можно снимать на этой неделе. В конце три промпта: упаковка блога под выбранный архетип, генератор контента на две недели и аудит того, что у тебя уже опубликовано. Прочитал только эту страницу, прошёл тест, вставил промпт и получил готовый план упаковки.</p>
+<p class="meta">Читается за 14 минут. Внутри тест на определение архетипа с механикой подсчёта, разбор всех двенадцати архетипов под задачу блога (тон, темы, форматы роликов, о чём молчит, типовая ошибка), готовые идеи контента по каждому и три промпта: упаковка блога, генератор контента на две недели, аудит уже опубликованного.</p>
+<div class="how">Сначала пройди тест, отвечая быстро и честно, так результат получается точнее. Потом посчитай баллы по ключу и найди свой архетип и поддерживающий второй. Прочитай разбор только своих двух, остальные десять оставь на потом, они пригодятся, когда будешь смотреть на конкурентов и понимать, почему их подача тебе не подходит. Возьми из своего архетипа тон, три темы и два формата ролика, вставь первый промпт и получи готовую упаковку блога. Дальше второй промпт соберёт тебе контент на две недели, а третий покажет, где то, что уже висит в профиле, спорит с твоим архетипом и путает людей.</div>
+<div class="sec"><h2 id="sec-0">Зачем блогу архетип и что он реально решает</h2><p>Архетип это устойчивый образ, который человек считывает за пару секунд и без объяснений. Юнг описал двенадцать таких образов, реклама пользуется ими сто лет, а для блога они решают самую скучную и самую дорогую проблему: почему тебя смотрят, но не запоминают. Когда голос блога плавает, каждый новый ролик знакомит зрителя с новым человеком, и подписка не превращается в доверие.</p><div class="grid2"><div class="cardb"><h3>Что даёт выбранный архетип</h3><p>Он снимает вопрос «о чём мне снимать» и «каким тоном это писать». У тебя появляется рамка: вот эти темы мои, вот такой у меня тон, вот про это я молчу. Ролики начинают складываться в одного узнаваемого человека, и лента перестаёт выглядеть набором случайных удачных попыток. Дальше подписку приносит понимание, кто ты такой, и одна виралка перестаёт быть единственным источником роста.</p></div><div class="cardb"><h3>Почему берём одного из двенадцати</h3><p>Соблазн взять всё сразу выглядит логично и убивает узнаваемость. Работает пара: ведущий архетип держит примерно семьдесят процентов контента и задаёт голос, поддерживающий даёт оставшиеся тридцать и добавляет объём, чтобы блог не читался плоско. Например, ведущий Мудрец с поддерживающим Бунтарём звучит как человек, который разбирает цифры и режет правду. Тот же Мудрец с Заботливым звучит совсем иначе, мягче и бережнее.</p></div><div class="cardb"><h3>Как это выглядит на цифрах</h3><p>Смотри на два показателя. Первый, удержание на первых трёх секундах: когда тон совпадает с образом, зритель не выпадает на несостыковке между картинкой и словами. Второй, переходы в профиль и подписка после просмотра: они растут, когда человек за один ролик понимает, кем ты будешь для него дальше. Если охваты есть, а подписка стоит, почти всегда причина в размытом образе, алгоритм тут ни при чём.</p></div><div class="cardb"><h3>Чем архетип не является</h3><p>Архетип это выбор того, какую свою часть ты усиливаешь на камеру. Играть чужую роль и переделывать характер под неё не требуется. Ты остаёшься собой, просто перестаёшь показывать себя во все стороны сразу. Если выбранный архетип приходится изображать через силу, значит выбран чужой, и тест ниже это поймает.</p></div></div></div>
+<div class="sec"><h2 id="sec-1">Тест: двенадцать вопросов, по которым видно твой архетип</h2><p>Отвечай быстро, первым движением, не выбирая правильный вариант. В каждом вопросе выбери ровно один ответ и запиши его номер в столбик. Номера рядом с ответами это коды архетипов, расшифровка идёт после теста, чтобы ты не подгонял ответы под красивое название. Всего двенадцать вопросов, каждый код встречается ровно четыре раза, значит максимум по одному архетипу это четыре балла.</p><div class="grid2"><div class="cardb"><h3>1. Что тебя злит в твоей нише сильнее всего</h3><ul><li>(1) Люди всё усложняют там, где на самом деле всё просто</li><li>(2) Все говорят уверенно и никто не проверяет факты</li><li>(4) Правила придумали те, кому выгодно, чтобы новые не поднялись</li><li>(8) Слишком серьёзные лица там, где происходит обычная работа</li></ul></div><div class="cardb"><h3>2. За что тебя чаще благодарят подписчики и клиенты</h3><ul><li>(2) За то, что объяснил сложное так, что стало понятно</li><li>(3) За то, что показал новое, о чём они не знали</li><li>(5) За то, что после разговора со мной у них наконец получилось</li><li>(9) За то, что я говорю по-человечески и без пьедестала</li></ul></div><div class="cardb"><h3>3. Ты снял ролик, он не зашёл. Первая мысль</h3><ul><li>(3) Ладно, попробую другой формат, интересно, что будет</li><li>(4) Значит, я недостаточно резко сказал то, что думаю</li><li>(6) Значит, надо снять ещё три сегодня же</li><li>(10) Значит, я не попал в то, что у людей болит</li></ul></div><div class="cardb"><h3>4. Как ты хочешь, чтобы тебя описывали за глаза</h3><ul><li>(4) Он говорит то, что все боятся сказать</li><li>(5) Он делает так, что результат появляется</li><li>(7) С ним приятно, у него красиво и тепло</li><li>(11) У него всё выстроено, он задаёт планку</li></ul></div><div class="cardb"><h3>5. Что тебе интереснее показать в ролике</h3><ul><li>(5) Превращение: было вот так, стало вот так</li><li>(6) Дистанцию: сколько я прошёл и чего это стоило</li><li>(8) Смешную правду про то, как это выглядит на самом деле</li><li>(12) Как я это сделал своими руками, весь процесс</li></ul></div><div class="cardb"><h3>6. Что для тебя самое тяжёлое в ведении блога</h3><ul><li>(6) Держать режим, когда нет отдачи</li><li>(7) Отдавать сырое, когда хочется, чтобы было красиво</li><li>(9) Выглядеть экспертом, когда я обычный человек</li><li>(1) Не утонуть в сложных схемах, которые все советуют</li></ul></div><div class="cardb"><h3>7. Что ты чаще замечаешь в чужом контенте</h3><ul><li>(7) Вкус, кадр, интонацию, детали</li><li>(8) Занудство там, где можно было пошутить</li><li>(10) Что человеку страшно, и ему никто не помог</li><li>(2) Логическую дыру и непроверенное утверждение</li></ul></div><div class="cardb"><h3>8. Как ты ведёшь себя в новом окружении</h3><ul><li>(8) Разряжаю обстановку и быстро становлюсь своим</li><li>(9) Легко схожусь, потому что говорю просто и на равных</li><li>(11) Быстро понимаю, кто за что отвечает, и беру процесс на себя</li><li>(3) Первым иду смотреть, что тут вообще есть</li></ul></div><div class="cardb"><h3>9. Твой лучший рабочий день выглядит так</h3><ul><li>(9) Куча живого общения и понятных дел без пафоса</li><li>(10) Кому-то реально помог и увидел, что стало легче</li><li>(12) Сделал вещь, которой вчера не существовало</li><li>(4) Сломал схему, которая всех устраивала, и оказался прав</li></ul></div><div class="cardb"><h3>10. Что ты чаще говоришь клиенту, который буксует</h3><ul><li>(10) Давай разберём по шагам, я рядом, всё получится</li><li>(11) Вот система, делай по ней, дальше я контролирую результат</li><li>(1) Ты слишком усложнил, давай уберём лишнее</li><li>(5) Смотри, тут один рычаг, поменяем его и всё сдвинется</li></ul></div><div class="cardb"><h3>11. Как ты принимаешь решение о новом продукте</h3><ul><li>(11) Считаю, выстраиваю процесс и запускаю то, что масштабируется</li><li>(12) Делаю то, чего в нише ещё нет, потому что мне это интересно</li><li>(2) Изучаю данные и делаю то, что подтверждается цифрами</li><li>(6) Беру самую трудную задачу и доказываю, что её можно закрыть</li></ul></div><div class="cardb"><h3>12. Чего ты хочешь от аудитории через год</h3><ul><li>(12) Чтобы они делали своё и узнавали мой почерк</li><li>(1) Чтобы им стало просто и спокойно там, где было страшно</li><li>(3) Чтобы они попробовали то, на что раньше не решались</li><li>(7) Чтобы у нас были тёплые отношения, где цифры вторичны</li></ul></div></div></div>
+<div class="sec"><h2 id="sec-2">Ключ, подсчёт и что делать с результатом</h2><p>Теперь посчитай, сколько раз в твоём столбике встретился каждый номер, и переведи номера в названия по ключу. Максимум по одному архетипу четыре балла, потому что каждый код встречается в тесте ровно четыре раза.</p><div class="grid2"><div class="cardb"><h3>Ключ номеров</h3><ul><li>1 Простодушный, 2 Мудрец, 3 Искатель</li><li>4 Бунтарь, 5 Маг, 6 Герой</li><li>7 Влюблённый, 8 Шут, 9 Свой парень</li><li>10 Заботливый, 11 Правитель, 12 Творец</li></ul></div><div class="cardb"><h3>Как читать результат</h3><ul><li>Номер с максимальным числом баллов это твой ведущий архетип, он держит примерно семьдесят процентов контента и задаёт тон</li><li>Второй по баллам это поддерживающий, он даёт оставшиеся тридцать процентов и объём</li><li>Три и четыре балла у ведущего означают ясный образ, можно сразу паковаться</li><li>Всё размазано по единичкам и максимум два балла, значит отвечал как правильно вместо как есть, пройди ещё раз за пять минут и не думая</li></ul></div><div class="cardb"><h3>Если ничья между двумя</h3><ul><li>Спроси себя, о чём ты говоришь бесплатно и часами, когда никто не просит. Этот архетип и есть ведущий</li><li>Посмотри, за что тебя благодарили последние пять раз, дословно по сообщениям, потому что память тут подводит</li><li>Проверь, какая роль тебя выматывает к вечеру. Выматывает значит играешь роль, такой архетип в ведущие не берём</li><li>Остались две равные, ставь ведущим ту, что ближе к твоему продукту, вторую сделай поддерживающей</li></ul></div><div class="cardb"><h3>Проверка через неделю</h3><p>Сними пять роликов в тоне выбранного архетипа и посмотри на две вещи: стало ли легче их снимать и выросло ли число сообщений в личку от людей, которые пишут своими словами то, что ты транслируешь. Легче плюс отклик означает попадание. Тяжелее и тишина означают, что ты взял архетип, который тебе нравится со стороны, и тогда бери второй по баллам.</p></div></div><div class="note">Дальше идут разборы всех двенадцати. Читай подробно только свои два, остальные пробеги глазами. Они пригодятся, когда будешь смотреть на сильных конкурентов: ты увидишь, каким архетипом они говорят, и перестанешь копировать чужую подачу, которая на тебе не сработает.</div></div>
+<div class="sec"><h2 id="sec-3">Простодушный, Мудрец, Искатель: разбор для блога</h2><p>Первая тройка это архетипы, которые тянут человека к ясности, знанию и новому опыту. Их сила в том, что зритель уходит с ощущением «стало понятнее». Их общая слабость в том, что они легко забывают продавать.</p><div class="grid2"><div class="cardb"><h3>Простодушный</h3><ul><li>Тон: тёплый, спокойный, короткие слова, ноль профессионального жаргона</li><li>Темы: базовые шаги, упрощение, честный минимум, отказ от сложных схем</li><li>Форматы роликов: объясняю как для новичка, разбор одной кнопки, до и после без пафоса, ролик из серии перестал усложнять</li><li>О чём говорит: что можно начать сегодня и с малого, что страшно только на входе</li><li>О чём молчит: закулисные схемы, сложные технологии, войны с конкурентами, тёмные приёмы</li><li>Типовая ошибка: скатывается в позитив без содержания, ролики становятся милыми и пустыми. Лечится тем, что в каждый ролик кладёшь одно точное число или один конкретный шаг</li></ul></div><div class="cardb"><h3>Мудрец</h3><ul><li>Тон: спокойный, доказательный, без крика, с опорой на проверку</li><li>Темы: разборы, статистика, почему это работает, разоблачение мифов ниши</li><li>Форматы роликов: разбор с экрана, проверил тридцать примеров и вот что нашёл, факт-чек популярного совета</li><li>О чём говорит: как устроено под капотом, где логическая дыра в общепринятом</li><li>О чём молчит: эмоции ради эмоций, хайп без основания, личная драма</li><li>Типовая ошибка: лекция без применения, зритель уходит умнее и без действия. Лечится тем, что каждый разбор заканчивается строкой что сделать сегодня</li></ul></div><div class="cardb"><h3>Искатель</h3><ul><li>Тон: лёгкий, живой, от первого лица, ощущение движения</li><li>Темы: эксперименты, новые инструменты, личный путь, пробую первым</li><li>Форматы роликов: дневник эксперимента семь дней делаю такое-то, первый взгляд на новый сервис, сравнение пяти инструментов на одной задаче</li><li>О чём говорит: что попробовал, что вышло, куда идёт дальше</li><li>О чём молчит: рутина, стабильность, делай одно и то же годами</li><li>Типовая ошибка: бесконечные пробы без вывода, аудитория смотрит как сериал и не понимает, что у тебя купить. Лечится правилом: каждый эксперимент закрывается одним рабочим рецептом, который зритель повторит</li></ul></div></div><div class="grid2"><div class="cardb"><h3>Связки для контента: Простодушный</h3><ul><li>Ролик: три вещи, которые я перестал усложнять, и что от этого изменилось</li><li>Ролик: самый простой способ сделать первый шаг за десять минут, показываю экран</li><li>Пост: мне говорили, что нужна сложная схема, я сделал по-простому и вот результат</li><li>Серия: одна сложная вещь ниши в неделю, объяснённая словами, понятными школьнику</li></ul></div><div class="cardb"><h3>Связки для контента: Мудрец</h3><ul><li>Ролик: разобрал тридцать залетевших роликов ниши, вот три общих признака</li><li>Ролик: популярный совет, который не подтверждается цифрами, и что работает вместо него</li><li>Пост: разбор одного кейса по шагам с числами до и после</li><li>Серия: миф недели, каждый выпуск проверка одного расхожего утверждения</li></ul></div><div class="cardb"><h3>Связки для контента: Искатель</h3><ul><li>Ролик: тридцать дней тестирую новый подход, день первый, показываю точку старта</li><li>Ролик: попробовал новый сервис раньше всех, вот что он реально умеет и где врёт</li><li>Пост: дневник недели, что пробовал, что провалилось, что забираю в работу</li><li>Серия: один инструмент в неделю на одной и той же задаче, чтобы сравнение было честным</li></ul></div></div></div>
+<div class="sec"><h2 id="sec-4">Бунтарь, Маг, Герой: разбор для блога</h2><p>Вторая тройка это архетипы действия и результата. Они быстрее всех набирают охваты, потому что бьют в напряжение. Их общая слабость в том, что они легко превращаются в шоу, на которое смотрят, но которому не доверяют деньги.</p><div class="grid2"><div class="cardb"><h3>Бунтарь</h3><ul><li>Тон: резкий, прямой, спорный, короткие рубленые заявления в начале</li><li>Темы: против правил индустрии, изнанка схем, почему привычное больше не работает</li><li>Форматы роликов: заявление в лоб в первые две секунды, разоблачение приёма, история почему я ушёл оттуда, где все остаются</li><li>О чём говорит: что именно сломано и кому это выгодно</li><li>О чём молчит: вежливые полутона, реверансы авторитетам, компромиссные формулировки</li><li>Типовая ошибка: критика без альтернативы, аудитория заряжается злостью и уходит без покупки. Лечится жёстким правилом: сломал, сразу дай, что делать вместо, в том же ролике</li></ul></div><div class="cardb"><h3>Маг</h3><ul><li>Тон: показываю превращение, держу интригу на механике, говорю уверенно и спокойно</li><li>Темы: до и после, скрытые рычаги, системы и автоматизация, нейросети как инструмент</li><li>Форматы роликов: демонстрация превращения на экране, один приём и его эффект в цифрах, разбор рычага, который меняет результат</li><li>О чём говорит: что именно сдвинуть, чтобы результат появился быстро</li><li>О чём молчит: долгая скучная рутина, случайность и везение как объяснение</li><li>Типовая ошибка: превращается в фокусника, обещает магию и не даёт повторяемости. Лечится показом шага, который зритель повторит сегодня своими руками и увидит тот же эффект в малом</li></ul></div><div class="cardb"><h3>Герой</h3><ul><li>Тон: собранный, дисциплина, вызов самому себе, ноль нытья</li><li>Темы: челленджи, режим, преодоление, цифры и рекорды, возврат после провала</li><li>Форматы роликов: челлендж с публичным счётчиком, день четырнадцатый из сорока пяти, разбор своего провала и как выбирался</li><li>О чём говорит: сколько прошёл, чего это стоило и что делает завтра</li><li>О чём молчит: жалобы, поиск виноватых, мне сегодня лень</li><li>Типовая ошибка: пафос и недостижимость, зритель смотрит как на спорт и не примеряет на себя. Лечится тем, что регулярно показываешь стартовую точку с нуля и свои слабые места</li></ul></div></div><div class="grid2"><div class="cardb"><h3>Связки для контента: Бунтарь</h3><ul><li>Ролик: почему привычный совет снимать каждый день тормозит рост, и что делать вместо</li><li>Ролик: я перестал делать то, что делают все, и вот что случилось с охватами</li><li>Пост: изнанка приёма, который тебе продают как секрет, разбор по шагам</li><li>Серия: одно правило ниши в неделю под нож, каждый выпуск с рабочей заменой</li></ul></div><div class="cardb"><h3>Связки для контента: Маг</h3><ul><li>Ролик: превратил одну фотографию в готовый ролик за три минуты, весь путь на экране</li><li>Ролик: один приём, который поднял удержание, показываю цифры до и после</li><li>Пост: рычаг, который двигает результат сильнее всего, и как его найти у себя</li><li>Серия: превращение недели, каждый выпуск одно было и стало с механикой внутри</li></ul></div><div class="cardb"><h3>Связки для контента: Герой</h3><ul><li>Ролик: сорок пять дней, три ролика в день, считаю вслух и показываю счётчик</li><li>Ролик: мой худший месяц и три решения, которыми я его вытащил</li><li>Пост: режим, который держит меня, когда отдачи ещё нет</li><li>Серия: публичный челлендж с открытыми цифрами, короткий отчёт каждые три дня</li></ul></div></div></div>
+<div class="sec"><h2 id="sec-5">Влюблённый, Шут, Свой парень: разбор для блога</h2><p>Третья тройка это архетипы близости. Они лучше всех строят тёплые отношения с аудиторией и получают самые живые комментарии. Их общая слабость в том, что близость без границы превращается в дружбу, за которую не платят.</p><div class="grid2"><div class="cardb"><h3>Влюблённый</h3><ul><li>Тон: тёплый, чувственный, личное обращение, медленный ритм речи</li><li>Темы: эстетика, вкус, детали, отношения с аудиторией, забота о себе и о том, что делаешь</li><li>Форматы роликов: красивый кадр с медленным монтажом, личное обращение в камеру, история про конкретного человека</li><li>О чём говорит: почему важно, как это выглядит и как ощущается</li><li>О чём молчит: грубая конкуренция, сухие таблицы, агрессивные заголовки</li><li>Типовая ошибка: красота без пользы, лента выглядит как журнал и не продаёт. Лечится тем, что за каждой эстетикой стоит понятное приглашение и один конкретный продукт</li></ul></div><div class="cardb"><h3>Шут</h3><ul><li>Тон: лёгкий, самоирония, быстрый монтаж, живая мимика</li><li>Темы: смешное в профессии, типажи клиентов, боль ниши через юмор</li><li>Форматы роликов: скетч и пародия, ожидание против реальности, мем-формат с озвучкой, короткая сценка на двоих</li><li>О чём говорит: то же, что все, но так, что смешно и не обидно</li><li>О чём молчит: собственная серьёзная боль, длинные разборы, нравоучения</li><li>Типовая ошибка: юмор без экспертизы, огромные охваты и ноль заявок. Лечится правилом: шутка обязательно про боль клиента, а в конце одна серьёзная строка о том, как эту боль закрыть</li></ul></div><div class="cardb"><h3>Свой парень</h3><ul><li>Тон: разговорный, как в переписке с приятелем, без пьедестала</li><li>Темы: обычная жизнь эксперта, свои ошибки, честные будни работы</li><li>Форматы роликов: съёмка на ходу и на кухне, ответ на комментарий голосом, честно как есть без монтажа</li><li>О чём говорит: я такой же, вот что у меня не получилось и как я это чинил</li><li>О чём молчит: элитарность, статусные атрибуты, взгляд сверху вниз</li><li>Типовая ошибка: становится настолько обычным, что пропадает причина покупать. Лечится тем, что рядом с обычностью ты регулярно показываешь конкретный результат, который у тебя реально есть</li></ul></div></div><div class="grid2"><div class="cardb"><h3>Связки для контента: Влюблённый</h3><ul><li>Ролик: как я собираю кадр, чтобы на него хотелось смотреть, три приёма</li><li>Ролик: история одного человека, которому это изменило работу, тепло и без цифр в лоб</li><li>Пост: признание аудитории с приглашением в то, что ты делаешь</li><li>Серия: деталь недели, каждый выпуск про одну мелочь, из которой складывается вкус</li></ul></div><div class="cardb"><h3>Связки для контента: Шут</h3><ul><li>Ролик: как выглядит эксперт, который делает контент без плана, сценка на себе</li><li>Ролик: ожидание против реальности первого месяца в блоге</li><li>Пост: пять типов клиентов, которых узнает каждый в нише, с серьёзным выводом в конце</li><li>Серия: типажи недели, короткая сценка плюс одна рабочая мысль на выходе</li></ul></div><div class="cardb"><h3>Связки для контента: Свой парень</h3><ul><li>Ролик: мой день без монтажа и без красивых слов, что реально происходит</li><li>Ролик: ошибка, из-за которой я потерял месяц, рассказываю честно</li><li>Пост: отвечаю на самый неудобный вопрос из личных сообщений</li><li>Серия: разбор комментария недели голосом, коротко и на равных</li></ul></div></div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-6">Заботливый, Правитель, Творец: разбор для блога</h2><p>Четвёртая тройка это архетипы опоры. Они дают аудитории ощущение, что рядом взрослый, который знает, как надо. Их общая слабость в противоположных краях: Заботливый отдаёт бесплатно слишком много, Правитель отпугивает дистанцией, Творец залипает в процессе.</p><div class="grid2"><div class="cardb"><h3>Заботливый</h3><ul><li>Тон: поддерживающий, бережный, без давления, много прямых обращений к зрителю</li><li>Темы: пошаговые инструкции для тех, кому страшно, ответы на страхи, безопасность на входе</li><li>Форматы роликов: разбор вопроса подписчика, инструкция если у тебя не получается, чек-лист на экране</li><li>О чём говорит: ты не один, вот пошаговый путь, вот что делать прямо сейчас</li><li>О чём молчит: жёсткое давление, обвинения в лени, обесценивание страхов</li><li>Типовая ошибка: спасательство, блог превращается в бесплатную поддержку и заявок нет. Лечится границей: помощь до определённого порога в контенте, глубже только в платной работе, и это проговаривается вслух</li></ul></div><div class="cardb"><h3>Правитель</h3><ul><li>Тон: уверенный, структурный, задающий стандарт, спокойная сила без крика</li><li>Темы: системы, регламенты, управление, стандарты качества, порядок в процессах</li><li>Форматы роликов: как это устроено у меня, разбор системы на экране, стандарт ниже которого я не публикую</li><li>О чём говорит: как навести порядок и по какому правилу принимать решение</li><li>О чём молчит: растерянность без вывода, хаос как норма, оправдания</li><li>Типовая ошибка: высокомерие и дистанция, зритель смотрит снизу вверх и не верит, что повторит. Лечится тем, что каждую систему ты отдаёшь как готовый шаблон, который человек забирает и применяет у себя</li></ul></div><div class="cardb"><h3>Творец</h3><ul><li>Тон: увлечённый процессом, показывает кухню, говорит о том, как рождается вещь</li><li>Темы: создание с нуля, инструменты, путь от идеи до готового продукта, эксперименты с формой</li><li>Форматы роликов: ускоренная съёмка создания, собрал за вечер, разбор собственной находки, показ черновиков</li><li>О чём говорит: как это сделано и почему сделано именно так</li><li>О чём молчит: копирование чужого, призывы делать как все, готовые чужие шаблоны</li><li>Типовая ошибка: залипание в процессе, аудитория любуется и не понимает, зачем ей это. Лечится тем, что каждый показ создания заканчивается тем, что зритель получит для себя, желательно готовым к использованию</li></ul></div></div><div class="grid2"><div class="cardb"><h3>Связки для контента: Заботливый</h3><ul><li>Ролик: что делать, если ролики не набирают, пошагово и по порядку</li><li>Ролик: отвечаю на самый частый страх новичка, спокойно и с планом</li><li>Пост: чек-лист первых семи дней для того, кто только начал</li><li>Серия: вопрос подписчика недели с разбором и конкретными шагами</li></ul></div><div class="cardb"><h3>Связки для контента: Правитель</h3><ul><li>Ролик: моя система контента на неделю, показываю таблицу целиком</li><li>Ролик: стандарт, ниже которого я не публикую, четыре пункта проверки</li><li>Пост: регламент, по которому я принимаю решение запускать или нет</li><li>Серия: разбор одного процесса в неделю с готовым шаблоном на вынос</li></ul></div><div class="cardb"><h3>Связки для контента: Творец</h3><ul><li>Ролик: собрал рабочую вещь за вечер, показываю весь путь с нуля</li><li>Ролик: как рождается идея ролика, от пустой головы до готового сценария</li><li>Пост: разбор своей находки, которую нигде не подсмотрел, с механикой внутри</li><li>Серия: черновик недели, показываю сырое и объясняю, что с ним делаю дальше</li></ul></div></div><div class="note">Общая проверка для любого архетипа: открой последние девять своих публикаций и найди в каждой признак выбранного образа в первых трёх секундах. Если в пяти и более его нет, зритель до сих пор видит разных людей, и подписка будет вялой при любых охватах.</div></div>
+<div class="sec"><h2 id="sec-7">Промпт первый: упаковка блога под выбранный архетип</h2><p>Этот промпт превращает результат теста в готовую упаковку: позиционирование, описание профиля, три рубрики, правила тона, стоп-лист и первые темы. Вставляй в Claude или ChatGPT, подставляй свои значения в квадратных скобках. На выходе получается готовый документ, с которым можно идти и править профиль.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как продюсер блогов уровня principal, который упаковывает экспертов под архетип по Юнгу. Твоя задача выдать готовую упаковку профиля, без общих рассуждений про архетипы.
+
+Мои вводные:
+Ниша и что я продаю: [например, психолог, работаю со страхом публичности, продаю консультации и курс]
+Ведущий архетип: [из теста, например Мудрец]
+Поддерживающий архетип: [из теста, например Заботливый]
+Площадка: [Instagram, Telegram, YouTube, нужное оставить]
+Текущее число подписчиков: [например 800]
+Мои три реальных результата или кейса: [коротко, с цифрами, если есть]
+Что мне физически неприятно делать на камеру: [например кричать, танцевать, обещать быстрые результаты]
+
+Выдай строго по формату:
+
+1. ПОЗИЦИОНИРОВАНИЕ В ОДНОЙ СТРОКЕ. Кто я для зрителя и что он получает, языком моего архетипа, без штампов вроде помогаю раскрыть потенциал.
+
+2. ОПИСАНИЕ ПРОФИЛЯ. Готовый текст шапки до 150 знаков плюс расширенный вариант до 600 знаков. Тон строго по ведущему архетипу.
+
+3. ТРИ РУБРИКИ. По каждой: название, зачем она зрителю, какой процент контента занимает, два примера тем. Рубрики должны раскрывать ведущий архетип, одна из трёх работает на поддерживающий.
+
+4. ПРАВИЛА ТОНА. Пять правил, как я говорю: длина фраз, лексика, темп, что делаю в первые три секунды ролика, чем закрываю.
+
+5. СТОП-ЛИСТ. Семь вещей, которые мой архетип не делает никогда, с объяснением в одну строку каждая. Учти то, что мне неприятно делать на камеру.
+
+6. ДЕСЯТЬ ТЕМ НА СТАРТ. Конкретные темы роликов под мой архетип и мою нишу, каждая с хуком на первые три секунды дословно.
+
+7. ЧТО ПОМЕНЯТЬ ПЕРВЫМ. Три действия на ближайшие сорок восемь часов по приоритету, начиная с того, что даёт самый заметный сдвиг.
+
+Ограничения: пиши живым русским языком, без длинных тире, без противопоставлений через отрицание, без канцелярита. Если моих вводных не хватает для конкретики, задай не больше трёх уточняющих вопросов и только потом выдавай результат.">Скопировать</button></div><div class="box">Действуй как продюсер блогов уровня principal, который упаковывает экспертов под архетип по Юнгу. Твоя задача выдать готовую упаковку профиля, без общих рассуждений про архетипы.
+
+Мои вводные:
+Ниша и что я продаю: [например, психолог, работаю со страхом публичности, продаю консультации и курс]
+Ведущий архетип: [из теста, например Мудрец]
+Поддерживающий архетип: [из теста, например Заботливый]
+Площадка: [Instagram, Telegram, YouTube, нужное оставить]
+Текущее число подписчиков: [например 800]
+Мои три реальных результата или кейса: [коротко, с цифрами, если есть]
+Что мне физически неприятно делать на камеру: [например кричать, танцевать, обещать быстрые результаты]
+
+Выдай строго по формату:
+
+1. ПОЗИЦИОНИРОВАНИЕ В ОДНОЙ СТРОКЕ. Кто я для зрителя и что он получает, языком моего архетипа, без штампов вроде помогаю раскрыть потенциал.
+
+2. ОПИСАНИЕ ПРОФИЛЯ. Готовый текст шапки до 150 знаков плюс расширенный вариант до 600 знаков. Тон строго по ведущему архетипу.
+
+3. ТРИ РУБРИКИ. По каждой: название, зачем она зрителю, какой процент контента занимает, два примера тем. Рубрики должны раскрывать ведущий архетип, одна из трёх работает на поддерживающий.
+
+4. ПРАВИЛА ТОНА. Пять правил, как я говорю: длина фраз, лексика, темп, что делаю в первые три секунды ролика, чем закрываю.
+
+5. СТОП-ЛИСТ. Семь вещей, которые мой архетип не делает никогда, с объяснением в одну строку каждая. Учти то, что мне неприятно делать на камеру.
+
+6. ДЕСЯТЬ ТЕМ НА СТАРТ. Конкретные темы роликов под мой архетип и мою нишу, каждая с хуком на первые три секунды дословно.
+
+7. ЧТО ПОМЕНЯТЬ ПЕРВЫМ. Три действия на ближайшие сорок восемь часов по приоритету, начиная с того, что даёт самый заметный сдвиг.
+
+Ограничения: пиши живым русским языком, без длинных тире, без противопоставлений через отрицание, без канцелярита. Если моих вводных не хватает для конкретики, задай не больше трёх уточняющих вопросов и только потом выдавай результат.</div></div>
+<div class="sec"><h2 id="sec-8">Промпт второй: контент на две недели в голосе архетипа</h2><p>Когда упаковка готова, этот промпт собирает календарь на четырнадцать дней с хуками, форматами и распределением между ведущим и поддерживающим архетипом. Он специально просит разную длину и разные форматы, чтобы лента не выглядела одинаковой.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как контент-продюсер, который собирает календарь публикаций под конкретный архетип автора. Выдай готовый план, который можно снимать без доработки.
+
+Вводные:
+Ниша и продукт: [впиши]
+Ведущий архетип: [впиши], поддерживающий: [впиши]
+Площадка и частота: [например Instagram, один ролик в день, два поста в неделю]
+Мои темы и рубрики: [вставь три рубрики из первого промпта]
+Что уже выходило за последний месяц: [коротко перечисли, чтобы не повторяться]
+Одно действие, к которому я веду зрителя: [например написать кодовое слово в сообщения, забрать материал, прийти на разбор]
+
+Собери план на 14 дней строго по формату, таблицей по дням:
+День, формат, тема, хук на первые три секунды дословно, что показываю в кадре, чем закрываю, какой архетип работает в этом дне.
+
+Требования к плану:
+1. Примерно 70 процентов дней в ведущем архетипе, 30 процентов в поддерживающем, поддерживающие дни распредели равномерно по всему периоду, подряд не ставь.
+2. Форматы должны отличаться: разбор, история, демонстрация на экране, сценка, ответ на вопрос, показ процесса. Один формат подряд два дня не ставь.
+3. Три дня из четырнадцати ведут к моему действию прямо, остальные греют без прямого призыва.
+4. Хуки пиши дословно, разговорной речью, длиной до девяти слов, без общих фраз вроде сегодня расскажу.
+5. Отдельно после таблицы дай пять запасных тем на случай, если какая-то не пойдёт.
+
+Ограничения: живой русский язык, без длинных тире, без противопоставлений через отрицание. Не предлагай темы, которые противоречат стоп-листу моего архетипа. Если чего-то не хватает, задай не больше двух вопросов и выдавай план.">Скопировать</button></div><div class="box">Действуй как контент-продюсер, который собирает календарь публикаций под конкретный архетип автора. Выдай готовый план, который можно снимать без доработки.
+
+Вводные:
+Ниша и продукт: [впиши]
+Ведущий архетип: [впиши], поддерживающий: [впиши]
+Площадка и частота: [например Instagram, один ролик в день, два поста в неделю]
+Мои темы и рубрики: [вставь три рубрики из первого промпта]
+Что уже выходило за последний месяц: [коротко перечисли, чтобы не повторяться]
+Одно действие, к которому я веду зрителя: [например написать кодовое слово в сообщения, забрать материал, прийти на разбор]
+
+Собери план на 14 дней строго по формату, таблицей по дням:
+День, формат, тема, хук на первые три секунды дословно, что показываю в кадре, чем закрываю, какой архетип работает в этом дне.
+
+Требования к плану:
+1. Примерно 70 процентов дней в ведущем архетипе, 30 процентов в поддерживающем, поддерживающие дни распредели равномерно по всему периоду, подряд не ставь.
+2. Форматы должны отличаться: разбор, история, демонстрация на экране, сценка, ответ на вопрос, показ процесса. Один формат подряд два дня не ставь.
+3. Три дня из четырнадцати ведут к моему действию прямо, остальные греют без прямого призыва.
+4. Хуки пиши дословно, разговорной речью, длиной до девяти слов, без общих фраз вроде сегодня расскажу.
+5. Отдельно после таблицы дай пять запасных тем на случай, если какая-то не пойдёт.
+
+Ограничения: живой русский язык, без длинных тире, без противопоставлений через отрицание. Не предлагай темы, которые противоречат стоп-листу моего архетипа. Если чего-то не хватает, задай не больше двух вопросов и выдавай план.</div></div>
+<div class="sec"><h2 id="sec-9">Промпт третий: аудит того, что уже опубликовано</h2><p>Самая частая проблема после выбора архетипа в том, что новые ролики звучат по-новому, а профиль целиком продолжает путать людей старым. Этот промпт находит расхождения между выбранным образом и тем, что уже висит в ленте, и говорит, что переснять, что переписать и что убрать.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как аудитор упаковки блога. Я дам тебе свой выбранный архетип и список того, что у меня уже опубликовано. Найди расхождения и выдай план правок с приоритетами.
+
+Вводные:
+Ведущий архетип: [впиши], поддерживающий: [впиши]
+Ниша и продукт: [впиши]
+Текст моей шапки профиля сейчас: [вставь дословно]
+Последние 9 публикаций: [по каждой в одну строку: тема, формат, первая фраза, сколько просмотров, сколько сохранений или комментариев]
+Что из этого дало заявки: [отметь, если знаешь]
+
+Выдай строго по формату:
+
+1. ТАБЛИЦА СОВПАДЕНИЯ. По каждой из 9 публикаций: совпадает с ведущим архетипом, совпадает с поддерживающим или выпадает из образа. Одной строкой объясни, по какому признаку ты так решил.
+
+2. ГЛАВНОЕ РАСХОЖДЕНИЕ. Что именно в моём профиле мешает зрителю понять, кто я, за первые несколько секунд знакомства. Назови одну главную причину, список из десяти пунктов не нужен.
+
+3. ЧТО ДЕЛАТЬ С КАЖДОЙ ВЫПАДАЮЩЕЙ ПУБЛИКАЦИЕЙ. Три варианта на выбор по каждой: оставить, переписать подпись и первую фразу, снять заново в правильном тоне. Если переписать, дай готовый новый текст первой фразы.
+
+4. НОВАЯ ШАПКА. Перепиши мою шапку под ведущий архетип, до 150 знаков, и объясни в двух строках, что изменилось и почему это считывается быстрее.
+
+5. ПЛАН НА НЕДЕЛЮ. Пять действий по порядку, начиная с того, что даёт самый заметный эффект при наименьших усилиях. По каждому напиши, сколько это займёт времени.
+
+6. ЧЕГО НЕ ДЕЛАТЬ. Две вещи, которые я скорее всего захочу переделать, но трогать их сейчас не стоит, с объяснением почему.
+
+Ограничения: говори прямо, без смягчений, если что-то работает плохо. Живой русский язык, без длинных тире, без противопоставлений через отрицание. Если данных по публикациям мало, работай с тем, что есть, и отметь, где вывод предварительный.">Скопировать</button></div><div class="box">Действуй как аудитор упаковки блога. Я дам тебе свой выбранный архетип и список того, что у меня уже опубликовано. Найди расхождения и выдай план правок с приоритетами.
+
+Вводные:
+Ведущий архетип: [впиши], поддерживающий: [впиши]
+Ниша и продукт: [впиши]
+Текст моей шапки профиля сейчас: [вставь дословно]
+Последние 9 публикаций: [по каждой в одну строку: тема, формат, первая фраза, сколько просмотров, сколько сохранений или комментариев]
+Что из этого дало заявки: [отметь, если знаешь]
+
+Выдай строго по формату:
+
+1. ТАБЛИЦА СОВПАДЕНИЯ. По каждой из 9 публикаций: совпадает с ведущим архетипом, совпадает с поддерживающим или выпадает из образа. Одной строкой объясни, по какому признаку ты так решил.
+
+2. ГЛАВНОЕ РАСХОЖДЕНИЕ. Что именно в моём профиле мешает зрителю понять, кто я, за первые несколько секунд знакомства. Назови одну главную причину, список из десяти пунктов не нужен.
+
+3. ЧТО ДЕЛАТЬ С КАЖДОЙ ВЫПАДАЮЩЕЙ ПУБЛИКАЦИЕЙ. Три варианта на выбор по каждой: оставить, переписать подпись и первую фразу, снять заново в правильном тоне. Если переписать, дай готовый новый текст первой фразы.
+
+4. НОВАЯ ШАПКА. Перепиши мою шапку под ведущий архетип, до 150 знаков, и объясни в двух строках, что изменилось и почему это считывается быстрее.
+
+5. ПЛАН НА НЕДЕЛЮ. Пять действий по порядку, начиная с того, что даёт самый заметный эффект при наименьших усилиях. По каждому напиши, сколько это займёт времени.
+
+6. ЧЕГО НЕ ДЕЛАТЬ. Две вещи, которые я скорее всего захочу переделать, но трогать их сейчас не стоит, с объяснением почему.
+
+Ограничения: говори прямо, без смягчений, если что-то работает плохо. Живой русский язык, без длинных тире, без противопоставлений через отрицание. Если данных по публикациям мало, работай с тем, что есть, и отметь, где вывод предварительный.</div></div>
+<div class="sec"><h2 id="sec-10">План внедрения на семь дней</h2><p>Чтобы всё это не осталось интересным чтением, вот порядок действий по дням. Он рассчитан на человека, который параллельно ведёт блог и работает с клиентами, поэтому нагрузка небольшая.</p><div class="grid2"><div class="cardb"><h3>Дни 1 и 2</h3><ul><li>Пройди тест и посчитай баллы, на это уходит около десяти минут</li><li>Прочитай разбор своих двух архетипов и выпиши из них тон, три темы и два формата ролика</li><li>Прогони первый промпт и получи упаковку, шапку профиля меняй сразу</li></ul></div><div class="cardb"><h3>Дни 3 и 4</h3><ul><li>Прогони третий промпт и проведи аудит последних девяти публикаций</li><li>Перепиши подписи там, где промпт сказал переписать, это самая дешёвая правка с быстрым эффектом</li><li>Сними два ролика в новом тоне, не переснимая старое</li></ul></div><div class="cardb"><h3>Дни 5, 6 и 7</h3><ul><li>Прогони второй промпт и собери календарь на две недели</li><li>Сними подряд три ролика по календарю, чтобы почувствовать, стало ли легче</li><li>Замерь два показателя: удержание первых трёх секунд и число подписок после просмотра, запиши цифры, чтобы через две недели было с чем сравнивать</li></ul></div></div><div class="note">Через две недели вернись к цифрам. Выросло удержание и подписка, продолжай в том же архетипе и добавляй объём поддерживающим. Цифры стоят на месте, а снимать стало тяжело, значит ведущий архетип выбран со стороны, возьми второй по баллам из теста и повтори упаковку, времени это займёт один вечер.</div></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Зачем блогу архетип и что он реально решает</a><a href="#sec-1">Тест: двенадцать вопросов, по которым видно твой архетип</a><a href="#sec-2">Ключ, подсчёт и что делать с результатом</a><a href="#sec-3">Простодушный, Мудрец, Искатель: разбор для блога</a><a href="#sec-4">Бунтарь, Маг, Герой: разбор для блога</a><a href="#sec-5">Влюблённый, Шут, Свой парень: разбор для блога</a><a href="#sec-6">Заботливый, Правитель, Творец: разбор для блога</a><a href="#sec-7">Промпт первый: упаковка блога под выбранный архетип</a><a href="#sec-8">Промпт второй: контент на две недели в голосе архетипа</a><a href="#sec-9">Промпт третий: аудит того, что уже опубликовано</a><a href="#sec-10">План внедрения на семь дней</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>

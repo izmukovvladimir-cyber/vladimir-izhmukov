@@ -1,0 +1,670 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Шесть сервисов, которые закрывают полный цикл производства ролика</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>Шесть сервисов, которые закрывают полный цикл производства ролика</h1>
+<p class="lead">Это рабочая сборка из шести сервисов, которые вместе закрывают полный цикл производства контента: текст, картинка, видео, голос, аватар, монтаж. По каждому сервису внутри лежит четыре вещи: что он реально закрывает в твоём конвейере, живая ссылка и способ войти, честные условия бесплатного входа со всеми ограничениями, и первое конкретное действие, которое можно сделать сегодня вечером. Плюс к каждому сервису идёт готовый промпт или точная последовательность шагов, которую можно повторить один в один. Шесть сервисов такие: ChatGPT и Claude отвечают за текст, идеи, сценарии и описания, Seedance через Dreamina делает видео, ElevenLabs даёт голос, HeyGen собирает говорящего аватара, Submagic закрывает субтитры и финальную сборку. В конце страницы лежит маршрут на один вечер, по которому эти шесть сервисов складываются в один готовый ролик, и мастер-промпт продюсера, который выдаёт весь пакет материалов под этот маршрут сразу.</p>
+<p class="meta">Читается за 14 минут. Внутри шесть сервисов полного цикла с живыми ссылками, проверенными условиями бесплатного входа, первым действием на сегодня и готовым промптом по каждому. Плюс пошаговый маршрут сборки одного ролика за вечер и мастер-промпт продюсера, который выдаёт тему, хук, сценарий, промпт под видео, текст под озвучку и описание одним заходом.</p>
+<div class="how">Не открывай все шесть вкладок сразу, так обычно всё и глохнет на первом вечере. Пройди страницу сверху вниз и на каждом сервисе сделай ровно одно первое действие, которое там написано. Займёт это минут по десять на сервис. Начни с первой пары (ChatGPT и Claude), потому что без темы и текста остальные четыре просто нечего обрабатывать. Дальше добавляй по одному инструменту за раз, проверяя результат на реальном ролике. Когда все шесть заведены и ты понимаешь, что делает каждый, переходи к предпоследнему разделу и собери первый ролик по маршруту на вечер. Мастер-промпт продюсера в конце держи под рукой, он готовит весь пакет материалов под маршрут за один заход, и дальше ты только разносишь куски по сервисам.</div>
+<div class="sec"><h2 id="sec-0">Как эти шесть складываются в один конвейер</h2><p>Каждый сервис здесь занимает своё место в цепочке, и порядок в цепочке имеет значение. Сначала появляется смысл и текст, потом изображение и движение, потом звук, потом лицо, и только в самом конце финальная упаковка. Если начать с середины, ты будешь переделывать всё по кругу, потому что монтировать нечего, а озвучивать нечего.</p><div class="grid2"><div class="cardb"><h3>Шаг 1. Смысл и текст</h3><p>ChatGPT и Claude. Тема, боль зрителя, хук на первые три секунды, сценарий на двадцать секунд, длинное описание под пост и призыв с кодовым словом. Это фундамент всей цепочки, потому что ровно эти тексты дальше уходят в промпт видео, в озвучку и в субтитры. Сильный ролик со слабым текстом внутри не вытягивает, слабую картинку с сильным текстом вытягивает регулярно.</p></div><div class="cardb"><h3>Шаг 2. Картинка и движение</h3><p>Seedance через платформу Dreamina. Из текстового описания сцены получается готовый видеоряд на несколько секунд, можно отталкиваться от своей опорной картинки. Здесь же берётся обложка ролика. Это тот самый визуал, который делает ролик смотрибельным без съёмок, без студии и без монтажёра.</p></div><div class="cardb"><h3>Шаг 3. Голос и лицо</h3><p>ElevenLabs даёт озвучку по тексту, включая твой собственный клонированный голос. HeyGen собирает говорящего аватара, который проговаривает твой сценарий на камеру. Дальше ты выбираешь формат под задачу: закадровый голос поверх сгенерированного видеоряда или говорящее лицо в кадре.</p></div><div class="cardb"><h3>Шаг 4. Финальная упаковка</h3><p>Submagic. Сюда приезжает готовое видео и выходит из него с крупными субтитрами, расставленными акцентами, вставками и правильным вертикальным форматом. Это тот слой, который отвечает за удержание внимания, потому что зритель дочитывает субтитры даже со звуком на нуле.</p></div></div><div class="note">Важно про условия. Тарифы и лимиты у всех шести сервисов пересматриваются регулярно, иногда раз в пару месяцев. Все цифры ниже сверены с официальными страницами на момент публикации, но перед оплатой всегда открывай ссылку из карточки сервиса и смотри актуальный тариф своими глазами. Отдельно смотри, доступна ли оплата из твоей страны, у части сервисов это решается через посредников.</div></div>
+<div class="sec"><h2 id="sec-1">Сервис 1. ChatGPT: темы, хуки, быстрые черновики</h2><p>Первый инструмент цепочки. Его сильная сторона это скорость и широта: он быстро выдаёт много вариантов тем и хуков, ищет в интернете свежие поводы, разбирает загруженные файлы и картинки, тут же генерирует изображения. На этапе, когда тебе нужно набрать банк идей и отобрать сильные, он закрывает задачу лучше всего.</p><div class="grid2"><div class="cardb"><h3>Что реально закрывает</h3><p>Банк тем под твою аудиторию, варианты хуков на первые три секунды, быстрые черновики сценариев, поиск свежих инфоповодов через встроенный веб-поиск, разбор загруженного файла или скриншота, генерация картинок для обложек и слайдов. Это твой генератор количества, из которого ты дальше отбираешь качество.</p></div><div class="cardb"><h3>Ссылка и вход</h3><p>Открываешь chatgpt.com, регистрируешься по почте или через аккаунт Google, дальше всё работает прямо в браузере. Отдельно ставить ничего не нужно, мобильное приложение есть под обе платформы и синхронизируется с той же учётной записью.</p></div><div class="cardb"><h3>Бесплатный вход и ограничения</h3><p>Бесплатный тариф даёт доступ к флагманской модели с ограничением по числу сообщений в скользящем окне. Когда лимит выбран, разговор продолжается на облегчённой версии модели до сброса окна. В бесплатном режиме доступны веб-поиск, загрузка файлов и картинок, генерация изображений, каждое со своим лимитом. Платные тарифы начинаются примерно от восьми долларов в месяц за облегчённый уровень и около двадцати за полный. Условия и состав тарифов меняются часто, актуальную сетку смотри на chatgpt.com/pricing.</p></div><div class="cardb"><h3>Первое действие сегодня</h3><p>Вставь промпт из блока ниже и собери банк на тридцать тем под свою аудиторию. Дальше отметь галочкой пять, которые бьют в самую живую боль, и вот эти пять станут твоим контентом на ближайшую неделю. На это уходит минут десять, зато вопрос «что снимать» закрывается на неделю вперёд.</p></div></div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как контент-стратег с десятилетним опытом в коротких вертикальных видео. Твоя задача собрать банк тем, каждая из которых бьёт в реальную боль конкретной аудитории.
+
+Вводные:
+- Ниша: [например: психолог, работаю с выгоранием у женщин 30-40]
+- Аудитория: [кто эти люди, чем занимаются, что их бесит прямо сейчас]
+- Что я продаю: [продукт или услуга, к которой в итоге веду]
+- Площадка: [Instagram Reels / Telegram / YouTube Shorts]
+
+Сделай строго по формату, таблицей из 30 строк:
+
+Колонка 1. ТЕМА. Одна строка, конкретно, без общих слов вроде «про мотивацию».
+Колонка 2. БОЛЬ. Дословная фраза, которой мой зритель описывает эту проблему сам себе. Пиши его языком, не моим.
+Колонка 3. ХУК. Первая фраза ролика, максимум 9 слов, произносится за 3 секунды, вызывает желание досмотреть.
+Колонка 4. ОБЕЩАНИЕ. Что человек унесёт, досмотрев до конца.
+Колонка 5. ТЕМПЕРАТУРА. Холодная (широкая тема на охват) или тёплая (близко к продукту, на заявки).
+
+Ограничения:
+- Не повторяй одну и ту же мысль разными словами, 30 тем это 30 разных смыслов.
+- Соотношение примерно 20 холодных к 10 тёплым.
+- Никаких обещаний конкретных сумм и сроков.
+
+Пример строки, чтобы ты понял планку:
+ТЕМА: почему после отпуска становится хуже | БОЛЬ: «отдохнула две недели, вернулась и через день снова разбитая» | ХУК: «Отпуск не лечит выгорание. Вот почему» | ОБЕЩАНИЕ: поймёт, что именно восстанавливает ресурс | ТЕМПЕРАТУРА: холодная
+
+Если вводных мало, задай мне максимум три уточняющих вопроса и только потом выдавай таблицу.">Скопировать</button></div><div class="box">Действуй как контент-стратег с десятилетним опытом в коротких вертикальных видео. Твоя задача собрать банк тем, каждая из которых бьёт в реальную боль конкретной аудитории.
+
+Вводные:
+- Ниша: [например: психолог, работаю с выгоранием у женщин 30-40]
+- Аудитория: [кто эти люди, чем занимаются, что их бесит прямо сейчас]
+- Что я продаю: [продукт или услуга, к которой в итоге веду]
+- Площадка: [Instagram Reels / Telegram / YouTube Shorts]
+
+Сделай строго по формату, таблицей из 30 строк:
+
+Колонка 1. ТЕМА. Одна строка, конкретно, без общих слов вроде «про мотивацию».
+Колонка 2. БОЛЬ. Дословная фраза, которой мой зритель описывает эту проблему сам себе. Пиши его языком, не моим.
+Колонка 3. ХУК. Первая фраза ролика, максимум 9 слов, произносится за 3 секунды, вызывает желание досмотреть.
+Колонка 4. ОБЕЩАНИЕ. Что человек унесёт, досмотрев до конца.
+Колонка 5. ТЕМПЕРАТУРА. Холодная (широкая тема на охват) или тёплая (близко к продукту, на заявки).
+
+Ограничения:
+- Не повторяй одну и ту же мысль разными словами, 30 тем это 30 разных смыслов.
+- Соотношение примерно 20 холодных к 10 тёплым.
+- Никаких обещаний конкретных сумм и сроков.
+
+Пример строки, чтобы ты понял планку:
+ТЕМА: почему после отпуска становится хуже | БОЛЬ: «отдохнула две недели, вернулась и через день снова разбитая» | ХУК: «Отпуск не лечит выгорание. Вот почему» | ОБЕЩАНИЕ: поймёт, что именно восстанавливает ресурс | ТЕМПЕРАТУРА: холодная
+
+Если вводных мало, задай мне максимум три уточняющих вопроса и только потом выдавай таблицу.</div><div class="note">Как отбирать из тридцати. Читай только колонку с хуком и отмечай те, на которых ты сам притормозил бы в ленте. Не анализируй, не взвешивай, реагируй телом за секунду. Пять отмеченных и есть твоя неделя. Остальные не выбрасывай, складывай в отдельный файл, через месяц половина из них заиграет по-новому под свежий инфоповод.</div></div>
+<div class="sec"><h2 id="sec-2">Сервис 2. Claude: длинные тексты, структура, описания под ролик</h2><p>Второй текстовый инструмент, и держать его отдельно от первого имеет смысл. Claude сильнее держит длинную форму, ровный человеческий тон и заданную структуру на всю длину текста. Там, где нужно длинное описание под ролик, разбор, сценарий с точным хронометражем или текст, который не пахнет нейросетью, идёшь сюда.</p><div class="grid2"><div class="cardb"><h3>Что реально закрывает</h3><p>Длинные описания под ролик на полторы-две тысячи знаков, которые держат зрителя в посте, пока видео крутится по кругу. Сценарии с раскладкой по секундам. Переписывание черновика в живой человеческий тон без канцелярита. Разбор твоего текста с честным вердиктом, что слабо и почему. Работа с загруженными файлами и большими кусками текста целиком.</p></div><div class="cardb"><h3>Ссылка и вход</h3><p>Открываешь claude.ai, регистрируешься по почте, работает в браузере и в приложениях на телефоне и компьютере. Отдельная страница с тарифами лежит на claude.com/pricing, там же видно, что входит в каждый уровень.</p></div><div class="cardb"><h3>Бесплатный вход и ограничения</h3><p>Бесплатный тариф стоит ноль и даёт чат в вебе, на телефоне и на компьютере, генерацию текста, веб-поиск, работу с файлами. Основное ограничение это объём общения в окне времени, на длинных текстах он выбирается заметно быстрее. Тариф Pro на момент публикации стоит около двадцати долларов в месяц при помесячной оплате и около семнадцати при годовой, там же открываются повышенные лимиты. Уровень Max начинается примерно от ста долларов. Условия меняются, сверяйся на claude.com/pricing.</p></div><div class="cardb"><h3>Первое действие сегодня</h3><p>Возьми одну тему из тех пяти, что отобрал на прошлом шаге, вставь промпт ниже и получи готовое описание под ролик на 1900 знаков. Скопируй его в заметки телефона. Завтра, когда будешь выкладывать ролик, описание уже лежит готовое, и публикация занимает минуту вместо часа мучений над текстом.</p></div></div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как копирайтер, который пишет описания под короткие вертикальные видео и понимает, что длинное описание удерживает зрителя в посте, пока ролик играет по кругу.
+
+Вводные:
+- Тема ролика: [вставь тему]
+- Боль зрителя дословно: [фраза, которой он сам описывает проблему]
+- Что человек унесёт из ролика: [обещание]
+- Кодовое слово для призыва: [например ЭРА]
+- Куда ведём: [бот, личные сообщения, комментарии]
+
+Напиши описание под ролик по такой структуре:
+
+1. Первая строка. Цепляет и продолжает мысль ролика, не пересказывает его. Максимум 12 слов.
+2. Абзац боли, 3-4 строки. Опиши ситуацию зрителя так подробно и точно, чтобы он узнал в ней свой вчерашний день.
+3. Разворот, 2 строки. Назови настоящую причину происходящего, ту, о которой обычно не думают.
+4. Механика, 5-7 строк списком. Конкретные шаги или пункты, которые человек может применить сам сегодня.
+5. Один живой пример или наблюдение из практики, 2-3 строки, с деталями и цифрами.
+6. Призыв, 2 строки. Одно действие с кодовым словом.
+
+Жёсткие требования к языку:
+- Общий объём 1800-2000 знаков с пробелами. В конце посчитай и напиши, сколько вышло.
+- Обращение на «ты».
+- Ноль длинных тире, вместо них запятая или точка.
+- Никаких конструкций вида «не X, а Y».
+- Предложения нормальной длины, договорённые до конца. Короткая рубленая фраза допустима как акцент, не как весь текст.
+- Перечисление оформляй списком.
+- Без обещаний конкретных сумм и сроков.
+
+Сначала выдай готовый текст, потом отдельной строкой количество знаков.">Скопировать</button></div><div class="box">Действуй как копирайтер, который пишет описания под короткие вертикальные видео и понимает, что длинное описание удерживает зрителя в посте, пока ролик играет по кругу.
+
+Вводные:
+- Тема ролика: [вставь тему]
+- Боль зрителя дословно: [фраза, которой он сам описывает проблему]
+- Что человек унесёт из ролика: [обещание]
+- Кодовое слово для призыва: [например ЭРА]
+- Куда ведём: [бот, личные сообщения, комментарии]
+
+Напиши описание под ролик по такой структуре:
+
+1. Первая строка. Цепляет и продолжает мысль ролика, не пересказывает его. Максимум 12 слов.
+2. Абзац боли, 3-4 строки. Опиши ситуацию зрителя так подробно и точно, чтобы он узнал в ней свой вчерашний день.
+3. Разворот, 2 строки. Назови настоящую причину происходящего, ту, о которой обычно не думают.
+4. Механика, 5-7 строк списком. Конкретные шаги или пункты, которые человек может применить сам сегодня.
+5. Один живой пример или наблюдение из практики, 2-3 строки, с деталями и цифрами.
+6. Призыв, 2 строки. Одно действие с кодовым словом.
+
+Жёсткие требования к языку:
+- Общий объём 1800-2000 знаков с пробелами. В конце посчитай и напиши, сколько вышло.
+- Обращение на «ты».
+- Ноль длинных тире, вместо них запятая или точка.
+- Никаких конструкций вида «не X, а Y».
+- Предложения нормальной длины, договорённые до конца. Короткая рубленая фраза допустима как акцент, не как весь текст.
+- Перечисление оформляй списком.
+- Без обещаний конкретных сумм и сроков.
+
+Сначала выдай готовый текст, потом отдельной строкой количество знаков.</div><div class="note">Почему длина здесь именно рабочий параметр. Пока человек читает описание, ролик у него на экране играет второй, третий и четвёртый раз. Площадка видит высокое удержание и относит ролик к тем, что стоит показать дальше. Поэтому описание на две тысячи знаков даёт другой результат, чем подпись из одной строки, при том же самом видео. Проверять это на своём аккаунте можно буквально на паре роликов подряд.</div></div>
+<div class="sec"><h2 id="sec-3">Сервис 3. Seedance через Dreamina: видео без съёмки</h2><p>Seedance это модель генерации видео от ByteDance, тех же, кто сделал TikTok и CapCut. Она принимает текстовое описание сцены, опорную картинку и звук, и выдаёт готовый видеоряд. Для тебя это означает, что ролик можно получить, не выходя из дома, без камеры, света и монтажёра.</p><div class="grid2"><div class="cardb"><h3>Что реально закрывает</h3><p>Видеоряд на несколько секунд по текстовому описанию. Оживление твоей статичной картинки в движущуюся сцену. Обложка ролика и раскадровка. Реалистичные сцены, которые снять самому либо дорого, либо невозможно. В связке с закадровым голосом из следующего раздела это готовый ролик без единой съёмки.</p></div><div class="cardb"><h3>Ссылка и вход</h3><p>Официальная страница модели лежит на seed.bytedance.com/en/seedance2_0, там описание возможностей. Работать удобнее через платформу Dreamina по адресу dreamina.capcut.com: заходишь, регистрируешься через Google, почту или аккаунт CapCut, идёшь в раздел видео и в выборе модели ставишь Seedance. В самом CapCut на компьютере и телефоне те же модели доступны через раздел AI Media.</p></div><div class="cardb"><h3>Бесплатный вход и ограничения</h3><p>Dreamina выдаёт бесплатные кредиты каждый день, их хватает на несколько генераций, чтобы попробовать без оплаты. Кредиты сгорают и начисляются заново, поэтому имеет смысл заходить регулярно. Длина одной генерации измеряется секундами, длинный ролик собирается из нескольких кусков. Размер ежедневной выдачи и стоимость пакетов площадка меняет, актуальные условия смотри в личном кабинете Dreamina.</p></div><div class="cardb"><h3>Первое действие сегодня</h3><p>Возьми промпт-шаблон ниже, подставь свою сцену и сгенерируй один пятисекундный ролик. Цель первого захода простая: понять, как модель читает твоё описание. Посмотри, что она поняла правильно, а что додумала, и на второй генерации допиши недостающие детали. Обычно с третьей попытки картинка начинает попадать в задуманное.</p></div></div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Шаблон промпта под генерацию видео. Заполняй все шесть блоков, модель читает их как единое описание кадра. Пиши промпт на английском, так модель понимает детали точнее.
+
+SUBJECT: [кто или что в кадре, с внешними деталями: возраст, одежда, материал, состояние]
+ACTION: [одно понятное действие, которое происходит за 5 секунд, без нескольких событий подряд]
+CAMERA: [план и движение: close-up / medium shot / wide shot, static / slow push in / handheld follow]
+LIGHT: [источник и характер света: soft window light / neon city night / golden hour backlight]
+STYLE: [визуальный язык: photorealistic, cinematic 35mm, film grain, shallow depth of field]
+MOOD: [настроение сцены одним-двумя словами: calm, tense, warm]
+
+Заполненный пример, с которого можно стартовать:
+
+SUBJECT: a woman around 35 in a grey oversized sweater, tired face, holding a phone
+ACTION: she slowly lowers the phone and looks out of the window
+CAMERA: medium shot, static, slight handheld breathing
+LIGHT: soft grey morning window light from the left, no harsh shadows
+STYLE: photorealistic, cinematic 35mm, subtle film grain, shallow depth of field
+MOOD: quiet, heavy
+
+Правила, которые экономят генерации:
+1. Одно действие на один ролик. Два события подряд модель почти всегда смешивает в кашу.
+2. Чем конкретнее материал и свет, тем стабильнее результат. «Красиво» модель не понимает, «soft window light» понимает.
+3. Текст и надписи внутри кадра генерируются плохо, добавляй их потом на монтаже.
+4. Понравившийся кадр сохраняй и используй как опорную картинку для следующей генерации, так держится единый стиль серии.">Скопировать</button></div><div class="box">Шаблон промпта под генерацию видео. Заполняй все шесть блоков, модель читает их как единое описание кадра. Пиши промпт на английском, так модель понимает детали точнее.
+
+SUBJECT: [кто или что в кадре, с внешними деталями: возраст, одежда, материал, состояние]
+ACTION: [одно понятное действие, которое происходит за 5 секунд, без нескольких событий подряд]
+CAMERA: [план и движение: close-up / medium shot / wide shot, static / slow push in / handheld follow]
+LIGHT: [источник и характер света: soft window light / neon city night / golden hour backlight]
+STYLE: [визуальный язык: photorealistic, cinematic 35mm, film grain, shallow depth of field]
+MOOD: [настроение сцены одним-двумя словами: calm, tense, warm]
+
+Заполненный пример, с которого можно стартовать:
+
+SUBJECT: a woman around 35 in a grey oversized sweater, tired face, holding a phone
+ACTION: she slowly lowers the phone and looks out of the window
+CAMERA: medium shot, static, slight handheld breathing
+LIGHT: soft grey morning window light from the left, no harsh shadows
+STYLE: photorealistic, cinematic 35mm, subtle film grain, shallow depth of field
+MOOD: quiet, heavy
+
+Правила, которые экономят генерации:
+1. Одно действие на один ролик. Два события подряд модель почти всегда смешивает в кашу.
+2. Чем конкретнее материал и свет, тем стабильнее результат. «Красиво» модель не понимает, «soft window light» понимает.
+3. Текст и надписи внутри кадра генерируются плохо, добавляй их потом на монтаже.
+4. Понравившийся кадр сохраняй и используй как опорную картинку для следующей генерации, так держится единый стиль серии.</div><div class="note">Приём для серии роликов. Сгенерируй один кадр, который тебе нравится по свету и цвету, скачай его и дальше подавай эту же картинку опорной ко всем следующим генерациям, меняя только описание действия. Серия начинает выглядеть как снятая одним оператором в один день, и лента перестаёт выглядеть собранной из случайных кусков. Это заметно поднимает доверие к аккаунту у нового зрителя.</div></div>
+<div class="sec"><h2 id="sec-4">Сервис 4. ElevenLabs: голос, включая твой собственный</h2><p>ElevenLabs превращает текст в озвучку, которая звучит живым человеком с дыханием и интонацией. Умеет клонировать твой голос по образцу записи и озвучивать им любой текст, в том числе на других языках. Для конвейера это означает, что закадровый голос перестаёт зависеть от того, выспался ты сегодня и в голосе ли ты вообще.</p><div class="grid2"><div class="cardb"><h3>Что реально закрывает</h3><p>Закадровый голос под сгенерированный видеоряд. Твой собственный клонированный голос для роликов, которые ты не хочешь начитывать вручную. Озвучка на других языках тем же голосом, если планируешь выходить на зарубежную аудиторию. Звуковые эффекты и музыкальные подложки. Расшифровка речи в текст.</p></div><div class="cardb"><h3>Ссылка и вход</h3><p>Открываешь elevenlabs.io, регистрируешься по почте, работа идёт в браузере. Интерфейс переключается на русский. Раздел с озвучкой называется Text to Speech, раздел с голосами Voices, там же лежит клонирование.</p></div><div class="cardb"><h3>Бесплатный вход и ограничения</h3><p>Бесплатный тариф даёт около десяти тысяч кредитов в месяц, это примерно десять минут озвучки, и включает генерацию речи, расшифровку, звуковые эффекты и создание голоса. Ключевое ограничение бесплатного уровня: коммерческая лицензия в него не входит, для роликов, которые продают, нужен платный уровень. Стартовый тариф стоит около шести долларов в месяц, следующий около двадцати двух, там же открывается профессиональное клонирование голоса. Цены сверяй на elevenlabs.io/pricing перед оплатой.</p></div><div class="cardb"><h3>Первое действие сегодня</h3><p>Запиши на телефон две минуты своей спокойной речи в тихой комнате, просто прочитай вслух любой текст ровным голосом. Загрузи запись в раздел клонирования голоса. Дальше вставь текст сценария одного ролика и послушай, как твой голос читает то, что ты никогда не произносил. Обычно после этого вопрос «а надо ли начитывать самому» закрывается сам.</p></div></div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Промпт для подготовки текста под озвучку. Живой текст и текст для чтения вслух это разные вещи, поэтому сценарий перед озвучкой прогоняется через такую обработку.
+
+Действуй как редактор дикторских текстов. Твоя задача переписать мой сценарий так, чтобы он звучал естественно при чтении вслух и укладывался в хронометраж.
+
+Вводные:
+- Хронометраж ролика: [например 20 секунд]
+- Сценарий: [вставь текст]
+- Интонация: [спокойная и уверенная / энергичная / доверительная, как разговор с другом]
+
+Сделай по шагам:
+
+1. ПЕРЕСБОРКА. Перепиши текст под чтение вслух: убери причастные обороты, длинные вводные конструкции и всё, на чём язык спотыкается. Смысл сохрани полностью.
+2. ХРОНОМЕТРАЖ. Средний темп чтения примерно 150 слов в минуту. Посчитай, укладывается ли текст, и подрежь до нужной длины, начиная с наименее важного.
+3. РАЗМЕТКА. Расставь паузы двойным переносом строки там, где нужен воздух перед важной мыслью. Слова под интонационное ударение подай отдельной короткой строкой.
+4. ПЕРВАЯ ФРАЗА. Отдельно проверь, что первая фраза читается за 3 секунды и цепляет сама по себе, без контекста.
+5. ЧИСЛА И СОКРАЩЕНИЯ. Разверни всё, что синтез может прочитать неправильно: числа пиши словами, английские названия пиши так, как они произносятся по-русски.
+
+Выдай финальный текст, готовый к вставке в синтез речи, и отдельной строкой расчётный хронометраж.">Скопировать</button></div><div class="box">Промпт для подготовки текста под озвучку. Живой текст и текст для чтения вслух это разные вещи, поэтому сценарий перед озвучкой прогоняется через такую обработку.
+
+Действуй как редактор дикторских текстов. Твоя задача переписать мой сценарий так, чтобы он звучал естественно при чтении вслух и укладывался в хронометраж.
+
+Вводные:
+- Хронометраж ролика: [например 20 секунд]
+- Сценарий: [вставь текст]
+- Интонация: [спокойная и уверенная / энергичная / доверительная, как разговор с другом]
+
+Сделай по шагам:
+
+1. ПЕРЕСБОРКА. Перепиши текст под чтение вслух: убери причастные обороты, длинные вводные конструкции и всё, на чём язык спотыкается. Смысл сохрани полностью.
+2. ХРОНОМЕТРАЖ. Средний темп чтения примерно 150 слов в минуту. Посчитай, укладывается ли текст, и подрежь до нужной длины, начиная с наименее важного.
+3. РАЗМЕТКА. Расставь паузы двойным переносом строки там, где нужен воздух перед важной мыслью. Слова под интонационное ударение подай отдельной короткой строкой.
+4. ПЕРВАЯ ФРАЗА. Отдельно проверь, что первая фраза читается за 3 секунды и цепляет сама по себе, без контекста.
+5. ЧИСЛА И СОКРАЩЕНИЯ. Разверни всё, что синтез может прочитать неправильно: числа пиши словами, английские названия пиши так, как они произносятся по-русски.
+
+Выдай финальный текст, готовый к вставке в синтез речи, и отдельной строкой расчётный хронометраж.</div><div class="note">Про качество исходной записи для клонирования. Голос копируется вместе со всем, что попало в микрофон, поэтому эхо пустой комнаты, гул холодильника и шум улицы переедут в клон и будут в каждом ролике. Две минуты, записанные в тихой комнате с мягкой мебелью, дают результат заметно лучше, чем двадцать минут, записанные на кухне. Говори ровно и спокойно, без актёрской игры, интонацию потом задашь настройками.</div></div>
+<div class="sec"><h2 id="sec-5">Сервис 5. HeyGen: говорящий аватар вместо съёмки</h2><p>HeyGen делает видео, где человек говорит на камеру, из одного текста. Можно взять готового персонажа из библиотеки, а можно собрать цифрового двойника по своей записи, и дальше он будет проговаривать любой сценарий с твоим лицом и твоим голосом. Это закрывает самую частую причину, по которой люди перестают снимать: нежелание каждый день приводить себя в порядок и вставать перед камерой.</p><div class="grid2"><div class="cardb"><h3>Что реально закрывает</h3><p>Ролики с говорящим лицом без съёмки. Собственного цифрового двойника, который выглядит и звучит как ты. Переозвучку своих роликов на других языках с правильной артикуляцией. Быстрые серии однотипных видео, где меняется только текст, например ответы на частые вопросы аудитории.</p></div><div class="cardb"><h3>Ссылка и вход</h3><p>Открываешь heygen.com, регистрируешься по почте или через Google. Всё работает в браузере. Раздел с персонажами называется Avatars, там же лежит создание своего двойника, генерация видео идёт в редакторе Create Video.</p></div><div class="cardb"><h3>Бесплатный вход и ограничения</h3><p>Бесплатный тариф даёт три видео в месяц длиной до одной минуты, доступ к библиотеке из пятисот с лишним готовых персонажей, один свой цифровой двойник и более тридцати языков. Готовые ролики выходят с водяным знаком площадки. Тариф Creator стоит около двадцати девяти долларов в месяц, даёт шестьсот кредитов, длину до тридцати минут, качество 1080p, снимает водяной знак и открывает клонирование голоса и больше ста семидесяти языков. Следующий уровень около сорока девяти долларов. Условия и состав тарифов сверяй на heygen.com/pricing.</p></div><div class="cardb"><h3>Первое действие сегодня</h3><p>Сними на телефон две минуты себя: прямо в камеру, ровный свет от окна, спокойная речь, лицо целиком в кадре. Загрузи в раздел создания своего персонажа. Пока он обучается, возьми сценарий одного ролика и прогони его через готового персонажа из библиотеки, чтобы посмотреть на механику целиком. Когда твой двойник будет готов, поменяй персонажа и сравни.</p></div></div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Последовательность сборки ролика с аватаром. Повторяется один в один каждый раз, отклонения обычно и портят результат.
+
+ШАГ 1. ИСХОДНАЯ ЗАПИСЬ ДЛЯ ДВОЙНИКА
+- Снимай горизонтально или вертикально, но лицо занимает не меньше трети кадра.
+- Свет от окна в лицо, спиной к окну не садись, иначе лицо уйдёт в тень.
+- Фон однотонный и спокойный, без движения за спиной.
+- Говори ровно, обычным темпом, с естественной мимикой. Молчаливые паузы и жевание губ вырезай.
+- Минимум 2 минуты непрерывной речи, лучше 3.
+
+ШАГ 2. ТЕКСТ ПОД АВАТАРА
+- Сценарий бери уже прогнанный через редактуру для чтения вслух.
+- Абзацы делай короткими, синтез лучше держит интонацию на коротких блоках.
+- Английские термины пиши кириллицей, так, как они звучат.
+
+ШАГ 3. СБОРКА
+- Выбери своего персонажа, вставь текст, выбери голос: синтезированный или свой клонированный.
+- Формат ставь вертикальный 9:16 сразу, переделывать потом дороже.
+- Фон бери нейтральный или свой брендовый, пёстрый фон отвлекает от лица.
+
+ШАГ 4. ПРОВЕРКА ПЕРЕД ЭКСПОРТОМ
+- Просмотри превью со звуком целиком и отдельно без звука.
+- Смотри на артикуляцию на первых трёх секундах, именно там заметнее всего рассинхрон.
+- Проверь ударения в именах и терминах, при ошибке перепиши слово по слогам в тексте.
+
+ШАГ 5. ЭКСПОРТ
+- Выгружай в максимальном доступном качестве, дальше файл уходит на финальную упаковку в следующий сервис.">Скопировать</button></div><div class="box">Последовательность сборки ролика с аватаром. Повторяется один в один каждый раз, отклонения обычно и портят результат.
+
+ШАГ 1. ИСХОДНАЯ ЗАПИСЬ ДЛЯ ДВОЙНИКА
+- Снимай горизонтально или вертикально, но лицо занимает не меньше трети кадра.
+- Свет от окна в лицо, спиной к окну не садись, иначе лицо уйдёт в тень.
+- Фон однотонный и спокойный, без движения за спиной.
+- Говори ровно, обычным темпом, с естественной мимикой. Молчаливые паузы и жевание губ вырезай.
+- Минимум 2 минуты непрерывной речи, лучше 3.
+
+ШАГ 2. ТЕКСТ ПОД АВАТАРА
+- Сценарий бери уже прогнанный через редактуру для чтения вслух.
+- Абзацы делай короткими, синтез лучше держит интонацию на коротких блоках.
+- Английские термины пиши кириллицей, так, как они звучат.
+
+ШАГ 3. СБОРКА
+- Выбери своего персонажа, вставь текст, выбери голос: синтезированный или свой клонированный.
+- Формат ставь вертикальный 9:16 сразу, переделывать потом дороже.
+- Фон бери нейтральный или свой брендовый, пёстрый фон отвлекает от лица.
+
+ШАГ 4. ПРОВЕРКА ПЕРЕД ЭКСПОРТОМ
+- Просмотри превью со звуком целиком и отдельно без звука.
+- Смотри на артикуляцию на первых трёх секундах, именно там заметнее всего рассинхрон.
+- Проверь ударения в именах и терминах, при ошибке перепиши слово по слогам в тексте.
+
+ШАГ 5. ЭКСПОРТ
+- Выгружай в максимальном доступном качестве, дальше файл уходит на финальную упаковку в следующий сервис.</div><div class="note">Где аватар выигрывает, а где проигрывает живой съёмке. Аватар отлично закрывает объясняющие ролики, ответы на вопросы, разборы и всё, где важен смысл. Там, где нужна личная история с эмоцией, живая запись пока сильнее, зритель чувствует разницу. Разумный режим на старте такой: личные и эмоциональные ролики снимаешь сам, объясняющую рутину и серии отдаёшь аватару. Так ты снимаешь один раз в неделю вместо каждого дня, и лента при этом не пустеет.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-6">Сервис 6. Submagic: субтитры и финальная упаковка</h2><p>Submagic забирает готовое видео и возвращает его в том виде, в котором ролики реально смотрят: крупные субтитры в такт речи, выделенные ключевые слова, вставки и эффекты в нужных местах. Большая часть зрителей смотрит без звука, поэтому этот слой напрямую влияет на то, досмотрят ролик или пролистают.</p><div class="grid2"><div class="cardb"><h3>Что реально закрывает</h3><p>Автоматические субтитры с распознаванием русской речи и синхронизацией по словам. Готовые шаблоны оформления субтитров под короткие видео. Автоматические вставки и подсветку ключевых слов. Нарезку длинного видео на короткие фрагменты. Очистку звука и генерацию заголовков к роликам.</p></div><div class="cardb"><h3>Ссылка и вход</h3><p>Открываешь submagic.co, регистрируешься, загружаешь видео прямо в браузере. Отдельно ставить ничего не нужно. Экспорт скачивается готовым файлом в вертикальном формате.</p></div><div class="cardb"><h3>Бесплатный вход и ограничения</h3><p>На пробу даётся три бесплатных видео без привязки карты. Дальше стартовый тариф стоит около девятнадцати долларов в месяц при помесячной оплате и около двенадцати при годовой, туда входит пятнадцать видео в месяц длиной до двух минут, экспорт в 1080p и отсутствие водяного знака. Следующий уровень около тридцати девяти долларов даёт сорок видео до пяти минут и премиальные шаблоны. Уровень с доступом к API стоит около шестидесяти девяти долларов и поднимает лимит до ста видео и качества 4K. Нарезка длинных видео подключается отдельным дополнением. Тарифы сверяй на submagic.co/pricing.</p></div><div class="cardb"><h3>Первое действие сегодня</h3><p>Возьми любой свой существующий ролик, даже старый, загрузи его и прогони через три разных шаблона субтитров. Посмотри результаты подряд один за другим. Ты увидишь своими глазами, насколько сильно оформление меняет ощущение от одного и того же видео, и после этого выбор шаблона под свой стиль перестанет быть случайным.</p></div></div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Чек-лист финальной упаковки. Проходится по каждому ролику перед публикацией, занимает минуты три.
+
+1. ФОРМАТ
+- Вертикаль 9:16, разрешение не ниже 1080p.
+- Проверь, что важное не уезжает под интерфейс площадки: верхние и нижние примерно 15 процентов кадра держи свободными от текста.
+
+2. СУБТИТРЫ
+- Язык распознавания ставь русский до запуска обработки, иначе получишь транслитерацию.
+- Размер шрифта крупный, читается на телефоне с вытянутой руки.
+- Одновременно на экране не больше 3-4 слов, длинную строку зритель не успевает прочесть.
+- Позиция по центру или чуть выше центра, ближе к линии взгляда.
+
+3. АКЦЕНТЫ
+- Подсветку цветом ставь только на ключевые слова смысла, примерно одно слово на фразу. Подсвеченное всё читается как не подсвеченное ничего.
+- Первые три секунды: субтитр появляется сразу с первым словом, без задержки.
+
+4. ЗВУК
+- Прогони очистку звука, если запись делалась на телефон.
+- Музыкальную подложку держи тише голоса, ориентир примерно минус восемнадцать по ощущению, голос всегда впереди.
+
+5. ПОСЛЕДНИЙ ПРОСМОТР
+- Посмотри ролик целиком с выключенным звуком. Если смысл считывается по субтитрам без звука, упаковка сделана правильно.
+- Проверь, что в кадре нет чужих логотипов, ников и водяных знаков.
+
+6. ЭКСПОРТ
+- Скачивай файл и выкладывай его на площадку напрямую, без пересжатия в мессенджерах, иначе потеряешь качество.">Скопировать</button></div><div class="box">Чек-лист финальной упаковки. Проходится по каждому ролику перед публикацией, занимает минуты три.
+
+1. ФОРМАТ
+- Вертикаль 9:16, разрешение не ниже 1080p.
+- Проверь, что важное не уезжает под интерфейс площадки: верхние и нижние примерно 15 процентов кадра держи свободными от текста.
+
+2. СУБТИТРЫ
+- Язык распознавания ставь русский до запуска обработки, иначе получишь транслитерацию.
+- Размер шрифта крупный, читается на телефоне с вытянутой руки.
+- Одновременно на экране не больше 3-4 слов, длинную строку зритель не успевает прочесть.
+- Позиция по центру или чуть выше центра, ближе к линии взгляда.
+
+3. АКЦЕНТЫ
+- Подсветку цветом ставь только на ключевые слова смысла, примерно одно слово на фразу. Подсвеченное всё читается как не подсвеченное ничего.
+- Первые три секунды: субтитр появляется сразу с первым словом, без задержки.
+
+4. ЗВУК
+- Прогони очистку звука, если запись делалась на телефон.
+- Музыкальную подложку держи тише голоса, ориентир примерно минус восемнадцать по ощущению, голос всегда впереди.
+
+5. ПОСЛЕДНИЙ ПРОСМОТР
+- Посмотри ролик целиком с выключенным звуком. Если смысл считывается по субтитрам без звука, упаковка сделана правильно.
+- Проверь, что в кадре нет чужих логотипов, ников и водяных знаков.
+
+6. ЭКСПОРТ
+- Скачивай файл и выкладывай его на площадку напрямую, без пересжатия в мессенджерах, иначе потеряешь качество.</div><div class="note">Проверка без звука это главный тест этого этапа. Значительная часть просмотров в ленте идёт с выключенным звуком, особенно днём и в транспорте. Если твой ролик без звука превращается в набор картинок без смысла, он теряет этих зрителей на второй секунде. Если субтитры несут смысл сами по себе, ролик работает в обоих режимах, и удержание растёт на том же самом видео.</div></div>
+<div class="sec"><h2 id="sec-7">Маршрут на один вечер: от пустого экрана до готового ролика</h2><p>Здесь шесть сервисов складываются в одну последовательность. Маршрут рассчитан примерно на час у человека, который делает это впервые, и минут на двадцать, когда рука набита. Проходи строго по порядку, потому что каждый шаг кормит следующий.</p><div class="grid2"><div class="cardb"><h3>Минуты 0-10. Тема и хук</h3><p>ChatGPT, промпт из второго раздела. Собираешь тридцать тем, отмечаешь пять, берёшь одну на сегодня. Из строки таблицы у тебя уже есть тема, боль дословной фразой зрителя, хук на три секунды и обещание. Дальше эти четыре элемента едут по всей цепочке без изменений, поэтому выбирай осознанно.</p></div><div class="cardb"><h3>Минуты 10-25. Тексты</h3><p>Claude, промпт из третьего раздела. Получаешь описание под ролик на 1900 знаков и сценарий на двадцать секунд. Сценарий сразу прогоняешь через редактуру под чтение вслух из пятого раздела. На выходе у тебя два текста: один для площадки, второй для озвучки.</p></div><div class="cardb"><h3>Минуты 25-40. Картинка и звук</h3><p>Dreamina с моделью Seedance по шаблону из четвёртого раздела: генерируешь видеоряд, при необходимости несколько кусков. Параллельно, пока идёт генерация, отправляешь текст в ElevenLabs и получаешь озвучку своим голосом. Если формат ролика с говорящим лицом, вместо этих двух шагов идёшь в HeyGen и собираешь аватара.</p></div><div class="cardb"><h3>Минуты 40-55. Сборка и упаковка</h3><p>Складываешь видеоряд и звуковую дорожку, загружаешь в Submagic, ставишь русский язык распознавания, выбираешь шаблон субтитров, проходишь чек-лист из шестого раздела и выгружаешь готовый файл. Последние пять минут уходят на публикацию с готовым описанием и призывом с кодовым словом.</p></div></div><div class="note">Что делать, если застрял на первом прогоне. Самая частая точка остановки это генерация видео, потому что первый результат почти никогда не совпадает с картинкой в голове. Не буксуй там. Возьми любой подходящий кадр, доведи ролик до конца по всей цепочке и опубликуй. Смысл первого прогона в том, чтобы пройти весь маршрут целиком и увидеть его узкие места на своём материале. Красивый видеоряд подтянется на третьем-четвёртом ролике, когда ты начнёшь чувствовать, как модель читает твои описания.</div></div>
+<div class="sec"><h2 id="sec-8">Мастер-промпт продюсера: весь пакет материалов за один заход</h2><p>Когда маршрут понятен, отдельные промпты по каждому сервису можно заменить одним. Этот промпт выдаёт сразу весь пакет под один ролик: тему, хук, сценарий, промпт для генерации видео, текст под озвучку, описание для площадки и призыв. Дальше ты просто разносишь готовые куски по шести сервисам, ничего не придумывая по дороге.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как продюсер коротких вертикальных видео. Ты собираешь полный производственный пакет под один ролик так, чтобы исполнителю оставалось только разнести материалы по сервисам.
+
+Вводные:
+- Ниша: [твоя ниша]
+- Аудитория: [кто эти люди и что их беспокоит]
+- Тема ролика: [тема, или напиши «предложи сам» и тогда сначала дай 5 вариантов на выбор]
+- Формат: [сгенерированный видеоряд с закадровым голосом / говорящий аватар в кадре]
+- Хронометраж: [например 20 секунд]
+- Кодовое слово: [например ЭРА]
+- Куда ведём: [бот, личные сообщения, комментарии]
+
+Выдай ровно семь блоков, каждый с заголовком, в таком порядке:
+
+БЛОК 1. ХУК. Первая фраза ролика, максимум 9 слов, произносится за 3 секунды. Дай 3 варианта и отметь, какой сильнее и почему, одной строкой.
+
+БЛОК 2. СЦЕНАРИЙ. Раскладка по секундам под указанный хронометраж, в формате «0-3 сек: текст», построчно. Смысл должен закрываться полностью внутри хронометража.
+
+БЛОК 3. ПРОМПТ ДЛЯ ГЕНЕРАЦИИ ВИДЕО. На английском, по блокам SUBJECT, ACTION, CAMERA, LIGHT, STYLE, MOOD. Одно действие на сцену. Если ролику нужно несколько сцен, дай отдельный промпт на каждую и пронумеруй.
+
+БЛОК 4. ТЕКСТ ПОД ОЗВУЧКУ. Сценарий, переписанный под чтение вслух: без спотыканий, с паузами двойным переносом строки, числа словами, английские термины кириллицей. В конце расчётный хронометраж при темпе 150 слов в минуту.
+
+БЛОК 5. ОПИСАНИЕ ДЛЯ ПЛОЩАДКИ. 1800-2000 знаков с пробелами по структуре: цепляющая первая строка, абзац боли, разворот с настоящей причиной, механика списком, живой пример с деталями, призыв. В конце укажи количество знаков.
+
+БЛОК 6. ПРИЗЫВ. Одна конкретная формулировка с кодовым словом и указанием, куда писать. Без обещаний сумм и сроков.
+
+БЛОК 7. ЧЕК-ЛИСТ УПАКОВКИ. 5 пунктов, что проверить в этом конкретном ролике перед публикацией, с учётом его темы и формата.
+
+Жёсткие требования к языку во всех блоках на русском:
+- Ноль длинных тире, вместо них запятая или точка.
+- Никаких конструкций вида «не X, а Y».
+- Обращение на «ты».
+- Живая речь, предложения договорённые до конца, перечисления списком.
+- Без канцелярита и без обещаний конкретных сумм.
+
+Если вводных не хватает, задай максимум три уточняющих вопроса и только потом выдавай пакет.">Скопировать</button></div><div class="box">Действуй как продюсер коротких вертикальных видео. Ты собираешь полный производственный пакет под один ролик так, чтобы исполнителю оставалось только разнести материалы по сервисам.
+
+Вводные:
+- Ниша: [твоя ниша]
+- Аудитория: [кто эти люди и что их беспокоит]
+- Тема ролика: [тема, или напиши «предложи сам» и тогда сначала дай 5 вариантов на выбор]
+- Формат: [сгенерированный видеоряд с закадровым голосом / говорящий аватар в кадре]
+- Хронометраж: [например 20 секунд]
+- Кодовое слово: [например ЭРА]
+- Куда ведём: [бот, личные сообщения, комментарии]
+
+Выдай ровно семь блоков, каждый с заголовком, в таком порядке:
+
+БЛОК 1. ХУК. Первая фраза ролика, максимум 9 слов, произносится за 3 секунды. Дай 3 варианта и отметь, какой сильнее и почему, одной строкой.
+
+БЛОК 2. СЦЕНАРИЙ. Раскладка по секундам под указанный хронометраж, в формате «0-3 сек: текст», построчно. Смысл должен закрываться полностью внутри хронометража.
+
+БЛОК 3. ПРОМПТ ДЛЯ ГЕНЕРАЦИИ ВИДЕО. На английском, по блокам SUBJECT, ACTION, CAMERA, LIGHT, STYLE, MOOD. Одно действие на сцену. Если ролику нужно несколько сцен, дай отдельный промпт на каждую и пронумеруй.
+
+БЛОК 4. ТЕКСТ ПОД ОЗВУЧКУ. Сценарий, переписанный под чтение вслух: без спотыканий, с паузами двойным переносом строки, числа словами, английские термины кириллицей. В конце расчётный хронометраж при темпе 150 слов в минуту.
+
+БЛОК 5. ОПИСАНИЕ ДЛЯ ПЛОЩАДКИ. 1800-2000 знаков с пробелами по структуре: цепляющая первая строка, абзац боли, разворот с настоящей причиной, механика списком, живой пример с деталями, призыв. В конце укажи количество знаков.
+
+БЛОК 6. ПРИЗЫВ. Одна конкретная формулировка с кодовым словом и указанием, куда писать. Без обещаний сумм и сроков.
+
+БЛОК 7. ЧЕК-ЛИСТ УПАКОВКИ. 5 пунктов, что проверить в этом конкретном ролике перед публикацией, с учётом его темы и формата.
+
+Жёсткие требования к языку во всех блоках на русском:
+- Ноль длинных тире, вместо них запятая или точка.
+- Никаких конструкций вида «не X, а Y».
+- Обращение на «ты».
+- Живая речь, предложения договорённые до конца, перечисления списком.
+- Без канцелярита и без обещаний конкретных сумм.
+
+Если вводных не хватает, задай максимум три уточняющих вопроса и только потом выдавай пакет.</div><div class="note">Как этим пользоваться на потоке. Один раз заполни вводные под свою нишу и сохрани заполненный промпт отдельным файлом в заметках. Дальше на каждый новый ролик ты меняешь в нём одну строку с темой и получаешь готовый пакет за минуту. Через неделю такой работы у тебя накапливается библиотека пакетов, и производство ролика перестаёт зависеть от настроения и вдохновения, оно превращается в понятную последовательность действий, которую можно выполнять даже в плохой день.</div></div>
+<div class="sec"><h2 id="sec-9">Бюджет: с чего начать и что подключать платно первым</h2><p>Весь этот конвейер можно завести бесплатно и пройти по нему первые несколько роликов, чтобы понять, нужен ли он тебе вообще. Дальше подписки подключаются по одной, в порядке реальной отдачи. Здесь разложено, что даёт бесплатный вход, где он упирается в потолок и в какой последовательности разумно расширяться.</p><div class="grid2"><div class="cardb"><h3>Что реально доступно бесплатно</h3><p>ChatGPT и Claude дают бесплатные уровни с ограничением по объёму общения, для одного-двух роликов в день этого хватает. Dreamina начисляет бесплатные кредиты каждый день, они восстанавливаются. ElevenLabs даёт около десяти тысяч кредитов в месяц, это примерно десять минут озвучки. HeyGen даёт три видео в месяц до минуты с водяным знаком. Submagic даёт три пробных видео. Полный первый ролик собирается без единой оплаты.</p></div><div class="cardb"><h3>Где бесплатный уровень упирается</h3><p>Ограничений в основном три. Первое: у ElevenLabs на бесплатном уровне нет коммерческой лицензии, для роликов, которые ведут к продаже, нужен платный тариф. Второе: HeyGen ставит водяной знак на бесплатные ролики, а три видео в месяц это меньше одного в неделю. Третье: пробные видео у Submagic заканчиваются на третьем ролике, дальше упаковка требует подписки.</p></div><div class="cardb"><h3>Порядок подключения подписок</h3><p>Первым имеет смысл подключать Submagic, потому что упаковка работает на каждом ролике без исключения и напрямую влияет на удержание. Вторым уровень ChatGPT или Claude, чтобы не упираться в лимиты на середине рабочей сессии. Третьим ElevenLabs, когда пойдёт регулярный поток роликов с закадровым голосом. HeyGen подключай последним и только если ты действительно выбрал формат с говорящим лицом и снимать сам не готов.</p></div><div class="cardb"><h3>Разумный старт по стоимости</h3><p>Минимальный работающий набор на месяц это одна подписка на упаковку и одна на тексты, вместе это примерно тридцать пять-сорок долларов в месяц по стартовым тарифам. Полный набор из всех шести с платными уровнями выходит существенно дороже, и заходить в него сразу смысла нет. Годовая оплата у большинства сервисов заметно дешевле помесячной, но переходи на неё после того, как проработаешь на сервисе хотя бы месяц.</p></div></div><div class="note">Честное предупреждение про цифры. Все стоимости и лимиты на этой странице сверены с официальными страницами тарифов на момент публикации, но в этой области условия пересматриваются часто, иногда несколько раз в год, и состав тарифов может отличаться в зависимости от страны. Перед любой оплатой открывай ссылку из карточки сервиса и смотри актуальные условия своими глазами. Отдельно проверяй способ оплаты: у части сервисов прямая оплата из России недоступна, вопрос решается зарубежной картой или через посредников.</div></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Как эти шесть складываются в один конвейер</a><a href="#sec-1">Сервис 1. ChatGPT: темы, хуки, быстрые черновики</a><a href="#sec-2">Сервис 2. Claude: длинные тексты, структура, описания под ролик</a><a href="#sec-3">Сервис 3. Seedance через Dreamina: видео без съёмки</a><a href="#sec-4">Сервис 4. ElevenLabs: голос, включая твой собственный</a><a href="#sec-5">Сервис 5. HeyGen: говорящий аватар вместо съёмки</a><a href="#sec-6">Сервис 6. Submagic: субтитры и финальная упаковка</a><a href="#sec-7">Маршрут на один вечер: от пустого экрана до готового ролика</a><a href="#sec-8">Мастер-промпт продюсера: весь пакет материалов за один заход</a><a href="#sec-9">Бюджет: с чего начать и что подключать платно первым</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
