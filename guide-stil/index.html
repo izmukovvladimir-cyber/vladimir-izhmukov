@@ -1,0 +1,822 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Стильные нейрофото по чужому промпту: где брать галереи и двенадцать готовых стилей портрета</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-obraz-i-vnesnost">Образ и внешность</a></div>
+<h1>Стильные нейрофото по чужому промпту: где брать галереи и двенадцать готовых стилей портрета</h1>
+<p class="lead">Стильные нейрофото делаются не так, как думает большинство. Люди сидят и выдумывают описание своими словами, получают пластиковое лицо и бросают. Рабочий путь короче. Есть сайты, куда авторы выкладывают свои картинки вместе с промптами, которыми они сделаны. Это как лента Пинтереста, только под каждым снимком лежит готовый текст запроса. Ты листаешь, находишь кадр, который тебе нравится, копируешь его промпт, вставляешь в ChatGPT вместе со своим фото и получаешь себя в этом стиле. Всё. Ниже лежат сами галереи со ссылками, я прошёл по каждой и отметил, где промпт видно сразу, а где просят регистрацию. Дальше двенадцать готовых промптов под стильные портреты, каждый копируется одним блоком, и под каждым написано, какой стиль он даёт и на каком твоём фото сработает лучше всего. Плюс установочное сообщение, которое держит твоё лицо от кадра к кадру, и чинилка на случай, когда лицо поплыло или ChatGPT отказался.</p>
+<p class="meta">Подборка живых галерей нейропромптов со ссылками и пометками про регистрацию, двенадцать готовых промптов под стильные портреты с разбором, какой стиль каждый даёт, установочное сообщение для сохранения лица, промпт для вытаскивания чужого промпта из понравившейся картинки, чинилка на пять типовых поломок и честный блок про доступ из России.</p>
+<div class="how">Открой любую галерею из первого списка, найди кадр в стиле, который тебе нравится, и скопируй промпт под ним. Если промпта не показали, прогони картинку через промпт-разборщик из третьего раздела, он соберёт текст запроса за тебя. Дальше отправь в ChatGPT установочное сообщение с одним своим фото, дождись ответа и вставляй промпты по одному. Двенадцать готовых промптов ниже работают сразу, без галереи, просто подставь свою одежду и цвет фона в квадратных скобках. Если результат вышел не тот, иди в раздел с чинилкой, там разобраны все пять типовых поломок.</div>
+<div class="sec"><h2 id="sec-0">Как это работает и почему чужой промпт сильнее твоего описания</h2><p>Механика на одну минуту чтения, дальше сразу практика.</p><p>Когда человек описывает картинку своими словами, он пишет про сюжет. Костюм, город, закат. Модель получает сюжет и добирает всё остальное на своё усмотрение, поэтому выходит гладкое пластиковое лицо и свет из ниоткуда. Автор красивого кадра пишет по-другому. Он задаёт схему света, фокусное расстояние объектива, диафрагму, характер плёнки, глубину теней, фактуру кожи. Именно эти строчки и делают снимок похожим на настоящую съёмку. Забирая чужой промпт из галереи, ты забираешь чужой опыт настройки, который автор собирал десятками попыток.</p><ol><li>Заходишь в галерею промптов. Это сайт, где под каждой картинкой лежит текст, которым она сделана.</li><li>Находишь кадр в стиле, который тебе нравится, и жмёшь копирование промпта.</li><li>Открываешь ChatGPT, прикладываешь своё фото и вставляешь скопированный текст, добавив к нему требование перенести твоё лицо без изменений.</li><li>Получаешь себя в этом стиле. Дальше правишь одежду, фон и свет прямо в чате словами.</li></ol><div class="note">Промпты из галерей часто написаны под Midjourney или Stable Diffusion. В ChatGPT они всё равно работают, потому что модель понимает описание сцены. Служебные хвосты вроде параметров с двойными дефисами просто удали перед вставкой, они ничего не дают и иногда сбивают ответ.</div></div>
+<div class="sec"><h2 id="sec-1">Галереи промптов, проверенные вживую</h2><p>Я прошёл по каждой ссылке и отметил, где промпт видно сразу без входа, а где просят регистрацию. Порядок не случайный, сверху те, где промпты открытые и качество картинок ближе к фотографии.</p><h3>1. PromptHero. Самая большая база с открытыми промптами</h3><p>Поисковик по картинкам с промптами, разложенный по моделям. Есть отдельные разделы под ChatGPT Image и под Midjourney, там кадры ближе всего к фотографии. Промпт открывается кликом по картинке, копируется без регистрации. Аккаунт нужен только для сохранения избранного. Для портретов ищи по словам portrait, cinematic portrait, studio light, editorial.</p><a class="linkbtn" href="https://prompthero.com/chatgpt-image-prompts" target="_blank" rel="noopener">Открыть PromptHero, раздел ChatGPT Image</a><a class="linkbtn" href="https://prompthero.com/midjourney-prompts" target="_blank" rel="noopener">Открыть PromptHero, раздел Midjourney</a><h3>2. Prompt Gallery. Промпты целиком, копирование в один клик</h3><p>Молодой каталог, но сделан ровно под нашу задачу. Текст промпта показан полностью прямо под картинкой, рядом кнопка копирования, вход не нужен. Собраны промпты под Nano Banana, Veo, Midjourney, FLUX и Stable Diffusion, то есть под те модели, которыми люди пользуются прямо сейчас.</p><a class="linkbtn" href="https://www.prompt-gallery.art" target="_blank" rel="noopener">Открыть Prompt Gallery</a><h3>3. Promptono. Лента с длинными промптами под портреты</h3><p>Похожа на ленту Пинтереста, промпты длинные и подробные, с описанием ракурса, положения камеры и света. Под каждым кадром кнопка копирования, регистрацию не просят. Здесь удобно смотреть, как выглядит по-настоящему проработанный промпт, и учиться писать свои.</p><a class="linkbtn" href="https://www.promptono.com" target="_blank" rel="noopener">Открыть Promptono</a><h3>4. Arthub. Библиотека промптов с голосованием</h3><p>Раздел Prompt Library, промпты видны полностью и без входа, рядом счётчик голосов, поэтому сильные варианты всплывают наверх сами. Много портретов и художественных стилей. Картинки местами старые, зато формулировки промптов отличные, их спокойно можно переносить в ChatGPT.</p><a class="linkbtn" href="https://arthub.ai/library" target="_blank" rel="noopener">Открыть библиотеку Arthub</a><h3>5. Lexica. Десять миллионов картинок с промптами</h3><p>Старейший поисковик по промптам, просмотр бесплатный. База огромная, но собиралась вокруг Stable Diffusion, поэтому часть картинок выглядит устаревшей. Заходить сюда стоит за формулировками света и стиля, они универсальные. Ищи по запросу portrait photography и добавляй нужное настроение.</p><a class="linkbtn" href="https://lexica.art/?q=portrait" target="_blank" rel="noopener">Открыть Lexica с поиском по портретам</a><h3>6. OpenArt Discovery. Лента с разбором настроек</h3><p>Лента работ сообщества, у картинки открывается весь набор настроек и промпт. Часть действий вроде повтора кадра в один клик становится доступна после входа, но сам текст промпта читается и без аккаунта. Здесь же лежит их разборщик картинок, который собирает промпт по загруженному изображению.</p><a class="linkbtn" href="https://openart.ai/discovery" target="_blank" rel="noopener">Открыть OpenArt Discovery</a><a class="linkbtn" href="https://openart.ai/features/image-to-prompt" target="_blank" rel="noopener">Открыть разборщик картинок OpenArt</a><h3>7. Civitai. Мощная база, но с оговорками</h3><p>Огромный каталог картинок с полными настройками генерации, включая модели и веса. Две честные оговорки. Первая, на сайте много взрослого контента, фильтр приходится выкручивать руками. Вторая, площадка закрыла доступ для Великобритании и Австралии из-за требований по проверке возраста, так что при включённом VPN выбирай другую страну. Заходить сюда есть смысл, когда ты уже освоился и хочешь тонкие настройки.</p><a class="linkbtn" href="https://civitai.com/images" target="_blank" rel="noopener">Открыть галерею Civitai</a><h3>8. SpacePrompts и PromptBase. Смотреть можно, забрать сложнее</h3><p>SpacePrompts показывает картинки и начало промпта, полный текст открывается после бесплатной регистрации. PromptBase это магазин, большинство промптов там продаётся поштучно, но есть отдельный бесплатный раздел, где лежит несколько тысяч готовых. Оба сайта держи как запасные, если в первых семи не нашёл нужный стиль.</p><a class="linkbtn" href="https://www.spaceprompts.com/gallery" target="_blank" rel="noopener">Открыть SpacePrompts, полный текст после регистрации</a><a class="linkbtn" href="https://promptbase.com/free-prompts" target="_blank" rel="noopener">Открыть бесплатный раздел PromptBase</a><div class="note">Все восемь ссылок проверены и открываются. Отдельно скажу про две площадки, о которых спрашивают чаще всего. Витрина Midjourney и лента Sora требуют входа в аккаунт сервиса, посмотреть их без регистрации не получится, поэтому в основной список я их не ставил.</div></div>
+<div class="sec"><h2 id="sec-2">Как забрать промпт из картинки, под которой его не показали</h2><p>Половина красивых кадров в лентах и в Пинтересте лежит вообще без промпта. Это не тупик. ChatGPT умеет разобрать картинку и собрать промпт обратно.</p><p>Скачай понравившуюся картинку, открой новый чат, приложи её и вставь запрос ниже. На выходе получишь готовый промпт, который можно сразу применять к своему фото. Работает и с чужими нейрокартинками, и с обычными фотографиями из журналов.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты промпт-инженер по генерации изображений с опытом в рекламной и портретной съёмке. Я приложил картинку, стиль которой хочу повторить на своём фото.
+
+Разбери её и собери промпт, который воспроизведёт этот стиль на другом человеке.
+
+Что разобрать в картинке:
+- тип кадра и крупность (портрет, поясной, общий), ракурс и положение камеры
+- схема света: откуда падает основной свет, есть ли контровой, жёсткий он или мягкий, где лежат тени
+- оптика: примерное фокусное расстояние, глубина резкости, характер размытия фона
+- цвет и обработка: температура, контраст, насыщенность, зерно, свечение
+- фон, окружение, одежда, фактуры
+- общее настроение кадра
+
+Формат ответа строго такой:
+
+1. РАЗБОР. Шесть коротких пунктов по списку выше, по одной строке на пункт.
+
+2. ПРОМПТ НА РУССКОМ. Один готовый абзац для вставки в ChatGPT вместе с фотографией человека. Обязательно включи в него требование перенести лицо с приложенного фото без изменений и сохранить живую кожу с порами.
+
+3. ПРОМПТ НА АНГЛИЙСКОМ. Тот же текст на английском, одним блоком.
+
+4. ТРИ РУЧКИ. Три параметра, которые сильнее всего меняют результат в этом стиле, и что произойдёт, если каждый из них усилить или ослабить.
+
+Если по картинке невозможно определить какой-то параметр, напиши честно «не определяется» и предложи два рабочих варианта на выбор.">Скопировать</button></div><div class="box">Ты промпт-инженер по генерации изображений с опытом в рекламной и портретной съёмке. Я приложил картинку, стиль которой хочу повторить на своём фото.
+
+Разбери её и собери промпт, который воспроизведёт этот стиль на другом человеке.
+
+Что разобрать в картинке:
+- тип кадра и крупность (портрет, поясной, общий), ракурс и положение камеры
+- схема света: откуда падает основной свет, есть ли контровой, жёсткий он или мягкий, где лежат тени
+- оптика: примерное фокусное расстояние, глубина резкости, характер размытия фона
+- цвет и обработка: температура, контраст, насыщенность, зерно, свечение
+- фон, окружение, одежда, фактуры
+- общее настроение кадра
+
+Формат ответа строго такой:
+
+1. РАЗБОР. Шесть коротких пунктов по списку выше, по одной строке на пункт.
+
+2. ПРОМПТ НА РУССКОМ. Один готовый абзац для вставки в ChatGPT вместе с фотографией человека. Обязательно включи в него требование перенести лицо с приложенного фото без изменений и сохранить живую кожу с порами.
+
+3. ПРОМПТ НА АНГЛИЙСКОМ. Тот же текст на английском, одним блоком.
+
+4. ТРИ РУЧКИ. Три параметра, которые сильнее всего меняют результат в этом стиле, и что произойдёт, если каждый из них усилить или ослабить.
+
+Если по картинке невозможно определить какой-то параметр, напиши честно «не определяется» и предложи два рабочих варианта на выбор.</div><div class="note">Если картинка сложная, попроси дополнительно: «собери промпт так, чтобы в кадре был один человек». Часто разборщик тянет в промпт лишние объекты со второго плана, и потом они лезут в твой снимок.</div></div>
+<div class="sec"><h2 id="sec-3">Какое фото загружать, чтобы лицо не поплыло</h2><p>Восемь из десяти провалов начинаются здесь. Модель не может достать то, чего нет на исходнике.</p><ol><li>Кадр по грудь или по пояс, лицо занимает примерно треть высоты снимка. Портрет во весь рост даёт мало пикселей на лицо, и черты начнут гулять.</li><li>Ракурс анфас или лёгкий разворот в три четверти. Профиль и запрокинутая голова работают плохо, модель домысливает вторую половину лица.</li><li>Свет ровный и мягкий, лучше всего дневной от окна. Лицо целиком освещено, глубоких теней на половине лица нет, лоб и нос не пересвечены в белое пятно.</li><li>Разрешение от 1000 пикселей по короткой стороне, а лучше просто оригинал с телефона. Скриншот из мессенджера и картинка, пережатая в переписке, дают мыло.</li><li>Глаза открыты, взгляд в камеру, очки лучше снять. Тёмные очки закрывают половину примет, по которым модель узнаёт лицо.</li><li>Ничего не закрывает лицо: ни рука, ни микрофон, ни маска, ни капюшон на глазах.</li><li>Никаких фильтров, бьютификации и сглаживания кожи. Если исходник уже приглажен, на выходе будет манекен.</li><li>Приготовь два или три разных снимка: анфас, три четверти, и один средний план. Модель по нескольким кадрам собирает лицо заметно устойчивее.</li></ol><div class="note">Главное правило по всей цепочке: никогда не генерируй из сгенерированного. Как только ты возьмёшь готовый нейроснимок и подашь его как исходник для следующего, лицо начнёт плыть с каждым шагом. Всегда возвращайся к своему настоящему фото.</div></div>
+<div class="sec"><h2 id="sec-4">Порядок действий от галереи до готового снимка</h2><p>Весь путь занимает минут пять, дальше идёт только перебор стилей.</p><ol><li>Открой ChatGPT и создай новый чат. Один стиль в одном чате живёт лучше, чем десять стилей вперемешку.</li><li>Приложи своё фото через кнопку с плюсом слева от поля ввода. Если снимков несколько, прикладывай их одним сообщением.</li><li>Отправь установочное сообщение из следующего раздела и дождись ответа. Оно задаёт правила, которые дальше действуют на все генерации в этом чате.</li><li>Вставь промпт: либо скопированный из галереи, либо готовый из подборки ниже. Подставь свои значения в квадратных скобках.</li><li>Посмотри на результат и правь его словами прямо в чате. Работают короткие команды: «свет мягче», «фон темнее», «убери улыбку», «кадр крупнее», «лицо ближе к моему фото».</li><li>Понравившийся кадр скачай сразу. Дальше меняй только один параметр за раз, так ты поймёшь, что именно улучшает картинку.</li><li>Когда стиль найден, сохрани рабочий промпт себе в заметки. Через неделю ты не вспомнишь, какая формулировка дала лучший кадр.</li></ol><div class="note">Проси по одному изображению за раз. Когда модель делает четыре варианта разом, она экономит внимание на каждом, и сходство с твоим лицом падает почти всегда.</div></div>
+<div class="sec"><h2 id="sec-5">Установочное сообщение, которое держит твоё лицо</h2><p>Отправляется один раз в начале чата вместе с фотографией. Дальше работает на все промпты подряд, и тебе не нужно каждый раз дописывать требования про лицо.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты фотограф и ретушёр уровня рекламной съёмки. Я приложил своё фото. Дальше я буду присылать описания стилей, а ты каждый раз будешь помещать МЕНЯ в описанный кадр.
+
+Правила, которые действуют для всех следующих генераций в этом чате:
+
+1. Лицо переноси с моего фото один в один: форма и длина носа, разрез и посадка глаз, брови, линия скул и челюсти, форма губ, борода и её длина, родинки, естественная асимметрия лица.
+2. Не омолаживай меня, не худей, не выпрямляй нос, не увеличивай глаза, не делай зубы неоново-белыми.
+3. Кожа остаётся живой: видимые поры, лёгкая неровность тона, мимические складки на месте, мягкое фотографическое зерно. Гладкая пластиковая кожа считается браком.
+4. Телосложение, рост и пропорции оставляй мои.
+5. Кадр вертикальный, соотношение 4:5, разрешение максимальное из доступных.
+6. Никаких надписей, логотипов, водяных знаков и подписей в кадре.
+7. Если описание стиля противоречит моей внешности, приоритет всегда у моей внешности.
+8. Делай по одному изображению за запрос.
+
+Если всё понял, ответь одним словом «принял» и жди первое описание стиля.">Скопировать</button></div><div class="box">Ты фотограф и ретушёр уровня рекламной съёмки. Я приложил своё фото. Дальше я буду присылать описания стилей, а ты каждый раз будешь помещать МЕНЯ в описанный кадр.
+
+Правила, которые действуют для всех следующих генераций в этом чате:
+
+1. Лицо переноси с моего фото один в один: форма и длина носа, разрез и посадка глаз, брови, линия скул и челюсти, форма губ, борода и её длина, родинки, естественная асимметрия лица.
+2. Не омолаживай меня, не худей, не выпрямляй нос, не увеличивай глаза, не делай зубы неоново-белыми.
+3. Кожа остаётся живой: видимые поры, лёгкая неровность тона, мимические складки на месте, мягкое фотографическое зерно. Гладкая пластиковая кожа считается браком.
+4. Телосложение, рост и пропорции оставляй мои.
+5. Кадр вертикальный, соотношение 4:5, разрешение максимальное из доступных.
+6. Никаких надписей, логотипов, водяных знаков и подписей в кадре.
+7. Если описание стиля противоречит моей внешности, приоритет всегда у моей внешности.
+8. Делай по одному изображению за запрос.
+
+Если всё понял, ответь одним словом «принял» и жди первое описание стиля.</div><div class="note">Если через несколько кадров лицо начало уезжать, просто отправь в тот же чат: «вернись к моему исходному фото, сходство важнее стиля» и приложи снимок ещё раз. Это дешевле, чем начинать новый чат.</div></div>
+<div class="sec"><h2 id="sec-6">Промпты 1-4. Деловые и премиальные портреты</h2><p>Эти четыре закрывают всё, что нужно эксперту: аватарка, шапка сайта, обложка канала, фото для статьи и презентации. Подставь свою одежду и цвет фона в квадратных скобках.</p><h3>Промпт 1. Студийный деловой портрет</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай студийный деловой портрет по моему фото.
+
+Кадр: поясной, вертикальный 4:5. Я развёрнут в три четверти, плечи опущены и расслаблены, спина ровная, взгляд прямо в объектив, лёгкая сдержанная улыбка с закрытыми губами.
+
+Свет: большой софтбокс слева сверху под углом 45 градусов, мягкая тень от носа уходит к уголку губ. Справа серебристый отражатель добавляет примерно четверть яркости и раскрывает тени. Отдельный контровой источник сзади отделяет плечи и волосы от фона.
+
+Фон: ровный тёмно-серый студийный градиент, чуть светлее за головой и темнее по краям кадра, без фактуры и без предметов.
+
+Одежда: [тёмно-синий костюм без галстука, белая рубашка, верхняя пуговица расстёгнута].
+
+Оптика: объектив 85 мм, диафрагма 2.8, точка резкости на ближнем глазу, фон размыт мягко и без колец.
+
+Обработка: естественный цвет кожи, средний контраст, поры и фактура кожи видны, зерно почти отсутствует, никакой глянцевой ретуши.
+
+Лицо переноси с моей фотографии без изменений, включая бороду, родинки и естественную асимметрию. Не омолаживай и не сглаживай черты. Никаких надписей и логотипов в кадре.">Скопировать</button></div><div class="box">Сделай студийный деловой портрет по моему фото.
+
+Кадр: поясной, вертикальный 4:5. Я развёрнут в три четверти, плечи опущены и расслаблены, спина ровная, взгляд прямо в объектив, лёгкая сдержанная улыбка с закрытыми губами.
+
+Свет: большой софтбокс слева сверху под углом 45 градусов, мягкая тень от носа уходит к уголку губ. Справа серебристый отражатель добавляет примерно четверть яркости и раскрывает тени. Отдельный контровой источник сзади отделяет плечи и волосы от фона.
+
+Фон: ровный тёмно-серый студийный градиент, чуть светлее за головой и темнее по краям кадра, без фактуры и без предметов.
+
+Одежда: [тёмно-синий костюм без галстука, белая рубашка, верхняя пуговица расстёгнута].
+
+Оптика: объектив 85 мм, диафрагма 2.8, точка резкости на ближнем глазу, фон размыт мягко и без колец.
+
+Обработка: естественный цвет кожи, средний контраст, поры и фактура кожи видны, зерно почти отсутствует, никакой глянцевой ретуши.
+
+Лицо переноси с моей фотографии без изменений, включая бороду, родинки и естественную асимметрию. Не омолаживай и не сглаживай черты. Никаких надписей и логотипов в кадре.</div><div class="note">Даёт строгий портрет для шапки сайта, обложки канала и деловой аватарки. Лучше всего работает с исходником анфас при дневном свете от окна, где лицо освещено ровно.</div><h3>Промпт 2. Обложка журнала, цветной фон</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай портрет в стиле обложки делового журнала по моему фото.
+
+Кадр: погрудный, вертикальный 4:5, строго по центру, много воздуха над головой. Я слегка развёрнут, взгляд прямо в объектив, выражение спокойное и уверенное, без улыбки.
+
+Фон: ровный однотонный бумажный студийный фон цвета [терракотовый], без фактуры, без виньетки, без градиента.
+
+Свет: один жёсткий источник сверху и чуть сбоку даёт чёткую тень под подбородком и подчёркнутые скулы. Снизу мягкая заливка примерно на четверть силы, чтобы тени не проваливались в чёрное. Небольшие блики на скулах и переносице.
+
+Одежда: [чёрная водолазка].
+
+Оптика: объектив 105 мм, диафрагма 4, всё лицо целиком в резкости.
+
+Цвет: насыщенный, кожа тёплая, фон плотный и однородный, контраст выше среднего.
+
+Лицо переноси с моей фотографии без изменений, кожа живая с видимыми порами. Никаких надписей, заголовков и логотипов в кадре, только чистая картинка.">Скопировать</button></div><div class="box">Сделай портрет в стиле обложки делового журнала по моему фото.
+
+Кадр: погрудный, вертикальный 4:5, строго по центру, много воздуха над головой. Я слегка развёрнут, взгляд прямо в объектив, выражение спокойное и уверенное, без улыбки.
+
+Фон: ровный однотонный бумажный студийный фон цвета [терракотовый], без фактуры, без виньетки, без градиента.
+
+Свет: один жёсткий источник сверху и чуть сбоку даёт чёткую тень под подбородком и подчёркнутые скулы. Снизу мягкая заливка примерно на четверть силы, чтобы тени не проваливались в чёрное. Небольшие блики на скулах и переносице.
+
+Одежда: [чёрная водолазка].
+
+Оптика: объектив 105 мм, диафрагма 4, всё лицо целиком в резкости.
+
+Цвет: насыщенный, кожа тёплая, фон плотный и однородный, контраст выше среднего.
+
+Лицо переноси с моей фотографии без изменений, кожа живая с видимыми порами. Никаких надписей, заголовков и логотипов в кадре, только чистая картинка.</div><div class="note">Даёт заметный редакторский кадр, который хорошо смотрится в ленте и на превью. Меняя цвет фона, получаешь целую серию в одном стиле. Работает почти с любым исходником, где лицо в резкости.</div><h3>Промпт 3. Тёмный премиальный портрет</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай тёмный премиальный портрет по моему фото.
+
+Кадр: поясной, вертикальный 4:5. Я развёрнут в три четверти, корпус слегка отклонён от камеры, лицо повёрнуто в объектив, взгляд собранный, без улыбки.
+
+Свет: узкий направленный источник сбоку под углом 60 градусов рисует на дальней щеке светлый треугольник, ближняя половина лица уходит в мягкую тень. Тонкий контровой контур обводит плечо и линию волос. Общая тональность низкая, света мало, теней много.
+
+Фон: почти чёрный, глубокий. В воздухе лёгкая дымка, которая ловит контровой свет и даёт объём.
+
+Одежда: [чёрный костюм, чёрная рубашка без галстука].
+
+Оптика: объектив 85 мм, диафрагма 2.0, резкость по глазам.
+
+Обработка: кинематографичная, глубокие но не выбитые чёрные тона, тёплые блики на коже, мелкое зерно.
+
+Лицо переноси с моей фотографии без изменений, включая бороду и родинки. Сохрани видимые поры и естественную неровность кожи.">Скопировать</button></div><div class="box">Сделай тёмный премиальный портрет по моему фото.
+
+Кадр: поясной, вертикальный 4:5. Я развёрнут в три четверти, корпус слегка отклонён от камеры, лицо повёрнуто в объектив, взгляд собранный, без улыбки.
+
+Свет: узкий направленный источник сбоку под углом 60 градусов рисует на дальней щеке светлый треугольник, ближняя половина лица уходит в мягкую тень. Тонкий контровой контур обводит плечо и линию волос. Общая тональность низкая, света мало, теней много.
+
+Фон: почти чёрный, глубокий. В воздухе лёгкая дымка, которая ловит контровой свет и даёт объём.
+
+Одежда: [чёрный костюм, чёрная рубашка без галстука].
+
+Оптика: объектив 85 мм, диафрагма 2.0, резкость по глазам.
+
+Обработка: кинематографичная, глубокие но не выбитые чёрные тона, тёплые блики на коже, мелкое зерно.
+
+Лицо переноси с моей фотографии без изменений, включая бороду и родинки. Сохрани видимые поры и естественную неровность кожи.</div><div class="note">Даёт дорогой и немного жёсткий кадр, который хорошо работает на обложку продукта или анонс выступления. Требует исходника хорошего качества: на этом свете любая мыльность заметна сразу.</div><h3>Промпт 4. Деловой репортаж в интерьере</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай репортажный деловой кадр в интерьере по моему фото.
+
+Сцена: современная переговорная со стеклянными стенами. Я сижу за столом вполоборота к камере, одна рука лежит на столе рядом с закрытым ноутбуком, вторая жестикулирует. Я разговариваю с человеком за кадром, на лице живая рабочая эмоция, лёгкая улыбка. Взгляд направлен в сторону, не в объектив.
+
+Свет: большое окно слева, пасмурный день, свет мягкий и рассеянный, теней почти нет. Внутри тёплые потолочные лампы на заднем плане.
+
+Фон: офисное пространство в расфокусе, вдалеке силуэты коллег, растение, стеклянная перегородка. Фон живой и обитаемый, не пустой.
+
+Одежда: [светло-серый пиджак поверх футболки].
+
+Оптика: объектив 35 мм, диафрагма 2.8, съёмка с уровня глаз сидящего человека, кадр слегка динамичный, как в репортаже.
+
+Обработка: естественные цвета, нейтральный баланс белого, средний контраст, лёгкое зерно, ощущение живого рабочего момента.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами. Никаких логотипов и надписей на стенах и экранах.">Скопировать</button></div><div class="box">Сделай репортажный деловой кадр в интерьере по моему фото.
+
+Сцена: современная переговорная со стеклянными стенами. Я сижу за столом вполоборота к камере, одна рука лежит на столе рядом с закрытым ноутбуком, вторая жестикулирует. Я разговариваю с человеком за кадром, на лице живая рабочая эмоция, лёгкая улыбка. Взгляд направлен в сторону, не в объектив.
+
+Свет: большое окно слева, пасмурный день, свет мягкий и рассеянный, теней почти нет. Внутри тёплые потолочные лампы на заднем плане.
+
+Фон: офисное пространство в расфокусе, вдалеке силуэты коллег, растение, стеклянная перегородка. Фон живой и обитаемый, не пустой.
+
+Одежда: [светло-серый пиджак поверх футболки].
+
+Оптика: объектив 35 мм, диафрагма 2.8, съёмка с уровня глаз сидящего человека, кадр слегка динамичный, как в репортаже.
+
+Обработка: естественные цвета, нейтральный баланс белого, средний контраст, лёгкое зерно, ощущение живого рабочего момента.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами. Никаких логотипов и надписей на стенах и экранах.</div><div class="note">Даёт кадр, который выглядит как снятый на реальной рабочей встрече. Постановка в нём не читается. Отлично идёт в статьи, презентации и посты про работу. Хорошо работает с исходником, где ты снят в три четверти.</div></div>
+<div class="sec"><h2 id="sec-7">Промпты 5-8. Кино, улица и вечер</h2><p>Эти четыре дают картинку с настроением. Их берут в личные посты, сторис и на обложки роликов, где нужна атмосфера.</p><h3>Промпт 5. Золотой час на улице</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай кинематографичный уличный портрет на закате по моему фото.
+
+Кадр: поясной, вертикальный 4:5. Я иду по тротуару и оборачиваюсь к камере, корпус в движении, руки естественно опущены, спокойное выражение лица.
+
+Свет: солнце низко за моей спиной, контровой свет даёт тёплый золотой ореол по волосам и плечам. Лицо освещено мягким отражением от светлой стены дома напротив, поэтому оно не в тени. В кадре лёгкая дымка и мягкий блик от солнца сбоку.
+
+Фон: улица живого города, вывески, припаркованные машины, прохожие идут по своим делам. Фон читается и остаётся узнаваемым, размытие умеренное, без сильного боке.
+
+Одежда: [бежевое пальто поверх белой футболки].
+
+Оптика: объектив 50 мм, диафрагма 2.8, съёмка с уровня глаз, кадр чуть асимметричный, я смещён от центра.
+
+Обработка: тёплая цветокоррекция, мягкие света, тени с лёгким холодным оттенком, заметное фотографическое зерно.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами и естественной неровностью тона.">Скопировать</button></div><div class="box">Сделай кинематографичный уличный портрет на закате по моему фото.
+
+Кадр: поясной, вертикальный 4:5. Я иду по тротуару и оборачиваюсь к камере, корпус в движении, руки естественно опущены, спокойное выражение лица.
+
+Свет: солнце низко за моей спиной, контровой свет даёт тёплый золотой ореол по волосам и плечам. Лицо освещено мягким отражением от светлой стены дома напротив, поэтому оно не в тени. В кадре лёгкая дымка и мягкий блик от солнца сбоку.
+
+Фон: улица живого города, вывески, припаркованные машины, прохожие идут по своим делам. Фон читается и остаётся узнаваемым, размытие умеренное, без сильного боке.
+
+Одежда: [бежевое пальто поверх белой футболки].
+
+Оптика: объектив 50 мм, диафрагма 2.8, съёмка с уровня глаз, кадр чуть асимметричный, я смещён от центра.
+
+Обработка: тёплая цветокоррекция, мягкие света, тени с лёгким холодным оттенком, заметное фотографическое зерно.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами и естественной неровностью тона.</div><div class="note">Даёт самый универсальный лайфстайл-кадр из всей подборки, его чаще всего сохраняют себе. Работает почти с любым исходником. Если хочешь серию, меняй только одежду и город, свет оставляй как есть.</div><h3>Промпт 6. Ночной город, неон после дождя</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай ночной портрет в неоновом городе по моему фото.
+
+Кадр: погрудный, вертикальный 4:5. Я стою вполоборота, смотрю в объектив, выражение спокойное и слегка отстранённое.
+
+Сцена: узкая городская улица сразу после дождя, мокрый асфальт отражает вывески, в воздухе висит влага.
+
+Свет: холодный синий источник слева как основной, тёплая розовая вывеска подсвечивает правую сторону лица и шею. На коже видны цветные рефлексы. Контровой свет от дальнего фонаря обводит плечи.
+
+Фон: размытые неоновые вывески, огни машин полосами, силуэты людей вдалеке. Фон тёмный, но с яркими цветными пятнами.
+
+Одежда: [чёрная куртка с поднятым воротником].
+
+Оптика: объектив 50 мм, диафрагма 1.8, резкость по глазам, огни на фоне превращаются в мягкие круги.
+
+Обработка: кино, высокий контраст, глубокие тени, насыщенные цвета, заметное зерно, лёгкое свечение вокруг ярких источников.
+
+Лицо переноси с моей фотографии без изменений. Цветной свет не должен менять форму черт лица. Кожа живая, с порами.">Скопировать</button></div><div class="box">Сделай ночной портрет в неоновом городе по моему фото.
+
+Кадр: погрудный, вертикальный 4:5. Я стою вполоборота, смотрю в объектив, выражение спокойное и слегка отстранённое.
+
+Сцена: узкая городская улица сразу после дождя, мокрый асфальт отражает вывески, в воздухе висит влага.
+
+Свет: холодный синий источник слева как основной, тёплая розовая вывеска подсвечивает правую сторону лица и шею. На коже видны цветные рефлексы. Контровой свет от дальнего фонаря обводит плечи.
+
+Фон: размытые неоновые вывески, огни машин полосами, силуэты людей вдалеке. Фон тёмный, но с яркими цветными пятнами.
+
+Одежда: [чёрная куртка с поднятым воротником].
+
+Оптика: объектив 50 мм, диафрагма 1.8, резкость по глазам, огни на фоне превращаются в мягкие круги.
+
+Обработка: кино, высокий контраст, глубокие тени, насыщенные цвета, заметное зерно, лёгкое свечение вокруг ярких источников.
+
+Лицо переноси с моей фотографии без изменений. Цветной свет не должен менять форму черт лица. Кожа живая, с порами.</div><div class="note">Даёт эффектный кадр под обложку ролика или пост про город и движение. Требует исходника, снятого при ровном свете: если на твоём фото уже есть жёсткие тени, они подерутся с неоном.</div><h3>Промпт 7. Кафе вечером, тёплое кино</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай тёплый вечерний кадр в кафе по моему фото.
+
+Кадр: погрудный, вертикальный 4:5. Я сижу за столиком у окна, локти на столе, руки обхватывают чашку, корпус чуть наклонён вперёд, смотрю в объектив спокойно и по-домашнему.
+
+Свет: тёплые лампы над барной стойкой сзади дают мягкие круглые блики. Основной свет идёт от окна сбоку, приглушённый вечерний. На лице мягкий переход от света к тени.
+
+Фон: интерьер кафе в расфокусе, гирлянда лампочек, полки, барная стойка, вдалеке размытые силуэты людей. Атмосфера обжитая и тёплая.
+
+Предметы в кадре: чашка кофе на столе, рядом лежит закрытый блокнот. Ничего лишнего.
+
+Одежда: [тёмно-зелёный свитер крупной вязки].
+
+Оптика: объектив 50 мм, диафрагма 1.8, резкость по глазам, лампочки на фоне превращаются в мягкое круглое боке.
+
+Обработка: тёплая, слегка приглушённая, мягкие тени, лёгкое зерно, ощущение позднего вечера.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами. Руки должны выглядеть анатомически правильно, пять пальцев на каждой.">Скопировать</button></div><div class="box">Сделай тёплый вечерний кадр в кафе по моему фото.
+
+Кадр: погрудный, вертикальный 4:5. Я сижу за столиком у окна, локти на столе, руки обхватывают чашку, корпус чуть наклонён вперёд, смотрю в объектив спокойно и по-домашнему.
+
+Свет: тёплые лампы над барной стойкой сзади дают мягкие круглые блики. Основной свет идёт от окна сбоку, приглушённый вечерний. На лице мягкий переход от света к тени.
+
+Фон: интерьер кафе в расфокусе, гирлянда лампочек, полки, барная стойка, вдалеке размытые силуэты людей. Атмосфера обжитая и тёплая.
+
+Предметы в кадре: чашка кофе на столе, рядом лежит закрытый блокнот. Ничего лишнего.
+
+Одежда: [тёмно-зелёный свитер крупной вязки].
+
+Оптика: объектив 50 мм, диафрагма 1.8, резкость по глазам, лампочки на фоне превращаются в мягкое круглое боке.
+
+Обработка: тёплая, слегка приглушённая, мягкие тени, лёгкое зерно, ощущение позднего вечера.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами. Руки должны выглядеть анатомически правильно, пять пальцев на каждой.</div><div class="note">Даёт домашний доверительный кадр под личные посты и истории про себя. Хорошо работает под текст, где ты рассказываешь свой путь. Руки в кадре модель иногда путает, поэтому в промпте стоит отдельное требование по пальцам.</div><h3>Промпт 8. Крыша и синий час</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай широкий портрет на крыше в синий час по моему фото.
+
+Кадр: поясной с большим захватом окружения, вертикальный 4:5. Я стою у парапета вполоборота, одна рука в кармане, смотрю в объектив, выражение спокойное.
+
+Сцена: крыша высокого здания, внизу расстилается город, вдалеке горизонт.
+
+Свет: время сразу после заката, небо глубокого синего цвета с тёплой полосой у горизонта. Огни города дают слабую тёплую подсветку снизу. Основной свет мягкий, рассеянный, от неба.
+
+Фон: панорама города с зажжёнными окнами и огнями дорог, детали читаются, размытие слабое.
+
+Одежда: [тёмная куртка, под ней белая футболка]. Ветер слегка треплет волосы и ткань.
+
+Оптика: объектив 35 мм, диафрагма 4, резкость и на мне, и на городе.
+
+Обработка: холодная синяя тональность с тёплыми акцентами от огней, средний контраст, лёгкое зерно, ощущение простора.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами.">Скопировать</button></div><div class="box">Сделай широкий портрет на крыше в синий час по моему фото.
+
+Кадр: поясной с большим захватом окружения, вертикальный 4:5. Я стою у парапета вполоборота, одна рука в кармане, смотрю в объектив, выражение спокойное.
+
+Сцена: крыша высокого здания, внизу расстилается город, вдалеке горизонт.
+
+Свет: время сразу после заката, небо глубокого синего цвета с тёплой полосой у горизонта. Огни города дают слабую тёплую подсветку снизу. Основной свет мягкий, рассеянный, от неба.
+
+Фон: панорама города с зажжёнными окнами и огнями дорог, детали читаются, размытие слабое.
+
+Одежда: [тёмная куртка, под ней белая футболка]. Ветер слегка треплет волосы и ткань.
+
+Оптика: объектив 35 мм, диафрагма 4, резкость и на мне, и на городе.
+
+Обработка: холодная синяя тональность с тёплыми акцентами от огней, средний контраст, лёгкое зерно, ощущение простора.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами.</div><div class="note">Даёт масштабный кадр под анонс, обложку выступления или пост про большие планы. Здесь лицо занимает мало места, поэтому исходник нужен резкий и крупный, иначе черты поплывут.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-8">Промпты 9-12. Плёнка, лайфстайл и обложки</h2><p>Последняя четвёрка про фактуру. Эти стили дальше всего уходят от гладкой нейрокартинки, поэтому именно они чаще всего заставляют людей спрашивать, где ты снимался.</p><h3>Промпт 9. Чёрно-белая плёнка, крупный план</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай чёрно-белый плёночный портрет крупным планом по моему фото.
+
+Кадр: крупный план, вертикальный 4:5, в кадре только лицо и плечи. Я смотрю прямо в объектив, выражение серьёзное и открытое, без улыбки.
+
+Свет: жёсткий боковой свет из окна слева. Освещена примерно половина лица, вторая уходит в глубокую тень, граница света и тени проходит по переносице. В глазах читается блик от окна.
+
+Фон: тёмная однотонная стена, без деталей.
+
+Плёнка: чёрно-белая Ilford HP5, чувствительность 400. Зерно заметное и живое, контраст высокий, чёрные тона глубокие, белые не выбиты в пустоту, полутона на коже сохранены.
+
+Оптика: объектив 85 мм, диафрагма 2.0, резкость по ближнему глазу.
+
+Обработка: без цифровой ретуши. Поры, морщины, щетина и неровности кожи должны быть отчётливо видны, это главная фактура кадра.
+
+Лицо переноси с моей фотографии без изменений. Не омолаживай, не сглаживай, не убирай мимические складки.">Скопировать</button></div><div class="box">Сделай чёрно-белый плёночный портрет крупным планом по моему фото.
+
+Кадр: крупный план, вертикальный 4:5, в кадре только лицо и плечи. Я смотрю прямо в объектив, выражение серьёзное и открытое, без улыбки.
+
+Свет: жёсткий боковой свет из окна слева. Освещена примерно половина лица, вторая уходит в глубокую тень, граница света и тени проходит по переносице. В глазах читается блик от окна.
+
+Фон: тёмная однотонная стена, без деталей.
+
+Плёнка: чёрно-белая Ilford HP5, чувствительность 400. Зерно заметное и живое, контраст высокий, чёрные тона глубокие, белые не выбиты в пустоту, полутона на коже сохранены.
+
+Оптика: объектив 85 мм, диафрагма 2.0, резкость по ближнему глазу.
+
+Обработка: без цифровой ретуши. Поры, морщины, щетина и неровности кожи должны быть отчётливо видны, это главная фактура кадра.
+
+Лицо переноси с моей фотографии без изменений. Не омолаживай, не сглаживай, не убирай мимические складки.</div><div class="note">Даёт самый честный и взрослый кадр из подборки, отлично идёт на аватарку и в личные посты. Работает только с резким исходником крупным планом. Если фото снято издалека, плёночное зерно превратит лицо в кашу.</div><h3>Промпт 10. Прямая вспышка, эстетика девяностых</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай портрет со вспышкой в эстетике плёночных снимков девяностых по моему фото.
+
+Кадр: поясной, вертикальный 4:5, снято с рук слегка небрежно, горизонт чуть завален. Я стою у стены, поза расслабленная, смотрю в объектив, лёгкая живая улыбка.
+
+Свет: прямая встроенная вспышка в лицо. Резкая чёткая тень от моей фигуры на стене за спиной, лёгкая пересветка на лбу, носу и скулах, тени под подбородком короткие и жёсткие. Фон уходит в темноту, потому что вспышка до него не достаёт.
+
+Фон: простая стена [кирпичная], рядом край двери или водосточная труба. Ничего постановочного.
+
+Одежда: [джинсовая куртка поверх белой футболки].
+
+Плёнка: цветная негативная плёнка, чувствительность 800. Зерно крупное, цвета слегка сдвинуты в тёплый, кожа с розоватым оттенком, контраст умеренный.
+
+Оптика: компактная плёночная камера, объектив 35 мм, всё в кадре примерно одинаково резкое.
+
+Лицо переноси с моей фотографии без изменений, включая бороду и родинки. Пересветка от вспышки не должна съедать черты лица. Никаких надписей и дат в кадре.">Скопировать</button></div><div class="box">Сделай портрет со вспышкой в эстетике плёночных снимков девяностых по моему фото.
+
+Кадр: поясной, вертикальный 4:5, снято с рук слегка небрежно, горизонт чуть завален. Я стою у стены, поза расслабленная, смотрю в объектив, лёгкая живая улыбка.
+
+Свет: прямая встроенная вспышка в лицо. Резкая чёткая тень от моей фигуры на стене за спиной, лёгкая пересветка на лбу, носу и скулах, тени под подбородком короткие и жёсткие. Фон уходит в темноту, потому что вспышка до него не достаёт.
+
+Фон: простая стена [кирпичная], рядом край двери или водосточная труба. Ничего постановочного.
+
+Одежда: [джинсовая куртка поверх белой футболки].
+
+Плёнка: цветная негативная плёнка, чувствительность 800. Зерно крупное, цвета слегка сдвинуты в тёплый, кожа с розоватым оттенком, контраст умеренный.
+
+Оптика: компактная плёночная камера, объектив 35 мм, всё в кадре примерно одинаково резкое.
+
+Лицо переноси с моей фотографии без изменений, включая бороду и родинки. Пересветка от вспышки не должна съедать черты лица. Никаких надписей и дат в кадре.</div><div class="note">Даёт живой и модный кадр, который читается как случайный снимок с вечеринки. Хорошо работает в сторис и в постах, где нужна лёгкость. Подходит почти любой исходник, потому что вспышка сама выравнивает свет.</div><h3>Промпт 11. Осенний лайфстайл на природе</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай осенний лайфстайл-портрет на природе по моему фото.
+
+Кадр: поясной, вертикальный 4:5. Я иду по парковой дорожке, руки в карманах, оборачиваюсь к камере, на лице спокойная тёплая улыбка с закрытыми губами.
+
+Сцена: городской парк в середине осени, жёлтая и рыжая листва на деревьях и под ногами, дорожка уходит вглубь кадра.
+
+Свет: пасмурный день, свет мягкий и рассеянный, теней почти нет, всё лицо освещено ровно. Никакого прямого солнца.
+
+Фон: деревья с осенней листвой, вдалеке размытые силуэты гуляющих людей и скамейки. Фон живой, глубина читается.
+
+Одежда: [тёмно-коричневое пальто, серый шарф].
+
+Оптика: объектив 85 мм, диафрагма 2.8, резкость по глазам, фон размыт мягко.
+
+Обработка: тёплая осенняя палитра, приглушённая насыщенность, мягкий контраст, лёгкое зерно, ощущение спокойного дня.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами и естественным румянцем от прохлады.">Скопировать</button></div><div class="box">Сделай осенний лайфстайл-портрет на природе по моему фото.
+
+Кадр: поясной, вертикальный 4:5. Я иду по парковой дорожке, руки в карманах, оборачиваюсь к камере, на лице спокойная тёплая улыбка с закрытыми губами.
+
+Сцена: городской парк в середине осени, жёлтая и рыжая листва на деревьях и под ногами, дорожка уходит вглубь кадра.
+
+Свет: пасмурный день, свет мягкий и рассеянный, теней почти нет, всё лицо освещено ровно. Никакого прямого солнца.
+
+Фон: деревья с осенней листвой, вдалеке размытые силуэты гуляющих людей и скамейки. Фон живой, глубина читается.
+
+Одежда: [тёмно-коричневое пальто, серый шарф].
+
+Оптика: объектив 85 мм, диафрагма 2.8, резкость по глазам, фон размыт мягко.
+
+Обработка: тёплая осенняя палитра, приглушённая насыщенность, мягкий контраст, лёгкое зерно, ощущение спокойного дня.
+
+Лицо переноси с моей фотографии без изменений. Кожа живая, с порами и естественным румянцем от прохлады.</div><div class="note">Даёт мягкий располагающий кадр под личные посты и приветственные сообщения. Пасмурный свет прощает слабый исходник лучше всех остальных стилей, поэтому начинай именно с него, если сомневаешься в качестве своей фотографии.</div><h3>Промпт 12. Обложка подкаста, студия</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Сделай студийный кадр для обложки подкаста по моему фото.
+
+Кадр: погрудный, вертикальный 4:5. Я сижу перед студийным микрофоном на пантографе, микрофон в нижней части кадра слегка сбоку и не закрывает лицо, наушники висят на шее. Смотрю в объектив, выражение живое, будто я на середине фразы.
+
+Свет: приглушённый общий свет, основной мягкий источник спереди сбоку рисует лицо. Сзади две цветные подсветки, [синяя слева и тёплая оранжевая справа], создают объём и отделяют меня от фона.
+
+Фон: тёмная студия, на стене акустические панели в расфокусе, дальше уходит в темноту.
+
+Одежда: [чёрная рубашка].
+
+Оптика: объектив 50 мм, диафрагма 2.0, резкость по глазам, микрофон чуть мягче в фокусе.
+
+Обработка: контрастная, тёмная тональность, насыщенные цветные акценты, лёгкое зерно.
+
+Лицо переноси с моей фотографии без изменений, кожа живая, с порами. Никаких надписей, названий и логотипов на микрофоне и панелях.">Скопировать</button></div><div class="box">Сделай студийный кадр для обложки подкаста по моему фото.
+
+Кадр: погрудный, вертикальный 4:5. Я сижу перед студийным микрофоном на пантографе, микрофон в нижней части кадра слегка сбоку и не закрывает лицо, наушники висят на шее. Смотрю в объектив, выражение живое, будто я на середине фразы.
+
+Свет: приглушённый общий свет, основной мягкий источник спереди сбоку рисует лицо. Сзади две цветные подсветки, [синяя слева и тёплая оранжевая справа], создают объём и отделяют меня от фона.
+
+Фон: тёмная студия, на стене акустические панели в расфокусе, дальше уходит в темноту.
+
+Одежда: [чёрная рубашка].
+
+Оптика: объектив 50 мм, диафрагма 2.0, резкость по глазам, микрофон чуть мягче в фокусе.
+
+Обработка: контрастная, тёмная тональность, насыщенные цветные акценты, лёгкое зерно.
+
+Лицо переноси с моей фотографии без изменений, кожа живая, с порами. Никаких надписей, названий и логотипов на микрофоне и панелях.</div><div class="note">Даёт готовую обложку под эфир, подкаст или анонс выступления. Микрофон модель иногда рисует поверх лица, поэтому в промпте отдельно прописано, что он не должен закрывать лицо. Если всё равно закрыл, напиши в чат: «опусти микрофон ниже и левее».</div></div>
+<div class="sec"><h2 id="sec-9">Чинилка: пять поломок и что с ними делать</h2><p>Разбор по симптомам. Найди свой случай и примени решение, начинать заново обычно не нужно.</p><h3>Лицо поплыло, на снимке чужой человек</h3><ol><li>Приложи фото заново прямо в этот чат и напиши: «сходство с этим лицом важнее стиля, повтори кадр». В девяти случаях из десяти этого хватает.</li><li>Дай два или три исходника разом: анфас, три четверти и средний план. По нескольким ракурсам модель собирает лицо заметно точнее.</li><li>Проси одно изображение за раз. Четыре варианта в одном ответе почти всегда дают четыре разных лица.</li><li>Проверь, что ты не подал на вход уже сгенерированную картинку. Генерация из генерации уводит лицо на каждом шаге, всегда возвращайся к настоящему фото.</li><li>Если чат идёт долго и лицо уезжает всё сильнее, открой новый чат и начни с установочного сообщения. Длинная переписка размывает исходные требования.</li></ol><h3>Стиль применился слабо, картинка обычная</h3><ol><li>Добавь в промпт технику: фокусное расстояние, диафрагму, схему света, название плёнки. Именно эти строчки делают стиль, общие слова про красоту не работают.</li><li>Убери противоречия. Мягкий рассеянный свет и глубокие драматичные тени в одном промпте гасят друг друга, модель выберет что-то среднее и скучное.</li><li>Попроси усилить конкретный параметр словами: «контровой свет сильнее», «тени глубже», «зерно крупнее», «фон темнее». По одному параметру за раз.</li><li>Переведи промпт на английский и вставь заново. На английском модель понимает фототермины точнее, разница видна сразу. Попроси перевод прямо в чате.</li><li>Если ничего не помогает, отправь картинку-референс вместе с промптом и напиши: «повтори свет и цветокоррекцию с этого кадра, лицо возьми с моего фото».</li></ol><h3>ChatGPT отказался генерировать</h3><ol><li>Проверь, нет ли в промпте имени знаменитости. Просьба поставить рядом известного человека или сделать похожим на него срывается почти всегда. Убери имя и опиши внешность словами, тогда запрос проходит.</li><li>Убери названия брендов и логотипы. Просьба нарисовать конкретный логотип на одежде часто упирается в правила.</li><li>Смягчи формулировки про тело и одежду. Слова про откровенность и нижнее бельё блокируют запрос даже в безобидном контексте.</li><li>Если отказ пришёл на твоё же фото, напиши прямо: «на фотографии я сам, разрешаю обработку своего изображения». Иногда модель перестраховывается на незнакомом лице.</li><li>Начни новый чат. После отказа модель нередко продолжает осторожничать до конца переписки, даже когда ты уже всё исправил.</li></ol><h3>Картинка мыльная, руки и мелочи кривые</h3><ol><li>Начни с исходника. Если ты загрузил скриншот из переписки, резкости взяться неоткуда, возьми оригинал из галереи телефона.</li><li>Убери руки из кадра, если они не нужны по сюжету. Строчка «руки не в кадре» решает проблему пальцев за один раз.</li><li>Когда руки нужны, пропиши явно: «анатомически правильные кисти, пять пальцев на каждой руке, естественный хват предмета».</li><li>Проси не рисовать надписи. Текст на одежде, вывесках и микрофонах модель почти всегда пишет с ошибками, а глаз цепляется именно за это.</li><li>Точечно указывай на дефект: «перерисуй только правую руку, остальное оставь как есть». Полная перегенерация меняет и лицо тоже.</li></ol><h3>Видно, что это нейросеть</h3><ol><li>Верни коже фактуру: «видимые поры, лёгкая неровность тона, мимические складки на месте». Гладкая кожа выдаёт генерацию быстрее всего остального.</li><li>Добавь зерно и лёгкую асимметрию. Идеально симметричное лицо в реальности не встречается.</li><li>Убери слова про совершенство. Формулировки вроде безупречной кожи и идеальных черт тянут картинку в пластик.</li><li>Оживи фон. Пустой стерильный задник читается как декорация, а прохожие, машины и бытовые детали делают кадр съёмкой.</li><li>Убери сильное размытие фона на уличных кадрах. Плотное боке на улице выглядит нарисованным, оставь его для студии.</li></ol></div>
+<div class="sec"><h2 id="sec-10">Доступ из России</h2><p>Честно, без обещаний, что всё откроется само.</p><p>Напрямую с российского адреса ChatGPT не открывается, сервис смотрит на страну подключения. Значит понадобится либо VPN с включённой поддерживаемой страной, либо один из посредников, которые дают доступ к модели через свою инфраструктуру. Оплата официальной подписки российскими картами тоже не проходит, у OpenAI они не принимаются. При этом сам разбор фотографий и генерация картинок доступны и на бесплатном тарифе, просто с лимитом на количество изображений в сутки, так что начать можно без единого платежа.</p><ul><li>Галереи промптов из первого списка открываются в браузере обычным образом, отдельного доступа они не требуют. Если конкретный сайт не загрузился, включи VPN и попробуй ещё раз.</li><li>Civitai закрыт для Великобритании и Австралии из-за требований по проверке возраста, поэтому при включённом VPN выбирай другую страну, иначе увидишь заглушку.</li><li>Витрина Midjourney и лента Sora потребуют входа в аккаунт соответствующего сервиса, без регистрации там смотреть нечего.</li><li>Если VPN включён, а ChatGPT всё равно ругается на регион, выйди из аккаунта, почисти данные сайта в браузере и зайди заново уже с включённым VPN.</li></ul></div>
+<div class="sec"><h2 id="sec-11">Чужие лица и документы</h2><p>Короткий блок, который сэкономит тебе нервы.</p><p>Своё лицо ты грузишь по своему решению, и это твоё право. С чужими лицами всё иначе. Фотография другого человека это его персональные данные, и обрабатывать её без его согласия ты не можешь, даже если снимок лежит в открытом доступе и даже если ты делаешь что-то безобидное. Отдельно держи в голове, что снимки детей, чужие интимные фото и попытки поставить рядом знаменитость через нейросеть это прямой путь к жалобе и блокировке аккаунта.</p><ul><li>Грузи только свои фотографии, либо чужие с явного разрешения человека.</li><li>Никогда не загружай паспорт, водительские права, банковские карты и документы с личными данными. Это уходит на чужие серверы и остаётся там.</li><li>Не проси сделать себя похожим на конкретную известную личность. Запрос почти всегда отклоняется, а повторные попытки бьют по репутации аккаунта.</li><li>Публикуя нейрофото в рабочем контексте, лучше честно помечать его. Доверие аудитории стоит дороже, чем один красивый кадр.</li></ul></div>
+<div class="sec"><h2 id="sec-12">Все двенадцать промптов одним куском</h2><p>Собранный блок, чтобы держать под рукой. Сначала отправь установочное сообщение с фотографией, потом вставляй эти промпты по одному в тот же чат, подставляя своё в квадратных скобках. Развёрнутые версии с разбором лежат в разделах выше.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="1. СТУДИЙНЫЙ ДЕЛОВОЙ ПОРТРЕТ
+Поясной кадр 4:5, разворот в три четверти, взгляд в объектив, сдержанная улыбка. Софтбокс слева сверху под 45 градусов, отражатель справа на четверть яркости, контровой свет по плечам. Фон тёмно-серый градиент. Одежда: [впиши]. Объектив 85 мм, диафрагма 2.8, резкость по глазам. Естественный цвет кожи, видимые поры, без глянцевой ретуши.
+
+2. ОБЛОЖКА ЖУРНАЛА
+Погрудный кадр 4:5 по центру, много воздуха над головой, взгляд в объектив, без улыбки. Однотонный бумажный фон цвета [впиши]. Жёсткий свет сверху сбоку, чёткая тень под подбородком, мягкая заливка снизу. Одежда: [впиши]. Объектив 105 мм, диафрагма 4. Насыщенный цвет, контраст выше среднего.
+
+3. ТЁМНЫЙ ПРЕМИАЛЬНЫЙ ПОРТРЕТ
+Поясной кадр 4:5, разворот в три четверти, взгляд собранный. Узкий источник сбоку под 60 градусов рисует световой треугольник на щеке, ближняя половина лица в тени, контровой контур по плечу. Фон почти чёрный с лёгкой дымкой. Одежда: [впиши]. Объектив 85 мм, диафрагма 2.0. Низкая тональность, глубокие тени, мелкое зерно.
+
+4. ДЕЛОВОЙ РЕПОРТАЖ В ИНТЕРЬЕРЕ
+Переговорная, я сижу вполоборота, рука на столе, говорю с кем-то за кадром, взгляд в сторону. Большое окно слева, пасмурный мягкий свет. Фон офисный, живой, в расфокусе. Одежда: [впиши]. Объектив 35 мм, диафрагма 2.8, съёмка с уровня глаз. Естественные цвета, лёгкое зерно.
+
+5. ЗОЛОТОЙ ЧАС НА УЛИЦЕ
+Поясной кадр 4:5, я иду и оборачиваюсь к камере. Солнце низко за спиной, тёплый ореол по волосам, лицо освещено отражением от светлой стены. Фон живой улицы с прохожими, размытие умеренное. Одежда: [впиши]. Объектив 50 мм, диафрагма 2.8. Тёплая коррекция, заметное зерно.
+
+6. НОЧНОЙ ГОРОД, НЕОН
+Погрудный кадр 4:5, улица после дождя, мокрый асфальт с отражениями. Холодный синий свет слева, тёплая розовая вывеска справа, контровой от фонаря. Фон из размытых вывесок и огней машин. Одежда: [впиши]. Объектив 50 мм, диафрагма 1.8. Высокий контраст, насыщенные цвета, зерно.
+
+7. КАФЕ ВЕЧЕРОМ
+Погрудный кадр 4:5, я за столиком у окна, руки на чашке, наклон вперёд, взгляд в объектив. Тёплые лампы сзади дают круглое боке, свет от окна сбоку. Фон кафе в расфокусе. Одежда: [впиши]. Объектив 50 мм, диафрагма 1.8. Тёплая приглушённая обработка. Кисти рук анатомически правильные.
+
+8. КРЫША И СИНИЙ ЧАС
+Поясной кадр 4:5 с большим захватом окружения, я у парапета вполоборота. Небо глубокого синего цвета после заката, тёплая полоса у горизонта, огни города снизу. Фон панорамы города, размытие слабое. Одежда: [впиши], ветер треплет волосы. Объектив 35 мм, диафрагма 4.
+
+9. ЧЁРНО-БЕЛАЯ ПЛЁНКА, КРУПНЫЙ ПЛАН
+Крупный план 4:5, только лицо и плечи, взгляд в объектив, серьёзное выражение. Жёсткий боковой свет из окна, половина лица в глубокой тени, блик в глазах. Фон тёмная стена. Плёнка Ilford HP5 400, заметное зерно, высокий контраст. Объектив 85 мм, диафрагма 2.0. Поры, щетина и морщины отчётливо видны, без ретуши.
+
+10. ПРЯМАЯ ВСПЫШКА, ДЕВЯНОСТЫЕ
+Поясной кадр 4:5, снято с рук, горизонт слегка завален, я у стены, живая улыбка. Прямая встроенная вспышка в лицо, резкая тень на стене, лёгкая пересветка на лбу и носу, фон уходит в темноту. Стена: [впиши]. Одежда: [впиши]. Цветная негативная плёнка 800, крупное зерно, тёплый сдвиг цвета. Объектив 35 мм. Без надписей и дат в кадре.
+
+11. ОСЕННИЙ ЛАЙФСТАЙЛ
+Поясной кадр 4:5, я иду по парковой дорожке и оборачиваюсь, тёплая улыбка. Пасмурный рассеянный свет без теней, жёлтая листва вокруг. Фон с деревьями и размытыми силуэтами людей. Одежда: [впиши]. Объектив 85 мм, диафрагма 2.8. Тёплая приглушённая палитра, мягкий контраст.
+
+12. ОБЛОЖКА ПОДКАСТА
+Погрудный кадр 4:5, я перед студийным микрофоном, наушники на шее, микрофон снизу сбоку и не закрывает лицо, выражение живое. Приглушённый свет, мягкий источник спереди сбоку, сзади две цветные подсветки [впиши цвета]. Фон тёмная студия с акустическими панелями в расфокусе. Одежда: [впиши]. Объектив 50 мм, диафрагма 2.0. Контрастная тёмная тональность.
+
+ОБЩЕЕ ТРЕБОВАНИЕ КО ВСЕМ ДВЕНАДЦАТИ
+Лицо переноси с моей фотографии один в один, включая бороду, родинки и естественную асимметрию. Не омолаживай, не худей, не сглаживай черты. Кожа живая, с видимыми порами и мягким зерном. Кадр вертикальный 4:5, максимальное разрешение, одно изображение за запрос, без надписей и логотипов.">Скопировать</button></div><div class="box">1. СТУДИЙНЫЙ ДЕЛОВОЙ ПОРТРЕТ
+Поясной кадр 4:5, разворот в три четверти, взгляд в объектив, сдержанная улыбка. Софтбокс слева сверху под 45 градусов, отражатель справа на четверть яркости, контровой свет по плечам. Фон тёмно-серый градиент. Одежда: [впиши]. Объектив 85 мм, диафрагма 2.8, резкость по глазам. Естественный цвет кожи, видимые поры, без глянцевой ретуши.
+
+2. ОБЛОЖКА ЖУРНАЛА
+Погрудный кадр 4:5 по центру, много воздуха над головой, взгляд в объектив, без улыбки. Однотонный бумажный фон цвета [впиши]. Жёсткий свет сверху сбоку, чёткая тень под подбородком, мягкая заливка снизу. Одежда: [впиши]. Объектив 105 мм, диафрагма 4. Насыщенный цвет, контраст выше среднего.
+
+3. ТЁМНЫЙ ПРЕМИАЛЬНЫЙ ПОРТРЕТ
+Поясной кадр 4:5, разворот в три четверти, взгляд собранный. Узкий источник сбоку под 60 градусов рисует световой треугольник на щеке, ближняя половина лица в тени, контровой контур по плечу. Фон почти чёрный с лёгкой дымкой. Одежда: [впиши]. Объектив 85 мм, диафрагма 2.0. Низкая тональность, глубокие тени, мелкое зерно.
+
+4. ДЕЛОВОЙ РЕПОРТАЖ В ИНТЕРЬЕРЕ
+Переговорная, я сижу вполоборота, рука на столе, говорю с кем-то за кадром, взгляд в сторону. Большое окно слева, пасмурный мягкий свет. Фон офисный, живой, в расфокусе. Одежда: [впиши]. Объектив 35 мм, диафрагма 2.8, съёмка с уровня глаз. Естественные цвета, лёгкое зерно.
+
+5. ЗОЛОТОЙ ЧАС НА УЛИЦЕ
+Поясной кадр 4:5, я иду и оборачиваюсь к камере. Солнце низко за спиной, тёплый ореол по волосам, лицо освещено отражением от светлой стены. Фон живой улицы с прохожими, размытие умеренное. Одежда: [впиши]. Объектив 50 мм, диафрагма 2.8. Тёплая коррекция, заметное зерно.
+
+6. НОЧНОЙ ГОРОД, НЕОН
+Погрудный кадр 4:5, улица после дождя, мокрый асфальт с отражениями. Холодный синий свет слева, тёплая розовая вывеска справа, контровой от фонаря. Фон из размытых вывесок и огней машин. Одежда: [впиши]. Объектив 50 мм, диафрагма 1.8. Высокий контраст, насыщенные цвета, зерно.
+
+7. КАФЕ ВЕЧЕРОМ
+Погрудный кадр 4:5, я за столиком у окна, руки на чашке, наклон вперёд, взгляд в объектив. Тёплые лампы сзади дают круглое боке, свет от окна сбоку. Фон кафе в расфокусе. Одежда: [впиши]. Объектив 50 мм, диафрагма 1.8. Тёплая приглушённая обработка. Кисти рук анатомически правильные.
+
+8. КРЫША И СИНИЙ ЧАС
+Поясной кадр 4:5 с большим захватом окружения, я у парапета вполоборота. Небо глубокого синего цвета после заката, тёплая полоса у горизонта, огни города снизу. Фон панорамы города, размытие слабое. Одежда: [впиши], ветер треплет волосы. Объектив 35 мм, диафрагма 4.
+
+9. ЧЁРНО-БЕЛАЯ ПЛЁНКА, КРУПНЫЙ ПЛАН
+Крупный план 4:5, только лицо и плечи, взгляд в объектив, серьёзное выражение. Жёсткий боковой свет из окна, половина лица в глубокой тени, блик в глазах. Фон тёмная стена. Плёнка Ilford HP5 400, заметное зерно, высокий контраст. Объектив 85 мм, диафрагма 2.0. Поры, щетина и морщины отчётливо видны, без ретуши.
+
+10. ПРЯМАЯ ВСПЫШКА, ДЕВЯНОСТЫЕ
+Поясной кадр 4:5, снято с рук, горизонт слегка завален, я у стены, живая улыбка. Прямая встроенная вспышка в лицо, резкая тень на стене, лёгкая пересветка на лбу и носу, фон уходит в темноту. Стена: [впиши]. Одежда: [впиши]. Цветная негативная плёнка 800, крупное зерно, тёплый сдвиг цвета. Объектив 35 мм. Без надписей и дат в кадре.
+
+11. ОСЕННИЙ ЛАЙФСТАЙЛ
+Поясной кадр 4:5, я иду по парковой дорожке и оборачиваюсь, тёплая улыбка. Пасмурный рассеянный свет без теней, жёлтая листва вокруг. Фон с деревьями и размытыми силуэтами людей. Одежда: [впиши]. Объектив 85 мм, диафрагма 2.8. Тёплая приглушённая палитра, мягкий контраст.
+
+12. ОБЛОЖКА ПОДКАСТА
+Погрудный кадр 4:5, я перед студийным микрофоном, наушники на шее, микрофон снизу сбоку и не закрывает лицо, выражение живое. Приглушённый свет, мягкий источник спереди сбоку, сзади две цветные подсветки [впиши цвета]. Фон тёмная студия с акустическими панелями в расфокусе. Одежда: [впиши]. Объектив 50 мм, диафрагма 2.0. Контрастная тёмная тональность.
+
+ОБЩЕЕ ТРЕБОВАНИЕ КО ВСЕМ ДВЕНАДЦАТИ
+Лицо переноси с моей фотографии один в один, включая бороду, родинки и естественную асимметрию. Не омолаживай, не худей, не сглаживай черты. Кожа живая, с видимыми порами и мягким зерном. Кадр вертикальный 4:5, максимальное разрешение, одно изображение за запрос, без надписей и логотипов.</div></div>
+<div class="sec"><h2 id="sec-13">Что делать дальше</h2><p>Не пытайся прогнать все двенадцать стилей за один вечер, кадры смешаются в голове и ты не поймёшь, что из этого сильное. Возьми сегодня три промпта: один деловой, один уличный и чёрно-белую плёнку. Прогони каждый на своём лучшем фото, скачай результаты и посмотри на них через час свежим взглядом. Один из трёх обязательно окажется заметно лучше остальных, и это твой стиль. Дальше собери на нём серию: тот же свет и та же оптика, меняется только одежда, фон и время суток. Через неделю у тебя будет узнаваемая лента, где все снимки выглядят как одна съёмка у одного фотографа, а стоило это тебе только времени на копирование промптов. Когда серия соберётся, возвращайся в галереи и ищи следующий стиль, теперь ты уже понимаешь, какие строчки в чужом промпте отвечают за результат.</p></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Как это работает и почему чужой промпт сильнее твоего описания</a><a href="#sec-1">Галереи промптов, проверенные вживую</a><a href="#sec-2">Как забрать промпт из картинки, под которой его не показали</a><a href="#sec-3">Какое фото загружать, чтобы лицо не поплыло</a><a href="#sec-4">Порядок действий от галереи до готового снимка</a><a href="#sec-5">Установочное сообщение, которое держит твоё лицо</a><a href="#sec-6">Промпты 1-4. Деловые и премиальные портреты</a><a href="#sec-7">Промпты 5-8. Кино, улица и вечер</a><a href="#sec-8">Промпты 9-12. Плёнка, лайфстайл и обложки</a><a href="#sec-9">Чинилка: пять поломок и что с ними делать</a><a href="#sec-10">Доступ из России</a><a href="#sec-11">Чужие лица и документы</a><a href="#sec-12">Все двенадцать промптов одним куском</a><a href="#sec-13">Что делать дальше</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
