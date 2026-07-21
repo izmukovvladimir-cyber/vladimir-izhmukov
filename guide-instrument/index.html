@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Карта инструментов: чем реально делать каждую задачу, со ссылками и доступом из России</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>Карта инструментов: чем реально делать каждую задачу, со ссылками и доступом из России</h1>
+<p class="lead">Держи полную карту инструментов, как обещал в карусели. Восемь задач, которыми я занимаюсь каждый день, и по каждой три уровня: привычный слабый вариант, рабочий вариант и тот, которым пользуюсь сам. У каждого инструмента адрес, честная пометка про доступ из России, порядок цены и главное, приём, ради которого его стоит открывать. Внизу лежит сводка по доступу и оплате, стартовый набор на первый месяц и два промпта: один подбирает инструмент под твою задачу, второй помогает за полчаса самому проверить, действительно ли новый сервис сильнее старого.</p>
+<p class="meta">Карта инструментов под восемь задач: тексты и посты, сайт без кода, визуал и графика, ресёрч и факты, разработка и код, площадки для онлайна, видео без лица, автоматизация. По каждой задаче три уровня с адресами сервисов, пометкой про доступ из России, порядком цен и рабочим приёмом. Плюс сводка по оплате, стартовый набор и два готовых промпта.</p>
+<div class="how">Как пользоваться картой. Найди свою задачу в списке разделов и прочитай все три карточки подряд, потому что главный смысл лежит в разнице между уровнями. Возьми приём из блока под карточками и повтори его на своей реальной задаче сегодня же, иначе новый сервис останется просто ещё одной вкладкой. Перед оплатой загляни в раздел про доступ из России, там разложено, что открывается напрямую, а что потребует возни. Если сомневаешься, стоит ли переходить, прогони промпт про честное сравнение из последнего раздела, он даёт ответ за полчаса вместо месяца догадок.</div>
+<div class="sec"><h2 id="sec-0">По какому правилу расставлены уровни</h2><p>Я не расставлял места по громкости имени. У каждой строки в карте есть четыре критерия, и слово «лучше» означает, что инструмент выигрывает по ним именно на этой конкретной задаче. На другой задаче тот же сервис легко уезжает в нижнюю строку, и это нормально.</p><ol><li>Качество результата на одной узкой задаче. Универсальный сервис почти всегда проигрывает специализированному, потому что его тянут в десять сторон сразу.</li><li>Сколько шагов от запроса до готового результата. Если после ответа надо переписывать половину руками, инструмент считается слабым, каким бы известным он ни был.</li><li>Доступ из России и способ оплаты. Сервис, до которого ты не дотянешься без часа возни, для ежедневной работы бесполезен.</li><li>Цена за месяц реальной работы, посчитанная по своему объёму. Стартовый тариф тут обманывает. Считаю по тому объёму, который делаю сам: примерно 20 постов, 30 картинок и несколько видео в месяц.</li></ol><div class="note">Правило, которое сэкономит тебе бюджет. Инструмент из строки «Лучше» имеет смысл оплачивать только если ты делаешь эту задачу минимум раз в неделю. Если задача возникает раз в квартал, оставайся на строке «Хорошо» и не плати за мощность, которой не пользуешься. Одновременно я держу оплаченными четыре сервиса, всё остальное открываю на бесплатных лимитах.</div></div>
+<div class="sec"><h2 id="sec-1">Задача 1. Тексты и посты</h2><p>Речь про живой длинный текст: пост в канал, описание под ролик, продающая страница, письмо. Здесь важнее всего интонация и то, насколько текст звучит живым человеком.</p><div class="grid2"><div class="cardb"><h3>Плохо. ChatGPT</h3><p>chatgpt.com. Порядка 20 долларов в месяц за платный тариф, из России нужен VPN и зарубежная карта. Сильный универсал, который на текстах тянет в узнаваемый гладкий стиль: симметричные абзацы, обороты вида «в современном мире», вечные противопоставления. Читатель считывает такой текст за две секунды. Оставляй его для структуры, планов, таблиц и разбора данных, там он хорош.</p></div><div class="cardb"><h3>Хорошо. Gemini</h3><p>gemini.google.com. Есть бесплатный уровень, платный порядка 20 долларов в месяц, из России нужен VPN. Держит огромный объём контекста, поэтому в него удобно загрузить свои прошлые посты целиком и попросить писать в том же голосе. Хорошо работает с фактурой: закинул расшифровку эфира на час и получил из неё черновики постов.</p></div><div class="cardb"><h3>Лучше. Claude</h3><p>claude.ai. Порядка 20 долларов в месяц, из России нужен VPN и зарубежная карта. Лучше всех держит заданную интонацию и длинное живое предложение, меньше сваливается в канцелярит и реже сам придумывает красивости, которых ты не просил. Именно на нём я пишу тексты в канал и описания под ролики.</p></div></div><h3>Приём, ради которого это затевается</h3><p>Разница между сервисами проявляется только тогда, когда ты даёшь образец своего голоса. Собери файл из десяти своих текстов, которые тебе самому нравятся, загрузи его и держи одну инструкцию в начале каждого запроса: пиши моим голосом по этим примерам, длинными договорёнными предложениями, без длинных тире, без оборотов с противопоставлением через отрицание, перечисления оформляй списком. Без образца любой из трёх сервисов выдаст одинаковую усреднённую жвачку, и сравнивать будет нечего.</p></div>
+<div class="sec"><h2 id="sec-2">Задача 2. Сайт без кода</h2><p>Лендинг под оффер, страница под лид-магнит, простой сервис с формой. Смотрю на то, за сколько часов страница окажется в интернете по своему адресу и сколько будет стоить её потом менять.</p><div class="grid2"><div class="cardb"><h3>Плохо. WordPress</h3><p>wordpress.org. Сам движок бесплатный, платишь за хостинг и домен, порядка 300 рублей в месяц и выше. Из России доступен. Мощная система, которая требует отдельного времени: хостинг, тема, десяток плагинов, обновления, безопасность. Для одной продающей страницы это дорога длиной в выходные, и дальше сайт придётся обслуживать.</p></div><div class="cardb"><h3>Хорошо. Tilda</h3><p>tilda.cc. Российский сервис, платит рублёвой картой, тариф порядка 750 рублей в месяц, работает без VPN. Собирается блоками мышкой, есть готовые шаблоны под продающие страницы, приём оплаты подключается штатно. Идеальный вариант, когда страницу дальше будешь править сам руками и не хочешь трогать код вообще.</p></div><div class="cardb"><h3>Лучше. Lovable</h3><p>lovable.dev. Бесплатный уровень есть, платный порядка 25 долларов в месяц, оплата зарубежной картой. Ты описываешь страницу словами, и сервис собирает её кодом: макет, адаптив под телефон, форма, логика. Правки вносишь тоже словами. За вечер получается то, на что в конструкторе уходит несколько дней, и результат выглядит не как шаблон.</p></div></div><h3>Как формулировать задачу, чтобы страница вышла с первого раза</h3><ol><li>Сначала опиши, кто заходит на страницу и с какого источника, потому что от этого зависит первый экран целиком.</li><li>Назови одно целевое действие. Страница с двумя равными кнопками конвертирует хуже, чем страница с одной.</li><li>Перечисли блоки по порядку сверху вниз своими словами: обещание, боль, что внутри, кто автор, отзывы, оплата, ответы на возражения.</li><li>Отдельной строкой задай стиль: цвета, настроение, тёмная тема или светлая. Без этого получишь стандартный синий шаблон.</li><li>Попроси сразу проверить вид на телефоне и починить то, что поехало. Больше половины трафика придёт именно оттуда.</li></ol><div class="note">Честная деталь. Собранную страницу всё равно нужно куда-то поселить и повесить на неё домен. У Tilda это встроено и решается кнопкой. В случае с Lovable публикация делается тоже кнопкой, а вот свой домен подключается через настройки DNS у регистратора, и на это заложи ещё час в первый раз.</div></div>
+<div class="sec"><h2 id="sec-3">Задача 3. Визуал и графика</h2><p>Обложки, картинки к постам, слайды карусели, фон под сторис. Главный критерий тут один: получается изображение, которого больше ни у кого нет, или очередной узнаваемый шаблон.</p><div class="grid2"><div class="cardb"><h3>Плохо. Canva</h3><p>canva.com. Бесплатный уровень есть, платный порядка 12 долларов в месяц, из России доступ ограничен и оплата не проходит рублёвой картой. Быстрая сборка из готовых шаблонов, и в этом же её потолок: теми же шаблонами пользуются десятки тысяч людей, лента их узнаёт. Годится для служебной графики вроде таблиц и схем.</p></div><div class="cardb"><h3>Хорошо. Photoshop</h3><p>adobe.com. Порядка 20 долларов в месяц, официальная покупка из России недоступна. Даёт полный контроль над каждым пикселем и остаётся лучшим инструментом финальной доводки. Минус в скорости: чтобы получить одну обложку, нужно уметь её нарисовать, а на это уходят годы навыка.</p></div><div class="cardb"><h3>Лучше. Higgsfield</h3><p>higgsfield.ai. Тарифы начинаются примерно от 9 долларов в месяц, оплата зарубежной картой, из России нужен VPN. Генерирует изображение по описанию и по референсу, держит одно и то же лицо на серии картинок. Отсюда берутся уникальные обложки, серии портретов под карусель и фактурные фоны, которых нет ни у кого.</p></div></div><h3>Формула промпта на картинку, которая работает</h3><p>Слабый запрос звучит как «сделай красивую обложку про нейросети», и результат будет соответствующий. Рабочий запрос собирается из пяти частей подряд: что в кадре, как снято, свет, стиль и настроение, технические детали. Например: рабочий стол креатора сверху, на столе ноутбук и телефон с открытой лентой, съёмка сверху под небольшим углом, мягкий вечерний свет сбоку, тёмная сцена с одним ярким акцентом лаймового цвета, видимая фактура поверхности и лёгкое зерно как на плёнке. Дальше меняешь одну часть за раз и смотришь, что именно поменялось в картинке. Так за десять генераций ты соберёшь свою рабочую формулу вместо случайных попаданий.</p><div class="note">Про лица. Если нужен один и тот же человек на серии картинок, загружай три реальные фотографии этого человека как референс: анфас, три четверти и в полный рост. Никогда не подавай на вход уже сгенерированное лицо, потому что каждая следующая генерация будет уводить черты всё дальше, и к пятому кадру это будет другой человек.</div></div>
+<div class="sec"><h2 id="sec-4">Задача 4. Ресёрч и факты</h2><p>Проверить цифру, найти источник, собрать обзор рынка или разбор конкурента. Тут критерий жёсткий: можно ли проверить, откуда взялся каждый факт.</p><div class="grid2"><div class="cardb"><h3>Плохо. Wikipedia</h3><p>wikipedia.org. Бесплатно, из России доступна. Хороша как отправная точка по устоявшимся темам и совершенно не годится там, где картина меняется каждый месяц. По нейросетям, платформам и рынкам данные там отстают, а иногда просто устарели на год.</p></div><div class="cardb"><h3>Хорошо. DeepSeek</h3><p>chat.deepseek.com. Бесплатно, открывается из России напрямую, без VPN. Отличный вариант, когда нужно быстро разобраться в теме, разложить сложное простыми словами или посчитать. Слабое место в том, что ссылки на источники он даёт не всегда, поэтому важные цифры перепроверяй отдельно.</p></div><div class="cardb"><h3>Лучше. Perplexity</h3><p>perplexity.ai. Бесплатный уровень есть, платный порядка 20 долларов в месяц, из России стабильнее работает через VPN. Отвечает и сразу показывает список источников со ссылками, по которым ответ собран. Это единственный формат, в котором факт можно проверить за десять секунд, поэтому под ресёрч он и стоит первым.</p></div></div><h3>Правило трёх источников</h3><p>Любую цифру, которую ты собираешься произнести в ролике или написать в посте, проверяй по трём независимым источникам и смотри на дату публикации каждого. Если три источника расходятся, в контенте называй диапазон вместо точного числа. Если источник один и он вторичный, то есть сам ссылается на кого-то, цифру лучше не использовать вообще. Один разобранный на цифрах ляп в комментариях стоит дороже, чем час проверки.</p><div class="note">Приём для разбора конкурента. Попроси сразу конкретику вместо общего обзора: какие форматы контента человек выпускал последние тридцать дней, какие из них собрали заметно больше остальных, какой призыв к действию стоит под ними и что он продаёт в итоге. Общий обзор бесполезен. Разбор по этим четырём пунктам сразу превращается в список гипотез для твоего контента.</div></div>
+<div class="sec"><h2 id="sec-5">Задача 5. Разработка и код</h2><p>Скрипт под свою задачу, бот, автоматизация, правка сайта. Здесь разрыв между уровнями самый заметный, и я в этом живу каждый день.</p><div class="grid2"><div class="cardb"><h3>Плохо. Голый терминал</h3><p>Бесплатно и доступно всем. Писать код руками без помощника сегодня имеет смысл только если ты профессиональный разработчик и точно знаешь, что делаешь. Для человека из контента и маркетинга это гарантированный отказ от задачи на второй час.</p></div><div class="cardb"><h3>Хорошо. Cursor</h3><p>cursor.com. Бесплатный уровень есть, платный порядка 20 долларов в месяц, оплата зарубежной картой. Редактор кода со встроенным помощником, который видит проект целиком и правит сразу несколько файлов. Отличный вход для тех, кому важно видеть код глазами и понимать, что происходит.</p></div><div class="cardb"><h3>Лучше. Claude Code</h3><p>claude.com/product/claude-code. Входит в подписку Claude, порядка 20 долларов в месяц и выше, из России нужен VPN и зарубежная карта. Работает прямо в терминале, сам читает файлы проекта, сам вносит правки, сам запускает проверки. Ты ставишь задачу словами и получаешь готовый результат. На нём собраны и мой сайт, и мои внутренние помощники.</p></div></div><h3>С чего начать, если ты никогда не открывал терминал</h3><ol><li>Возьми одну реальную маленькую задачу, которую делаешь руками каждую неделю. Например, собрать статистику постов в таблицу или переименовать сотню файлов по правилу.</li><li>Опиши её обычными словами и добавь в конце одну фразу: объясняй каждый свой шаг простым языком и говори, что именно я должен нажать.</li><li>Всё, что помощник предлагает выполнить, сначала спрашивай своими словами: что эта команда сделает и как это откатить, если что-то пойдёт не так.</li><li>Первую неделю работай в отдельной пустой папке. Пока там нет ничего важного, любая ошибка стоит ноль.</li><li>Как только первая задача заработала, сразу бери вторую. Навык закрепляется на третьей задаче, до неё всё кажется магией.</li></ol></div>
+<div class="sec"><h2 id="sec-6">Задача 6. Площадки для онлайна</h2><p>Единственный раздел карты, где речь идёт про площадки. Вопрос простой: где человек без бюджета и без аудитории быстрее всего получит первых людей.</p><div class="grid2"><div class="cardb"><h3>Плохо. Свой блог с нуля</h3><p>Сайт или блог на своём домене. Стоит недорого, но органический трафик из поиска приходит месяцами, потому что новому домену нужно время на доверие поисковика. Блог отлично работает как место, куда ты приводишь людей с других площадок, и очень плохо работает как первый источник людей.</p></div><div class="cardb"><h3>Хорошо. YouTube</h3><p>youtube.com. Даёт длинный след: ролик приносит просмотры через год после публикации, и там же живёт самая тёплая аудитория. Минус во времени производства и в том, что первые ролики почти всегда идут тяжело, потому что площадка сначала должна понять, кому тебя показывать.</p></div><div class="cardb"><h3>Лучше. Reels</h3><p>instagram.com. Самый быстрый на сегодня способ получить холодные охваты без бюджета и без аудитории, потому что короткие ролики раздаются людям, которые на тебя не подписаны. На старом аккаунте у меня это дало рост с тысячи до тридцати четырёх тысяч под:писчиков за два с половиной месяца и тридцать девять м:лн про:смотров.</p></div></div><h3>Как эти три площадки складываются в одну систему</h3><p>Ошибка новичка в том, чтобы выбрать одну площадку и спорить, какая из них лучше. Рабочая схема собирает их в цепочку: короткие ролики приводят холодных людей, мессенджер или почта удерживают их и греют, длинное видео и блог отвечают на вопросы тех, кто уже думает о покупке. Начинать надо с той площадки, которая даёт вход холодной аудитории, потому что удерживать пока некого. Когда первый поток пошёл, добавляешь второе звено, и только потом третье.</p></div>
+<div class="sec"><h2 id="sec-7">Задача 7. Видео без лица</h2><p>Ролики, где в кадре нет тебя: сцены, объекты, атмосферные вставки, ультрареалистичные кадры под озвучку. Оцениваю по связке трёх вещей: качество движения, цена за секунду готового видео и реальная доступность.</p><div class="grid2"><div class="cardb"><h3>Плохо. Veo 3</h3><p>Модель Google, доступна внутри их подписок. Сама по себе она сильная, особенно по звуку в кадре, поэтому в нижней строке она стоит именно под эту задачу и по этим критериям. Из России путь к ней самый длинный: нужен VPN, зарубежная оплата, а цена за секунду готового видео выходит выше остальных вариантов при сопоставимой картинке.</p></div><div class="cardb"><h3>Хорошо. Grok Imagine</h3><p>Внутри Grok от компании X, grok.com. Требует платной подписки X и зарубежной оплаты. Быстро отдаёт результат и хорошо делает короткие динамичные сцены. Слабое место в стабильности: одна и та же сцена от прогона к прогону получается заметно разной, поэтому под серию однородных кадров он подходит хуже.</p></div><div class="cardb"><h3>Лучше. Seedance</h3><p>Модель от ByteDance, доступна на агрегаторах видеомоделей, в том числе на higgsfield.ai. Держит физику движения и реалистичную камеру заметно ровнее конкурентов, и по цене за секунду сейчас выгоднее всего. Это мой рабочий выбор под ультрареалистичные ролики без лица.</p></div></div><h3>Порядок блоков в видеопромпте</h3><p>Модель читает промпт сверху вниз и первым блокам верит больше. Рабочий порядок такой: кто или что в кадре, что происходит по действию, как движется камера, какой свет и время суток, какая атмосфера и стиль, технические детали вроде объектива и зерна. Держи одну сцену на один ролик. Как только ты просишь в пяти секундах показать три разных события, модель начинает мазать и склеивать, и брак пойдёт в каждом кадре.</p><div class="note">Про деньги. Генерация видео это единственная строка карты, где легко утопить бюджет за вечер. Договорись с собой заранее: сначала три коротких пробных прогона на низком качестве, чтобы поймать сцену, и только потом один финальный прогон в высоком. Перегенерация уже готового ролика ради мелкой правки почти всегда дороже, чем смириться с этой правкой.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-8">Задача 8. Автоматизация</h2><p>Связать сервисы между собой, чтобы рутина шла сама: заявка падает в таблицу, новый подписчик получает письмо, отчёт собирается по расписанию.</p><div class="grid2"><div class="cardb"><h3>Плохо. Zapier</h3><p>zapier.com. Бесплатный уровень очень узкий, рабочие тарифы начинаются примерно от 20 долларов в месяц и быстро растут вместе с количеством операций. Оплата зарубежной картой. Самый известный сервис в мире, и при этом самый дорогой на объёме: платишь за каждое действие, и счёт растёт быстрее пользы.</p></div><div class="cardb"><h3>Хорошо. Make</h3><p>make.com. Есть рабочий бесплатный уровень, платные тарифы примерно от 9 долларов в месяц, оплата зарубежной картой. Сценарии собираются мышкой на визуальном полотне, видно каждый шаг и где именно всё сломалось. Хороший баланс цены и возможностей для первых автоматизаций.</p></div><div class="cardb"><h3>Лучше. n8n</h3><p>n8n.io. Облачная версия примерно от 20 евро в месяц, а версию для своего сервера можно поставить бесплатно. Логика та же визуальная, плюс возможность вставить кусок кода там, где мышкой уже неудобно. Главный плюс для нас в том, что при установке на свой сервер данные остаются у тебя и платить за количество операций не нужно.</p></div></div><h3>С какой автоматизации начать</h3><ol><li>Выпиши всё, что делаешь руками чаще двух раз в неделю, и рядом честно поставь минуты. Автоматизировать имеет смысл только то, что суммарно съедает больше часа в месяц.</li><li>Возьми из списка самое простое, где участвуют ровно два сервиса. Например, заявка из формы падает в таблицу и одновременно приходит уведомлением в мессенджер.</li><li>Собери сценарий и обязательно добавь себе уведомление об ошибке. Автоматизация, которая молча сломалась, хуже ручной работы, потому что ты неделю не будешь знать, что заявки не доходят.</li><li>Проверь на десяти реальных прогонах и только потом включай на поток.</li><li>Дальше добавляй по одному шагу за раз. Сценарий из пятнадцати шагов, собранный сразу, невозможно чинить.</li></ol></div>
+<div class="sec"><h2 id="sec-9">Доступ из России и оплата</h2><p>Самая частая причина, по которой карта остаётся просто списком названий. Разложил честно, что открывается как. Ситуация с доступом меняется, поэтому проверяй на своём соединении перед оплатой.</p><div class="grid2"><div class="cardb"><h3>Открывается напрямую, платится рублями</h3><p>Tilda, DeepSeek, Wikipedia, YouTube и Instagram в части просмотра. Сюда же любой сервис, который ты ставишь на свой сервер, например n8n. Это база, с которой можно начать вообще без танцев с бубном и без единой зарубежной карты.</p></div><div class="cardb"><h3>Нужен VPN, оплата зарубежной картой</h3><p>ChatGPT, Claude, Claude Code, Gemini, Perplexity, Higgsfield, Grok. Здесь два барьера сразу, и решать их надо в правильном порядке: сначала стабильное соединение, потом способ оплаты. Проверять карту без рабочего соединения бессмысленно, потому что сервис отклонит платёж по адресу входа.</p></div><div class="cardb"><h3>Технически доступно, сложность в оплате</h3><p>Cursor, Make, Zapier, Lovable. Сами сайты обычно открываются, спотыкается именно платёж. Здесь чаще всего выручают зарубежные виртуальные карты или посредник, который оформляет подписку на своё имя.</p></div></div><h3>Три рабочих способа оплатить зарубежный сервис</h3><ol><li>Виртуальная карта зарубежного банка или платёжного сервиса. Самый устойчивый вариант вдолгую, потому что подписка оформлена на тебя и её никто не отключит по чужому решению. Требует времени на оформление.</li><li>Посредник, который оплачивает подписку со своей карты за комиссию. Быстро и решает вопрос сегодня, но ты зависишь от чужой добросовестности, поэтому не заводи так критичные для работы аккаунты.</li><li>Российские агрегаторы, которые дают доступ к зарубежным моделям через свой личный кабинет и принимают рубли. Удобно для старта, минус в том, что ты получаешь урезанный интерфейс и не всегда самую свежую версию модели.</li></ol><div class="note">Практическая мелочь, которая экономит нервы. Заведи под все зарубежные сервисы отдельную почту и всегда заходи в них с одного и того же соединения, желательно с одной и той же страной. Резкие прыжки страны входа это самая частая причина, по которой аккаунт внезапно просит подтверждение или уходит в блокировку.</div></div>
+<div class="sec"><h2 id="sec-10">Стартовый набор на первый месяц</h2><p>Если ставить всё сразу незачем и денег на восемь подписок нет, вот минимальный набор, который закрывает основную работу над контентом. Порядок именно такой.</p><div class="grid2"><div class="cardb"><h3>Шаг 1. Один сильный текстовый сервис</h3><p>Порядка 20 долларов в месяц. Тексты нужны каждый день, поэтому это единственная подписка, которую я советую оформить сразу. Загрузи в него свои прошлые тексты как образец голоса и работай через один сохранённый запрос, чтобы не объяснять правила заново каждый раз.</p></div><div class="cardb"><h3>Шаг 2. Генератор картинок</h3><p>Примерно от 9 долларов в месяц. Подключай на второй неделе, когда тексты уже идут потоком и стало понятно, под какие посты нужны обложки. Первые две недели спокойно проживёшь на бесплатных лимитах, собирая свою формулу промпта.</p></div><div class="cardb"><h3>Шаг 3. Место для страницы</h3><p>От 750 рублей в месяц за конструктор или бесплатный уровень у сборщика по описанию. Нужен в тот момент, когда появился первый лид-магнит или продукт, которые надо куда-то положить. Раньше этого момента страница просто будет стоять пустой.</p></div><div class="cardb"><h3>Шаг 4. Автоматизация</h3><p>Бесплатный уровень на старте. Подключается последней, когда уже есть поток заявок и стало ясно, какая именно рутина съедает время. Автоматизировать пустой поток нечего, это самая частая ошибка на старте.</p></div></div><div class="note">Итого на первый месяц выходит порядка 30 долларов и около тысячи рублей, и этого достаточно, чтобы полностью закрыть производство контента одним человеком. Всё остальное из карты добирается позже под конкретную задачу, когда она реально появилась.</div></div>
+<div class="sec"><h2 id="sec-11">Промпт 1. Подбор инструмента под твою задачу</h2><p>Если твоей задачи в карте нет, не ищи вслепую и не читай подборки из ста сервисов. Открой любой сильный текстовый сервис и вставь этот промпт целиком, подставив свои данные в квадратные скобки. На выходе получишь три конкретных варианта с ценами и планом проверки.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как практикующий подборщик рабочих инструментов, который сам ими пользуется каждый день и считает деньги клиента. Твоя задача подобрать мне инструмент под конкретную работу и обосновать выбор.
+
+Моя задача: [ЧТО ИМЕННО НАДО ДЕЛАТЬ, ОДНИМ ПРЕДЛОЖЕНИЕМ]
+Как часто я это делаю: [РАЗ В ДЕНЬ / РАЗ В НЕДЕЛЮ / РАЗ В МЕСЯЦ]
+Объём за месяц: [СКОЛЬКО ЕДИНИЦ РЕЗУЛЬТАТА]
+Мой уровень: [НОВИЧОК / УВЕРЕННЫЙ ПОЛЬЗОВАТЕЛЬ / ТЕХНИЧЕСКИЙ]
+Бюджет в месяц: [СУММА]
+Ограничения: [НАПРИМЕР, НУЖЕН ДОСТУП ИЗ РОССИИ И ОПЛАТА РУБЛЯМИ]
+Чем пользуюсь сейчас: [ТЕКУЩИЙ ИНСТРУМЕНТ ИЛИ «НИЧЕМ»]
+
+Верни ответ строго в таком формате:
+1. Три варианта в виде уровней: рабочий минимум, оптимальный выбор, максимум под объём. По каждому: название, адрес сайта, цена в месяц, доступность из России, способ оплаты.
+2. По каждому варианту одна строка «берёшь его, когда» и одна строка «не берёшь его, когда».
+3. Один рекомендованный вариант для моих вводных с обоснованием ровно в три предложения, где хотя бы одно предложение про деньги.
+4. Что конкретно я делаю в первые тридцать минут после регистрации, по шагам.
+5. Первый тестовый запрос или действие, по результату которого я пойму, подходит инструмент или нет.
+6. Одна честная слабость рекомендованного варианта, о которой обычно не пишут.
+
+Ограничения. Не предлагай сервисы, которые закрылись или недоступны на мой рынок, и если не уверен в актуальности, пиши об этом прямо. Не давай список из десяти вариантов, мне нужны три. Не используй длинные тире и обороты с противопоставлением через отрицание. Если моих вводных не хватает для честного ответа, сначала задай мне максимум три уточняющих вопроса и только потом отвечай.">Скопировать</button></div><div class="box">Действуй как практикующий подборщик рабочих инструментов, который сам ими пользуется каждый день и считает деньги клиента. Твоя задача подобрать мне инструмент под конкретную работу и обосновать выбор.
+
+Моя задача: [ЧТО ИМЕННО НАДО ДЕЛАТЬ, ОДНИМ ПРЕДЛОЖЕНИЕМ]
+Как часто я это делаю: [РАЗ В ДЕНЬ / РАЗ В НЕДЕЛЮ / РАЗ В МЕСЯЦ]
+Объём за месяц: [СКОЛЬКО ЕДИНИЦ РЕЗУЛЬТАТА]
+Мой уровень: [НОВИЧОК / УВЕРЕННЫЙ ПОЛЬЗОВАТЕЛЬ / ТЕХНИЧЕСКИЙ]
+Бюджет в месяц: [СУММА]
+Ограничения: [НАПРИМЕР, НУЖЕН ДОСТУП ИЗ РОССИИ И ОПЛАТА РУБЛЯМИ]
+Чем пользуюсь сейчас: [ТЕКУЩИЙ ИНСТРУМЕНТ ИЛИ «НИЧЕМ»]
+
+Верни ответ строго в таком формате:
+1. Три варианта в виде уровней: рабочий минимум, оптимальный выбор, максимум под объём. По каждому: название, адрес сайта, цена в месяц, доступность из России, способ оплаты.
+2. По каждому варианту одна строка «берёшь его, когда» и одна строка «не берёшь его, когда».
+3. Один рекомендованный вариант для моих вводных с обоснованием ровно в три предложения, где хотя бы одно предложение про деньги.
+4. Что конкретно я делаю в первые тридцать минут после регистрации, по шагам.
+5. Первый тестовый запрос или действие, по результату которого я пойму, подходит инструмент или нет.
+6. Одна честная слабость рекомендованного варианта, о которой обычно не пишут.
+
+Ограничения. Не предлагай сервисы, которые закрылись или недоступны на мой рынок, и если не уверен в актуальности, пиши об этом прямо. Не давай список из десяти вариантов, мне нужны три. Не используй длинные тире и обороты с противопоставлением через отрицание. Если моих вводных не хватает для честного ответа, сначала задай мне максимум три уточняющих вопроса и только потом отвечай.</div></div>
+<div class="sec"><h2 id="sec-12">Промпт 2. Честная проверка, стоит ли переходить</h2><p>Спор о том, какой сервис сильнее, решается за полчаса на твоей собственной задаче. Этот промпт собирает эталонный тест: один и тот же запрос уходит в старый и новый инструмент, а оценка идёт по заранее заданным критериям вместо ощущений.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как методист, который проверяет инструменты на практике и не даёт себя обмануть первым впечатлением. Собери мне честный тест-драйв.
+
+Задача, на которой проверяю: [ЧТО ДЕЛАЮ]
+Старый инструмент: [ЧЕМ ПОЛЬЗУЮСЬ СЕЙЧАС]
+Новый инструмент: [ЧТО ХОЧУ ПРОВЕРИТЬ]
+Что для меня значит хороший результат: [СВОИМИ СЛОВАМИ]
+
+Верни:
+1. Один эталонный запрос, который я вставлю без изменений в оба инструмента. Он должен быть реальным рабочим заданием на моих вводных, без абстрактных примеров.
+2. Пять критериев оценки результата, каждый с оценкой от одного до пяти и с описанием, что означает крайняя оценка. Хотя бы один критерий про скорость и хотя бы один про то, сколько мне придётся переделывать руками.
+3. Таблицу для заполнения: критерий, старый инструмент, новый инструмент, разница.
+4. Порог перехода: при какой суммарной разнице в баллах смена инструмента оправдывает потраченное на переучивание время.
+5. Три ловушки, из-за которых такое сравнение обычно врёт, и как их обойти.
+
+Ограничения. Не хвали ни один из инструментов заранее. Не используй длинные тире и обороты с противопоставлением через отрицание. Если для честного сравнения нужна информация, которой у тебя нет, скажи об этом прямо.">Скопировать</button></div><div class="box">Действуй как методист, который проверяет инструменты на практике и не даёт себя обмануть первым впечатлением. Собери мне честный тест-драйв.
+
+Задача, на которой проверяю: [ЧТО ДЕЛАЮ]
+Старый инструмент: [ЧЕМ ПОЛЬЗУЮСЬ СЕЙЧАС]
+Новый инструмент: [ЧТО ХОЧУ ПРОВЕРИТЬ]
+Что для меня значит хороший результат: [СВОИМИ СЛОВАМИ]
+
+Верни:
+1. Один эталонный запрос, который я вставлю без изменений в оба инструмента. Он должен быть реальным рабочим заданием на моих вводных, без абстрактных примеров.
+2. Пять критериев оценки результата, каждый с оценкой от одного до пяти и с описанием, что означает крайняя оценка. Хотя бы один критерий про скорость и хотя бы один про то, сколько мне придётся переделывать руками.
+3. Таблицу для заполнения: критерий, старый инструмент, новый инструмент, разница.
+4. Порог перехода: при какой суммарной разнице в баллах смена инструмента оправдывает потраченное на переучивание время.
+5. Три ловушки, из-за которых такое сравнение обычно врёт, и как их обойти.
+
+Ограничения. Не хвали ни один из инструментов заранее. Не используй длинные тире и обороты с противопоставлением через отрицание. Если для честного сравнения нужна информация, которой у тебя нет, скажи об этом прямо.</div></div>
+<div class="sec"><h2 id="sec-13">Что делать дальше</h2><p>Не пытайся перейти на новую карту целиком за один вечер, это верный способ бросить через три дня. Возьми одну задачу, на которую уходит больше всего твоего времени, скорее всего это тексты, и следующие семь дней делай её только новым инструментом, даже если первые попытки будут выходить медленнее старых. Через неделю прогони промпт про честное сравнение и посмотри на цифры вместо ощущений. Если разница есть, задача закрыта навсегда и можно брать вторую. Так за два месяца ты спокойно переберёшь всю карту, и у тебя вместо кучи вкладок соберётся рабочий набор, где под каждую задачу стоит один инструмент, и ты точно знаешь, почему именно он.</p></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">По какому правилу расставлены уровни</a><a href="#sec-1">Задача 1. Тексты и посты</a><a href="#sec-2">Задача 2. Сайт без кода</a><a href="#sec-3">Задача 3. Визуал и графика</a><a href="#sec-4">Задача 4. Ресёрч и факты</a><a href="#sec-5">Задача 5. Разработка и код</a><a href="#sec-6">Задача 6. Площадки для онлайна</a><a href="#sec-7">Задача 7. Видео без лица</a><a href="#sec-8">Задача 8. Автоматизация</a><a href="#sec-9">Доступ из России и оплата</a><a href="#sec-10">Стартовый набор на первый месяц</a><a href="#sec-11">Промпт 1. Подбор инструмента под твою задачу</a><a href="#sec-12">Промпт 2. Честная проверка, стоит ли переходить</a><a href="#sec-13">Что делать дальше</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>

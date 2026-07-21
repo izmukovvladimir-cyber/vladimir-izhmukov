@@ -1,0 +1,485 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Лучшее время для публикации: снять свой график активности и собрать из него сетку выходов</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-marketing">Маркетинг</a></div>
+<h1>Лучшее время для публикации: снять свой график активности и собрать из него сетку выходов</h1>
+<p class="lead">Инстаграм уже посчитал, когда твоя аудитория сидит в приложении, и держит этот график внутри статистики. Здесь лежит полная инструкция, как его открыть, как правильно прочитать столбики и как из этих цифр собрать сетку выходов на неделю вперёд. Внутри точный путь по приложению с запасными названиями пунктов, потому что Инстаграм их периодически переименовывает, готовая таблица-снимок для заметок, куда ты вписываешь свои числа за 10 минут, три ловушки чтения графика, из-за которых люди делают неверные выводы из верных цифр, готовая сетка недели под 3, 5 и 7 выходов, промпт, который превращает твои столбики в расписание с обоснованием, протокол двухнедельного теста с правилом решения, и запасной метод на случай, если статистика пустая или все столбики стоят вровень.</p>
+<p class="meta">Читается за 12 минут, применяется за 20. Путь к графику активности в приложении, разбор что он показывает на самом деле, таблица для снятия своих цифр, сетка недели под разную частоту выходов, промпт для сборки расписания, протокол теста на две недели и запасной метод без статистики.</p>
+<div class="how">Открой инструкцию с телефона, потому что статистика активности живёт только в мобильном приложении. Сначала прочитай второй раздел про то, что этот график показывает на самом деле, он занимает три минуты и снимает главные ошибки чтения. Дальше иди по шагам с телефоном в руках и сразу заполняй таблицу-снимок в заметках, по памяти потом не восстановишь. Когда цифры собраны, скорми их промпту из шестого раздела либо собери сетку руками по правилам оттуда же. Дальше две недели живёшь по расписанию и возвращаешься к разделу про тест, чтобы честно оценить результат.</div>
+<div class="sec"><h2 id="sec-0">Почему чужие таблицы времени тебе не подходят</h2><p>Короткий раздел, чтобы ты понимал, зачем вообще лезть в статистику, если в интернете лежат готовые ответы.</p><p>Подборки вида «публикуй во вторник в девять утра» собраны усреднением миллионов аккаунтов по всему миру. В одной куче кулинарные блоги, автосалоны, подростковые мемные паблики и B2B-консультанты, живущие в десятке часовых поясов. Среднее по такой выборке описывает несуществующий аккаунт. Твои подписчики просыпаются, едут на работу, укладывают детей и листают ленту по собственному расписанию, и это расписание Инстаграм уже измерил персонально для тебя.</p><p>Разница между угаданным временем и своим на практике выглядит скромнее, чем обещают в роликах. Время публикации влияет на первый час жизни ролика, а этот первый час влияет на то, покажет ли алгоритм ролик дальше. То есть время работает как усилитель того, что у тебя уже есть. Слабый ролик в идеальный час останется слабым роликом. Сильный ролик в мёртвый час теряет разгон и часто не доезжает до рекомендаций. Поэтому время стоит настроить один раз и забыть, освободив голову для содержания.</p><div class="note">Держи правильное ожидание: перенос выходов на свои пики обычно даёт заметный, но не взрывной прирост охватов. Если у роликов сейчас двести просмотров, время их не спасёт. Работай с хуком и удержанием, а расписание собери заодно, потому что это тридцать минут разовой работы.</div></div>
+<div class="sec"><h2 id="sec-1">Что этот график показывает на самом деле</h2><p>Три вещи, которые нужно понимать до того, как ты начнёшь делать выводы. Из-за них люди читают верные цифры и приходят к неверным решениям.</p><div class="grid2"><div class="cardb"><h3>Он показывает присутствие, готовность реагировать он не меряет</h3><p>Столбик отвечает на вопрос, сколько твоих подписчиков было в приложении в этот час. Он ничего не говорит о том, в каком они были настроении и готовы ли досматривать, лайкать и писать в директ. Утренний пик часто состоит из людей, которые листают ленту одной рукой в транспорте и пролистывают всё подряд. Вечерний пик обычно даёт более вовлечённый просмотр. Поэтому при равных столбиках вечер чаще выигрывает у утра по реакциям, и это стоит проверить на своём тесте.</p></div><div class="cardb"><h3>Он показывает твоё время, не время подписчиков</h3><p>График строится по часовому поясу, который стоит у тебя в телефоне. Если ты живёшь в одном городе, а основная масса подписчиков в другом, ты видишь их активность, пересчитанную на свои часы. Это удобно, потому что публикуешь ты тоже по своим часам. Ловушка появляется, когда ты переезжаешь или летишь в отпуск: смена пояса в телефоне сдвигает всю картинку, и старые записи перестают биться с новыми.</p></div><div class="cardb"><h3>Он частично отражает твою же привычку</h3><p>Самое неочевидное. Люди приходят в приложение в том числе по уведомлениям о твоих публикациях. Если ты полгода выходишь в девять вечера, часть вечернего пика создана тобой самим. График в этом смысле немного самоподтверждающийся. Лечится это одним движением: раз в квартал сознательно выйди пару раз в другое окно и посмотри, появился ли там столбик. Иногда рядом обнаруживается второе живое окно, о котором ты не знал.</p></div></div><p>Из этих трёх пунктов следует практический вывод. График выдаёт короткий список гипотез, обычно из двух или трёх окон, готового ответа в нём нет. Дальше ты проверяешь их на своих публикациях и оставляешь то, где реально выше охват. Вся работа ниже построена именно так: сначала снимаем цифры, потом ставим тест, потом решаем по результату.</p></div>
+<div class="sec"><h2 id="sec-2">Шаг 1. Открыть график активности</h2><p>Делается с телефона, в веб-версии этого блока нет. Весь путь занимает меньше минуты.</p><ol><li>Открой свой профиль, иконка справа внизу.</li><li>Нажми три полоски в правом верхнем углу.</li><li>Выбери пункт «Статистика». В части версий он называется «Профессиональный дашборд», и статистика открывается уже внутри него.</li><li>Перейди на вкладку «Аудитория». В некоторых версиях она подписана «Ваши подписчики» либо «Аудитория подписчиков».</li><li>Пролистай вниз до блока «Самое активное время». Встречаются варианты названия «Наиболее активное время» и «Активное время подписчиков».</li><li>Сверху блока стоит переключатель «Часы» и «Дни». Это и есть нужный график.</li></ol><div class="note">Названия пунктов Инстаграм меняет от версии к версии и от языка к языку. Ориентируйся на смысл: тебе нужен раздел про аудиторию внутри статистики, а внутри него блок с почасовой активностью и переключателем часов и дней. Если интерфейс переехал, ищи именно этот блок, он никуда не пропадал уже несколько лет.</div><h3>Если пункта «Статистика» нет вообще</h3><p>Значит у тебя личный аккаунт. Статистика открывается только на профессиональном, в варианте «Автор» либо «Бизнес». Переключение лежит в настройках, в разделе про тип аккаунта, и занимает минуту. Подписчики, публикации, охваты и переписки остаются на месте, ничего не теряется. Для эксперта и блогера обычно подходит «Автор», для магазина и услуг с адресом «Бизнес». Вернуться обратно на личный можно в любой момент там же.</p><h3>Если блок есть, но цифр в нём нет</h3><p>Разбор аудитории раскрывается не на любом аккаунте: нужен минимальный объём подписчиков, чтобы Инстаграм считал выборку осмысленной, и нужно, чтобы прошло какое-то время после переключения на профессиональный. Порог платформа меняет и официально не фиксирует, ориентировочно речь про сотню подписчиков и выше. Проверяется это ровно одним способом: открыл, посмотрел, есть цифры или нет. Если пусто, переключись на профессиональный аккаунт сегодня, чтобы данные начали копиться, а расписание пока собери запасным методом из предпоследнего раздела.</p></div>
+<div class="sec"><h2 id="sec-3">Шаг 2. Снять часы</h2><p>Здесь ты превращаешь картинку со столбиками в числа, с которыми можно работать. Займёт около десяти минут, делается один раз.</p><p>Включи переключатель «Часы». Сверху появится выбор дня недели. Важный момент, который пропускают почти все: график почасовой активности показывается отдельно по каждому дню недели, и картинка в понедельник и в субботу у большинства аккаунтов разная. Смотреть один усреднённый день бессмысленно, поэтому пройди по дням отдельно.</p><ol><li>Выбери понедельник. Найди глазами два самых высоких столбика и запиши эти часы. Если между вторым и третьим разница на глаз почти незаметна, пиши оба, потом разберёмся.</li><li>Обрати внимание не только на высоту пика, но и на его форму. Узкий одинокий столбик означает короткую вспышку, в него легко не попасть. Плато из трёх-четырёх соседних часов почти одной высоты это широкое окно, туда попасть проще, и надёжность выше.</li><li>Повтори то же самое для каждого дня недели. Семь заходов, по минуте на день.</li><li>Заполни таблицу-снимок из следующего блока прямо в заметках телефона. Через неделю ты не вспомнишь эти числа, а сравнивать с новым замером через месяц придётся.</li><li>Поставь в заметке дату замера и город, в котором ты находишься. Это спасёт тебя, когда цифры внезапно поедут после поездки.</li></ol><h3>Таблица-снимок, копируй в заметки</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="СНИМОК АКТИВНОСТИ АУДИТОРИИ
+Дата замера: ___________
+Город и часовой пояс телефона: ___________
+Подписчиков на момент замера: ___________
+
+ЧАСЫ (два самых высоких столбика по каждому дню)
+Пн: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Вт: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Ср: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Чт: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Пт: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Сб: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Вс: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+
+ДНИ (расставь все семь дней по убыванию активности)
+1 место: ______   2 место: ______   3 место: ______
+4 место: ______   5 место: ______   6 место: ______   7 место: ______
+Разрыв между первым и третьим местом: заметный / почти вровень
+
+ВЫВОД
+Мои рабочие дни: ______, ______, ______
+Моё основное окно: ____:00
+Моё второе окно: ____:00
+Время постановки публикации (за 30-60 минут до пика): ____:00 и ____:00">Скопировать</button></div><div class="box">СНИМОК АКТИВНОСТИ АУДИТОРИИ
+Дата замера: ___________
+Город и часовой пояс телефона: ___________
+Подписчиков на момент замера: ___________
+
+ЧАСЫ (два самых высоких столбика по каждому дню)
+Пн: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Вт: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Ср: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Чт: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Пт: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Сб: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+Вс: пик 1 ____:00   пик 2 ____:00   форма пика: узкий / плато
+
+ДНИ (расставь все семь дней по убыванию активности)
+1 место: ______   2 место: ______   3 место: ______
+4 место: ______   5 место: ______   6 место: ______   7 место: ______
+Разрыв между первым и третьим местом: заметный / почти вровень
+
+ВЫВОД
+Мои рабочие дни: ______, ______, ______
+Моё основное окно: ____:00
+Моё второе окно: ____:00
+Время постановки публикации (за 30-60 минут до пика): ____:00 и ____:00</div><div class="note">Не усредняй пики по всей неделе в одно число. Смысл этой работы ровно в том, чтобы поймать разницу между днями. У экспертных блогов обычная картина такая: в будни утренний пик около дороги на работу и вечерний около десяти, а в выходные утренний пик уползает на пару часов вперёд и становится ниже. Если ты усреднишь, ты потеряешь именно это.</div></div>
+<div class="sec"><h2 id="sec-4">Шаг 3. Снять дни</h2><p>Второй переключатель отвечает на вопрос, в какие дни вообще стоит выходить, если ты публикуешь не каждый день.</p><p>Переключись на «Дни». Здесь семь столбиков, по одному на день недели, и они показывают общую активность твоей аудитории за сутки. Расставь все семь дней по убыванию и запиши в таблицу-снимок. Три верхних это твои рабочие дни, если ты выходишь три раза в неделю.</p><div class="grid2"><div class="cardb"><h3>Разрыв заметный</h3><p>Между первым и третьим местом видимая разница по высоте. Отлично, у тебя есть чёткие рабочие дни. Ставь основные публикации именно в них и не размазывай силы на аутсайдеров. Самый слабый день недели используй под лёгкий контент, сторис и переписки, не трать на него ролик, в который вложил вечер работы.</p></div><div class="cardb"><h3>Столбики стоят почти вровень</h3><p>Частая ситуация у небольших аккаунтов, и это нормально. Значит день недели у тебя слабый фактор, и решает время суток. Бери те дни, где столбик хотя бы немного выше соседей, начинай тест с них, а основное внимание переноси на часы. Ещё вариант: выбери дни, удобные лично тебе по производству, стабильность выпуска для алгоритма важнее выигрыша в пару процентов.</p></div><div class="cardb"><h3>Выходные проваливаются</h3><p>Типично для экспертных блогов, где аудитория листает ленту в рабочих паузах. Не пытайся героически выправить субботу, просто переноси выходы на будни. Выходные оставь под сторис и живое общение, там аудитория ведёт себя иначе.</p></div><div class="cardb"><h3>Выходные впереди будней</h3><p>Типично для развлекательного, путешествий, лайфстайла, хобби. Тогда твой главный ролик недели живёт в субботу или воскресенье, а будни работают на прогрев. Это ровно противоположная раскладка, и переносить чужие советы для экспертных блогов сюда нельзя.</p></div></div></div>
+<div class="sec"><h2 id="sec-5">Свод: готовая сетка недели</h2><p>Твоё время лежит на пересечении лучших дней и лучших часов. Ниже три готовые раскладки под разную частоту выходов, бери ту, что совпадает с твоим ритмом.</p><h3>Правило постановки: за 30-60 минут до пика</h3><p>Публикуй заранее, до пика. Ролику нужно время, чтобы собрать первые просмотры, досмотры и реакции на небольшой группе людей, потому что именно по этим первым сигналам платформа решает, показывать ли его дальше. К моменту, когда основная масса подписчиков зайдёт в ленту, у ролика уже должна быть накоплена реакция. Полчаса форы для узкого пика и час для широкого плато это рабочая отправная точка, которую дальше ты подвинешь по результатам теста.</p><h3>Раскладка на 3 выхода в неделю</h3><ul><li>Три верхних дня из замера, желательно вразбежку через день, чтобы публикации не толпились подряд.</li><li>Каждый выход в основное окно этого дня, то есть в самый высокий столбик по часам именно для него.</li><li>Один из трёх выходов раз в две недели ставь во второе окно вместо основного. Так ты продолжаешь собирать данные и однажды обнаруживаешь, что второе окно у тебя сильнее.</li></ul><h3>Раскладка на 5 выходов в неделю</h3><ul><li>Пять верхних дней недели по замеру.</li><li>Три самых сильных дня в основное окно, два оставшихся во второе окно. Так ты покрываешь обе части суток и не приучаешь аудиторию к единственному часу.</li><li>Самый слабый день недели держи пустым сознательно, это твой день на производство и на отдых.</li></ul><h3>Раскладка на 7 выходов в неделю</h3><ul><li>Каждый день в основное окно именно этого дня. Один и тот же час на всю неделю здесь не подходит, ради этого ты и снимал часы отдельно по дням.</li><li>Самый сильный ролик недели ставь в день с самым высоким столбиком, туда же уводи главный призыв к действию.</li><li>Раз в неделю в самый слабый день ставь эксперимент: другой формат, другое окно, необычный хук. Терять там нечего, а находки случаются регулярно.</li></ul><div class="note">Два выхода в один день ставь с разрывом минимум в шесть часов, лучше в разные окна, утреннее и вечернее. Две публикации подряд с коротким интервалом конкурируют между собой за одну и ту же аудиторию, и вторая почти всегда собирает заметно меньше первой.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-6">Промпт: собрать расписание из твоих цифр</h2><p>Заполни подстановки числами из таблицы-снимка и отдай нейросети. На выходе получишь готовую сетку недели с обоснованием по каждому слоту и с планом теста. Работает в ChatGPT, Claude, Gemini и в любой другой модели.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как аналитик контент-расписания для Инстаграма. Твоя задача собрать мне рабочую сетку публикаций на неделю на основе моих реальных данных из статистики аккаунта и объяснить каждое решение.
+
+МОИ ДАННЫЕ
+Ниша блога: [например, психолог для женщин 30-40 лет]
+Часовой пояс телефона: [например, Москва]
+Подписчиков: [число]
+Сколько раз в неделю я готов публиковать: [3 / 5 / 7]
+Формат основного контента: [рилс / карусель / смешанно]
+
+АКТИВНОСТЬ ПО ЧАСАМ (два самых высоких столбика по каждому дню, форма пика узкая или плато)
+Пн: [08:00 узкий], [21:00 плато]
+Вт: [__:00 ___], [__:00 ___]
+Ср: [__:00 ___], [__:00 ___]
+Чт: [__:00 ___], [__:00 ___]
+Пт: [__:00 ___], [__:00 ___]
+Сб: [__:00 ___], [__:00 ___]
+Вс: [__:00 ___], [__:00 ___]
+
+АКТИВНОСТЬ ПО ДНЯМ (все семь дней по убыванию)
+[1 место, 2 место, 3 место, 4 место, 5 место, 6 место, 7 место]
+Разрыв между первым и третьим местом: [заметный / почти вровень]
+
+ЧТО СДЕЛАТЬ
+1. Собери сетку ровно на то количество выходов, которое я указал.
+2. Для каждого выхода дай: день, точное время постановки публикации, целевой пик, к которому мы готовимся, и одну строку объяснения, почему выбран именно этот слот.
+3. Время постановки считай за 30-60 минут до пика: 30 минут для узкого пика, 60 для плато.
+4. Отдельно назови мой самый сильный слот недели, куда ставить лучший материал и главный призыв к действию.
+5. Предложи один экспериментальный слот в слабый день с гипотезой, что мы проверяем.
+6. Дай план теста на две недели: что фиксировать после каждой публикации и по какому правилу принимать решение через две недели.
+7. Назови риски именно моей раскладки: где слоты стоят слишком кучно, где я рискую не попасть в узкий пик, что делать при переезде в другой часовой пояс.
+
+ФОРМАТ ОТВЕТА
+Сначала таблица: День | Время постановки | Целевой пик | Почему этот слот.
+Потом блок «Самый сильный слот недели» одним абзацем.
+Потом блок «Эксперимент недели» одним абзацем.
+Потом блок «План теста на две недели» списком.
+Потом блок «Риски» списком.
+Без вступлений и без пересказа моих данных. Сразу таблица.
+
+ЕСЛИ ДАННЫХ НЕ ХВАТАЕТ
+Если я заполнил часы не по всем дням, не выдумывай недостающие числа. Собери сетку по тем дням, где данные есть, а по остальным честно напиши, что нужно доснять, и укажи какие именно дни.">Скопировать</button></div><div class="box">Действуй как аналитик контент-расписания для Инстаграма. Твоя задача собрать мне рабочую сетку публикаций на неделю на основе моих реальных данных из статистики аккаунта и объяснить каждое решение.
+
+МОИ ДАННЫЕ
+Ниша блога: [например, психолог для женщин 30-40 лет]
+Часовой пояс телефона: [например, Москва]
+Подписчиков: [число]
+Сколько раз в неделю я готов публиковать: [3 / 5 / 7]
+Формат основного контента: [рилс / карусель / смешанно]
+
+АКТИВНОСТЬ ПО ЧАСАМ (два самых высоких столбика по каждому дню, форма пика узкая или плато)
+Пн: [08:00 узкий], [21:00 плато]
+Вт: [__:00 ___], [__:00 ___]
+Ср: [__:00 ___], [__:00 ___]
+Чт: [__:00 ___], [__:00 ___]
+Пт: [__:00 ___], [__:00 ___]
+Сб: [__:00 ___], [__:00 ___]
+Вс: [__:00 ___], [__:00 ___]
+
+АКТИВНОСТЬ ПО ДНЯМ (все семь дней по убыванию)
+[1 место, 2 место, 3 место, 4 место, 5 место, 6 место, 7 место]
+Разрыв между первым и третьим местом: [заметный / почти вровень]
+
+ЧТО СДЕЛАТЬ
+1. Собери сетку ровно на то количество выходов, которое я указал.
+2. Для каждого выхода дай: день, точное время постановки публикации, целевой пик, к которому мы готовимся, и одну строку объяснения, почему выбран именно этот слот.
+3. Время постановки считай за 30-60 минут до пика: 30 минут для узкого пика, 60 для плато.
+4. Отдельно назови мой самый сильный слот недели, куда ставить лучший материал и главный призыв к действию.
+5. Предложи один экспериментальный слот в слабый день с гипотезой, что мы проверяем.
+6. Дай план теста на две недели: что фиксировать после каждой публикации и по какому правилу принимать решение через две недели.
+7. Назови риски именно моей раскладки: где слоты стоят слишком кучно, где я рискую не попасть в узкий пик, что делать при переезде в другой часовой пояс.
+
+ФОРМАТ ОТВЕТА
+Сначала таблица: День | Время постановки | Целевой пик | Почему этот слот.
+Потом блок «Самый сильный слот недели» одним абзацем.
+Потом блок «Эксперимент недели» одним абзацем.
+Потом блок «План теста на две недели» списком.
+Потом блок «Риски» списком.
+Без вступлений и без пересказа моих данных. Сразу таблица.
+
+ЕСЛИ ДАННЫХ НЕ ХВАТАЕТ
+Если я заполнил часы не по всем дням, не выдумывай недостающие числа. Собери сетку по тем дням, где данные есть, а по остальным честно напиши, что нужно доснять, и укажи какие именно дни.</div><div class="note">Проверяй ответ модели глазами по одному пункту: время постановки обязано стоять раньше пика. Публикация ровно в час пика это ошибка, и модели периодически её делают, потому что это выглядит логичнее. Если увидел такое, просто напиши «пересчитай время постановки, оно должно быть за 30-60 минут до пика», и она перестроит таблицу.</div></div>
+<div class="sec"><h2 id="sec-7">Тест на две недели и правило решения</h2><p>Без этого шага ты не узнаешь, сработало или нет, и через месяц вернёшься к угадыванию. Ведение занимает минуту после каждой публикации.</p><p>Логика теста простая. Две недели ты держишь новое расписание без единого отклонения, фиксируешь результат каждой публикации в одну строку и сравниваешь со своими же цифрами за предыдущие две недели. Отклонения ломают замер: одна публикация, поставленная на два часа позже «потому что не успел», превращает чистый тест в кашу, из которой выводов не сделать.</p><h3>Журнал теста, копируй в заметки</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="ЖУРНАЛ ТЕСТА ВРЕМЕНИ
+Базовый период (две недели ДО): средний охват одной публикации ______, средний процент досмотров ______
+
+Строка на каждую публикацию:
+Дата | День | Время постановки | Формат | Охват за 24 часа | Охват за 72 часа | Досмотры % | Сохранения | Комментарии
+
+1. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+2. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+3. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+4. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+5. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+6. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+
+ИТОГ ЧЕРЕЗ ДВЕ НЕДЕЛИ
+Средний охват за 24 часа: ______ (было ______)
+Средний охват за 72 часа: ______ (было ______)
+Лучший слот недели: ______
+Худший слот недели: ______
+Решение: закрепляю / меняю худший слот на второе окно / возвращаюсь к старому">Скопировать</button></div><div class="box">ЖУРНАЛ ТЕСТА ВРЕМЕНИ
+Базовый период (две недели ДО): средний охват одной публикации ______, средний процент досмотров ______
+
+Строка на каждую публикацию:
+Дата | День | Время постановки | Формат | Охват за 24 часа | Охват за 72 часа | Досмотры % | Сохранения | Комментарии
+
+1. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+2. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+3. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+4. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+5. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+6. ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____ | ____
+
+ИТОГ ЧЕРЕЗ ДВЕ НЕДЕЛИ
+Средний охват за 24 часа: ______ (было ______)
+Средний охват за 72 часа: ______ (было ______)
+Лучший слот недели: ______
+Худший слот недели: ______
+Решение: закрепляю / меняю худший слот на второе окно / возвращаюсь к старому</div><ol><li>Смотри охват за первые 24 часа, это самый чувствительный к времени показатель. Итоговый охват за неделю сильно зависит от того, ушёл ли ролик в рекомендации, и там время публикации уже почти ни при чём.</li><li>Обязательно записывай и охват за 72 часа. Если 24 часа выросли, а 72 остались прежними, значит время дало ускорение старта, но качество материала осталось потолком. Это полезно знать, чтобы понимать, куда вкладываться дальше.</li><li>Сравнивай похожее с похожим. Рилс с рилсом, карусель с каруселью. Смешивать форматы в одном сравнении бессмысленно, у них разная механика распространения.</li><li>Выбрось из подсчёта одну случайную виралку, если она случилась. Один ролик, улетевший в десять раз выше обычного, перекосит среднее и покажет несуществующий успех расписания.</li><li>Правило решения: если средний охват за 24 часа вырос примерно на пятую часть и больше, расписание закрепляй. Если движение в пределах нескольких процентов, оставляй расписание, потому что оно как минимум не хуже, и переключай внимание на хуки. Если охват просел, верни старое время и проверь, не ошибся ли ты с часовым поясом при замере.</li></ol><div class="note">Пересматривай замер примерно раз в месяц и обязательно после трёх событий: заметный приход новой аудитории, смена основной темы блога, переезд или длинная поездка в другой часовой пояс. Аудитория меняется, и график вместе с ней. Старый снимок в заметках нужен именно для того, чтобы увидеть сдвиг.</div></div>
+<div class="sec"><h2 id="sec-8">Если статистики нет или все столбики ровные</h2><p>Запасной метод для новых аккаунтов и для случая, когда график ничего внятного не показывает. Даёт рабочее расписание за две недели наблюдений.</p><p>Когда данных мало, ты собираешь их сам, публикуя в разные окна и фиксируя результат. Это дольше, но честнее любых чужих таблиц, потому что меряет ровно твою аудиторию.</p><ol><li>Возьми три окна-кандидата, опираясь на здравый смысл про свою аудиторию. Классические варианты: утро около дороги на работу, обеденная пауза, вечер после ужина. Для мам с маленькими детьми добавь позднее утро и поздний вечер, для студентов сдвигай всё позже.</li><li>Две недели публикуй по кругу: первый выход в окно А, второй в окно Б, третий в окно В, потом снова А. Ничего больше не меняй, форматы держи примерно одинаковыми.</li><li>Веди тот же журнал из предыдущего раздела, записывая охват за 24 часа.</li><li>Через две недели у тебя по три-четыре точки на каждое окно. Победитель обычно виден невооружённым глазом.</li><li>Закрепи победителя как основное окно, второе по результату оставь как запасное и проверь статистику ещё раз, когда аккаунт подрастёт. К тому моменту график уже раскроется, и ты сверишь свои наблюдения с цифрами платформы.</li></ol><div class="note">Отдельно про совсем маленькие аккаунты. Пока подписчиков мало, основной охват тебе дают рекомендации, лента подписчиков приносит немного, и влияние времени публикации там ощутимо слабее. Собери расписание один раз запасным методом, зафиксируй его и не трать на эту тему больше внимания, пока аккаунт не подрастёт.</div></div>
+<div class="sec"><h2 id="sec-9">Чего время не чинит</h2><p>Честный раздел, чтобы ты не потратил месяц на перестановку часов, когда проблема лежит в другом месте.</p><div class="grid2"><div class="cardb"><h3>Слабый первый кадр</h3><p>Если человек уходит на первой секунде, до алгоритма просто не доходит сигнал, что ролик интересный. Идеальный час эту дыру не закроет. Признак: досмотры в статистике ролика низкие с самого начала. Лечится хуком, первым кадром и первой строкой текста поверх видео.</p></div><div class="cardb"><h3>Нестабильность выпуска</h3><p>Три ролика за неделю, потом тишина на десять дней. Аккаунт с рваным ритмом теряет разгон, и никакое расписание не спасёт, если по нему не живут. Стабильные три выхода в неделю в среднее время сильнее пяти выходов в идеальное время раз в месяц.</p></div><div class="cardb"><h3>Тема, которая никого не задевает</h3><p>Ролик про то, что интересно тебе и не болит у аудитории, соберёт мало в любой час. Признак: ровные низкие охваты на всех форматах и слотах, без единого всплеска. Лечится списком реальных болей аудитории и темами под них.</p></div><div class="cardb"><h3>Ожидание чуда от переноса на час</h3><p>Перенос выхода с восьми вечера на девять это тонкая настройка. Она даёт прирост в процентах, не в разах. Если ты ждёшь от неё смены порядка цифр, ты разочаруешься и бросишь работающий инструмент. Настрой один раз и иди работать над содержанием.</p></div></div></div>
+<div class="sec"><h2 id="sec-10">План на ближайшие 20 минут</h2><p>Пять шагов, после которых у тебя на руках будет своё расписание вместо чужой таблички из интернета.</p><ol><li>Открой статистику, вкладку «Аудитория», блок «Самое активное время». Если пункта нет, переключи аккаунт на профессиональный прямо сейчас, это минута.</li><li>Скопируй таблицу-снимок в заметки и заполни её, проходя по дням недели в переключателе «Часы». Десять минут.</li><li>Переключись на «Дни» и расставь все семь дней по убыванию в ту же таблицу. Две минуты.</li><li>Собери сетку: либо руками по раскладкам из шестого раздела, либо промптом, вставив свои числа. Пять минут.</li><li>Заведи журнал теста и поставь себе напоминание на две недели вперёд, чтобы вернуться и посчитать результат. Иначе тест повиснет незакрытым, а решение так и не будет принято.</li></ol><div class="note">И главное, что стоит унести с этой страницы: расписание собирается один раз и пересматривается раз в месяц по пятиминутному замеру. Это редкая задача в продвижении, у которой есть точный ответ внутри приложения. Забери его и освободи голову для того, что действительно решает, для содержания твоих роликов.</div></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Почему чужие таблицы времени тебе не подходят</a><a href="#sec-1">Что этот график показывает на самом деле</a><a href="#sec-2">Шаг 1. Открыть график активности</a><a href="#sec-3">Шаг 2. Снять часы</a><a href="#sec-4">Шаг 3. Снять дни</a><a href="#sec-5">Свод: готовая сетка недели</a><a href="#sec-6">Промпт: собрать расписание из твоих цифр</a><a href="#sec-7">Тест на две недели и правило решения</a><a href="#sec-8">Если статистики нет или все столбики ровные</a><a href="#sec-9">Чего время не чинит</a><a href="#sec-10">План на ближайшие 20 минут</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
