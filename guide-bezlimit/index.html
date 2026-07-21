@@ -1,0 +1,356 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Клод Код без упора в лимиты: открытый шлюз OmniRoute, честные цифры и безопасная установка</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>Клод Код без упора в лимиты: открытый шлюз OmniRoute, честные цифры и безопасная установка</h1>
+<p class="lead">Это разбор OmniRoute, открытого бесплатного шлюза, через который Клод Код ходит сразу в сотни ИИ-провайдеров вместо одного Anthropic, сам перескакивает на следующего, когда упёрся в лимит, и по дороге сжимает то, что уезжает в модель. Я проверил его по официальному репозиторию, по пакету в npm и по независимому обзору, потому что цифры в роликах и цифры в реальности расходятся заметно, и ниже честно развожу, где правда, а где округлили в свою пользу. Внутри установка точными командами, обязательный шаг по безопасности, который в роликах не показывают и без которого ты открываешь дыру у себя на машине, способ убедиться, что переключение действительно работает, замер реального расхода, отдельный жёсткий блок про приватность и про то, какие задачи через чужие бесплатные провайдеры гнать нельзя, чинилка типовых ошибок и полный откат, если решишь снести.</p>
+<p class="meta">Читается за 20 минут. Внутри проверка фактов об OmniRoute по официальному репозиторию и независимому обзору, установка точными командами, обязательная настройка безопасности, проверка автопереключения между провайдерами, замер расхода, честный разбор приватности и рисков для аккаунтов, чинилка ошибок и команды полного отката.</p>
+<div class="how">Начни с первого раздела с проверкой фактов, он занимает три минуты и сразу поставит правильные ожидания, потому что заявленные в роликах цифры и реальные отличаются в разы. Дальше иди по установке сверху вниз, копируя команды блоками целиком. Шаг с секретами не пропускай, он единственный обязательный с точки зрения безопасности. После установки обязательно прогони раздел с проверкой, иначе ты не узнаешь, работает переключение или ты просто сидишь на одном провайдере. Раздел про приватность прочитай до того, как начнёшь гонять через это рабочие задачи, там про то, куда реально уходит твой код.</div>
+<div class="sec"><h2 id="sec-0">Сначала факты: что подтвердилось, а где в ролике округлили</h2><p>Я специально свёл заявления из роликов с тем, что написано в официальном репозитории, в пакете npm и в независимом обзоре, потому что ты пойдёшь ставить это себе и должен понимать, чего ждать на самом деле.</p><p>Инструмент существует, называется OmniRoute, живёт на GitHub по адресу diegosouzapw/OmniRoute, лицензия MIT, весь код открыт, платить за него не нужно никому. На момент проверки в июле 2026 у репозитория около 23,5 тысячи звёзд, 3,1 тысячи форков, около 270 контрибьюторов и 225 открытых задач. Последний коммит был в день проверки, проект живой и обновляется буквально ежедневно. Пакет в npm называется omniroute, за неделю с 14 по 20 июля его поставили около 40 тысяч раз. Всё это настоящее, проект не выдумка и не мёртвая заброшенная поделка.</p><a class="linkbtn" href="https://github.com/diegosouzapw/OmniRoute" target="_blank" rel="noopener">Открыть официальный репозиторий OmniRoute на GitHub</a><div class="grid2"><div class="cardb"><h3>200+ бесплатных провайдеров: сильно преувеличено</h3><p>Провайдеров в системе действительно много, около 270. Но бесплатных среди них далеко не 200. Сам проект пишет аккуратнее: 90 с лишним провайдеров имеют какой-то бесплатный тариф, постоянно бесплатных около 40. Независимая проверка разложила ещё жёстче: без регистрации работают всего 11, около 40 требуют завести аккаунт и получить ключ, около 50 просят привязать банковскую карту, остальные 130 с лишним платные по подписке. Реальная картина такая: бесплатно и сразу у тебя будет десяток, а не двести.</p></div><div class="cardb"><h3>Экономия до 90 процентов: это потолок, а не норма</h3><p>Заявление про 15-95 процентов и среднюю экономию около 89 процентов принадлежит авторам проекта и относится к самым удачным сценариям с тяжёлым машинным выводом. Независимый замер дал другое: на коде около 18 процентов, на генерации текста около 50, на длинной истории чата около 65, в среднем около 42 процентов. Клод Код это работа с кодом, то есть твой реальный диапазон ближе к нижней границе. Ставь ожидание в 15-25 процентов, всё сверху будет приятной неожиданностью.</p></div><div class="cardb"><h3>Автопереключение при лимите: правда</h3><p>Вот это подтверждается полностью и это главная ценность инструмента. Шлюз следит за квотами каждого подключённого провайдера, и когда текущий отвечает отказом по лимиту, запрос уходит следующему по цепочке. Работает и на бесплатных тарифах, и на платных подписках. Именно ради этого пункта затея имеет смысл, а не ради сжатия.</p></div><div class="cardb"><h3>Сжатие промптов: правда, но с ценой</h3><p>Сжатие реально есть, работает несколькими движками, код, ссылки и структуры JSON при этом сохраняются байт в байт. Цена в том, что каждый запрос обрастает задержкой в 50-200 миллисекунд на обычном железе. На единичных вопросах незаметно, на длинной сессии с сотнями обращений к инструментам это чувствуется.</p></div></div><div class="note">Даже сам проект называет разные цифры в разных местах: в описании репозитория 268 провайдеров, в тексте документации 271, в описании пакета npm вообще 160. Это не обман, это следствие бешеной скорости разработки, когда описания не успевают за кодом. Но общий вывод простой: любую цифру отсюда проверяй у себя, единственная честная экономия это та, которую ты увидишь на своём счётчике.</div></div>
+<div class="sec"><h2 id="sec-1">Что это вообще такое и зачем оно тебе</h2><p>Минута на понимание механики сэкономит тебе часы разбирательств, когда что-то пойдёт не так.</p><p>Клод Код обычным образом ходит по одному адресу, в Anthropic, и упирается в лимит твоей подписки. OmniRoute поднимает у тебя на машине локальный шлюз, и ты говоришь Клод Коду ходить на этот локальный адрес вместо прямого пути в Anthropic. Дальше шлюз сам решает, какому провайдеру отдать запрос: твоей подписке Anthropic, бесплатному тарифу другого сервиса, платному ключу третьего. Когда один упёрся в квоту, запрос перекидывается на следующего, и работа продолжается.</p><p>Второй слой это сжатие. Основной расход токенов создаёшь не ты своими сообщениями, его создают ответы инструментов: содержимое прочитанных файлов, вывод команд в терминале, результаты поиска по проекту, длинные логи. Шлюз прогоняет эти простыни через свои сжиматели, прежде чем отправить дальше. Внутри одиннадцать движков сжатия разной агрессивности, от лёгкого режима до предельного.</p><p>И третье, о чём стоит сказать честно. Слово бесплатно тут означает бесплатные тарифы чужих сервисов, а не отмену лимитов. У каждого бесплатного тарифа свои ограничения, обычно от одного до десяти запросов в минуту и от ста до тысячи в сутки. Обещание вечной работы без лимитов держится на том, что ты подключаешь много таких тарифов сразу и прыгаешь между ними. Это работает, но это не волшебство, и в тяжёлый рабочий день ты выберешь и их.</p><div class="note">Главная выгода тут в том, что работа не встаёт колом посреди задачи, когда кончилась квота. Экономия денег идёт вторым номером. Если ты держишь эту рамку в голове, инструмент тебя не разочарует.</div></div>
+<div class="sec"><h2 id="sec-2">Установка по шагам</h2><p>Все команды вводятся в терминале, а не в окне диалога с Клод Кодом. На Windows работай в терминале WSL.</p><h3>Шаг 0. Проверь версию Node</h3><p>Это место, где спотыкается больше половины новичков. Проект жёстко требует Node версии 22.22.2 и выше внутри двадцать второй ветки, либо 24 и выше. На всём остальном он падает с невнятной ошибкой при входе в панель. Рекомендуется 24.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="node --version">Скопировать</button></div><div class="box">node --version</div><p>Если версия не подходит, поставь нужную через менеджер версий и переключись на неё:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="nvm install 24
+nvm use 24
+node --version">Скопировать</button></div><div class="box">nvm install 24
+nvm use 24
+node --version</div><h3>Шаг 1. Поставь шлюз</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="npm install -g omniroute">Скопировать</button></div><div class="box">npm install -g omniroute</div><p>Если предпочитаешь Docker и не хочешь трогать систему, ставь контейнером. Флаг остановки тут не для красоты, без него база данных может побиться при выключении:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="docker run -d --name omniroute --restart unless-stopped --stop-timeout 40 \
+  -p 127.0.0.1:20128:20128 -v omniroute-data:/app/data \
+  diegosouzapw/omniroute:latest">Скопировать</button></div><div class="box">docker run -d --name omniroute --restart unless-stopped --stop-timeout 40 \
+  -p 127.0.0.1:20128:20128 -v omniroute-data:/app/data \
+  diegosouzapw/omniroute:latest</div><h3>Шаг 2. Обязательный шаг про безопасность</h3><p>Вот это в роликах не показывают, а пропускать нельзя. Из коробки проект стартует с предсказуемым секретом подписи входа и без шифрования хранилища, то есть твои ключи от всех провайдеров лежат на диске открытым текстом. У предшественника этого проекта ровно такая дыра получила номер CVE. Сгенерируй два своих секрета и пропиши их до первого запуска.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="mkdir -p ~/.omniroute
+printf &#x27;JWT_SECRET=%s\nSTORAGE_ENCRYPTION_KEY=%s\nPORT=20128\n&#x27; \
+  &quot;$(openssl rand -hex 32)&quot; &quot;$(openssl rand -hex 32)&quot; &gt;&gt; ~/.omniroute/.env
+cat ~/.omniroute/.env">Скопировать</button></div><div class="box">mkdir -p ~/.omniroute
+printf &#x27;JWT_SECRET=%s\nSTORAGE_ENCRYPTION_KEY=%s\nPORT=20128\n&#x27; \
+  &quot;$(openssl rand -hex 32)&quot; &quot;$(openssl rand -hex 32)&quot; &gt;&gt; ~/.omniroute/.env
+cat ~/.omniroute/.env</div><div class="note">Никогда не выставляй порт 20128 наружу в интернет. Панель управления не рассчитана на публичный доступ, а внутри неё лежат ключи от всех твоих провайдеров. Нужен доступ с другой машины, поднимай через VPN или обратный прокси с паролем и HTTPS.</div><h3>Шаг 3. Запусти и зайди в панель</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="omniroute">Скопировать</button></div><div class="box">omniroute</div><p>Шлюз поднимется и напечатает адрес панели. Открой в браузере http://localhost:20128 и задай пароль администратора при первом входе.</p><h3>Шаг 4. Подключи провайдеров</h3><p>В панели зайди в раздел Providers и подключи хотя бы двоих, иначе переключать будет не на что и весь смысл пропадает. Часть подключается по кнопке через вход в аккаунт, часть требует вставить ключ из личного кабинета сервиса. Начни с тех, что не просят банковскую карту, их список лежит в документации проекта в файле FREE_PROVIDER_RANKINGS.md.</p><h3>Шаг 5. Создай ключ для Клод Кода</h3><p>В панели открой раздел Endpoints и сгенерируй ключ доступа. Это твой личный ключ к локальному шлюзу, никакого отношения к ключам провайдеров он не имеет. Скопируй его.</p><h3>Шаг 6. Переведи Клод Код на шлюз</h3><p>Самый простой путь, автоматическая настройка. Команда сама пропишет профили в настройки Клод Кода:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="omniroute setup-claude">Скопировать</button></div><div class="box">omniroute setup-claude</div><p>Если хочешь понимать, что происходит, и держать всё под контролем, настрой руками. Подставь свой ключ из пятого шага вместо ЗДЕСЬ_ТВОЙ_КЛЮЧ и запусти Клод Код прямо из этого же окна терминала:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="export ANTHROPIC_BASE_URL=&quot;http://localhost:20128&quot;
+export ANTHROPIC_AUTH_TOKEN=&quot;ЗДЕСЬ_ТВОЙ_КЛЮЧ&quot;
+export CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=&quot;1&quot;
+claude">Скопировать</button></div><div class="box">export ANTHROPIC_BASE_URL=&quot;http://localhost:20128&quot;
+export ANTHROPIC_AUTH_TOKEN=&quot;ЗДЕСЬ_ТВОЙ_КЛЮЧ&quot;
+export CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=&quot;1&quot;
+claude</div><div class="note">Обрати внимание: в переменной ANTHROPIC_BASE_URL суффикс /v1 не пишется, Клод Код добавляет его сам. Это одна из самых частых ошибок при ручной настройке, а выглядит она как загадочная ошибка 404 на каждый запрос.</div></div>
+<div class="sec"><h2 id="sec-3">Как убедиться, что переключение реально работает</h2><p>Самая частая ситуация выглядит так: человек поставил шлюз, запустил Клод Код по старой привычке в другом окне терминала и потом рассказывает, что ничего не изменилось.</p><ol><li>Проверь, что шлюз жив. Команда проверки здоровья идёт следующим блоком, она должна вернуть ответ, а не отказ в соединении.</li><li>Проверь, что Клод Код смотрит именно на шлюз. Переменные окружения живут только в том окне терминала, где ты их задал. Открыл новое окно, значит там их уже нет, и Клод Код пошёл в Anthropic напрямую.</li><li>Открой в панели раздел с логами запросов и задай Клод Коду любой вопрос. Если в логах появилась строка с этим запросом и именем провайдера, который его обслужил, связка работает.</li><li>Проверь сам перескок. Поставь режим модели auto, чтобы шлюз выбирал провайдера сам, и прогони тяжёлую задачу, где Клод Код много читает и ищет по проекту. В логах ты увидишь, как имя провайдера меняется, когда предыдущий отдал отказ по квоте.</li><li>Не верь тишине. Если в логах панели пусто, значит запросы идут мимо шлюза, сколько бы всё ни выглядело работающим.</li></ol><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="curl -s http://localhost:20128/api/monitoring/health">Скопировать</button></div><div class="box">curl -s http://localhost:20128/api/monitoring/health</div><p>Проверить, куда сейчас смотрит твоя сессия, можно одной строкой. Если в ответ пусто, ты работаешь напрямую с Anthropic, мимо шлюза:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="echo &quot;$ANTHROPIC_BASE_URL&quot;">Скопировать</button></div><div class="box">echo &quot;$ANTHROPIC_BASE_URL&quot;</div><p>Чтобы шлюз сам выбирал провайдера и перекидывал запрос при отказе, задай режим auto перед запуском:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="export ANTHROPIC_MODEL=&quot;auto&quot;
+claude">Скопировать</button></div><div class="box">export ANTHROPIC_MODEL=&quot;auto&quot;
+claude</div></div>
+<div class="sec"><h2 id="sec-4">Как посмотреть реальный расход</h2><p>Это единственный способ узнать правду про экономию именно на твоих задачах. Займёт полчаса, зато дальше ты говоришь цифрами, а не пересказываешь ролики.</p><p>У тебя два счётчика. Первый внутри самого Клод Кода, служебная команда, которую набираешь прямо в окне диалога. Второй в панели шлюза, раздел с отслеживанием расхода, где видно каждый запрос, к какому провайдеру он ушёл, сколько токенов занял и сколько сжалось.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/cost">Скопировать</button></div><div class="box">/cost</div><h3>Методика честного замера</h3><ol><li>Сделай замер до. Запусти Клод Код обычным способом, без шлюза, выполни свою типовую рабочую задачу целиком, набери /cost и запиши цифру в заметку.</li><li>Сделай тот же прогон через шлюз. Та же задача, теми же словами, на том же проекте. Снова /cost, снова записал.</li><li>Повтори пару прогонов трижды. Один прогон не доказывает ничего, потому что расход прыгает даже на одинаковых задачах, модель каждый раз выбирает чуть разный путь. Смотри на среднее из трёх.</li><li>Сравнивай похожее с похожим. Если во втором прогоне Клод полез в другие файлы, замер испорчен, повтори.</li><li>Смотри не только на деньги. Часто главная выгода в том, что работа не встала посреди задачи, и это ощущается сильнее любых процентов экономии.</li></ol><div class="note">Панель показывает расчётную стоимость для сравнения провайдеров между собой, а не твой реальный счёт. Деньги ты платишь провайдерам напрямую, шлюз в этой цепочке денег не касается вообще. Сверяй итог в личных кабинетах сервисов, а не по панели.</div></div>
+<div class="sec"><h2 id="sec-5">Приватность: куда реально уходят твои промпты</h2><p>Раздел, ради которого стоило написать всю страницу. Тут придётся сказать неприятное, потому что в роликах эту часть проглатывают.</p><p>Сам шлюз честно локальный. Он крутится у тебя на машине, база лежит в папке ~/.omniroute, телеметрия по умолчанию выключена, в облако проекта твои промпты не уходят. Всё это правда и это хорошо.</p><p>Но смысл инструмента в том, чтобы отправлять твои запросы десяткам чужих компаний вместо одной. Каждый промпт, каждый кусок кода, который Клод Код прочитал у тебя в проекте, каждый лог и каждая переменная окружения, попавшая в контекст, уезжает тому провайдеру, которого шлюз выбрал в эту секунду. И вот тут главное: бесплатные тарифы почти всегда бесплатны именно потому, что провайдер оставляет за собой право использовать твои данные для обучения своих моделей. Платный тариф обычно такого права не даёт, бесплатный даёт почти всегда. Ты платишь своим кодом.</p><div class="grid2"><div class="cardb"><h3>Гнать можно спокойно</h3><p>Свои учебные и личные проекты, открытый код, черновики и эксперименты, разбор публичных библиотек, генерация обвязки и тестов, всё, что ты и так не постесняешься выложить на GitHub. Тут никакого риска нет, и именно на таких задачах инструмент раскрывается.</p></div><div class="cardb"><h3>Гнать нельзя никогда</h3><p>Персональные данные клиентов, базы контактов, выгрузки из CRM. Это уже не про этику, это 152-ФЗ и штрафы до полутора миллионов рублей за утечку. Отдельно: файлы .env, ключи от платёжек, токены ботов, пароли к серверам. Всё, что попало в контекст, ушло третьему лицу.</p></div><div class="cardb"><h3>Только со своей головой</h3><p>Код клиента под договором и NDA, внутренние документы компании, коммерческая тайна, финансовые модели, незапущенные продукты. Если бы за это пришлось объясняться перед клиентом, гони такую задачу напрямую через свою платную подписку, без шлюза.</p></div><div class="cardb"><h3>Что делать практически</h3><p>Держи два режима работы. Личные и открытые проекты через шлюз, там экономия и бесконечные лимиты. Клиентские и коммерческие задачи через обычную платную подписку напрямую. Переключение это одна переменная окружения, привыкаешь за день.</p></div></div><p>Технически переключиться обратно на прямой путь можно в любой момент, просто сбросив переменные в текущем окне терминала:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="unset ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN ANTHROPIC_MODEL CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY
+claude">Скопировать</button></div><div class="box">unset ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN ANTHROPIC_MODEL CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY
+claude</div><div class="note">В проекте есть встроенная чистка персональных данных перед отправкой, но она выключена по умолчанию и включается вручную. Плюс защитные фильтры устроены так, что при собственной ошибке они пропускают запрос дальше вместо того, чтобы его остановить. Полагаться на них как на страховку нельзя, решение о том, что можно отправлять, остаётся за тобой.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-6">Риски, о которых честно предупредить</h2><p>Инструмент рабочий, но он молодой, растёт на бешеной скорости и делается по сути одним автором. Вот что стоит знать до установки.</p><div class="grid2"><div class="cardb"><h3>Бан аккаунтов у провайдеров</h3><p>Часть сервисов прямо запрещает своими правилами доступ через прокси и склейку нескольких бесплатных тарифов. Документация проекта отдельно помечает такие провайдеры, чтобы ты решал сам. Реальный риск это блокировка твоего аккаунта у конкретного сервиса. Не подключай сюда аккаунты, потеря которых будет для тебя болезненной.</p></div><div class="cardb"><h3>Дыры в безопасности были</h3><p>В мае 2026 пакет попал под блокировку сервиса проверки за обфусцированный код и скрипты установки. Малвари не нашли, но автор признал две настоящие уязвимости с утечкой ключей и починил их в версии 3.8.6. История нормальная для молодого проекта, но она показывает уровень зрелости.</p></div><div class="cardb"><h3>Небезопасные настройки по умолчанию</h3><p>Предсказуемый секрет входа и выключенное шифрование хранилища из коробки. Шаг 2 в установке закрывает ровно это. Если ты его пропустил, вернись и сделай, это пять минут.</p></div><div class="cardb"><h3>Ломающиеся релизы</h3><p>Версии выходят почти каждый день, и среди них попадаются нерабочие. Свежий пример: одна из версий уронила запуск целиком и была срочно перевыпущена. Если после обновления всё встало, откатись на предыдущую версию, а не ищи ошибку у себя.</p></div></div><p>Откатиться на конкретную рабочую версию можно так, подставив нужный номер:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="npm install -g omniroute@3.8.48">Скопировать</button></div><div class="box">npm install -g omniroute@3.8.48</div><div class="note">Простое правило: если ты работаешь в найме с чужим кодом, в регулируемой отрасли или у тебя на машине лежат клиентские проекты под договором, ставь это на отдельную машину или в контейнер, а не в основное рабочее окружение.</div></div>
+<div class="sec"><h2 id="sec-7">Чинилка типовых ошибок</h2><p>Собрал места, где спотыкаются чаще всего, и что делать в каждом.</p><div class="grid2"><div class="cardb"><h3>Панель не открывается, ошибка про модуль</h3><p>Почти всегда это версия Node. Нужна 22.22.2 и выше внутри двадцать второй ветки либо 24 и выше. Поставь через nvm нужную версию, переключись на неё и переустанови пакет заново, командами из нулевого шага установки.</p></div><div class="cardb"><h3>Ошибка про better_sqlite3 на macOS</h3><p>Собранный модуль базы не подошёл под твою систему. Лечится пересборкой на месте: перейди в папку пакета командой cd $(npm root -g)/omniroute/app и выполни npm rebuild better-sqlite3, потом запусти omniroute снова.</p></div><div class="cardb"><h3>Порт 20128 занят</h3><p>Либо висит забытый шлюз с прошлого раза, либо порт занят чужой программой. Найди процесс командой lsof -i :20128, закрой его, либо пропиши другой порт в файле ~/.omniroute/.env и перезапусти.</p></div><div class="cardb"><h3>Каждый запрос падает с 404</h3><p>В переменной ANTHROPIC_BASE_URL прописан лишний суффикс /v1. Клод Код добавляет его сам. Должно быть ровно http://localhost:20128 и ничего больше.</p></div><div class="cardb"><h3>401 Unauthorized</h3><p>Ключ в ANTHROPIC_AUTH_TOKEN не тот. Это должен быть ключ из раздела Endpoints панели шлюза, а не ключ провайдера и не ключ Anthropic. Сгенерируй заново и скопируй целиком, без пробелов по краям.</p></div><div class="cardb"><h3>429 или сообщение про исчерпанную квоту</h3><p>Все подключённые провайдеры выбраны. Подключи ещё нескольких в разделе Providers, включи режим модели auto, чтобы шлюз перебирал их сам, либо просто подожди минуту, у бесплатных тарифов лимит часто минутный.</p></div><div class="cardb"><h3>Клод Код работает, а в логах панели пусто</h3><p>Ты запустил Клод Код в другом окне терминала, где переменные окружения не заданы. Проверь строкой echo &quot;$ANTHROPIC_BASE_URL&quot; прямо перед запуском. Чтобы не задавать их каждый раз, пропиши в ~/.bashrc или ~/.zshrc, но помни про раздел с приватностью.</p></div><div class="cardb"><h3>EACCES, отказ в доступе к папке</h3><p>Шлюзу некуда писать базу. Укажи свою папку через переменную DATA_DIR в файле ~/.omniroute/.env, выбрав директорию, куда у тебя точно есть право записи.</p></div></div><p>Если ничего не подошло, включи запись логов в файл, добавив строку APP_LOG_TO_FILE=true в ~/.omniroute/.env, перезапусти шлюз и прочитай, на каком шаге всё встало. И поищи текст своей ошибки в разделе Issues репозитория, при двух с лишним сотнях открытых обращений твою проблему скорее всего уже описали.</p></div>
+<div class="sec"><h2 id="sec-8">Полный откат, если решишь снести</h2><p>Всё сносится начисто за минуту, следов в системе не остаётся. Держи команды под рукой сразу, чтобы не искать их в панике.</p><p>Сначала верни Клод Код на прямой путь. Если ты прописывал переменные в файл настроек оболочки, удали их оттуда, а в текущем окне сбрось руками:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="unset ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN ANTHROPIC_MODEL CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY
+rm -rf ~/.claude/profiles">Скопировать</button></div><div class="box">unset ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN ANTHROPIC_MODEL CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY
+rm -rf ~/.claude/profiles</div><p>Потом снеси сам шлюз вместе с его базой и ключами:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="npm uninstall -g omniroute
+rm -rf ~/.omniroute">Скопировать</button></div><div class="box">npm uninstall -g omniroute
+rm -rf ~/.omniroute</div><p>Если ставил через Docker, убирай контейнер, том с данными и образ:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="docker stop omniroute
+docker rm omniroute
+docker volume rm omniroute-data
+docker rmi diegosouzapw/omniroute:latest">Скопировать</button></div><div class="box">docker stop omniroute
+docker rm omniroute
+docker volume rm omniroute-data
+docker rmi diegosouzapw/omniroute:latest</div><div class="note">Удаление папки ~/.omniroute стирает и все подключённые ключи провайдеров. Если планируешь вернуться, сначала скопируй эту папку в надёжное место, а уже потом сноси.</div></div>
+<div class="sec"><h2 id="sec-9">План на первый вечер</h2><p>Шесть шагов примерно на полтора часа, после которых ты получишь честный ответ, нужно оно тебе или нет.</p><ol><li>Сделай замер до. Запусти Клод Код как обычно, выполни свою типовую задачу, посмотри /cost и запиши цифру. Без этого шага весь вечер бессмысленный, сравнивать будет не с чем.</li><li>Проверь версию Node и поставь шлюз одной командой. Не забудь про шаг с секретами, он обязательный.</li><li>Подключи минимум двух провайдеров из тех, что не просят банковскую карту. На одном провайдере переключаться некуда и смысла в затее ноль.</li><li>Переведи Клод Код на шлюз и убедись по логам панели, что запросы реально идут через него. Пустые логи означают, что ты работаешь мимо.</li><li>Повтори ту же самую задачу теми же словами, посмотри /cost и сравни с первой цифрой. Заодно посмотри в логах, менялся ли провайдер по ходу работы.</li><li>Реши по-взрослому, что ты сюда пускаешь. Личные и открытые проекты через шлюз, клиентские и коммерческие через прямую платную подписку. Это решение важнее любых процентов экономии.</li></ol><div class="note">Что унести с этой страницы, если запомнишь только одно. Инструмент настоящий, бесплатный и рабочий, и главная его польза в том, что работа не встаёт, когда кончилась квота. Но двести бесплатных провайдеров превращаются в реальности в десяток, девяносто процентов экономии на коде превращаются в пятнадцать-двадцать, а твой код на бесплатных тарифах уезжает чужим компаниям и вполне законно идёт им в обучение. Зная это, ты пользуешься инструментом осознанно, а не разочаровываешься через неделю.</div></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Сначала факты: что подтвердилось, а где в ролике округлили</a><a href="#sec-1">Что это вообще такое и зачем оно тебе</a><a href="#sec-2">Установка по шагам</a><a href="#sec-3">Как убедиться, что переключение реально работает</a><a href="#sec-4">Как посмотреть реальный расход</a><a href="#sec-5">Приватность: куда реально уходят твои промпты</a><a href="#sec-6">Риски, о которых честно предупредить</a><a href="#sec-7">Чинилка типовых ошибок</a><a href="#sec-8">Полный откат, если решишь снести</a><a href="#sec-9">План на первый вечер</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
