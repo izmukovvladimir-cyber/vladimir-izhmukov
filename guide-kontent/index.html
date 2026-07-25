@@ -1,0 +1,668 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Статистика Reels: находим слабое место ролика и чиним его</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.tilda.ws"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-marketing">Маркетинг</a></div>
+<h1>Статистика Reels: находим слабое место ролика и чиним его</h1>
+<p class="lead">Полный разбор блока «что влияет на охват» в статистике Reels: где норма по каждому показателю, что чинить в ролике при каждом слабом месте, 7 готовых промптов и вечерний цикл на 15 минут.</p>
+<p class="meta">Instagram открыл то, за что раньше платили аналитикам. В статистике ролика теперь видно, из-за чего конкретно он недобрал: люди свайпнули в первые секунды, досмотрели и забыли, посмотрели и не сохранили, зашли и не написали ни слова. Каждая из этих цифр чинится своим действием в следующем ролике, и лечить их вслепую больше не нужно. Ниже разложен каждый показатель (что он значит, где проходит норма, что именно менять в ролике), решётка «слабое место и правка», семь промптов полным текстом под ChatGPT или Claude, и короткий вечерний цикл, по которому статистика превращается в темы новых роликов.</p>
+<div class="how">Открой статистику последнего ролика и держи её перед глазами. Сначала пройди раздел с показателями и найди у себя один самый слабый. Потом бери решётку, там на этот показатель написана конкретная правка и способ проверить её через три ролика. Промпты копируй целиком, подставляй свои цифры в квадратные скобки и получай готовый разбор со сценарием. В конце лежит вечерний цикл на 15 минут, поставь его в календарь и работай по нему неделю.</div>
+<div class="sec"><h2 id="sec-0">Где лежит этот блок и почему он важнее общего числа про:смотров</h2><p>Число про:смотров говорит только о факте, оно не говорит о причине. Блок влияния на охват показывает поведение зрителя по шагам, и каждый шаг чинится отдельно.</p><ol><li>Открой свой ролик в ленте, нажми на три точки, выбери «Статистика». Если ролик свежий, дай ему хотя бы 48 часов, до этого цифры прыгают и разбирать их бессмысленно.</li><li>Пролистай до блока, где показатели идут долями: доля пропусков, доля досмотров, доля сохранений, доля поделившихся, доля ком:ментариев, переходы в профиль.</li><li>Рядом с показателями Instagram подсвечивает, выше или ниже они твоего собственного среднего по последним роликам. Это самая ценная часть блока, потому что абсолютные проценты по нишам гуляют сильно, а твоё среднее врать не умеет.</li><li>Сделай скриншот целиком, вместе с темой ролика и длительностью. Дальше он идёт в промпт первым делом.</li></ol><div class="note">Главное правило чтения: сравнивай себя с собой. Цифры ниже это мои рабочие ориентиры, снятые на своих аккаунтах и на аккаунтах учеников. Они дают быстрый угол зрения, но твоё среднее по последним 20 роликам всегда точнее любого чужого бенчмарка.</div><p>Смысл всей этой работы простой. Раньше ролик недобрал и ты гадал, что было причиной: тема, хук, длина, звук, время выкладки. Теперь система прямым текстом говорит, на каком шаге посыпалось, и ты меняешь ровно одну вещь в следующем ролике, а не переснимаешь всё подряд.</p></div>
+<div class="sec"><h2 id="sec-1">Показатели входа: пропуски и досмотры</h2><p>Эти два решают, дойдёт ли ролик до широкой аудитории вообще. Пока они красные, всё остальное чинить бесполезно, потому что до сохранений и репостов люди просто не доживают.</p><div class="grid2"><div class="cardb"><h3>Доля пропусков</h3><p>Сколько людей свайпнуло дальше в первые секунды, не досмотрев даже начало. Это приговор хуку и первому кадру. Ориентиры: до 25 процентов хорошо, от 25 до 40 рабочая зона, выше 45 хук не сработал совсем.</p><ul><li>Первая фраза уходит в разгон («сегодня хочу рассказать», «многие спрашивают») и человек свайпает раньше, чем ты дошёл до сути.</li><li>На первом кадре нет текста, и зритель со звуком на минимуме не понимает, о чём тут вообще.</li><li>Первый кадр статичный: лицо в одной точке, ноль движения, ноль смены плана в первые две секунды.</li><li>Чинится так: суть выносится в первые 6 слов, текст ставится на первый кадр крупно, действие в кадре начинается с нулевой секунды, а обещание формулируется конкретно («три формулы» вместо «полезная информация»).</li></ul></div><div class="cardb"><h3>Доля досмотров и повторы</h3><p>Сколько людей дошло до конца и сколько запустило ролик повторно. Ориентиры для ролика в 20 или 30 секунд: досмотр от 30 процентов хорошо, от 45 сильно, ниже 15 ролик рассыпается в середине. Повторы это отдельный подарок, они умножают время про:смотра без нового зрителя.</p><ul><li>Провал почти всегда на 5 или 7 секунде, там заканчивается интерес от хука и начинается разговор без нового крючка.</li><li>Ролик длиннее, чем содержание. Если ты сказал всё за 12 секунд, а он идёт 40, досмотры валятся именно на этом.</li><li>Финал обрывается на пустоте, вместо того чтобы закольцевать зрителя на первую фразу.</li><li>Чинится так: второй крючок ставится на 5 или 7 секунду («и вот тут начинается странное», смена плана, новая цифра), длина режется до реального содержания, финал возвращает к началу, длинное описание под роликом держит человека внутри, пока видео крутится по кругу.</li></ul></div></div><div class="note">Если пропуски выше нормы, не трогай ни тему, ни свет, ни музыку. Меняй только первые две секунды и снимай три ролика подряд с новым типом хука. Всё остальное на этом этапе шум.</div></div>
+<div class="sec"><h2 id="sec-2">Показатели ценности: сохранения, репосты, ком:ментарии, профиль</h2><p>Эти четыре говорят системе, что ролик стоит показывать дальше. Каждый из них включается своим приёмом внутри ролика, и приёмы эти разные, поэтому качать их одним движением не получится.</p><div class="grid2"><div class="cardb"><h3>Доля сохранений</h3><p>Человек забрал ролик себе, чтобы вернуться. Это чистый сигнал прикладной пользы. Ориентиры от числа про:смотров: 0,5 процента нормально, 1 процент хорошо, от 2 сильно, ниже 0,2 ролик приятный и бесполезный.</p><ul><li>Сохраняют то, что невозможно запомнить с первого раза: список, порядок шагов, цифры, названия сервисов, готовый текст.</li><li>Сохранения убивает общий разговор без конкретики, даже если он умный и красивый.</li><li>Чинится так: в тело ролика ставится плотность (пять пунктов вместо одной мысли), на экран выводится список текстом, в конце звучит прямая причина вернуться («сохрани, пока не начнёшь снимать»).</li></ul></div><div class="cardb"><h3>Доля поделившихся</h3><p>Ролик отправили другому человеку в личные сообщения. Самый дорогой сигнал, именно он выносит видео за пределы твоей аудитории. Ориентиры: 0,5 процента хорошо, от 1,5 ролик пошёл вширь, ниже 0,2 он остался внутри своих.</p><ul><li>Пересылают эмоцию и узнавание: смешное, возмутительное, «это же ровно про тебя», новость, которую собеседник ещё не видел.</li><li>Пересылают то, что помогает человеку выглядеть умнее в глазах друга, а не то, что хвалит тебя.</li><li>Чинится так: внутрь ролика вставляется фраза узнавания («если ты тоже держишь 30 вкладок, это про тебя»), берётся острая или новостная подача, добавляется прямая просьба отправить тому, кто в этой ситуации сидит прямо сейчас.</li></ul></div><div class="cardb"><h3>Доля ком:ментариев</h3><p>Люди написали под роликом. Ориентиры: 0,3 процента нормально, от 1 процента сильно. Помни, что этот показатель легко накручивается вопросом ради вопроса, и такой охват потом не превращается ни во что.</p><ul><li>Пишут, когда есть один короткий вопрос с выбором из двух вариантов, а не открытое «что думаете».</li><li>Пишут на спорное утверждение, с которым хочется поспорить, и на просьбу написать одно слово.</li><li>Чинится так: в финал ставится один закрытый вопрос, ответ на который занимает одно слово, и убирается всё остальное, потому что два призыва в одном ролике гасят друг друга.</li></ul></div><div class="cardb"><h3>Переходы в профиль и новые под:писчики</h3><p>Сколько людей после ролика открыли шапку и сколько из них осталось. Ориентиры: переходы 1 или 2 процента от про:смотров, из перешедших остаётся от 5 до 15 процентов. Этот показатель ловит разрыв между роликом и профилем.</p><ul><li>Переходов мало, когда ролик закрывает тему целиком и любопытства к автору не остаётся ни капли.</li><li>Переходы есть, а под:писок нет, значит шапка и закреплённые ролики говорят не о том, что человек только что посмотрел.</li><li>Чинится так: в ролике оставляется намёк на продолжение («вторую часть выложил отдельно»), а шапка переписывается под ту тему, которая сейчас приносит охват.</li></ul></div></div></div>
+<div class="sec"><h2 id="sec-3">Решётка: слабый показатель, что менять, как проверить</h2><p>Держи это перед глазами каждый раз, когда открываешь статистику. Правило одно: одна правка за раз, три ролика на проверку, сравнение со своим средним.</p><div class="grid2"><div class="cardb"><h3>Пропуски выше нормы</h3><p>Меняешь: первые две секунды. Суть в первые 6 слов, крупный текст на первом кадре, движение с нулевой секунды, конкретное обещание с цифрой.</p><ul><li>Проверка: три ролика с новым типом хука, тема и формат прежние. Ждёшь снижение доли пропусков минимум на 10 процентных пунктов.</li></ul></div><div class="cardb"><h3>Досмотры ниже нормы</h3><p>Меняешь: середину и длину. Второй крючок на 5 или 7 секунде, обрезка до реального содержания, закольцованный финал.</p><ul><li>Проверка: три ролика короче прежних на треть, с одним новым крючком в середине. Ждёшь рост досмотров и появление повторных про:смотров.</li></ul></div><div class="cardb"><h3>Сохранений мало</h3><p>Меняешь: плотность пользы. Список из пяти пунктов вместо одной мысли, цифры и названия на экране, прямая причина вернуться.</p><ul><li>Проверка: три ролика формата списка или пошаговой инструкции. Ждёшь удвоение доли сохранений, это самый отзывчивый показатель.</li></ul></div><div class="cardb"><h3>Репостов мало</h3><p>Меняешь: эмоцию и узнавание. Фраза «это про тебя», острая или новостная подача, просьба отправить конкретному человеку.</p><ul><li>Проверка: три ролика с фразой узнавания в первой трети. Ждёшь рост доли поделившихся и первый ролик, который уйдёт за пределы твоей аудитории.</li></ul></div><div class="cardb"><h3>Ком:ментариев мало</h3><p>Меняешь: финал. Один закрытый вопрос с выбором из двух вариантов, ответ в одно слово, остальные призывы убираешь.</p><ul><li>Проверка: три ролика с одним вопросом в конце. Ждёшь рост доли ком:ментариев и смотришь, чтобы сохранения при этом не просели.</li></ul></div><div class="cardb"><h3>Переходов в профиль мало</h3><p>Меняешь: незакрытость. Намёк на продолжение, вторая часть отдельным роликом, упоминание того, что лежит в профиле.</p><ul><li>Проверка: три ролика с открытой петлёй в финале. Ждёшь рост переходов, а если они выросли, а под:писок нет, переписываешь шапку.</li></ul></div></div><p>Сохрани короткую версию решётки себе, чтобы она была под рукой в момент разбора:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="РЕШЁТКА ПО СТАТИСТИКЕ РОЛИКА
+
+Пропуски высокие -&gt; чиню первые 2 секунды (суть в 6 слов, текст на первом кадре, движение сразу) -&gt; 3 ролика, жду минус 10 п.п.
+Досмотры низкие -&gt; второй крючок на 5-7 сек, режу длину на треть, кольцую финал -&gt; 3 ролика, жду рост досмотров и повторов.
+Сохранений мало -&gt; список из 5 пунктов, цифры и названия на экране, причина вернуться -&gt; 3 ролика, жду удвоение доли сохранений.
+Репостов мало -&gt; фраза узнавания «это про тебя», острая подача, просьба отправить другу -&gt; 3 ролика, жду рост доли поделившихся.
+Ком:ментариев мало -&gt; один закрытый вопрос в финале, ответ одним словом, других призывов нет -&gt; 3 ролика, жду рост доли ком:ментариев.
+Переходов в профиль мало -&gt; намёк на продолжение, вторая часть отдельно -&gt; 3 ролика, жду рост переходов, иначе переписываю шапку.
+
+Правило: одна правка за раз. Три ролика на проверку. Сравнение только со своим средним по последним 20.">Скопировать</button></div><div class="box">РЕШЁТКА ПО СТАТИСТИКЕ РОЛИКА
+
+Пропуски высокие -&gt; чиню первые 2 секунды (суть в 6 слов, текст на первом кадре, движение сразу) -&gt; 3 ролика, жду минус 10 п.п.
+Досмотры низкие -&gt; второй крючок на 5-7 сек, режу длину на треть, кольцую финал -&gt; 3 ролика, жду рост досмотров и повторов.
+Сохранений мало -&gt; список из 5 пунктов, цифры и названия на экране, причина вернуться -&gt; 3 ролика, жду удвоение доли сохранений.
+Репостов мало -&gt; фраза узнавания «это про тебя», острая подача, просьба отправить другу -&gt; 3 ролика, жду рост доли поделившихся.
+Ком:ментариев мало -&gt; один закрытый вопрос в финале, ответ одним словом, других призывов нет -&gt; 3 ролика, жду рост доли ком:ментариев.
+Переходов в профиль мало -&gt; намёк на продолжение, вторая часть отдельно -&gt; 3 ролика, жду рост переходов, иначе переписываю шапку.
+
+Правило: одна правка за раз. Три ролика на проверку. Сравнение только со своим средним по последним 20.</div></div>
+<div class="sec"><h2 id="sec-4">Правило трёх роликов: как отличить сработавшую правку от случайности</h2><p>Один ролик ничего не доказывает. Охват гуляет от времени выкладки, темы и настроения ленты, поэтому решение принимается только по серии.</p><ol><li>Возьми своё среднее по последним 20 роликам по каждому показателю. Это твоя базовая линия, запиши её в заметки и обновляй раз в месяц.</li><li>Выбери ОДИН слабый показатель. Если слабых несколько, начинай сверху: сначала пропуски, потом досмотры, потом сохранения, потом всё остальное. Порядок именно такой, потому что верхние показатели кормят нижние.</li><li>Внеси одну правку по решётке и сними три ролика подряд с этой правкой. Тему, формат и длину держи прежними, иначе будет непонятно, что именно сработало.</li><li>Через 48 часов после третьего ролика сравни среднее по этим трём со своей базовой линией. Разница меньше 15 процентов это шум, разница больше это результат.</li><li>Правка сработала, закрепляй её как стандарт и переходи к следующему слабому показателю. Не сработала, меняй сам приём, а не показатель: тот же слабый пункт, но другой способ его чинить.</li></ol><div class="note">Частая ошибка: человек меняет сразу хук, длину, музыку и тему, ролик взлетает, и повторить это он уже не может, потому что не знает, что именно сработало. Одна правка за раз даёт медленный, но воспроизводимый рост.</div></div>
+<div class="sec"><h2 id="sec-5">Промпт 1. Разбор скриншота статистики</h2><p>Это главный промпт всей системы. Кидаешь в ChatGPT или Claude скриншот статистики вместе с вводными о ролике и получаешь на выходе один слабый показатель, объяснение поведения зрителя, три правки к следующему ролику и переписанный хук. Признак того, что промпт отработал слабо: тебе вернули список из пяти проблем сразу. Тогда добавь в конце строку «назови ровно один самый слабый показатель» и прогони заново.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как аналитик коротких видео, который каждый день разбирает статистику Reels и отвечает за рост охвата.
+
+Я приложил скриншот статистики моего ролика из Instagram. В нём есть блок с показателями: доля пропусков, доля досмотров, сохранения, поделились, ком:ментарии, переходы в профиль.
+
+Вводные о ролике:
+Тема: [о чём ролик одной строкой]
+Хук дословно, первая фраза на экране и в звуке: [текст]
+Длительность: [сколько секунд]
+Формат: [говорящая голова / нарезка / текст на экране / сгенерированное видео]
+Что я прошу сделать в финале: [призыв дословно]
+Моё среднее по последним 20 роликам: пропуски [%], досмотры [%], сохранения [%], поделились [%], ком:ментарии [%]
+
+Сделай так:
+1. Выпиши таблицей все показатели со скриншота, рядом моё среднее, рядом отклонение в процентных пунктах.
+2. Назови ОДИН самый слабый показатель, который сильнее всего просадил охват. Ровно один, без списка «и ещё вот это».
+3. Объясни в двух предложениях, какое поведение зрителя стоит за этой цифрой: что человек сделал и на какой секунде.
+4. Дай 3 конкретные правки к следующему ролику по этому показателю. Каждая правка в формате: что меняю -&gt; как именно, с примером текста или кадра под мою тему -&gt; на какой секунде это работает.
+5. Перепиши мой хук в трёх вариантах под этот слабый показатель, каждый до 8 слов, с конкретикой или цифрой.
+6. Скажи, какую цифру я должен увидеть через 3 ролика, чтобы считать правку сработавшей.
+
+Формат ответа: сначала таблица, потом пункты 2-6 под жирными заголовками. Без вступлений, без общих советов уровня «делай интереснее» и «добавь динамики».
+Если часть цифр на скриншоте не читается, скажи прямо, каких не хватает, и разбирай по тем, что есть.">Скопировать</button></div><div class="box">Действуй как аналитик коротких видео, который каждый день разбирает статистику Reels и отвечает за рост охвата.
+
+Я приложил скриншот статистики моего ролика из Instagram. В нём есть блок с показателями: доля пропусков, доля досмотров, сохранения, поделились, ком:ментарии, переходы в профиль.
+
+Вводные о ролике:
+Тема: [о чём ролик одной строкой]
+Хук дословно, первая фраза на экране и в звуке: [текст]
+Длительность: [сколько секунд]
+Формат: [говорящая голова / нарезка / текст на экране / сгенерированное видео]
+Что я прошу сделать в финале: [призыв дословно]
+Моё среднее по последним 20 роликам: пропуски [%], досмотры [%], сохранения [%], поделились [%], ком:ментарии [%]
+
+Сделай так:
+1. Выпиши таблицей все показатели со скриншота, рядом моё среднее, рядом отклонение в процентных пунктах.
+2. Назови ОДИН самый слабый показатель, который сильнее всего просадил охват. Ровно один, без списка «и ещё вот это».
+3. Объясни в двух предложениях, какое поведение зрителя стоит за этой цифрой: что человек сделал и на какой секунде.
+4. Дай 3 конкретные правки к следующему ролику по этому показателю. Каждая правка в формате: что меняю -&gt; как именно, с примером текста или кадра под мою тему -&gt; на какой секунде это работает.
+5. Перепиши мой хук в трёх вариантах под этот слабый показатель, каждый до 8 слов, с конкретикой или цифрой.
+6. Скажи, какую цифру я должен увидеть через 3 ролика, чтобы считать правку сработавшей.
+
+Формат ответа: сначала таблица, потом пункты 2-6 под жирными заголовками. Без вступлений, без общих советов уровня «делай интереснее» и «добавь динамики».
+Если часть цифр на скриншоте не читается, скажи прямо, каких не хватает, и разбирай по тем, что есть.</div></div>
+<div class="sec"><h2 id="sec-6">Промпт 2. Достать закономерность из пяти сильных роликов</h2><p>Твои лучшие ролики уже содержат рабочую формулу, её просто никто не выписывал. Этот промпт превращает пять удачных случаев в повторяемую структуру с секундами. Бери именно пять и именно самых сильных по охвату, четыре хороших и один средний размывают вывод.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как редактор, который находит повторяющуюся механику в контенте и превращает её в правило.
+
+Ниже пять моих самых сильных роликов за последние 3 месяца. По каждому даю текст и цифры.
+
+Ролик 1.
+Хук дословно: [текст]
+Полный сценарий или расшифровка речи: [текст]
+Тема: [строка]
+Формат и длительность: [строка]
+Про:смотры: [число]. Сохранения: [число]. Поделились: [число]. Ком:ментарии: [число].
+
+Ролик 2. [то же самое]
+Ролик 3. [то же самое]
+Ролик 4. [то же самое]
+Ролик 5. [то же самое]
+
+Сделай так:
+1. Найди, что общего у этих пяти по СМЫСЛУ (какое обещание получает зритель), по СТРУКТУРЕ (порядок блоков в сценарии) и по ФОРМЕ (длина, темп, тип кадра, вид хука).
+2. Выпиши закономерность как формулу из 4-6 шагов, по которой их можно повторять. У каждого шага укажи секунды.
+3. Назови конкретный триггер, который заставлял людей сохранять, и отдельно тот, который заставлял пересылать. Опирайся на мои же фразы, цитируй их.
+4. Скажи, чего в этих пяти НЕТ. Что я обычно делаю в слабых роликах и чего здесь не оказалось.
+5. Дай проверочный чек-лист из 6 пунктов, по которому я перед съёмкой пойму, попадает новый ролик в мою формулу или нет.
+
+Формат: сначала формула, потом остальное. Пиши только про мои тексты, общих правил про короткие видео не давай.
+Если пяти роликов мало для надёжного вывода, скажи это прямо и укажи, какие данные добрать.">Скопировать</button></div><div class="box">Действуй как редактор, который находит повторяющуюся механику в контенте и превращает её в правило.
+
+Ниже пять моих самых сильных роликов за последние 3 месяца. По каждому даю текст и цифры.
+
+Ролик 1.
+Хук дословно: [текст]
+Полный сценарий или расшифровка речи: [текст]
+Тема: [строка]
+Формат и длительность: [строка]
+Про:смотры: [число]. Сохранения: [число]. Поделились: [число]. Ком:ментарии: [число].
+
+Ролик 2. [то же самое]
+Ролик 3. [то же самое]
+Ролик 4. [то же самое]
+Ролик 5. [то же самое]
+
+Сделай так:
+1. Найди, что общего у этих пяти по СМЫСЛУ (какое обещание получает зритель), по СТРУКТУРЕ (порядок блоков в сценарии) и по ФОРМЕ (длина, темп, тип кадра, вид хука).
+2. Выпиши закономерность как формулу из 4-6 шагов, по которой их можно повторять. У каждого шага укажи секунды.
+3. Назови конкретный триггер, который заставлял людей сохранять, и отдельно тот, который заставлял пересылать. Опирайся на мои же фразы, цитируй их.
+4. Скажи, чего в этих пяти НЕТ. Что я обычно делаю в слабых роликах и чего здесь не оказалось.
+5. Дай проверочный чек-лист из 6 пунктов, по которому я перед съёмкой пойму, попадает новый ролик в мою формулу или нет.
+
+Формат: сначала формула, потом остальное. Пиши только про мои тексты, общих правил про короткие видео не давай.
+Если пяти роликов мало для надёжного вывода, скажи это прямо и укажи, какие данные добрать.</div></div>
+<div class="sec"><h2 id="sec-7">Промпт 3. Десять новых идей ровно по своей формуле</h2><p>Сюда подставляешь формулу, которую отдал промпт 2. На выходе десять роликов, снимаемых за 15 минут на телефон, с хуком дословно и раскадровкой по секундам. Это закрывает вопрос «что снимать» на две недели вперёд.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как продюсер контента. У тебя есть моя рабочая формула, по которой ролики набирают охват.
+
+Моя формула:
+[вставь сюда формулу из 4-6 шагов, которую отдал прошлый разбор]
+
+Моя тема и аудитория: [ниша, кому я говорю, какую боль закрываю]
+К чему я веду людей: [одна строка]
+Темы, которые я уже снимал: [список, чтобы не было повторов]
+
+Дай 10 идей новых роликов ровно по этой формуле. Каждая идея в таком виде:
+- Рабочее название
+- Хук дословно, до 8 слов, тот, что появится на экране в первую секунду
+- Раскадровка по секундам: 0-3, 3-8, 8-20, финал
+- Почему человек сохранит этот ролик
+- Почему человек отправит его другому
+- Фраза призыва в финале, одна
+
+Требования: 10 разных механик, без повторов между собой и без пересечений с моим списком снятого. Никаких абстрактных тем вроде «мотивация» и «полезные советы». Каждая идея снимается мной за 15 минут на телефон, без съёмочной группы и без сложного монтажа.
+
+В конце отсортируй все 10 по ожидаемому охвату и объясни одной строкой, почему первая стоит первой.">Скопировать</button></div><div class="box">Действуй как продюсер контента. У тебя есть моя рабочая формула, по которой ролики набирают охват.
+
+Моя формула:
+[вставь сюда формулу из 4-6 шагов, которую отдал прошлый разбор]
+
+Моя тема и аудитория: [ниша, кому я говорю, какую боль закрываю]
+К чему я веду людей: [одна строка]
+Темы, которые я уже снимал: [список, чтобы не было повторов]
+
+Дай 10 идей новых роликов ровно по этой формуле. Каждая идея в таком виде:
+- Рабочее название
+- Хук дословно, до 8 слов, тот, что появится на экране в первую секунду
+- Раскадровка по секундам: 0-3, 3-8, 8-20, финал
+- Почему человек сохранит этот ролик
+- Почему человек отправит его другому
+- Фраза призыва в финале, одна
+
+Требования: 10 разных механик, без повторов между собой и без пересечений с моим списком снятого. Никаких абстрактных тем вроде «мотивация» и «полезные советы». Каждая идея снимается мной за 15 минут на телефон, без съёмочной группы и без сложного монтажа.
+
+В конце отсортируй все 10 по ожидаемому охвату и объясни одной строкой, почему первая стоит первой.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-8">Промпт 4. Разобрать ролик конкурента и забрать механику</h2><p>В Instagram есть панель со сравнением аккаунтов твоего уровня, там видно, какие темы приносят охват и новых под:писчиков соседям по нише. Берёшь оттуда конкретный сильный ролик и разбираешь его этим промптом. Забирай оттуда механику. Тема выгорает за неделю, механика работает месяцами.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как разведчик контента. Разбери чужой ролик и достань из него механику, которую я смогу повторить на своей теме.
+
+Ролик конкурента:
+Аккаунт и тематика: [ник, о чём аккаунт]
+Число под:писчиков у него: [число]
+Текст ролика дословно или расшифровка речи: [текст]
+Что происходит в кадре по секундам: [описание]
+Подпись под роликом: [текст]
+Цифры: про:смотры [число], лайки [число], ком:ментарии [число], его среднее по аккаунту [число]
+
+Сделай так:
+1. Скажи, за счёт чего этот ролик обогнал его собственное среднее. Разложи на три части: хук, удержание, причина реакции.
+2. Разбери хук по механике: какой приём использован (обещание, конфликт, цифра, чужая ошибка, любопытство, узнавание) и почему он попал в его аудиторию.
+3. Выпиши структуру ролика по секундам как пустой шаблон, куда можно подставить любую тему.
+4. Скажи, какой показатель этот ролик качает сильнее всего (сохранения, репосты или ком:ментарии) и по каким признакам в тексте это видно.
+5. Перенеси механику на мою тему: [моя ниша и о чём я говорю]. Дай 3 готовых хука и один полный сценарий по его структуре, с раскадровкой по секундам.
+6. Скажи честно, где эта механика на моей аудитории не сработает и что придётся заменить.
+
+Не пересказывай ролик своими словами. Отдавай шаблон и мои готовые сценарии.">Скопировать</button></div><div class="box">Действуй как разведчик контента. Разбери чужой ролик и достань из него механику, которую я смогу повторить на своей теме.
+
+Ролик конкурента:
+Аккаунт и тематика: [ник, о чём аккаунт]
+Число под:писчиков у него: [число]
+Текст ролика дословно или расшифровка речи: [текст]
+Что происходит в кадре по секундам: [описание]
+Подпись под роликом: [текст]
+Цифры: про:смотры [число], лайки [число], ком:ментарии [число], его среднее по аккаунту [число]
+
+Сделай так:
+1. Скажи, за счёт чего этот ролик обогнал его собственное среднее. Разложи на три части: хук, удержание, причина реакции.
+2. Разбери хук по механике: какой приём использован (обещание, конфликт, цифра, чужая ошибка, любопытство, узнавание) и почему он попал в его аудиторию.
+3. Выпиши структуру ролика по секундам как пустой шаблон, куда можно подставить любую тему.
+4. Скажи, какой показатель этот ролик качает сильнее всего (сохранения, репосты или ком:ментарии) и по каким признакам в тексте это видно.
+5. Перенеси механику на мою тему: [моя ниша и о чём я говорю]. Дай 3 готовых хука и один полный сценарий по его структуре, с раскадровкой по секундам.
+6. Скажи честно, где эта механика на моей аудитории не сработает и что придётся заменить.
+
+Не пересказывай ролик своими словами. Отдавай шаблон и мои готовые сценарии.</div></div>
+<div class="sec"><h2 id="sec-9">Промпт 5. Карта тем ниши из панели сравнения</h2><p>Этот промпт работает с целым списком чужих роликов сразу. Выписываешь из панели сравнения по 5 сильных роликов у трёх или четырёх аккаунтов твоего уровня и получаешь карту тем: что в нише растёт прямо сейчас, что уже выгорело и какие темы никто не занял. Прогоняй раз в две недели, ниша меняется быстро.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как аналитик ниши. Собери карту тем по чужим роликам и скажи, куда мне заходить прямо сейчас.
+
+Моя ниша и аудитория: [описание]
+Мой уровень: [число под:писчиков, средний охват ролика]
+
+Аккаунты рядом со мной и их сильные ролики за последний месяц:
+Аккаунт 1 [ник, число под:писчиков]:
+- Ролик: [тема одной строкой], хук: [текст], про:смотры: [число], ком:ментарии: [число]
+- (ещё 4 ролика так же)
+Аккаунт 2 [то же самое]
+Аккаунт 3 [то же самое]
+
+Сделай так:
+1. Сгруппируй все ролики по темам и по механикам подачи. Отдельно темы, отдельно приёмы, это разные списки.
+2. Отметь, какие темы дают охват у нескольких аккаунтов сразу. Это подтверждённый спрос, а не случайность одного автора.
+3. Отметь темы, которые повторяются у всех и уже собирают слабые цифры. Это выгоревшее, туда не иду.
+4. Найди дыры: о чём в этой нише говорят все, но плохо, и о чём не говорит никто, хотя аудитории это нужно.
+5. Дай мне 7 тем под мой уровень охвата, каждую в формате: тема -&gt; почему она сейчас идёт -&gt; какой механикой её подавать -&gt; хук дословно.
+6. Отдельно скажи, какие 2 темы я должен снять на этой неделе первыми и почему именно они.
+
+Опирайся только на те цифры, что я дал. Если данных по какому-то выводу мало, пиши «данных мало» и не выдумывай.">Скопировать</button></div><div class="box">Действуй как аналитик ниши. Собери карту тем по чужим роликам и скажи, куда мне заходить прямо сейчас.
+
+Моя ниша и аудитория: [описание]
+Мой уровень: [число под:писчиков, средний охват ролика]
+
+Аккаунты рядом со мной и их сильные ролики за последний месяц:
+Аккаунт 1 [ник, число под:писчиков]:
+- Ролик: [тема одной строкой], хук: [текст], про:смотры: [число], ком:ментарии: [число]
+- (ещё 4 ролика так же)
+Аккаунт 2 [то же самое]
+Аккаунт 3 [то же самое]
+
+Сделай так:
+1. Сгруппируй все ролики по темам и по механикам подачи. Отдельно темы, отдельно приёмы, это разные списки.
+2. Отметь, какие темы дают охват у нескольких аккаунтов сразу. Это подтверждённый спрос, а не случайность одного автора.
+3. Отметь темы, которые повторяются у всех и уже собирают слабые цифры. Это выгоревшее, туда не иду.
+4. Найди дыры: о чём в этой нише говорят все, но плохо, и о чём не говорит никто, хотя аудитории это нужно.
+5. Дай мне 7 тем под мой уровень охвата, каждую в формате: тема -&gt; почему она сейчас идёт -&gt; какой механикой её подавать -&gt; хук дословно.
+6. Отдельно скажи, какие 2 темы я должен снять на этой неделе первыми и почему именно они.
+
+Опирайся только на те цифры, что я дал. Если данных по какому-то выводу мало, пиши «данных мало» и не выдумывай.</div></div>
+<div class="sec"><h2 id="sec-10">Промпт 6. Переупаковать свой ролик под слабое место</h2><p>Когда статистика показала слабый показатель, а тема хорошая и терять её жалко. Промпт находит в сценарии конкретную фразу, которая убивает нужную реакцию, и переписывает ролик целиком под этот показатель. На выходе таблица по секундам, с которой можно идти снимать.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как редактор, который переписывает готовый сценарий под конкретный слабый показатель статистики.
+
+Мой ролик, который недобрал:
+Тема: [строка]
+Полный сценарий дословно: [текст]
+Длительность: [секунды]
+Слабый показатель: [пропуски / досмотры / сохранения / поделились / ком:ментарии]
+Цифра по нему: [%], моё среднее: [%]
+Моя аудитория: [описание]
+
+Сделай так:
+1. Найди в моём сценарии ровно то место, которое убивает этот показатель. Процитируй фразу и назови секунду.
+2. Объясни в двух предложениях, что делает зритель в этот момент.
+3. Перепиши сценарий целиком под этот показатель по таким правилам:
+   - слабое место пропуски: первая фраза несёт конкретику или конфликт и умещается в 6 слов, действие в кадре начинается сразу, обещание с цифрой;
+   - слабые досмотры: второй крючок на 5 или 7 секунде, лишнее вырезано, финал закольцован на первую фразу;
+   - слабые сохранения: в теле список, цифры, порядок шагов, то, что невозможно запомнить с первого раза;
+   - слабые репосты: внутри есть фраза узнавания, после которой человек говорит «это же про меня» и отправляет знакомому;
+   - слабые ком:ментарии: в финале один закрытый вопрос с выбором из двух вариантов, ответ одним словом.
+4. Дай три версии хука на выбор.
+5. Отдай финальный сценарий таблицей по секундам: секунда, что в кадре, что на экране текстом, что я говорю.
+
+Верни только переписанный сценарий, хуки и таблицу. Теорию не объясняй.">Скопировать</button></div><div class="box">Действуй как редактор, который переписывает готовый сценарий под конкретный слабый показатель статистики.
+
+Мой ролик, который недобрал:
+Тема: [строка]
+Полный сценарий дословно: [текст]
+Длительность: [секунды]
+Слабый показатель: [пропуски / досмотры / сохранения / поделились / ком:ментарии]
+Цифра по нему: [%], моё среднее: [%]
+Моя аудитория: [описание]
+
+Сделай так:
+1. Найди в моём сценарии ровно то место, которое убивает этот показатель. Процитируй фразу и назови секунду.
+2. Объясни в двух предложениях, что делает зритель в этот момент.
+3. Перепиши сценарий целиком под этот показатель по таким правилам:
+   - слабое место пропуски: первая фраза несёт конкретику или конфликт и умещается в 6 слов, действие в кадре начинается сразу, обещание с цифрой;
+   - слабые досмотры: второй крючок на 5 или 7 секунде, лишнее вырезано, финал закольцован на первую фразу;
+   - слабые сохранения: в теле список, цифры, порядок шагов, то, что невозможно запомнить с первого раза;
+   - слабые репосты: внутри есть фраза узнавания, после которой человек говорит «это же про меня» и отправляет знакомому;
+   - слабые ком:ментарии: в финале один закрытый вопрос с выбором из двух вариантов, ответ одним словом.
+4. Дай три версии хука на выбор.
+5. Отдай финальный сценарий таблицей по секундам: секунда, что в кадре, что на экране текстом, что я говорю.
+
+Верни только переписанный сценарий, хуки и таблицу. Теорию не объясняй.</div></div>
+<div class="sec"><h2 id="sec-11">Промпт 7. Недельный разбор всей пачки роликов</h2><p>Раз в неделю прогоняешь сразу все ролики недели и получаешь один вывод вместо шести разрозненных. Этот промпт держит систему в порядке: он не даёт хвататься за новую правку, пока прошлая не проверена.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как аналитик, который ведёт мой контент по неделям и отвечает за один вывод в конце недели.
+
+Моя базовая линия по последним 20 роликам: пропуски [%], досмотры [%], сохранения [%], поделились [%], ком:ментарии [%], переходы в профиль [%].
+Правка, которую я тестировал на этой неделе: [что менял, одной строкой]
+
+Ролики недели:
+1. Тема: [строка]. Хук: [текст]. Длительность: [сек]. Пропуски [%], досмотры [%], сохранения [%], поделились [%], ком:ментарии [%], переходы [%].
+2. [то же самое]
+(дальше все ролики недели)
+
+Сделай так:
+1. Собери таблицу: ролик, все показатели, отклонение от моей базовой линии в процентных пунктах.
+2. Назови лучший и худший ролик недели и в одном предложении объясни причину по цифрам, без общих слов.
+3. Скажи вердикт по правке, которую я тестировал: сработала, не сработала или данных мало. Считай разницу меньше 15 процентов шумом.
+4. Найди закономерность внутри недели: что общего у роликов, которые обогнали базовую линию.
+5. Назови ОДНУ правку на следующую неделю. Ровно одну, с формулировкой «на следующей неделе я меняю только это».
+6. Обнови мою базовую линию с учётом новых роликов и выдай её строкой, чтобы я вставил её в следующий разбор.
+
+Без похвалы и без мотивации. Только цифры, вердикт и одно действие.">Скопировать</button></div><div class="box">Действуй как аналитик, который ведёт мой контент по неделям и отвечает за один вывод в конце недели.
+
+Моя базовая линия по последним 20 роликам: пропуски [%], досмотры [%], сохранения [%], поделились [%], ком:ментарии [%], переходы в профиль [%].
+Правка, которую я тестировал на этой неделе: [что менял, одной строкой]
+
+Ролики недели:
+1. Тема: [строка]. Хук: [текст]. Длительность: [сек]. Пропуски [%], досмотры [%], сохранения [%], поделились [%], ком:ментарии [%], переходы [%].
+2. [то же самое]
+(дальше все ролики недели)
+
+Сделай так:
+1. Собери таблицу: ролик, все показатели, отклонение от моей базовой линии в процентных пунктах.
+2. Назови лучший и худший ролик недели и в одном предложении объясни причину по цифрам, без общих слов.
+3. Скажи вердикт по правке, которую я тестировал: сработала, не сработала или данных мало. Считай разницу меньше 15 процентов шумом.
+4. Найди закономерность внутри недели: что общего у роликов, которые обогнали базовую линию.
+5. Назови ОДНУ правку на следующую неделю. Ровно одну, с формулировкой «на следующей неделе я меняю только это».
+6. Обнови мою базовую линию с учётом новых роликов и выдай её строкой, чтобы я вставил её в следующий разбор.
+
+Без похвалы и без мотивации. Только цифры, вердикт и одно действие.</div></div>
+<div class="sec"><h2 id="sec-12">Вечерний цикл: 15 минут в день, неделя работы</h2><p>Вся система выше живёт только тогда, когда становится привычкой. Вот рабочая неделя, которая занимает четверть часа вечером и держит рост без героизма.</p><ol><li>Понедельник. Открываешь статистику трёх последних роликов, прогоняешь каждый через промпт 1, выписываешь один общий слабый показатель. 15 минут.</li><li>Вторник. Берёшь решётку, выбираешь правку под этот показатель и снимаешь первый ролик с ней. Тему и формат не трогаешь. 15 минут.</li><li>Среда. Прогоняешь промпт 5 по панели сравнения, забираешь 2 темы, которые в нише идут прямо сейчас, ставишь их в план на конец недели. 15 минут.</li><li>Четверг. Снимаешь второй ролик с той же правкой. Вечером смотришь статистику первого и просто фиксируешь цифру в заметках, выводов пока не делаешь. 15 минут.</li><li>Пятница. Снимаешь третий ролик с правкой. Если тема жалко пропадает и ролик недобрал, прогоняешь его через промпт 6 и переснимаешь переупакованную версию на следующей неделе. 15 минут.</li><li>Суббота. Прогоняешь промпт 4 по одному сильному чужому ролику и забираешь механику в свой банк приёмов. Это твой запас на случай, когда идей нет. 15 минут.</li><li>Воскресенье. Прогоняешь промпт 7 по всей неделе, получаешь вердикт по правке и ОДНУ правку на следующую неделю. Раз в месяц в этот же день прогоняешь промпт 2 и обновляешь свою формулу. 20 минут.</li></ol><p>Сохрани цикл себе, чтобы не держать его в голове:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="ВЕЧЕРНИЕ 15 МИНУТ
+
+Пн: статистика 3 роликов -&gt; промпт 1 -&gt; один слабый показатель недели.
+Вт: правка по решётке -&gt; ролик 1 с правкой.
+Ср: промпт 5 по панели сравнения -&gt; 2 темы в план.
+Чт: ролик 2 с правкой, фиксирую цифры ролика 1.
+Пт: ролик 3 с правкой. Недобравшую тему -&gt; промпт 6, переупаковка.
+Сб: промпт 4 по чужому сильному ролику -&gt; механика в банк приёмов.
+Вс: промпт 7 по всей неделе -&gt; вердикт + ОДНА правка на следующую. Раз в месяц: промпт 2, обновить формулу.
+
+Правило: одна правка за раз, три ролика на проверку, сравнение только со своим средним.">Скопировать</button></div><div class="box">ВЕЧЕРНИЕ 15 МИНУТ
+
+Пн: статистика 3 роликов -&gt; промпт 1 -&gt; один слабый показатель недели.
+Вт: правка по решётке -&gt; ролик 1 с правкой.
+Ср: промпт 5 по панели сравнения -&gt; 2 темы в план.
+Чт: ролик 2 с правкой, фиксирую цифры ролика 1.
+Пт: ролик 3 с правкой. Недобравшую тему -&gt; промпт 6, переупаковка.
+Сб: промпт 4 по чужому сильному ролику -&gt; механика в банк приёмов.
+Вс: промпт 7 по всей неделе -&gt; вердикт + ОДНА правка на следующую. Раз в месяц: промпт 2, обновить формулу.
+
+Правило: одна правка за раз, три ролика на проверку, сравнение только со своим средним.</div></div>
+<div class="sec"><h2 id="sec-13">Пять ошибок, из-за которых статистика перестаёт помогать</h2><p>Эти пять я собрал по своим аккаунтам и по разборам учеников. Каждая из них превращает полезный блок цифр в повод расстроиться и ничего не поменять.</p><ol><li>Смотреть статистику через два часа после выкладки. В первые часы ролик крутится на маленькой тестовой группе, доли скачут в разы, и любой вывод из них будет ложным. Разбирай через 48 часов, окончательные цифры смотри через неделю.</li><li>Сравнивать себя с чужими бенчмарками из интернета. У аккаунта на 200 тысяч и у аккаунта на 2 тысячи разная механика показов, поэтому единственная честная точка отсчёта это твоё собственное среднее по последним 20 роликам.</li><li>Чинить всё сразу. Меняешь хук, длину, музыку, тему и подачу одновременно, ролик выстреливает, и повторить это невозможно, потому что причина неизвестна. Одна правка, три ролика, вывод.</li><li>Гнаться за ком:ментариями в ущерб остальному. Вопрос ради вопроса поднимает одну долю и роняет сохранения, потому что в ролике не осталось пользы. Смотри на показатели в связке, а не по одному.</li><li>Разбирать статистику и не менять сценарий. Самая частая. Человек читает цифры, кивает, и снимает следующий ролик ровно так же, как прошлый. Каждый разбор обязан заканчиваться одной конкретной строчкой в сценарии, иначе это просто чтение отчётов.</li></ol><div class="note">Если делать по этой системе три ролика в неделю, за месяц ты закроешь два слабых показателя из шести. Это выглядит медленно ровно до момента, когда пропуски падают вдвое, и тот же самый контент начинает собирать в несколько раз больше про:смотров без единого нового приёма.</div></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Где лежит этот блок и почему он важнее общего числа про:смотров</a><a href="#sec-1">Показатели входа: пропуски и досмотры</a><a href="#sec-2">Показатели ценности: сохранения, репосты, ком:ментарии, профиль</a><a href="#sec-3">Решётка: слабый показатель, что менять, как проверить</a><a href="#sec-4">Правило трёх роликов: как отличить сработавшую правку от случайности</a><a href="#sec-5">Промпт 1. Разбор скриншота статистики</a><a href="#sec-6">Промпт 2. Достать закономерность из пяти сильных роликов</a><a href="#sec-7">Промпт 3. Десять новых идей ровно по своей формуле</a><a href="#sec-8">Промпт 4. Разобрать ролик конкурента и забрать механику</a><a href="#sec-9">Промпт 5. Карта тем ниши из панели сравнения</a><a href="#sec-10">Промпт 6. Переупаковать свой ролик под слабое место</a><a href="#sec-11">Промпт 7. Недельный разбор всей пачки роликов</a><a href="#sec-12">Вечерний цикл: 15 минут в день, неделя работы</a><a href="#sec-13">Пять ошибок, из-за которых статистика перестаёт помогать</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
