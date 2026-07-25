@@ -98,7 +98,9 @@ background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 
 /* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
    so the caption sends people here and they type the same word into this field. it has
    to be the first thing seen under the hero, hence the size and the accent border. */
-.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
 .srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
 .srch-w{position:relative;display:flex;align-items:center}
 .srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
