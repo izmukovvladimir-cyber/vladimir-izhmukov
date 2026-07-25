@@ -444,7 +444,9 @@ h1{font-size:28px}
     var raw=norm(q?q.value:''),alt=fix(raw),n=0;
     cards.forEach(function(c){
       var okCat=(cat==='all'||c.getAttribute('data-cat')===cat);
-      var hay=c.getAttribute('data-s')||'',cw=c.getAttribute('data-cw')||'';
+      // карточку нормализуем ТОЙ ЖЕ функцией, что и запрос: иначе «съёмка» с настоящей ё
+      // не находит карточку, потому что в запросе ё уже стала е (поймано на живом поиске)
+      var hay=norm(c.getAttribute('data-s')),cw=norm(c.getAttribute('data-cw'));
       var okQ=!raw||hay.indexOf(raw)>-1||(alt!==raw&&hay.indexOf(alt)>-1);
       var on=okCat&&okQ;
       c.style.display=on?'':'none';
