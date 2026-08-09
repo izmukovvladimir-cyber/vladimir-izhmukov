@@ -200,6 +200,11 @@ h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing
 .quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
 .note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
 .linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
 .linkbtn:hover{opacity:.75}
 .mid{margin:26px 0;text-align:center}
 .mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
@@ -491,11 +496,12 @@ h1{font-size:28px}
 
 Если ни один не заходит, выдай ещё 3 в том же формате, усилив по моей реакции.</div></div>
 <div class="sec"><h2 id="sec-6">Порядок запуска: все 5 шагов за один заход</h2><p>Пять промптов выше это конвейер. Вот последовательность, которая из пустого вечера выдаёт готовую карусель. Результат каждого шага скармливаешь следующему, ничего не пропускай.</p><ol><li>Шаг 1. Запусти промпт текста и получи все слайды пронумерованными. Это скелет карусели, из него ясно сколько слайдов и какие слова на каждом.</li><li>Шаг 2. Один раз собери паспорт стиля вторым промптом и сохрани его отдельно. Дальше он вставляется в начало каждого запроса на картинку.</li><li>Шаг 3. Прогони промпт хуков, приложи референсы обложек, гоняй круги, пока один вариант не остановит тебя самого. Ставь его на обложку.</li><li>Шаг 4. Собери якорный слайд четвёртым промптом на базе паспорта стиля, выбери победителя и передавай его референсом во все следующие слайды.</li><li>Шаг 5. Прогони промпт CTA, выбери финальный слайд, с которого хочется сделать репост. Затем собери оставшиеся слайды по якорю из шага 4.</li><li>На выходе у тебя обложка с сильным хуком, единый стиль по всей карусели, зафиксированный якорем, и финал, который собирает действие и репосты. Остаётся выложить.</li></ol><div class="note">Главное правило. Не проси Claude собрать карусель одним огромным запросом, качество проседает и всё разъезжается. Идёшь по шагам, результат каждого промпта отдаёшь в следующий. Так Claude работает как копирайтер и дизайнер твоей команды, а ты держишь контроль над смыслом и стилем на каждом этапе.</div></div>
+<div class="sec"><h2>Читать дальше в блоге</h2><p>Эту тему я разбираю подробно в статье <a class="lnk" href="https://blog.vladimir-izhmukov.ru/guides/podpischiki-instagram-s-nulya/">как набрать подписчиков в Instagram с нуля</a>. Там же лежат остальные <a class="lnk" href="https://blog.vladimir-izhmukov.ru/instagram/">разборы про рост в Instagram</a>.</p></div>
 <div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
 </article>
 <aside class="toc"><div class="h">На странице</div><a href="#sec-0">Почему Claude мажет с первого раза</a><a href="#sec-1">Шаг 1. Сначала текст, потом картинки</a><a href="#sec-2">Шаг 2. Зашей свой вкус в отдельный навык</a><a href="#sec-3">Шаг 3. Три разных хука и переделывай, пока не остановит</a><a href="#sec-4">Шаг 4. Зафиксируй якорь стиля</a><a href="#sec-5">Шаг 5. CTA это тоже хук</a><a href="#sec-6">Порядок запуска: все 5 шагов за один заход</a></aside>
 </main>
-<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
 <script>
 document.querySelectorAll('.copy').forEach(function(b){
   b.addEventListener('click',function(){

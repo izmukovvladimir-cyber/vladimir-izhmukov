@@ -200,6 +200,11 @@ h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing
 .quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
 .note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
 .linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
 .linkbtn:hover{opacity:.75}
 .mid{margin:26px 0;text-align:center}
 .mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
@@ -286,11 +291,12 @@ h1{font-size:28px}
 <div class="mid"><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></div>
 <div class="sec"><h2 id="sec-3">Живой пример</h2><p>Как это работает на понятной задаче.</p><p>Допустим, ты собираешь простое приложение со счётом матчей в реальном времени. Идёшь в категорию Sports, выбираешь спортивный API с бесплатным доступом, берёшь адрес его endpoint и подключаешь к своему приложению. Приложение по этому адресу запрашивает данные и мгновенно показывает актуальный счёт. Точно так же подключается погода, новости, курс валют или вакансии, меняется только выбранный источник.</p></div>
 <div class="sec"><h2 id="sec-4">Готовый промпт: Клод соберёт проект на выбранном API</h2><p>Скопируй, впиши свою идею и нужный API, получи план и код.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты старший разработчик и наставник. Я хочу собрать небольшое приложение или автоматизацию на бесплатном API. Моя идея: [ОПИШИ ЧТО ХОЧЕШЬ, например: приложение, которое показывает счёт матчей в реальном времени]. Выбранный API: [ВСТАВЬ НАЗВАНИЕ И ССЫЛКУ ИЗ КАТАЛОГА, либо попроси помочь выбрать]. Сделай по шагам: 1. Проверь, подходит ли этот API под задачу, нужен ли ключ и как его получить. 2. Распиши архитектуру простыми словами. 3. Дай готовый код минимальной рабочей версии с комментариями. 4. Объясни, как её запустить, будто я новичок. Сначала задай мне один уточняющий вопрос, если чего-то не хватает, потом выдавай решение.">Скопировать</button></div><div class="box">Ты старший разработчик и наставник. Я хочу собрать небольшое приложение или автоматизацию на бесплатном API. Моя идея: [ОПИШИ ЧТО ХОЧЕШЬ, например: приложение, которое показывает счёт матчей в реальном времени]. Выбранный API: [ВСТАВЬ НАЗВАНИЕ И ССЫЛКУ ИЗ КАТАЛОГА, либо попроси помочь выбрать]. Сделай по шагам: 1. Проверь, подходит ли этот API под задачу, нужен ли ключ и как его получить. 2. Распиши архитектуру простыми словами. 3. Дай готовый код минимальной рабочей версии с комментариями. 4. Объясни, как её запустить, будто я новичок. Сначала задай мне один уточняющий вопрос, если чего-то не хватает, потом выдавай решение.</div></div>
+
 <div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.tilda.ws">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
 </article>
 <aside class="toc"><div class="h">На странице</div><a href="#sec-0">Что это и зачем тебе</a><a href="#sec-1">Ссылка на репозиторий</a><a href="#sec-2">Как быстро найти нужный API</a><a href="#sec-3">Живой пример</a><a href="#sec-4">Готовый промпт: Клод соберёт проект на выбранном API</a></aside>
 </main>
-<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.tilda.ws">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
 <script>
 document.querySelectorAll('.copy').forEach(function(b){
   b.addEventListener('click',function(){
