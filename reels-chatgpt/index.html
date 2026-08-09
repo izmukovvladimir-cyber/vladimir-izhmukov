@@ -18,9 +18,6 @@ document.addEventListener('DOMContentLoaded',t_setvisRecs);}})();</script>
   text-align:center;margin-top:7px}
 @media (min-width:961px){#izh-sticky{display:none}}
 @media (prefers-color-scheme:dark){#izh-sticky{background:rgba(24,24,24,.92)}}
-.izh-fade{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
-.izh-fade.izh-in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.izh-fade{opacity:1;transform:none;transition:none}}
 </style>
 
 <!-- Yandex.Metrika counter -->
@@ -297,30 +294,11 @@ href="https://t.me/izhmukov777_bot?start=buy490" data-lid="7318039511910"><span 
     if (a) reach('buy_click');
   }, true);
 
-  // Мягкое появление блоков. Только там, где у Тильды своей анимации нет,
-  // иначе две анимации на одном блоке дерутся и он моргает.
-  if ('IntersectionObserver' in window) {
-    var recs = [].slice.call(document.querySelectorAll('.t-rec'));
-    var targets = recs.filter(function (el, i) {
-      if (i === 0) return false;                       // первый экран показываем сразу
-      if (el.hasAttribute('data-animationappear')) return false;
-      return el.querySelector('[data-animationappear]') === null;
-    });
-    targets.forEach(function (el) { el.classList.add('izh-fade'); });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add('izh-in');
-          io.unobserve(en.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
-    targets.forEach(function (el) { io.observe(el); });
-    // страховка: если наблюдатель почему-то не сработал, через 4 секунды показываем всё
-    setTimeout(function () {
-      targets.forEach(function (el) { el.classList.add('izh-in'); });
-    }, 4000);
-  }
+  // Мягкого появления блоков здесь НЕТ и быть не должно. Первая версия его имела,
+  // и она гасила блоки до пересечения через opacity:0. Четыре блока из 28 так и
+  // остались невидимыми, страница показала пустоты, Владимир увидел это раньше меня
+  // (09.08, msg 17174). Правило простое: украшение, способное СПРЯТАТЬ контент,
+  // на перенесённой один в один странице не стоит ничего.
 })();
 </script>
 </body> </html>
