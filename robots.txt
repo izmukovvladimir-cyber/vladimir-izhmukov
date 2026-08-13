@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /files/Reels-
+Disallow: /nabor-start/
