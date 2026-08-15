@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Четыре плагина против упора в лимиты Claude Code: настоящие названия, команды и порядок установки</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>Четыре плагина против упора в лимиты Claude Code: настоящие названия, команды и порядок установки</h1>
+<p class="lead">Это рабочая сборка из четырёх открытых плагинов для Claude Code, которые вместе снимают упор в лимиты. Каждый я нашёл по официальному репозиторию и проверил, что он живой, потому что в роликах их названия перевирают на слух и человек потом ищет несуществующий инструмент. Внутри порядок установки с объяснением, почему он именно такой, точные команды под копирование, честный разбор заявленных цифр с указанием, где они завышены, способ замерить эффект у себя и раздел на случай, когда что-то не завелось.</p>
+<p class="meta">Читается за 15 минут. Внутри: настоящие названия и ссылки на все четыре репозитория, порядок установки, команды под копирование, замер расхода до и после, честные оговорки по каждому инструменту, что делать при отказе.</p>
+<div class="how">Начни с первого раздела, он объясняет, почему эти четыре штуки работают вместе и один другого не заменяет. Дальше иди строго по порядку разделов: первым ставится измеритель, иначе ты не увидишь собственного эффекта и будешь верить чужим процентам. Команды копируй целиком, они даны отдельными блоками.</div>
+<div class="sec"><h2 id="sec-0">Почему их именно четыре</h2><p>Расход в Claude Code складывается из трёх разных частей, и один инструмент закрывает только одну из них. Поэтому сборка работает, а любой плагин поодиночке даёт заметно меньше.</p><p>Токены уходят по трём каналам. Первый это то, что улетает В модель: файлы, логи, ответы инструментов, результаты поиска по коду. Второй это то, что модель пишет обратно тебе. Третий это повторное перечитывание одного и того же кода в каждой новой сессии, потому что модель не помнит вчерашний разговор.</p><div class="grid2"><div class="cardb"><h3>Headroom берёт вход</h3><p>Садится между тобой и моделью и сжимает то, что уходит наверх: длинные логи, JSON, выдачу поиска по коду. Смысл сохраняется, объём падает.</p></div><div class="cardb"><h3>Caveman берёт выход</h3><p>Заставляет модель отвечать сжато, без вежливых вступлений и пересказа задачи. Код, команды и тексты ошибок при этом остаются целыми.</p></div><div class="cardb"><h3>Graphify берёт перечитывание</h3><p>Один раз разбирает проект в граф связей, и дальше модель спрашивает граф вместо того, чтобы открывать десятки файлов подряд.</p></div><div class="cardb"><h3>CodeBurn берёт измерение</h3><p>Показывает, куда именно ушли деньги и токены: по проектам, моделям и задачам. Без него ты не отличишь работающую настройку от плацебо.</p></div></div><div class="note">Все четыре бесплатны и работают локально на твоей машине. Ни один из них не требует ключей и не отправляет твой код на сторону. Это я проверил по официальным репозиториям, ссылки лежат в разделах ниже.</div><p>Названия в роликах и расшифровках перевирают почти всегда, потому что их произносят вслух. Ниже настоящие имена, по которым инструмент реально находится.</p><ul><li>Headroom, репозиторий headroomlabs-ai</li><li>Graphify, репозиторий Graphify-Labs</li><li>CodeBurn, репозиторий getagentseal, запускается как codeburn</li><li>Caveman, репозиторий JuliusBrussee</li></ul></div>
+<div class="sec"><h2 id="sec-1">Шаг 1. Сначала измеритель, потом всё остальное</h2><p>CodeBurn ставится первым, и это самая важная мысль всего разбора. Пока ты не видишь свою цифру, любая экономия существует только в чужих обещаниях.</p><p>CodeBurn читает файлы сессий, которые твои инструменты и так пишут на диск, и раскладывает расход по проектам, моделям и задачам. Ему не нужен ни ключ, ни прокси, ни доступ в сеть.</p><h3>Запуск без установки</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="npx codeburn">Скопировать</button></div><div class="box">npx codeburn</div><p>Откроется панель прямо в терминале. Стрелки переключают период, клавиша q закрывает. Нужен Node.js версии 22.13 или новее.</p><h3>Если хочешь оставить насовсем</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="npm install -g codeburn">Скопировать</button></div><div class="box">npm install -g codeburn</div><h3>Три команды, ради которых он и нужен</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="codeburn overview">Скопировать</button></div><div class="box">codeburn overview</div><p>Сводка за месяц. Это твоя отправная точка, запиши цифру.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="codeburn optimize">Скопировать</button></div><div class="box">codeburn optimize</div><p>Показывает, где расход уходит впустую. Обычно первое же место в этом списке даёт больше экономии, чем все плагины вместе.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="codeburn compare">Скопировать</button></div><div class="box">codeburn compare</div><p>Сравнение моделей между собой. Часть работы спокойно живёт на модели попроще, и видно это именно здесь.</p><a class="linkbtn" href="https://github.com/getagentseal/codeburn" target="_blank" rel="noopener">Открыть официальный репозиторий CodeBurn</a><div class="note">Сними цифру ДО установки остальных трёх и запиши её отдельно. Через неделю сравнишь с новой. Это единственный честный способ узнать свою экономию. Чужие проценты этого не заменяют.</div></div>
+<div class="sec"><h2 id="sec-2">Шаг 2. Headroom, сжатие того, что уходит в модель</h2><p>Самый весомый из четырёх, потому что вход почти всегда толще выхода. Работает как обёртка вокруг Claude Code.</p><h3>Проверь, что подходит машина</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="python3 --version">Скопировать</button></div><div class="box">python3 --version</div><p>Нужен Python версии 3.10 или новее. Версия старше, значит сначала обнови Python, иначе установка упадёт с непонятной ошибкой.</p><h3>Установка</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="pip install &quot;headroom-ai[all]&quot;">Скопировать</button></div><div class="box">pip install &quot;headroom-ai[all]&quot;</div><p>Ставится изолированно через uv, тогда системный Python остаётся чистым. Команда ниже.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="uv tool install --python 3.13 &quot;headroom-ai[all]&quot;">Скопировать</button></div><div class="box">uv tool install --python 3.13 &quot;headroom-ai[all]&quot;</div><h3>Запуск Claude Code через Headroom</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="headroom wrap claude">Скопировать</button></div><div class="box">headroom wrap claude</div><p>Дальше работаешь как обычно. При старте обёртка печатает, что прокси поднялся. Строк нет и Claude Code открылся мгновенно, значит обёртка не отработала и ты просто сидишь без неё.</p><h3>Для Claude Code внутри VS Code</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="headroom wrap vscode-claude">Скопировать</button></div><div class="box">headroom wrap vscode-claude</div><a class="linkbtn" href="https://github.com/headroomlabs-ai/headroom" target="_blank" rel="noopener">Открыть официальный репозиторий Headroom</a><div class="note">Честная цифра. Для обычной работы с кодом заявлено около 20 процентов экономии, а вот на длинных JSON и выдаче поиска доходит до 60 и выше. Проценты за девяносто, которые гуляют по роликам, снимались на специально подобранных случаях вроде разбора логов. У себя увидишь свою цифру, и она честнее любой чужой.</div></div>
+<div class="sec"><h2 id="sec-3">Шаг 3. Caveman, сжатие того, что модель пишет тебе</h2><p>Заставляет отвечать по делу и без вежливой обёртки. Ставится в одну команду и включается сразу.</p><h3>Установка через магазин плагинов Claude Code</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="claude plugin marketplace add JuliusBrussee/caveman">Скопировать</button></div><div class="box">claude plugin marketplace add JuliusBrussee/caveman</div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="claude plugin install caveman@caveman">Скопировать</button></div><div class="box">claude plugin install caveman@caveman</div><h3>Управление режимами прямо в диалоге</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/caveman lite">Скопировать</button></div><div class="box">/caveman lite</div><p>Мягкий режим. Ответы становятся короче, язык остаётся нормальным человеческим. С него и начинай.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/caveman full">Скопировать</button></div><div class="box">/caveman full</div><p>Основной режим. Ответ сжимается сильно, вежливые связки исчезают совсем.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/caveman off">Скопировать</button></div><div class="box">/caveman off</div><p>Выключение. Пригодится, когда просишь объяснить сложную вещь словами и тебе нужен развёрнутый ответ.</p><a class="linkbtn" href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener">Открыть официальный репозиторий Caveman</a><div class="note">Оговорка, которой нет в роликах. Caveman режет ТОЛЬКО ответы модели, около 65 процентов от них, и при этом сам добавляет примерно тысячу входных токенов на каждый ход. На задачах, где модель и так отвечает коротко, выигрыш близок к нулю. Зато на длинных разборах и планах экономия видна сразу.</div><p>Код, команды, сообщения об ошибках и тексты коммитов он не трогает вовсе, поэтому потерять важное здесь нечем.</p></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-4">Шаг 4. Graphify, чтобы проект не перечитывался заново</h2><p>Разбирает код в граф связей у тебя на машине и даёт модели спрашивать граф вместо открывания файлов пачками. Заметнее всего на больших проектах.</p><h3>Установка</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="uv tool install graphifyy">Скопировать</button></div><div class="box">uv tool install graphifyy</div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="graphify install">Скопировать</button></div><div class="box">graphify install</div><p>Нужен Python 3.10 или новее и uv. На Mac ставится так.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="brew install python@3.12 uv">Скопировать</button></div><div class="box">brew install python@3.12 uv</div><h3>Построить граф своего проекта</h3><p>Открой Claude Code в папке проекта и набери команду ниже. Точка означает текущую папку.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/graphify .">Скопировать</button></div><div class="box">/graphify .</div><p>Разбор идёт локально, без обращения к модели, поэтому построение графа само по себе токенов не тратит. На выходе три файла: наглядная схема в браузере, отчёт и сам граф.</p><h3>Спрашивать про свой код</h3><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/graphify query &quot;кто вызывает эту функцию&quot;">Скопировать</button></div><div class="box">/graphify query &quot;кто вызывает эту функцию&quot;</div><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/graphify path A B">Скопировать</button></div><div class="box">/graphify path A B</div><p>Вторая команда показывает цепочку связей между двумя частями проекта. Это самый частый вопрос при разборе чужого кода.</p><a class="linkbtn" href="https://github.com/Graphify-Labs/graphify" target="_blank" rel="noopener">Открыть официальный репозиторий Graphify</a><div class="note">Смысл появляется на проектах примерно от пятисот файлов. На маленьком проекте модель и так держит всё в голове, и граф не окупит время на установку.</div></div>
+<div class="sec"><h2 id="sec-5">Как убедиться, что стало лучше</h2><p>Правило трёх прогонов, чтобы не спутать эффект настройки со случайностью.</p><ol><li>Возьми одну свою типовую задачу, которую делаешь регулярно. Бери ту, которую делаешь чаще всего.</li><li>Прогони её три раза до установки и запиши расход через codeburn overview. Три раза нужны потому, что один прогон ничего не доказывает, разброс между попытками бывает больше самой экономии.</li><li>Поставь плагины и прогони ту же задачу ещё три раза.</li><li>Сравнивай средние значения между собой. Разница меньше десяти процентов это шум.</li><li>Через неделю посмотри codeburn optimize. Он покажет, что съедает расход теперь, и это будет уже другое место.</li></ol><div class="note">Самая крупная экономия почти всегда лежит вне плагинов. Это привычка называть конкретные файлы вместо того, чтобы вываливать в модель весь проект целиком, и привычка начинать новый разговор под новую задачу вместо бесконечной одной сессии. Плагины добавляются сверху к этому. Заменить это они не могут.</div></div>
+<div class="sec"><h2 id="sec-6">Если не завелось</h2><p>Четыре отказа, которые встречаются чаще всего, и что делать с каждым.</p><h3>Команда не найдена после установки</h3><p>Закрой терминал целиком и открой заново. Свежепоставленные команды подхватываются только новым окном.</p><h3>Установка падает на сборке</h3><p>Почти всегда это старый Python. Проверь версию командой python3 --version и обнови, если меньше 3.10.</p><h3>Claude Code стартует, а экономии нет</h3><p>Проверь, что запускаешь именно через обёртку headroom wrap claude. Привычная команда claude запускает Claude Code без неё. Запустил по привычке, значит работаешь без Headroom и даже не заметишь.</p><h3>Ответы стали слишком куцыми</h3><p>Это Caveman в основном режиме. Переключись на /caveman lite или выключи его на время объяснений через /caveman off.</p><div class="note">Ставь по одному и работай день на каждом. Поставишь все четыре разом и что-то сломается, ты не поймёшь, кто именно виноват, и снесёшь всю сборку вместе с работающей частью.</div></div>
+<div class="sec"><h2>Читать дальше в блоге</h2><p>Эту тему я разбираю подробно в статье <a class="lnk" href="https://blog.vladimir-izhmukov.ru/guides/neyroseti-dlya-kontenta-spisok/">рабочий список нейросетей для контента</a>. Там же лежат остальные <a class="lnk" href="https://blog.vladimir-izhmukov.ru/neyroseti/">разборы про нейросети</a>.</p></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Почему их именно четыре</a><a href="#sec-1">Шаг 1. Сначала измеритель, потом всё остальное</a><a href="#sec-2">Шаг 2. Headroom, сжатие того, что уходит в модель</a><a href="#sec-3">Шаг 3. Caveman, сжатие того, что модель пишет тебе</a><a href="#sec-4">Шаг 4. Graphify, чтобы проект не перечитывался заново</a><a href="#sec-5">Как убедиться, что стало лучше</a><a href="#sec-6">Если не завелось</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
