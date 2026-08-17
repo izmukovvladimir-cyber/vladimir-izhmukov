@@ -2,3 +2,4 @@ User-agent: *
 Disallow: /files/Reels-
 Disallow: /nabor-start/
 Disallow: /chatgpt-ustanovka/
+Sitemap: https://vladimir-izhmukov.ru/sitemap.xml
