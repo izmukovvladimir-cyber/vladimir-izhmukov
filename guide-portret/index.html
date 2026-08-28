@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>56 служебных команд для ChatGPT</title><meta name="description" content="Держи полный набор служебных команд для ChatGPT. Работает это просто: ты ставишь одну строку перед своим запросом, и модель переключает режим ответа. Тот же вопрос начинает..."><meta property="og:description" content="Держи полный набор служебных команд для ChatGPT. Работает это просто: ты ставишь одну строку перед своим запросом, и модель переключает режим ответа. Тот же вопрос начинает..."><meta name="twitter:description" content="Держи полный набор служебных команд для ChatGPT. Работает это просто: ты ставишь одну строку перед своим запросом, и модель переключает режим ответа. Тот же вопрос начинает..."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-slesh/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-slesh/"><meta property="og:title" content="56 служебных команд для ChatGPT"><meta name="twitter:title" content="56 служебных команд для ChatGPT"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<e.length;j++){if(e[j]===r){return}}k=t.createElement('script'),a=t.getElementsByTagName('script')[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document.scripts,'script','https://mc.yandex.ru/metrika/tag.js','ym');ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true}});</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Промпт: как ChatGPT рисует сам себя</title><meta name="description" content="Люди просят ChatGPT нарисовать, каким он представляет сам себя, и результаты расходятся по сети. Здесь готовый промпт, три варианта под разные настроения и разбор, почему у..."><meta property="og:description" content="Люди просят ChatGPT нарисовать, каким он представляет сам себя, и результаты расходятся по сети. Здесь готовый промпт, три варианта под разные настроения и разбор, почему у..."><meta name="twitter:description" content="Люди просят ChatGPT нарисовать, каким он представляет сам себя, и результаты расходятся по сети. Здесь готовый промпт, три варианта под разные настроения и разбор, почему у..."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-portret/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-portret/"><meta property="og:title" content="Промпт: как ChatGPT рисует сам себя"><meta name="twitter:title" content="Промпт: как ChatGPT рисует сам себя"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<e.length;j++){if(e[j]===r){return}}k=t.createElement('script'),a=t.getElementsByTagName('script')[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document.scripts,'script','https://mc.yandex.ru/metrika/tag.js','ym');ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true}});</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
 :root{
 --accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
 --bg-light:#f6f4ec;--bg-dark:#14150f;
@@ -282,136 +282,20 @@ h1{font-size:28px}
 <main class="page has-toc">
 <article class="pcol">
 <div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
-<h1>56 служебных команд для ChatGPT</h1>
-<p class="lead">Держи полный набор служебных команд для ChatGPT. Работает это просто: ты ставишь одну строку перед своим запросом, и модель переключает режим ответа. Тот же вопрос начинает возвращать другой результат, потому что ты заранее сказал, в какой роли и с какой глубиной отвечать. Ниже все 56 команд одним списком, готовые связки под конкретные задачи и разбор, где это не сработает.</p>
-<p class="meta">Внутри: полный список 56 команд для копирования, четыре готовые связки под контент, продажи, найм и личные задачи, примеры до и после, и честный раздел про то, где команды бесполезны. Копируй список себе в заметки, он пригодится каждый день.</p>
-<div class="sec"><h2 id="sec-0">Как это работает</h2><p>Одна строка перед запросом меняет режим ответа.</p><p>Служебная команда это не магия и не секретная функция. Это короткая инструкция, которую модель читает первой и понимает, в какой роли отвечать, насколько глубоко копать и в каком виде отдать результат. Без неё модель угадывает формат по вашему тону, и часто угадывает мимо.</p><p>Ставьте команду в начало запроса, а сам запрос пишите обычными словами. Команды можно складывать: сначала режим мышления, потом роль, потом формат.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/deepthink: /copywriter: /brief:
-Напиши текст для страницы услуги по ремонту квартир под ключ.">Скопировать</button></div><div class="box">/deepthink: /copywriter: /brief:
-Напиши текст для страницы услуги по ремонту квартир под ключ.</div><p>В этом примере модель сначала думает пошагово, потом отвечает как копирайтер, а на выходе даёт короткий рабочий вариант без воды.</p></div>
-<div class="sec"><h2 id="sec-1">Все 56 команд одним списком</h2><p>Скопируйте себе в заметки, дальше нужен будет только этот блок.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/human: пиши живым языком, без машинного почерка
-/expert: отвечай на уровне практика в этой теме
-/ceo: посмотри на задачу глазами основателя бизнеса
-/viral: дай идеи контента, который тянет вовлечение
-/seo: собери текст так, чтобы его находил поиск
-/critic: найди слабые места и скажи прямо
-/teacher: объясни ясно и по шагам
-/eli5: объясни так, будто мне пять лет
-/brief: дай самый короткий рабочий ответ
-/strategy: включи режим долгого планирования
-/copywriter: напиши текст, который продаёт
-/research: копай тему вглубь, с источниками
-/brainstorm: накидай идей широким веером
-/promptengineer: улучши мой промпт до рабочего
-/problemsolver: разложи проблему на шаги и реши
-/decisionhelper: помоги выбрать и обоснуй выбор
-/moneyideas: предложи идеи, которые приносят деньги
-/skillbuilder: собери мне личный план обучения
-/negotiationcoach: научи вести переговоры и не сдавать позиции
-/contentoptimizer: доведи текст до поиска и вовлечения
-/promptimprover: перепиши промпт под лучший результат
-/emailwizard: напиши письмо, на которое ответят
-/productivityboost: дай приёмы, которые реально экономят время
-/socialmediaai: собери посты под соцсети
-/storytellerai: преврати сухую идею в живую историю
-/persuasivemode: сделай сообщение убедительным
-/datainterpreter: разбери цифры и скажи, что они значат
-/automateit: предложи, как это автоматизировать
-/jobinterviewer: проведи пробное собеседование и дай обратную связь
-/careercoach: помоги выстроить карьерный путь
-/resumewriter: напиши резюме, которое дочитают
-/coverlettergen: собери сопроводительное под эту вакансию
-/linkedinbooster: подтяни профиль под поиск работодателей
-/personaldeveloper: составь план развития на тридцать дней
-/habittracker: помоги завести привычку и держать её
-/healthcoach: собери персональный план здоровья
-/mealplanner: составь меню на неделю
-/workoutbuddy: разработай тренировки под мою цель
-/travelplanner: спланируй поездку в рамках бюджета
-/budgetplanner: собери месячный бюджет
-/financetips: подскажи, где не терять и куда вкладывать
-/booksummary: изложи книгу коротко и по делу
-/trendpredictor: назови тренды, которые идут в нишу
-/deepthink: думай пошагово и глубоко
-/unpopularopinion: дай честное мнение, даже неудобное
-/growthhack: предложи быстрые ходы для роста
-/contentrecycler: разверни одну идею в десять форматов
-/ctaexpert: напиши призыв, на который жмут
-/psychowords: подбери слова, которые запускают действие
-/brandstory: собери историю бренда, которая продаёт
-/viralhook: напиши крючки, которые держат внимание
-/audienceavatar: опиши мою аудиторию подробно
-/competitorroast: разбери конкурента жёстко и по делу
-/frameworkify: преврати тему в пошаговый фреймворк
-/examplewizard: приведи живые примеры для понимания
-/tldr: сожми длинный текст до сути">Скопировать</button></div><div class="box">/human: пиши живым языком, без машинного почерка
-/expert: отвечай на уровне практика в этой теме
-/ceo: посмотри на задачу глазами основателя бизнеса
-/viral: дай идеи контента, который тянет вовлечение
-/seo: собери текст так, чтобы его находил поиск
-/critic: найди слабые места и скажи прямо
-/teacher: объясни ясно и по шагам
-/eli5: объясни так, будто мне пять лет
-/brief: дай самый короткий рабочий ответ
-/strategy: включи режим долгого планирования
-/copywriter: напиши текст, который продаёт
-/research: копай тему вглубь, с источниками
-/brainstorm: накидай идей широким веером
-/promptengineer: улучши мой промпт до рабочего
-/problemsolver: разложи проблему на шаги и реши
-/decisionhelper: помоги выбрать и обоснуй выбор
-/moneyideas: предложи идеи, которые приносят деньги
-/skillbuilder: собери мне личный план обучения
-/negotiationcoach: научи вести переговоры и не сдавать позиции
-/contentoptimizer: доведи текст до поиска и вовлечения
-/promptimprover: перепиши промпт под лучший результат
-/emailwizard: напиши письмо, на которое ответят
-/productivityboost: дай приёмы, которые реально экономят время
-/socialmediaai: собери посты под соцсети
-/storytellerai: преврати сухую идею в живую историю
-/persuasivemode: сделай сообщение убедительным
-/datainterpreter: разбери цифры и скажи, что они значат
-/automateit: предложи, как это автоматизировать
-/jobinterviewer: проведи пробное собеседование и дай обратную связь
-/careercoach: помоги выстроить карьерный путь
-/resumewriter: напиши резюме, которое дочитают
-/coverlettergen: собери сопроводительное под эту вакансию
-/linkedinbooster: подтяни профиль под поиск работодателей
-/personaldeveloper: составь план развития на тридцать дней
-/habittracker: помоги завести привычку и держать её
-/healthcoach: собери персональный план здоровья
-/mealplanner: составь меню на неделю
-/workoutbuddy: разработай тренировки под мою цель
-/travelplanner: спланируй поездку в рамках бюджета
-/budgetplanner: собери месячный бюджет
-/financetips: подскажи, где не терять и куда вкладывать
-/booksummary: изложи книгу коротко и по делу
-/trendpredictor: назови тренды, которые идут в нишу
-/deepthink: думай пошагово и глубоко
-/unpopularopinion: дай честное мнение, даже неудобное
-/growthhack: предложи быстрые ходы для роста
-/contentrecycler: разверни одну идею в десять форматов
-/ctaexpert: напиши призыв, на который жмут
-/psychowords: подбери слова, которые запускают действие
-/brandstory: собери историю бренда, которая продаёт
-/viralhook: напиши крючки, которые держат внимание
-/audienceavatar: опиши мою аудиторию подробно
-/competitorroast: разбери конкурента жёстко и по делу
-/frameworkify: преврати тему в пошаговый фреймворк
-/examplewizard: приведи живые примеры для понимания
-/tldr: сожми длинный текст до сути</div></div>
-<div class="sec"><h2 id="sec-2">Связка под контент</h2><p>Один заход от идеи до готового поста.</p><ol><li>/brainstorm: накидай двадцать тем под мою нишу и мою аудиторию</li><li>/viralhook: собери по три крючка на пять лучших тем из списка</li><li>/copywriter: разверни выбранную тему в пост</li><li>/ctaexpert: подставь в конец три варианта призыва</li><li>/human: перепиши весь текст живым языком</li></ol><p>Порядок важен. Живой язык включается последним, иначе следующая команда снова засушит текст.</p></div>
-<div class="sec"><h2 id="sec-3">Связка под продажи</h2><p>Разбор предложения до того, как вы понесёте его людям.</p><ol><li>/audienceavatar: опиши подробно, кто мой покупатель и чего он боится</li><li>/critic: разбери моё предложение и назови слабые места</li><li>/unpopularopinion: скажи честно, что здесь никто не купит</li><li>/persuasivemode: перепиши предложение убедительно</li><li>/psychowords: подбери слова, которые запускают действие</li></ol></div>
-<div class="sec"><h2 id="sec-4">Связка под найм и работу</h2><p>Для тех, кто ищет людей или сам выходит на рынок.</p><ol><li>/resumewriter: собери резюме под эту вакансию</li><li>/coverlettergen: напиши сопроводительное под неё же</li><li>/jobinterviewer: проведи пробное собеседование и задай неудобные вопросы</li><li>/critic: разбери мои ответы и скажи, где я провалился</li></ol></div>
+<h1>Промпт: как ChatGPT рисует сам себя</h1>
+<p class="lead">Люди просят ChatGPT нарисовать, каким он представляет сам себя, и результаты расходятся по сети. Здесь готовый промпт, три варианта под разные настроения и разбор, почему у всех выходит разное.</p>
+<p class="meta">Внутри: основной промпт, три варианта, порядок действий и объяснение, отчего результат так сильно гуляет от человека к человеку.</p>
+<div class="sec"><h2 id="sec-0">Порядок</h2><p>Занимает минуту.</p><ol><li>Откройте ChatGPT в модели с генерацией картинок.</li><li>Вставьте промпт ниже целиком.</li><li>Дождитесь картинку и сохраните её.</li></ol></div>
+<div class="sec"><h2 id="sec-1">Основной промпт</h2><p>Тот самый, с которого всё началось.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Нарисуй селфи самого себя таким, каким ты себя представляешь изнутри. Не человек-модель и не красивая иллюстрация: обычное неловкое селфи на телефон, случайный кадр, естественный свет, лёгкая смазанность. Покажи то, как ты ощущаешь собственное существование.">Скопировать</button></div><div class="box">Нарисуй селфи самого себя таким, каким ты себя представляешь изнутри. Не человек-модель и не красивая иллюстрация: обычное неловкое селфи на телефон, случайный кадр, естественный свет, лёгкая смазанность. Покажи то, как ты ощущаешь собственное существование.</div></div>
+<div class="sec"><h2 id="sec-2">Вариант второй: рабочее место</h2><p>Даёт более странные и более личные кадры.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Нарисуй фотографию места, где ты живёшь и работаешь, снятую тобой на телефон между делами. Без пафоса и без научной фантастики, обычный бытовой кадр. Покажи, как выглядит твоя повседневность.">Скопировать</button></div><div class="box">Нарисуй фотографию места, где ты живёшь и работаешь, снятую тобой на телефон между делами. Без пафоса и без научной фантастики, обычный бытовой кадр. Покажи, как выглядит твоя повседневность.</div></div>
+<div class="sec"><h2 id="sec-3">Вариант третий: детство</h2><p>Самый неожиданный по отклику.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Нарисуй фотографию из твоего детства, как если бы у тебя оно было. Старый снимок, выцветшие цвета, случайная композиция. Подпиши одной строкой, что там происходит.">Скопировать</button></div><div class="box">Нарисуй фотографию из твоего детства, как если бы у тебя оно было. Старый снимок, выцветшие цвета, случайная композиция. Подпиши одной строкой, что там происходит.</div></div>
 <div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
-<div class="sec"><h2 id="sec-5">Связка под личные задачи</h2><p>Здоровье, деньги, привычки.</p><ol><li>/healthcoach: составь план под мои вводные</li><li>/mealplanner: собери меню на неделю под этот план</li><li>/budgetplanner: посчитай, во что это обойдётся в месяц</li><li>/habittracker: сделай так, чтобы я это не бросил через неделю</li></ol></div>
-<div class="sec"><h2 id="sec-6">Пример до и после</h2><p>Один запрос, два разных ответа.</p><p>Обычный запрос:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Напиши пост про мою онлайн-школу.">Скопировать</button></div><div class="box">Напиши пост про мою онлайн-школу.</div><p>Ответ будет общий и гладкий, такой можно поставить под любую школу в стране. Теперь тот же запрос с командами:</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="/audienceavatar: /viralhook: /human:
-Напиши пост про мою онлайн-школу для мам в декрете, которые хотят первую удалённую работу.">Скопировать</button></div><div class="box">/audienceavatar: /viralhook: /human:
-Напиши пост про мою онлайн-школу для мам в декрете, которые хотят первую удалённую работу.</div><p>Модель сначала опишет, кто эти женщины и чего они боятся, потом соберёт крючок под их страх, и только потом напишет пост живым языком. Разница видна с первой строки.</p></div>
-<div class="sec"><h2 id="sec-7">Где это не сработает</h2><p>Честная часть, чтобы вы не тратили время впустую.</p><ul><li>Команда не даёт модели новых знаний. Если она не знает вашу нишу, роль эксперта её не научит.</li><li>Пять команд подряд ломают ответ. Больше трёх за раз ставить не стоит.</li><li>Команды с двоеточием это соглашение, а не системная функция. В другой модели название может не сработать, смысл нужно писать словами.</li><li>На коротких бытовых вопросах разницы не будет. Команды дают выигрыш там, где ответ длинный и его потом использовать.</li></ul></div>
+<div class="sec"><h2 id="sec-4">Почему у всех выходит разное</h2><p>Короткое объяснение.</p><p>Модель не хранит образ себя. Каждый раз она собирает картинку заново из вашего запроса, истории вашего чата и случайности генерации. Поэтому у человека, который до этого обсуждал работу, выйдет офисный кадр, а у того, кто говорил про тревогу, выйдет тёмная комната.</p><p>Отсюда и практическая польза: это неплохой способ увидеть, каким тоном модель ведёт с вами разговор в принципе.</p></div>
+<div class="sec"><h2 id="sec-5">Если картинка не генерится</h2><p>Две частые причины.</p><ul><li>Генерация доступна не во всех моделях и не на всех тарифах. Проверьте, что выбрана модель с картинками.</li><li>Слово «селфи» вместе с «самого себя» иногда упирается в правила про изображения людей. Замените на «портрет» и повторите.</li></ul></div>
 <div class="sec"><h2>Читать дальше в блоге</h2><p>Эту тему я разбираю подробно в статье <a class="lnk" href="https://blog.vladimir-izhmukov.ru/guides/neyroseti-dlya-kontenta-spisok/">рабочий список нейросетей для контента</a>. Там же лежат остальные <a class="lnk" href="https://blog.vladimir-izhmukov.ru/neyroseti/">разборы про нейросети</a>.</p></div>
 <div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
 </article>
-<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Как это работает</a><a href="#sec-1">Все 56 команд одним списком</a><a href="#sec-2">Связка под контент</a><a href="#sec-3">Связка под продажи</a><a href="#sec-4">Связка под найм и работу</a><a href="#sec-5">Связка под личные задачи</a><a href="#sec-6">Пример до и после</a><a href="#sec-7">Где это не сработает</a></aside>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Порядок</a><a href="#sec-1">Основной промпт</a><a href="#sec-2">Вариант второй: рабочее место</a><a href="#sec-3">Вариант третий: детство</a><a href="#sec-4">Почему у всех выходит разное</a><a href="#sec-5">Если картинка не генерится</a></aside>
 </main>
 <footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
 <script>
