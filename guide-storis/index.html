@@ -173,6 +173,18 @@ h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing
 .lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
 .meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
 .how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
 .p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
 .p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
 :root[data-theme=dark] .p .num{border-color:var(--accent)}
