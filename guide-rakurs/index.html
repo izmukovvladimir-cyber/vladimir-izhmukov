@@ -1,0 +1,402 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Как снять много роликов за один день: план и промпт</title><meta name="description" content="Блочная съёмка коротких роликов: готовый промпт для сценариев, двадцать формул хуков, карта ракурсов, банк перебивок и план съёмочного дня по часам."><meta property="og:description" content="Блочная съёмка коротких роликов: готовый промпт для сценариев, двадцать формул хуков, карта ракурсов, банк перебивок и план съёмочного дня по часам."><meta name="twitter:description" content="Блочная съёмка коротких роликов: готовый промпт для сценариев, двадцать формул хуков, карта ракурсов, банк перебивок и план съёмочного дня по часам."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-rakurs/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-rakurs/"><meta property="og:title" content="Как снять много роликов за один день: план и промпт"><meta name="twitter:title" content="Как снять много роликов за один день: план и промпт"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-video-i-montaj">Видео и монтаж</a></div>
+<h1>Съёмка блоком: промпт для сценариев, двадцать хуков и карта из девяти ракурсов</h1>
+<p class="lead">Промпт, который пишет сценарий говорящего ролика под твою тему, двадцать формул хуков, карта из девяти ракурсов и план съёмочного дня, после которого на карте памяти лежит материал на десятки роликов.</p>
+<p class="meta">Сто роликов за один съёмочный день держатся на подготовке. Выносливость тут решает мало. Работает связка из четырёх вещей: формулы, по которым пишется первая фраза, карта ракурсов камеры, банк перебивок и правило, по которому один и тот же материал превращается в десяток разных роликов. Ниже вся связка целиком: мастер-промпт для сценария, двадцать формул хуков с примерами, девять позиций камеры, план дня по часам и разбор пяти ошибок, на которых блочная съёмка обычно разваливается.</p>
+<div class="how">Начни со второго раздела: вставь мастер-промпт и получи десять сценариев под свою тему за один заход. Дальше открой карту ракурсов и распечатай её либо держи на телефоне рядом с камерой. Съёмку веди по плану из седьмого раздела, он рассчитан на четыре часа. Разделы восемь и девять прочитай вечером перед съёмкой, они экономят весь следующий день.</div>
+<div class="sec"><h2 id="sec-0">1. Почему сотня роликов за день держится на подготовке</h2><p>Человек, который снимает ролик за раз, тратит силы не на съёмку. Он тратит их на решения: о чём снять, с чего начать, как это сказать, куда поставить телефон. Четыре решения до того, как нажата кнопка записи. Когда эти решения приняты заранее и лежат списком, съёмка превращается в механическую работу, и скорость вырастает в десятки раз.</p><p>Разложи свой обычный ролик по времени, и картина станет понятной. Придумать тему это пятнадцать минут. Написать первую фразу это ещё десять, потому что именно она решает, досмотрят ролик или нет. Проговорить текст с третьего дубля это пять минут. Сама съёмка занимает сорок секунд.</p><div class="note">Тридцать минут решений на сорок секунд записи. Именно поэтому обычный человек выкладывает один ролик в неделю и честно считает, что у него нет времени.</div><p>Блочная съёмка переносит все решения в один вечер до съёмки. Ты садишься за стол, получаешь от модели тридцать сценариев, выбираешь десять, размечаешь их по ракурсам. На следующий день берёшь телефон и просто говоришь по списку, меняя точку камеры каждые три ролика.</p><h3>Что даёт сама подготовка</h3><ul><li>Ты не выбираешь слова у камеры. Первая фраза уже написана и проверена глазами.</li><li>Ты не ищешь кадр. Позиция камеры назначена заранее и записана рядом со сценарием.</li><li>Ты не устаёшь от переключений. Мозг держит один режим: говорить. Он не прыгает между сочинением и исполнением.</li><li>Ты получаешь однородный материал. Из него потом собираются перебивки, нарезки и вторые версии роликов.</li></ul></div>
+<div class="sec"><h2 id="sec-1">2. Мастер-промпт: сценарий говорящего ролика</h2><p>Этот промпт пишет сценарий под съёмку с лицом в кадре. Он не выдаёт текст статьи и не пересказывает тему, он даёт ровно то, что произносится вслух, с пометками длительности и с готовой первой фразой. Вставляй целиком, тему подставляй в конце.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Ты пишешь сценарии коротких вертикальных роликов для эксперта, который говорит на камеру сам, без монтажёра и без сложного монтажа.
+
+Правила, которые ты соблюдаешь всегда:
+
+1. Первая фраза занимает не больше восьми слов и произносится за три секунды. Она ставит вопрос, называет неудобный факт или обещает конкретный результат. Обращений «привет», «друзья», «сегодня поговорим» в ней нет никогда.
+2. Весь сценарий рассчитан на 35-45 секунд живой речи. Это примерно 90-110 слов. Считай слова и пиши количество в конце.
+3. Ты пишешь разговорными предложениями, которые человек может произнести на одном дыхании. Причастные обороты, канцелярит и книжные связки запрещены.
+4. В середине ролика стоит одна конкретная вещь, которую зритель может сделать сегодня: число, шаг, приём, ошибка с её починкой. Общие рассуждения запрещены.
+5. Последняя фраза оставляет зрителя с мыслью или ведёт к одному действию. Призыв подписаться в текст не входит, он ставится отдельно.
+6. Ты не используешь слова «уникальный», «эффективный», «в современном мире», «не секрет, что».
+
+Формат ответа по каждому сценарию:
+
+ХУК: одна строка, то что произносится в первые три секунды
+ТЕКСТ: сплошной речевой блок без разбивки на абзацы
+СЛОВ: число
+ЧТО ПОКАЗАТЬ: одна строка, что происходит в кадре, если это не просто лицо
+
+Сделай 10 разных сценариев по теме ниже. Каждый следующий заходит с другой стороны: один через ошибку, один через число, один через личную историю, один через разбор чужого случая, один через инструкцию, один через возражение, один через сравнение до и после, один через вопрос, который зритель боится задать, один через быстрый разбор мифа, один через то, что произойдёт, если ничего не менять.
+
+ТЕМА: [подставь свою тему]
+ДЛЯ КОГО: [одна строка о зрителе: кто он и что у него болит]">Скопировать</button></div><div class="box">Ты пишешь сценарии коротких вертикальных роликов для эксперта, который говорит на камеру сам, без монтажёра и без сложного монтажа.
+
+Правила, которые ты соблюдаешь всегда:
+
+1. Первая фраза занимает не больше восьми слов и произносится за три секунды. Она ставит вопрос, называет неудобный факт или обещает конкретный результат. Обращений «привет», «друзья», «сегодня поговорим» в ней нет никогда.
+2. Весь сценарий рассчитан на 35-45 секунд живой речи. Это примерно 90-110 слов. Считай слова и пиши количество в конце.
+3. Ты пишешь разговорными предложениями, которые человек может произнести на одном дыхании. Причастные обороты, канцелярит и книжные связки запрещены.
+4. В середине ролика стоит одна конкретная вещь, которую зритель может сделать сегодня: число, шаг, приём, ошибка с её починкой. Общие рассуждения запрещены.
+5. Последняя фраза оставляет зрителя с мыслью или ведёт к одному действию. Призыв подписаться в текст не входит, он ставится отдельно.
+6. Ты не используешь слова «уникальный», «эффективный», «в современном мире», «не секрет, что».
+
+Формат ответа по каждому сценарию:
+
+ХУК: одна строка, то что произносится в первые три секунды
+ТЕКСТ: сплошной речевой блок без разбивки на абзацы
+СЛОВ: число
+ЧТО ПОКАЗАТЬ: одна строка, что происходит в кадре, если это не просто лицо
+
+Сделай 10 разных сценариев по теме ниже. Каждый следующий заходит с другой стороны: один через ошибку, один через число, один через личную историю, один через разбор чужого случая, один через инструкцию, один через возражение, один через сравнение до и после, один через вопрос, который зритель боится задать, один через быстрый разбор мифа, один через то, что произойдёт, если ничего не менять.
+
+ТЕМА: [подставь свою тему]
+ДЛЯ КОГО: [одна строка о зрителе: кто он и что у него болит]</div><div class="note">Если сценарии выходят гладкими и одинаковыми, добавь строку: «Пиши так, как говорит человек, который делал это руками, с конкретными деталями своей практики. Общие формулировки переписывай до конкретики».</div><h3>Что делать с ответом</h3><p>Из десяти сценариев рабочими окажутся шесть или семь. Оставшиеся выбрасывай без сожаления, переписывать их дольше, чем запросить новые. Каждый оставленный сценарий прочитай вслух: там, где язык спотыкается, меняй слово прямо в тексте. Это занимает минуту и снимает половину дублей на съёмке.</p></div>
+<div class="sec"><h2 id="sec-2">3. Двадцать формул хуков</h2><p>Хук это первые три секунды. Он решает, останется зритель или пролистнёт. Ниже двадцать формул, по которым пишется первая фраза. Формула это скелет: подставляешь свою тему и получаешь готовый хук.</p><ul><li>Ошибка большинства. «Девять из десяти делают это неправильно». Пример: «Девять из десяти снимают первые три секунды впустую».</li><li>Число и срок. «За [срок] я получил [результат]». Пример: «За двенадцать дней аккаунт собрал 327 тысяч просмотров».</li><li>Прямое возражение. «Тебе говорят [распространённый совет]. Это не работает». Пример: «Тебе говорят снимать каждый день. Так ты сгоришь за месяц».</li><li>Неудобный вопрос. «Сколько [действие] ты сделал за неделю?». Пример: «Сколько роликов ты выложил за последнюю неделю?».</li><li>Разоблачение простоты. «Это выглядит сложно. На деле тут три шага».</li><li>Цена ошибки. «Одна деталь стоила мне [потеря]». Пример: «Одна строка в описании стоила мне месяца охватов».</li><li>Сравнение до и после. «Было [А]. Стало [Б]. Между ними [действие]».</li><li>Чужой случай. «Человек пришёл с [точка А] и через [срок] получил [точка Б]».</li><li>Запрет. «Никогда не делай [действие], если хочешь [результат]».</li><li>Секундная инструкция. «Сделай это за десять секунд и [результат]».</li><li>Разбор мифа. «Говорят, что [миф]. Проверил, вот что вышло».</li><li>Признание. «Я делал это неправильно два года».</li><li>Выбор из двух. «Либо ты [А], либо [Б]. Третьего нет».</li><li>Отложенный итог. «Если ничего не менять, через год будет ровно это».</li><li>Инсайдерская деталь. «Этого не пишут в гайдах».</li><li>Точное число шагов. «Три вещи решают всё остальное».</li><li>Вопрос к себе. «Почему у одних получается за месяц, а у других не выходит годами».</li><li>Против авторитета. «Все советуют [приём]. У меня он не сработал ни разу».</li><li>Быстрая проверка. «Проверь себя за пять секунд».</li><li>Обещание конкретного файла. «Забери список, который экономит день работы».</li></ul><div class="note">Формулы работают в связке с темой. Сами по себе они пустые. Хук, который обещает больше, чем даёт ролик, роняет досматриваемость сильнее, чем слабый хук. Обещай ровно то, что лежит внутри.</div><h3>Как выбрать формулу под ролик</h3><ul><li>Тема про деньги и результат: формулы 2, 6, 7, 14.</li><li>Тема про ошибки и починку: формулы 1, 3, 9, 18.</li><li>Тема обучающая: формулы 10, 16, 19, 20.</li><li>Тема личная: формулы 12, 17, 15.</li></ul></div>
+<div class="sec"><h2 id="sec-3">4. Карта ракурсов: девять позиций камеры</h2><p>Однообразный кадр убивает досматриваемость даже при сильном тексте. Смена ракурса каждые два-три ролика делает ленту живой и даёт монтажёру материал для перебивок. Держи эту карту рядом с камерой.</p><ul><li>Фронтальный крупный. Лицо занимает треть кадра, глаза на верхней трети. База для разговорных роликов, самый сильный контакт со зрителем.</li><li>Фронтальный средний. Видно плечи и руки. Подходит там, где ты жестикулируешь или показываешь предмет.</li><li>Три четверти слева. Камера смещена на 30-40 градусов, взгляд в объектив. Даёт объём и снимает эффект допроса.</li><li>Три четверти справа. Та же позиция зеркально. Чередуй с левой, зритель воспринимает их как разные кадры.</li><li>Нижняя точка. Камера чуть ниже линии глаз, наклон вверх. Добавляет уверенности говорящему, хорошо работает на сильных утверждениях.</li><li>Верхняя точка. Камера выше глаз на ладонь. Смягчает подачу, подходит для личных историй и признаний.</li><li>В движении. Ты идёшь, камера идёт рядом на вытянутой руке. Движение само по себе удерживает внимание первые секунды.</li><li>Через плечо. Камера позади, в кадре часть тебя и то, на что ты смотришь: экран, доска, продукт.</li><li>Статичный кадр без тебя. Стол, экран, руки, предмет. Используется как перебивка поверх твоего голоса.</li></ul><div class="note">Правило одного дня: за съёмочный день используй минимум пять позиций из девяти. Тогда десять роликов будут выглядеть как снятые в разное время.</div><h3>Разметка сценариев по ракурсам</h3><p>Перед съёмкой открой список сценариев и поставь рядом с каждым номер позиции. Сильные утверждения ставь на позицию 5, личные истории на 6, инструкции на 2, разборы чужих случаев на 3 или 4. Ролики с одной позицией снимай подряд, чтобы не переставлять камеру по десять раз.</p></div>
+<div class="sec"><h2 id="sec-4">5. Банк перебивок: снять один раз, использовать сто раз</h2><p>Перебивка это короткий кадр без твоего лица, который вставляется поверх речи. Он закрывает склейку, держит внимание и спасает ролик, где ты сбился. Один час съёмки перебивок закрывает потребности на несколько месяцев.</p><h3>Что снять в первый заход</h3><ul><li>Руки на клавиатуре, крупно, десять секунд.</li><li>Экран телефона со статистикой профиля, медленный проезд камеры.</li><li>Ты открываешь ноутбук и садишься за стол, общий план.</li><li>Кофе, блокнот, ручка, крупные планы предметов на столе.</li><li>Ты идёшь по улице, камера сбоку, пятнадцать секунд.</li><li>Ты пишешь что-то от руки, видно только руку и лист.</li><li>Ты смотришь в окно, спиной к камере.</li><li>Быстрая прокрутка ленты на телефоне, крупно.</li><li>Ты киваешь и улыбаешься молча, три секунды, фронтально.</li><li>Ты разводишь руками, три секунды, фронтально.</li></ul><div class="note">Снимай каждую перебивку по десять секунд минимум. Короткие куски невозможно замедлить и растянуть, а длинные всегда можно обрезать.</div><p>Складывай перебивки в одну папку с понятными именами: руки-клавиатура, экран-статистика, улица-ходьба. Когда монтажёр получает такую папку, он собирает ролик вдвое быстрее и не просит доснять.</p></div>
+<div class="sec"><h2 id="sec-5">6. Правило десяти: один материал в десять роликов</h2><p>Самая дорогая ошибка блочной съёмки это снимать десять тем ради десяти роликов. Одна тема даёт десять роликов, если резать её по разным осям.</p><h3>Десять осей одной темы</h3><ul><li>Полный ответ на главный вопрос темы.</li><li>Одна ошибка внутри темы и её починка.</li><li>Вторая ошибка, отдельным роликом.</li><li>Инструкция из трёх шагов.</li><li>Личная история, как ты сам это проходил.</li><li>Чужой случай с цифрами.</li><li>Разбор мифа вокруг темы.</li><li>Ответ на частое возражение.</li><li>Что будет, если ничего не делать.</li><li>Короткий чек-лист проверки себя.</li></ul><p>Прогоняешь тему через эти десять осей в модели одним запросом, получаешь десять разных сценариев по одной подготовленной теме. Снимаешь их подряд в одном образе, а выкладываешь по одному в течение двух недель. Зритель видит разные ролики, потому что смысл в каждом свой.</p><div class="note">Держи между роликами одной темы разрыв в два дня минимум. Три ролика одной темы подряд читаются как повтор и роняют охват.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-6">7. План съёмочного дня по часам</h2><p>План рассчитан на четыре часа и даёт на выходе от двадцати до тридцати готовых роликов. Больше тридцати за раз снимать не советую, речь садится и лицо устаёт, это видно на записи.</p><ul><li>Вечер накануне, 40 минут. Прогон мастер-промпта, выбор сценариев, разметка по ракурсам. Список лежит в телефоне крупным шрифтом.</li><li>00:00-00:20. Подготовка точки: свет, телефон на штативе, проверка звука на пробной записи. Пробную запись обязательно прослушай в наушниках.</li><li>00:20-01:20. Первый блок, позиции 1 и 2. Самые важные сценарии снимай первыми, пока голос свежий.</li><li>01:20-01:35. Перерыв, вода, тишина. Голосу нужен отдых, это слышно на записи.</li><li>01:35-02:30. Второй блок, позиции 3, 4, 5. Смена образа по желанию: другая рубашка делает материал похожим на съёмку другого дня.</li><li>02:30-03:10. Третий блок, позиции 6 и 7, личные истории и мягкие темы.</li><li>03:10-03:40. Перебивки по списку из пятого раздела.</li><li>03:40-04:00. Проверка материала: открой пять случайных файлов и посмотри звук и фокус. Брак ловится сейчас, пересъёмка стоит десять минут.</li></ul><div class="note">Пиши номер сценария вслух перед каждым дублем: «шестой, дубль два». На разборе материала это экономит час поиска нужного файла.</div></div>
+<div class="sec"><h2 id="sec-7">8. Свет, звук и кадр: минимум, который решает</h2><p>Дорогая техника не нужна. Нужны три вещи, которые чаще всего и портят материал у тех, кто снимает дома.</p><h3>Свет</h3><p>Ставь лицо к окну, камеру спиной к окну. Один источник света спереди, ровный, без прямого солнца. Верхний свет в комнате выключай, он даёт тени под глазами. Снимаешь вечером, поставь любую лампу за камерой на уровне лица и добавь вторую сбоку слабее.</p><h3>Звук</h3><p>Звук важнее картинки. Зритель прощает мягкий фокус и не прощает эхо. Снимай в комнате с мягкими поверхностями: диван, шторы, ковёр. Пустая кухня с плиткой даёт эхо, которое не лечится ничем. Петличка за тысячу рублей решает вопрос целиком.</p><h3>Кадр</h3><ul><li>Глаза на верхней трети кадра, над головой остаётся ладонь пространства.</li><li>Телефон на уровне глаз, экраном к тебе, чтобы видеть себя.</li><li>Смотри в объектив, не на своё изображение. Взгляд мимо камеры читается как неуверенность.</li><li>Нижняя четверть кадра остаётся пустой, там встанут подписи и интерфейс.</li></ul><div class="note">Проверь один раз настройки камеры: 1080p и 30 кадров хватает для любой ленты, а 4K съедает память и замедляет обработку.</div></div>
+<div class="sec"><h2 id="sec-8">9. Пять ошибок блочной съёмки</h2><p>На этих пяти вещах блочная съёмка разваливается чаще всего. Каждая стоит целого дня.</p><ul><li>Снимать без списка. Человек надеется вспомнить темы на месте и через сорок минут стоит перед камерой с пустой головой. Список решает это полностью.</li><li>Один образ и один ракурс на весь день. Тридцать одинаковых роликов выглядят как один ролик, выложенный тридцать раз. Меняй позицию камеры и хотя бы верх одежды.</li><li>Гнаться за идеальным дублем. Третий дубль почти всегда хуже первого, речь становится механической. Прими правило: два дубля и идём дальше.</li><li>Не проверять звук в начале. Испорченная дорожка обнаруживается на монтаже, когда переснять уже нельзя. Пробная запись перед стартом занимает минуту.</li><li>Выложить всё сразу. Двадцать роликов за три дня сажают охват и выжигают темы. Раскладывай материал на две-три недели.</li></ul></div>
+<div class="sec"><h2 id="sec-9">10. Порядок действий на ближайший час</h2><p>Чтобы это не осталось чтением, сделай прямо сейчас четыре вещи. Час работы, и у тебя готов съёмочный день.</p><ul><li>Возьми мастер-промпт из второго раздела, подставь свою тему и получи десять сценариев. Пятнадцать минут.</li><li>Прочитай их вслух, выброси слабые, поправь спотыкающиеся места. Двадцать минут.</li><li>Открой карту ракурсов и поставь рядом с каждым сценарием номер позиции. Десять минут.</li><li>Назначь дату съёмки в календаре и проверь свет в комнате в это время суток. Пятнадцать минут.</li></ul><div class="note">Материал одного такого дня закрывает ленту на две недели вперёд. Дальше остаётся только выкладывать по плану.</div></div>
+<div class="sec"><h2>Читать дальше в блоге</h2><p>Эту тему я разбираю подробно в статье <a class="lnk" href="https://blog.vladimir-izhmukov.ru/guides/reels-bez-semok-neyrosetyami/">как собрать Рилс без съёмок и монтажа</a>. Там же лежат остальные <a class="lnk" href="https://blog.vladimir-izhmukov.ru/instagram/">разборы про короткие ролики</a>.</p></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">1. Почему сотня роликов за день держится на подготовке</a><a href="#sec-1">2. Мастер-промпт: сценарий говорящего ролика</a><a href="#sec-2">3. Двадцать формул хуков</a><a href="#sec-3">4. Карта ракурсов: девять позиций камеры</a><a href="#sec-4">5. Банк перебивок: снять один раз, использовать сто раз</a><a href="#sec-5">6. Правило десяти: один материал в десять роликов</a><a href="#sec-6">7. План съёмочного дня по часам</a><a href="#sec-7">8. Свет, звук и кадр: минимум, который решает</a><a href="#sec-8">9. Пять ошибок блочной съёмки</a><a href="#sec-9">10. Порядок действий на ближайший час</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
