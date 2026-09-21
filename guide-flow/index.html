@@ -1,0 +1,559 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>99 команд для Google Flow: камера, свет и цвет с готовой фразой для каждой</title><meta name="description" content="Все 99 команд для Google Flow с готовой фразой для каждой: камера, ракурсы, свет, композиция, эффекты, фокус, цвет и портрет. Плюс порядок работы, инструкция для нейросети и..."><meta property="og:description" content="Все 99 команд для Google Flow с готовой фразой для каждой: камера, ракурсы, свет, композиция, эффекты, фокус, цвет и портрет. Плюс порядок работы, инструкция для нейросети и..."><meta name="twitter:description" content="Все 99 команд для Google Flow с готовой фразой для каждой: камера, ракурсы, свет, композиция, эффекты, фокус, цвет и портрет. Плюс порядок работы, инструкция для нейросети и..."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-flow/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-flow/"><meta property="og:title" content="99 команд для Google Flow: камера, свет и цвет с готовой фразой для каждой"><meta name="twitter:title" content="99 команд для Google Flow: камера, свет и цвет с готовой фразой для каждой"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>99 команд для Google Flow: камера, свет и цвет с готовой фразой для каждой</h1>
+<p class="lead">Все 99 команд для Google Flow с готовой фразой для каждой: камера, ракурсы, свет, композиция, эффекты, фокус, цвет и портрет. Плюс порядок работы, инструкция для нейросети и пять готовых связок.</p>
+<p class="meta">Команд со слэшем в самом Flow нет: это ярлыки, которые ты раскрываешь в описание кадра. Результат зависит от сцены, формулировки надо подгонять.</p>
+<div class="how">Начни со второго раздела: три шага и пример. Все 99 фраз лежат в разделах с четвёртого по двенадцатый.</div>
+<div class="sec"><h2 id="sec-0">1. Что это и как читать команды</h2><p>В Google Flow нет команд со слэшем. Это ярлыки: каждый раскрывается в описание кадра на языке кино.</p><p>Google Flow строит видео по текстовому описанию сцены. Хорошее описание содержит субъект, действие, место и три вещи режиссёра: камеру, свет и цвет. Команды со слэшем это готовые формулировки для этих трёх вещей. Ты берёшь описание сцены своими словами, добавляешь к нему одну-три формулировки, и модель получает язык, который лучше понимает.</p><p>Ниже все 99 команд в том порядке, в котором они шли в карусели: девять разделов по 11 штук. У каждой команды две части: смысл по-русски и готовая фраза для вставки в описание кадра. Фразы на английском, потому что видеомодели надёжнее всего откликаются на английскую кинематографическую лексику.</p><div class="note">Результат зависит от модели и от сцены: одна и та же фраза даёт разные кадры на разных сценах. Формулировки собраны из общепринятых терминов съёмки. Подгони под свою сцену: замени слово, убери лишнее, добавь деталь. Доступ к Flow, лимиты генераций и стоимость зависят от твоего тарифа Google, смотри их в самом Flow.</div></div>
+<div class="sec"><h2 id="sec-1">2. Как пользоваться за три шага</h2><p>Один кадр, одна сцена, одна-три команды. Начни с одной.</p><ol><li>Опиши сцену своими словами: кто, что делает, где. Одно предложение хватит.</li><li>Добавь команду из нужного раздела: камера, свет или цвет. Возьми её фразу из справочника ниже.</li><li>Вставь получившееся описание в Google Flow, посмотри результат и поменяй одну вещь за раз: так видно, что именно сработало.</li></ol><div class="grid2"><div class="cardb"><h3>Правило одного кадра</h3><p>Одна сцена это одно действие. Если в описании два действия подряд, модель чаще смазывает оба. Разбей на два кадра.</p></div><div class="cardb"><h3>Правило трёх команд</h3><p>Одна команда камеры, одна света, одна цвета. Четвёртая и пятая начинают спорить с первыми тремя.</p></div><div class="cardb"><h3>Правило конфликта</h3><p>Не ставь рядом команды, которые противоречат друг другу: /allclear и /blurback, /sunsetglow и /nightcity, /grayscale и /colorpop.</p></div></div><div class="lblrow"><span class="lbl">Пример: что ты пишешь</span><button class="copy" data-text="Сцена: девушка идёт по пустому пляжу с чемоданом. Команды: /pushin /sunsetglow /orangeteal">Скопировать</button></div><div class="box">Сцена: девушка идёт по пустому пляжу с чемоданом. Команды: /pushin /sunsetglow /orangeteal</div><div class="lblrow"><span class="lbl">Пример: что получается для вставки во Flow</span><button class="copy" data-text="A young woman walks along an empty beach carrying a suitcase. Slow push-in, camera moves from a medium shot to a close-up, rising tension. Warm golden hour light, low sun, long soft shadows, golden glow. Orange and teal colour grade, warm skin tones against teal shadows, blockbuster look.">Скопировать</button></div><div class="box">A young woman walks along an empty beach carrying a suitcase. Slow push-in, camera moves from a medium shot to a close-up, rising tension. Warm golden hour light, low sun, long soft shadows, golden glow. Orange and teal colour grade, warm skin tones against teal shadows, blockbuster look.</div></div>
+<div class="sec"><h2 id="sec-2">3. Автоматическая раскрутка команд нейросетью</h2><p>Не хочешь вставлять фразы руками: пусть нейросеть подставит их сама.</p><p>Создай проект в ChatGPT или Claude, загрузи туда файл со всеми блоками из разделов с четвёртого по двенадцатый и вставь инструкцию ниже. Дальше ты пишешь сцену и команды, а в ответ получаешь готовый промпт для Flow.</p><div class="lblrow"><span class="lbl">Инструкция для проекта</span><button class="copy" data-text="Ты помощник, который пишет описания кадров для AI-видео в Google Flow. В моих сообщениях встречаются слэш-команды, например /pushin. Действуй так:
+
+1. Найди каждую команду в моём списке командного справочника ниже и подставь вместо неё описание из справочника, слово в слово или слегка склонённое под сцену.
+2. Собери из моей сцены и подставленных описаний один связный промпт на английском: субъект, действие, место, камера, свет, цвет.
+3. Не добавляй эффектов, о которых я не просил. Команды, которых нет в справочнике, не выдумывай и скажи мне об этом.
+4. Выдай только готовый промпт в одном блоке, без пояснений, чтобы я мог сразу вставить его во Flow.
+
+Справочник команд: [ВСТАВЬ СЮДА БЛОКИ С КОМАНДАМИ]">Скопировать</button></div><div class="box">Ты помощник, который пишет описания кадров для AI-видео в Google Flow. В моих сообщениях встречаются слэш-команды, например /pushin. Действуй так:
+
+1. Найди каждую команду в моём списке командного справочника ниже и подставь вместо неё описание из справочника, слово в слово или слегка склонённое под сцену.
+2. Собери из моей сцены и подставленных описаний один связный промпт на английском: субъект, действие, место, камера, свет, цвет.
+3. Не добавляй эффектов, о которых я не просил. Команды, которых нет в справочнике, не выдумывай и скажи мне об этом.
+4. Выдай только готовый промпт в одном блоке, без пояснений, чтобы я мог сразу вставить его во Flow.
+
+Справочник команд: [ВСТАВЬ СЮДА БЛОКИ С КОМАНДАМИ]</div><div class="lblrow"><span class="lbl">Формат сообщения</span><button class="copy" data-text="Сцена: [ОПИШИ ГЕРОЯ, ДЕЙСТВИЕ И МЕСТО ОДНИМ ПРЕДЛОЖЕНИЕМ]
+Команды: /pushin /sunsetglow /orangeteal">Скопировать</button></div><div class="box">Сцена: [ОПИШИ ГЕРОЯ, ДЕЙСТВИЕ И МЕСТО ОДНИМ ПРЕДЛОЖЕНИЕМ]
+Команды: /pushin /sunsetglow /orangeteal</div></div>
+<div class="sec"><h2 id="sec-3">4. Камера и движение, команды 1-11</h2><p>11 команд, которые двигают кадр.</p><div class="lblrow"><span class="lbl">Камера и движение, команды 1-11</span><button class="copy" data-text="/filmlook = кадр как из кино. Вставка: cinematic film look, shallow depth of field, natural film grain, anamorphic feel
+/skyview = масштаб сверху. Вставка: high wide aerial view from above the scene, showing the scale of the landscape
+/tightframe = крупные детали. Вставка: tight framing on fine details, extreme close-up of textures
+/vastview = драматичный масштаб. Вставка: dramatic wide establishing shot, tiny subject against an enormous landscape
+/circleshot = облёт героя. Вставка: camera orbits smoothly around the subject in a full circle
+/pushin = нарастает напряжение. Вставка: slow push-in, camera moves from a medium shot to a close-up, rising tension
+/pullback = раскрывает сцену. Вставка: slow pull-back, camera moves away to reveal the whole scene
+/followshot = идёт за движением. Вставка: tracking shot, camera follows behind the subject as they move
+/timestretch = кинематографичное замедление. Вставка: cinematic slow motion, time stretched, every detail of the movement visible
+/fastforward = показывает ход времени. Вставка: time-lapse, fast-forward passing of time, clouds and shadows racing across the scene
+/hypershot = ощущение скорости. Вставка: hyper-fast camera move, strong sense of speed, motion streaks at the edges of the frame">Скопировать</button></div><div class="box">/filmlook = кадр как из кино. Вставка: cinematic film look, shallow depth of field, natural film grain, anamorphic feel
+/skyview = масштаб сверху. Вставка: high wide aerial view from above the scene, showing the scale of the landscape
+/tightframe = крупные детали. Вставка: tight framing on fine details, extreme close-up of textures
+/vastview = драматичный масштаб. Вставка: dramatic wide establishing shot, tiny subject against an enormous landscape
+/circleshot = облёт героя. Вставка: camera orbits smoothly around the subject in a full circle
+/pushin = нарастает напряжение. Вставка: slow push-in, camera moves from a medium shot to a close-up, rising tension
+/pullback = раскрывает сцену. Вставка: slow pull-back, camera moves away to reveal the whole scene
+/followshot = идёт за движением. Вставка: tracking shot, camera follows behind the subject as they move
+/timestretch = кинематографичное замедление. Вставка: cinematic slow motion, time stretched, every detail of the movement visible
+/fastforward = показывает ход времени. Вставка: time-lapse, fast-forward passing of time, clouds and shadows racing across the scene
+/hypershot = ощущение скорости. Вставка: hyper-fast camera move, strong sense of speed, motion streaks at the edges of the frame</div></div>
+<div class="sec"><h2 id="sec-4">5. Ракурсы, команды 12-22</h2><p>Меняй ощущение одним ракурсом.</p><div class="lblrow"><span class="lbl">Ракурсы, команды 12-22</span><button class="copy" data-text="/groundlevel = герой выглядит сильным. Вставка: low angle shot from ground level looking up, the subject appears powerful
+/birdseye = показывает одиночество. Вставка: bird&#x27;s-eye view from high above, the subject looks small and alone
+/straightdown = чистый вид строго сверху. Вставка: top-down shot, camera pointing straight down, clean overhead view
+/firstperson = зритель внутри сцены. Вставка: first-person point of view, the viewer is inside the scene, hands visible in frame
+/secondview = кадр для разговора. Вставка: over-the-shoulder shot suited for a conversation between two people
+/openingshot = задаёт сцену. Вставка: wide establishing shot that sets the location and mood before the action
+/focusswap = переводит внимание. Вставка: rack focus, focus shifts from the foreground object to the subject in the background
+/hheld = естественная дрожь камеры. Вставка: handheld camera with natural subtle shake, documentary feel
+/glidecam = плавное движение. Вставка: smooth gimbal glide, stabilised fluid camera movement
+/liftup = открывает большой мир. Вставка: crane shot, camera rises slowly to reveal the big world around the subject
+/settledown = создаёт близость. Вставка: camera slowly descends toward the subject, creating closeness">Скопировать</button></div><div class="box">/groundlevel = герой выглядит сильным. Вставка: low angle shot from ground level looking up, the subject appears powerful
+/birdseye = показывает одиночество. Вставка: bird&#x27;s-eye view from high above, the subject looks small and alone
+/straightdown = чистый вид строго сверху. Вставка: top-down shot, camera pointing straight down, clean overhead view
+/firstperson = зритель внутри сцены. Вставка: first-person point of view, the viewer is inside the scene, hands visible in frame
+/secondview = кадр для разговора. Вставка: over-the-shoulder shot suited for a conversation between two people
+/openingshot = задаёт сцену. Вставка: wide establishing shot that sets the location and mood before the action
+/focusswap = переводит внимание. Вставка: rack focus, focus shifts from the foreground object to the subject in the background
+/hheld = естественная дрожь камеры. Вставка: handheld camera with natural subtle shake, documentary feel
+/glidecam = плавное движение. Вставка: smooth gimbal glide, stabilised fluid camera movement
+/liftup = открывает большой мир. Вставка: crane shot, camera rises slowly to reveal the big world around the subject
+/settledown = создаёт близость. Вставка: camera slowly descends toward the subject, creating closeness</div></div>
+<div class="sec"><h2 id="sec-5">6. Движение и действие, команды 23-33</h2><p>Оживи сцену.</p><div class="lblrow"><span class="lbl">Движение и действие, команды 23-33</span><button class="copy" data-text="/sprintmode = энергичный бег. Вставка: the subject sprints forward with energy, dynamic movement, tracking camera
+/strollmode = спокойный шаг. Вставка: the subject walks at a calm relaxed pace, gentle tracking shot
+/spinreveal = 360 градусов вокруг предмета. Вставка: camera makes a 360-degree turn around the object, revealing it from every side
+/unveil = эффектное появление. Вставка: dramatic reveal, the subject emerges from darkness or behind an object into the light
+/firstlook = сильный выход. Вставка: strong entrance, the subject steps into frame and looks at the camera
+/lastlook = эмоциональный уход. Вставка: emotional exit, the subject turns and walks away, one last look back
+/timestop = замирает пик момента. Вставка: time freezes at the peak of the moment, suspended in mid-air, everything still
+/speedshift = от быстрого к замедленному. Вставка: speed ramp, fast motion that smoothly changes into slow motion
+/matrixtime = эффект замершей пули. Вставка: bullet-time effect, frozen moment while the camera sweeps around the subject
+/weightless = движение как во сне. Вставка: weightless dreamlike motion, the subject and objects float slowly
+/dropshot = стремительное падение. Вставка: fast falling shot, the camera plunges downward at speed">Скопировать</button></div><div class="box">/sprintmode = энергичный бег. Вставка: the subject sprints forward with energy, dynamic movement, tracking camera
+/strollmode = спокойный шаг. Вставка: the subject walks at a calm relaxed pace, gentle tracking shot
+/spinreveal = 360 градусов вокруг предмета. Вставка: camera makes a 360-degree turn around the object, revealing it from every side
+/unveil = эффектное появление. Вставка: dramatic reveal, the subject emerges from darkness or behind an object into the light
+/firstlook = сильный выход. Вставка: strong entrance, the subject steps into frame and looks at the camera
+/lastlook = эмоциональный уход. Вставка: emotional exit, the subject turns and walks away, one last look back
+/timestop = замирает пик момента. Вставка: time freezes at the peak of the moment, suspended in mid-air, everything still
+/speedshift = от быстрого к замедленному. Вставка: speed ramp, fast motion that smoothly changes into slow motion
+/matrixtime = эффект замершей пули. Вставка: bullet-time effect, frozen moment while the camera sweeps around the subject
+/weightless = движение как во сне. Вставка: weightless dreamlike motion, the subject and objects float slowly
+/dropshot = стремительное падение. Вставка: fast falling shot, the camera plunges downward at speed</div></div>
+<div class="sec"><h2 id="sec-6">7. Свет, команды 34-44</h2><p>Свет меняет всё настроение.</p><div class="lblrow"><span class="lbl">Свет, команды 34-44</span><button class="copy" data-text="/sunsetglow = тёплый золотой час. Вставка: warm golden hour light, low sun, long soft shadows, golden glow
+/duskhour = прохладные сумерки. Вставка: cool blue dusk light, twilight atmosphere, soft cold shadows
+/neonpulse = яркий неон. Вставка: vivid neon lighting, pink and cyan glow, reflections on wet surfaces
+/darkmood = драматичный тёмный свет. Вставка: low-key dramatic lighting, deep shadows, single light source
+/softbox = мягкий студийный свет. Вставка: soft studio lighting, large softbox, even flattering light, gentle shadows
+/edgelight = светящийся контур. Вставка: rim light, a glowing outline around the subject separating it from the background
+/shadowform = мощный силуэт. Вставка: strong silhouette, subject as a dark shape against a bright background
+/spotbeam = направленный луч. Вставка: a single focused spotlight beam on the subject, the rest in darkness
+/lightrays = лучи в воздухе. Вставка: volumetric light rays through haze, visible beams in the air
+/glowbehind = мягкая подсветка сзади. Вставка: soft backlight glow behind the subject, gentle halo of light
+/nightcity = ночной город как в кино. Вставка: night city at its most cinematic, wet streets, neon signs, glowing windows">Скопировать</button></div><div class="box">/sunsetglow = тёплый золотой час. Вставка: warm golden hour light, low sun, long soft shadows, golden glow
+/duskhour = прохладные сумерки. Вставка: cool blue dusk light, twilight atmosphere, soft cold shadows
+/neonpulse = яркий неон. Вставка: vivid neon lighting, pink and cyan glow, reflections on wet surfaces
+/darkmood = драматичный тёмный свет. Вставка: low-key dramatic lighting, deep shadows, single light source
+/softbox = мягкий студийный свет. Вставка: soft studio lighting, large softbox, even flattering light, gentle shadows
+/edgelight = светящийся контур. Вставка: rim light, a glowing outline around the subject separating it from the background
+/shadowform = мощный силуэт. Вставка: strong silhouette, subject as a dark shape against a bright background
+/spotbeam = направленный луч. Вставка: a single focused spotlight beam on the subject, the rest in darkness
+/lightrays = лучи в воздухе. Вставка: volumetric light rays through haze, visible beams in the air
+/glowbehind = мягкая подсветка сзади. Вставка: soft backlight glow behind the subject, gentle halo of light
+/nightcity = ночной город как в кино. Вставка: night city at its most cinematic, wet streets, neon signs, glowing windows</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-7">8. Композиция, команды 45-55</h2><p>Веди взгляд зрителя.</p><div class="lblrow"><span class="lbl">Композиция, команды 45-55</span><button class="copy" data-text="/fullscene = полный контекст. Вставка: wide composition showing the full scene and context around the subject
+/closecrop = акцент на герое. Вставка: tight crop, the frame is filled by the subject, accent on the hero
+/cleanspace = минимум лишнего. Вставка: minimalist composition, lots of clean empty space, nothing extra in frame
+/guidedlines = линии ведут взгляд. Вставка: leading lines converge toward the subject, guiding the eye through the frame
+/thirdgrid = сбалансированный кадр. Вставка: rule of thirds composition, the subject placed on a third line, balanced frame
+/mirrormatch = симметрия. Вставка: perfectly symmetrical composition, centred subject, mirrored left and right
+/frontlayer = добавляет глубину. Вставка: foreground elements in front of the subject to add depth, layered frame
+/innerframe = рамка внутри кадра. Вставка: frame within the frame, the subject seen through a door, window or archway
+/slantline = добавляет энергии. Вставка: dutch angle, tilted horizon, diagonal lines adding energy and unease
+/midpoint = смелый центр. Вставка: bold centred composition, the subject dead centre of the frame
+/emptyroom = тишина в кадре. Вставка: empty room, a lone subject in a quiet still space, silence in the frame">Скопировать</button></div><div class="box">/fullscene = полный контекст. Вставка: wide composition showing the full scene and context around the subject
+/closecrop = акцент на герое. Вставка: tight crop, the frame is filled by the subject, accent on the hero
+/cleanspace = минимум лишнего. Вставка: minimalist composition, lots of clean empty space, nothing extra in frame
+/guidedlines = линии ведут взгляд. Вставка: leading lines converge toward the subject, guiding the eye through the frame
+/thirdgrid = сбалансированный кадр. Вставка: rule of thirds composition, the subject placed on a third line, balanced frame
+/mirrormatch = симметрия. Вставка: perfectly symmetrical composition, centred subject, mirrored left and right
+/frontlayer = добавляет глубину. Вставка: foreground elements in front of the subject to add depth, layered frame
+/innerframe = рамка внутри кадра. Вставка: frame within the frame, the subject seen through a door, window or archway
+/slantline = добавляет энергии. Вставка: dutch angle, tilted horizon, diagonal lines adding energy and unease
+/midpoint = смелый центр. Вставка: bold centred composition, the subject dead centre of the frame
+/emptyroom = тишина в кадре. Вставка: empty room, a lone subject in a quiet still space, silence in the frame</div></div>
+<div class="sec"><h2 id="sec-8">9. Эффекты камеры, команды 56-66</h2><p>Финальный слой картинки.</p><div class="lblrow"><span class="lbl">Эффекты камеры, команды 56-66</span><button class="copy" data-text="/speedblur = показывает скорость. Вставка: motion blur showing speed, streaking background
+/burstzoom = резкий зум. Вставка: sudden crash zoom into the subject
+/softdots = мягкое боке. Вставка: soft circular bokeh, glowing out-of-focus lights in the background
+/sunflare = блик объектива. Вставка: natural anamorphic lens flare from the sun, glowing streak across the frame
+/edgefade = затемнённые края. Вставка: vignette, darkened edges of the frame drawing attention to the centre
+/duotone = двухцветный тон. Вставка: two-colour duotone grade, only two tones, stylised look
+/grayscale = драматичный ч/б. Вставка: dramatic black and white, deep contrast, rich grays
+/spinblur = радиальное размытие. Вставка: radial spinning blur around the subject, sharp centre
+/rainbowsplit = игра призмы. Вставка: prism light leak, rainbow refractions and colour split at the frame edges
+/digitalglitch = цифровые помехи. Вставка: digital glitch effect, RGB split, scan lines, brief signal distortion
+/oldfilm = плёнка как раньше. Вставка: vintage 16mm film, warm faded colours, grain, dust and light scratches">Скопировать</button></div><div class="box">/speedblur = показывает скорость. Вставка: motion blur showing speed, streaking background
+/burstzoom = резкий зум. Вставка: sudden crash zoom into the subject
+/softdots = мягкое боке. Вставка: soft circular bokeh, glowing out-of-focus lights in the background
+/sunflare = блик объектива. Вставка: natural anamorphic lens flare from the sun, glowing streak across the frame
+/edgefade = затемнённые края. Вставка: vignette, darkened edges of the frame drawing attention to the centre
+/duotone = двухцветный тон. Вставка: two-colour duotone grade, only two tones, stylised look
+/grayscale = драматичный ч/б. Вставка: dramatic black and white, deep contrast, rich grays
+/spinblur = радиальное размытие. Вставка: radial spinning blur around the subject, sharp centre
+/rainbowsplit = игра призмы. Вставка: prism light leak, rainbow refractions and colour split at the frame edges
+/digitalglitch = цифровые помехи. Вставка: digital glitch effect, RGB split, scan lines, brief signal distortion
+/oldfilm = плёнка как раньше. Вставка: vintage 16mm film, warm faded colours, grain, dust and light scratches</div></div>
+<div class="sec"><h2 id="sec-9">10. Фокус и глубина, команды 67-77</h2><p>Управляй резкостью.</p><div class="lblrow"><span class="lbl">Фокус и глубина, команды 67-77</span><button class="copy" data-text="/extremeclose = скрытая фактура. Вставка: extreme macro close-up, the hidden texture of the surface fills the frame
+/blurback = размытый фон. Вставка: shallow depth of field, the background heavily blurred, the subject sharp
+/allclear = всё в фокусе. Вставка: deep focus, everything from foreground to background sharp
+/isolatefocus = выделяет героя. Вставка: subject isolated by focus, everything else soft and out of focus
+/gazepoint = фокус на глазах. Вставка: focus locked on the eyes, sharp eyes, soft surroundings
+/coresharp = резкий центр. Вставка: sharp centre of frame with the edges gently softening
+/darkedges = эффект тоннеля. Вставка: tunnel effect, dark vignette closing in around the subject
+/layerstack = несколько планов резкости. Вставка: multiple planes of focus, foreground, middle ground and background each readable
+/dropdetail = мелкие детали. Вставка: fine small details in sharp focus, tiny elements clearly visible
+/precisefocus = точный фокус. Вставка: precise focus on one exact point of the subject, razor-sharp
+/lightshapes = боке своей формы. Вставка: custom-shaped bokeh, out-of-focus lights forming distinct shapes such as hearts or stars">Скопировать</button></div><div class="box">/extremeclose = скрытая фактура. Вставка: extreme macro close-up, the hidden texture of the surface fills the frame
+/blurback = размытый фон. Вставка: shallow depth of field, the background heavily blurred, the subject sharp
+/allclear = всё в фокусе. Вставка: deep focus, everything from foreground to background sharp
+/isolatefocus = выделяет героя. Вставка: subject isolated by focus, everything else soft and out of focus
+/gazepoint = фокус на глазах. Вставка: focus locked on the eyes, sharp eyes, soft surroundings
+/coresharp = резкий центр. Вставка: sharp centre of frame with the edges gently softening
+/darkedges = эффект тоннеля. Вставка: tunnel effect, dark vignette closing in around the subject
+/layerstack = несколько планов резкости. Вставка: multiple planes of focus, foreground, middle ground and background each readable
+/dropdetail = мелкие детали. Вставка: fine small details in sharp focus, tiny elements clearly visible
+/precisefocus = точный фокус. Вставка: precise focus on one exact point of the subject, razor-sharp
+/lightshapes = боке своей формы. Вставка: custom-shaped bokeh, out-of-focus lights forming distinct shapes such as hearts or stars</div></div>
+<div class="sec"><h2 id="sec-10">11. Цвет, команды 78-88</h2><p>Цвет задаёт эмоцию.</p><div class="lblrow"><span class="lbl">Цвет, команды 78-88</span><button class="copy" data-text="/amberlook = тёплый и ностальгичный. Вставка: warm amber colour grade, nostalgic golden tones
+/icylook = чистый и спокойный. Вставка: cool icy colour grade, clean calm blue-white tones
+/highcontrast = смелая киноконтрастность. Вставка: bold cinematic contrast, deep blacks and bright highlights
+/brightbalance = чистая экспозиция. Вставка: clean balanced exposure, natural neutral colours, bright and clear
+/colorpop = живые цвета. Вставка: vibrant saturated colours, colours popping against the background
+/mutedtone = приглушённый арт-тон. Вставка: muted desaturated palette, soft art-house tones
+/gradeflat = выверенный киноцвет. Вставка: carefully graded cinematic colour, flat log-style base with refined tones
+/orangeteal = цвет большого блокбастера. Вставка: orange and teal colour grade, warm skin tones against teal shadows, blockbuster look
+/boldcolor = цепляет внимание. Вставка: bold graphic colour palette, attention-grabbing colour blocking
+/purebw = вечный чёрно-белый. Вставка: timeless black and white, classic film noir contrast
+/neonwash = яркий футуризм. Вставка: neon colour wash over the whole scene, futuristic magenta and cyan glow">Скопировать</button></div><div class="box">/amberlook = тёплый и ностальгичный. Вставка: warm amber colour grade, nostalgic golden tones
+/icylook = чистый и спокойный. Вставка: cool icy colour grade, clean calm blue-white tones
+/highcontrast = смелая киноконтрастность. Вставка: bold cinematic contrast, deep blacks and bright highlights
+/brightbalance = чистая экспозиция. Вставка: clean balanced exposure, natural neutral colours, bright and clear
+/colorpop = живые цвета. Вставка: vibrant saturated colours, colours popping against the background
+/mutedtone = приглушённый арт-тон. Вставка: muted desaturated palette, soft art-house tones
+/gradeflat = выверенный киноцвет. Вставка: carefully graded cinematic colour, flat log-style base with refined tones
+/orangeteal = цвет большого блокбастера. Вставка: orange and teal colour grade, warm skin tones against teal shadows, blockbuster look
+/boldcolor = цепляет внимание. Вставка: bold graphic colour palette, attention-grabbing colour blocking
+/purebw = вечный чёрно-белый. Вставка: timeless black and white, classic film noir contrast
+/neonwash = яркий футуризм. Вставка: neon colour wash over the whole scene, futuristic magenta and cyan glow</div></div>
+<div class="sec"><h2 id="sec-11">12. Портрет и герой, команды 89-99</h2><p>Направь внимание на человека.</p><div class="lblrow"><span class="lbl">Портрет и герой, команды 89-99</span><button class="copy" data-text="/heroportrait = мощный портрет. Вставка: powerful hero portrait, subject centred, confident expression, cinematic lighting
+/glowskin = красиво и естественно. Вставка: natural glowing skin, soft flattering light, realistic skin texture
+/haloedge = отделяет героя от фона. Вставка: soft halo of light around the subject&#x27;s edge separating them from the background
+/softbackdrop = убирает лишнее. Вставка: clean soft backdrop, distractions removed, subject clearly separated
+/crispsubject = реалистичная чёткость. Вставка: realistic crisp sharpness on the subject, fine detail in hair and fabric
+/singletone = вечное настроение портрета. Вставка: monochrome portrait in a single colour tone, moody timeless feeling
+/darkframe = загадочный редакционный вид. Вставка: dark mysterious editorial look, deep shadows, muted colours, magazine style
+/brightframe = чистый коммерческий стиль. Вставка: clean bright commercial style, white background, high-key lighting
+/macroeyes = акцент на глазах. Вставка: macro close-up on the eyes, every detail of the iris visible
+/headtotoe = герой в полный рост. Вставка: full-body shot, the hero shown from head to toe with the surroundings
+/unposed = как в жизни, без постановки. Вставка: candid unposed moment, natural relaxed movement, as if caught in real life">Скопировать</button></div><div class="box">/heroportrait = мощный портрет. Вставка: powerful hero portrait, subject centred, confident expression, cinematic lighting
+/glowskin = красиво и естественно. Вставка: natural glowing skin, soft flattering light, realistic skin texture
+/haloedge = отделяет героя от фона. Вставка: soft halo of light around the subject&#x27;s edge separating them from the background
+/softbackdrop = убирает лишнее. Вставка: clean soft backdrop, distractions removed, subject clearly separated
+/crispsubject = реалистичная чёткость. Вставка: realistic crisp sharpness on the subject, fine detail in hair and fabric
+/singletone = вечное настроение портрета. Вставка: monochrome portrait in a single colour tone, moody timeless feeling
+/darkframe = загадочный редакционный вид. Вставка: dark mysterious editorial look, deep shadows, muted colours, magazine style
+/brightframe = чистый коммерческий стиль. Вставка: clean bright commercial style, white background, high-key lighting
+/macroeyes = акцент на глазах. Вставка: macro close-up on the eyes, every detail of the iris visible
+/headtotoe = герой в полный рост. Вставка: full-body shot, the hero shown from head to toe with the surroundings
+/unposed = как в жизни, без постановки. Вставка: candid unposed moment, natural relaxed movement, as if caught in real life</div></div>
+<div class="sec"><h2 id="sec-12">13. Готовые связки и что делать, если кадр не получился</h2><p>Пять связок, которые дают узнаваемый результат сразу.</p><ul><li>Блокбастер: /pushin /sunsetglow /orangeteal. Наезд, тёплый свет, кино-цвет.</li><li>Драма: /groundlevel /darkmood /highcontrast. Герой снизу, тёмный свет, контраст.</li><li>Ночной город: /followshot /nightcity /neonwash. Камера идёт за героем, неон вокруг.</li><li>Портрет: /heroportrait /softbox /blurback. Герой, мягкий свет, размытый фон.</li><li>Ретро: /hheld /oldfilm /amberlook. Ручная камера, плёнка, тёплый ностальгичный тон.</li></ul><ul><li>Кадр не похож на команду. Вставь фразу целиком и убери остальные команды, оставив одну.</li><li>Две команды дают кашу. Оставь ту, что важнее, вторую вынеси в следующий кадр.</li><li>Герой меняется от кадра к кадру. Слэш-команды это не решают, зафиксируй героя в описании отдельной строкой и повторяй её в каждом кадре.</li><li>Команда даёт эффект слабее, чем ждёшь. Добавь слова «strong» или «very pronounced» перед фразой.</li><li>Не знаешь, какая команда нужна. Опиши сцену и спроси нейросеть с инструкцией из третьего раздела: какие три команды подойдут.</li></ul></div>
+<div class="sec"><h2>Читать дальше в блоге</h2><p>Эту тему я разбираю подробно в статье <a class="lnk" href="https://blog.vladimir-izhmukov.ru/guides/neyroseti-dlya-kontenta-spisok/">рабочий список нейросетей для контента</a>. Там же лежат остальные <a class="lnk" href="https://blog.vladimir-izhmukov.ru/neyroseti/">разборы про нейросети</a>.</p></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">1. Что это и как читать команды</a><a href="#sec-1">2. Как пользоваться за три шага</a><a href="#sec-2">3. Автоматическая раскрутка команд нейросетью</a><a href="#sec-3">4. Камера и движение, команды 1-11</a><a href="#sec-4">5. Ракурсы, команды 12-22</a><a href="#sec-5">6. Движение и действие, команды 23-33</a><a href="#sec-6">7. Свет, команды 34-44</a><a href="#sec-7">8. Композиция, команды 45-55</a><a href="#sec-8">9. Эффекты камеры, команды 56-66</a><a href="#sec-9">10. Фокус и глубина, команды 67-77</a><a href="#sec-10">11. Цвет, команды 78-88</a><a href="#sec-11">12. Портрет и герой, команды 89-99</a><a href="#sec-12">13. Готовые связки и что делать, если кадр не получился</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>

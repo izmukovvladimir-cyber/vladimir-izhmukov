@@ -1,0 +1,584 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>99 команд для ChatGPT: версия для копирования и подключение</title><meta name="description" content="Все 99 слэш-команд для ChatGPT в версии для копирования: определение каждой, три способа подключения, девять комбинаций и шаблон для своих команд. Команды работают как..."><meta property="og:description" content="Все 99 слэш-команд для ChatGPT в версии для копирования: определение каждой, три способа подключения, девять комбинаций и шаблон для своих команд. Команды работают как..."><meta name="twitter:description" content="Все 99 слэш-команд для ChatGPT в версии для копирования: определение каждой, три способа подключения, девять комбинаций и шаблон для своих команд. Команды работают как..."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-shifr/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-shifr/"><meta property="og:title" content="99 команд для ChatGPT: версия для копирования и подключение"><meta name="twitter:title" content="99 команд для ChatGPT: версия для копирования и подключение"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>99 команд для ChatGPT: версия для копирования и подключение</h1>
+<p class="lead">Все 99 слэш-команд для ChatGPT в версии для копирования: определение каждой, три способа подключения, девять комбинаций и шаблон для своих команд. Команды работают как ярлыки, которые ты один раз объясняешь нейросети.</p>
+<p class="meta">Команды придуманы под удобную работу и не являются встроенными функциями ChatGPT. Подключение проверяется тестом из второго раздела за две минуты.</p>
+<div class="how">Начни со второго раздела: подключение и проверка занимают десять минут. Определения команд лежат в разделах с четвёртого по тринадцатый.</div>
+<div class="sec"><h2 id="sec-0">1. Как работают эти команды на самом деле</h2><p>В ChatGPT нет встроенных скрытых команд. Слэш-слово начинает работать ровно тогда, когда ты один раз объяснил ему смысл.</p><p>Команда вроде /brief для нейросети обычное слово. Если сказать ей заранее «под /brief я понимаю ответ не длиннее трёх предложений», то дальше слово запускает это поведение. Ты пишешь одно слово, а она читает готовую инструкцию. Экономится время на длинных описаниях, и ответы становятся ровнее, потому что инструкция каждый раз одна и та же.</p><p>Это же объясняет, почему у двух людей одна и та же команда работает по-разному: определение пишет сам человек. Ниже все 99 команд с определениями, которые я проверил на ясность, и порядок подключения.</p><div class="note">Определения написаны так, чтобы модель выполняла их без домыслов: у каждой указан формат ответа, объём или последовательность. Хочешь другое поведение, замени определение своим.</div></div>
+<div class="sec"><h2 id="sec-1">2. Три способа подключить</h2><p>Выбирай способ по тому, где ты работаешь. Лучше всего работает первый.</p><div class="grid2"><div class="cardb"><h3>Способ 1. Проект и файл commands.md (все 99 команд)</h3><p>Создай проект в ChatGPT или в Claude, загрузи в него файл commands.md со всеми определениями и вставь короткую инструкцию из блока ниже в поле инструкций проекта. Все чаты внутри проекта понимают все 99 команд.</p></div><div class="cardb"><h3>Способ 2. Пользовательские инструкции (десять главных команд)</h3><p>У поля пользовательских инструкций в ChatGPT ограниченная длина, обычно около полутора тысяч знаков, поэтому все 99 туда не помещаются. Вставь короткую версию с десятью командами из блока ниже. Раздел ищи в настройках под названием «Персонализация» или Custom instructions: название иногда меняется.</p></div><div class="cardb"><h3>Способ 3. Вставка в начало чата</h3><p>Открой новый чат, вставь короткую инструкцию и определения нужных команд. Работает в любой нейросети, но в каждом новом чате вставлять придётся заново.</p></div></div><div class="lblrow"><span class="lbl">Короткая инструкция для поля проекта (способ 1)</span><button class="copy" data-text="Я пользуюсь командами-ярлыками. Команда начинается со слэша, например /brief. Действуй так:
+
+1. Если в моём сообщении есть слэш-команда, найди её определение в файле commands.md и выполни задачу так, как оно описано. Всё остальное в сообщении остаётся заданием.
+2. Несколько команд подряд применяй вместе. Если они противоречат друг другу, побеждает та, что стоит последней.
+3. Команды, которой нет в файле, не выдумывай. Скажи, что такой нет, и назови ближайшую по смыслу.
+4. Если для команды не хватает данных, задай один уточняющий вопрос и жди ответа.
+5. Факты называй только те, в которых уверен. Не уверен, скажи об этом прямо.
+6. Пиши по-русски, если я не попросил иначе.">Скопировать</button></div><div class="box">Я пользуюсь командами-ярлыками. Команда начинается со слэша, например /brief. Действуй так:
+
+1. Если в моём сообщении есть слэш-команда, найди её определение в файле commands.md и выполни задачу так, как оно описано. Всё остальное в сообщении остаётся заданием.
+2. Несколько команд подряд применяй вместе. Если они противоречат друг другу, побеждает та, что стоит последней.
+3. Команды, которой нет в файле, не выдумывай. Скажи, что такой нет, и назови ближайшую по смыслу.
+4. Если для команды не хватает данных, задай один уточняющий вопрос и жди ответа.
+5. Факты называй только те, в которых уверен. Не уверен, скажи об этом прямо.
+6. Пиши по-русски, если я не попросил иначе.</div><div class="lblrow"><span class="lbl">Короткая версия на десять команд (способ 2)</span><button class="copy" data-text="Команды-ярлыки. Слэш-команда в сообщении задаёт режим ответа:
+/brief: не длиннее трёх предложений, без вступления
+/human: живая речь, без канцелярита и штампов
+/expert: как практик, с нюансами и типичными ошибками
+/critic: только слабые места и исправления, без похвалы
+/stepbystep: нумерованные шаги с проверкой каждого
+/eli5: объясни как пятилетнему, до пяти предложений
+/concise: сократи на треть без потери смысла
+/checklist: чек-лист в порядке выполнения
+/table: ответ таблицей
+/factcheck: отдели факты от утверждений
+Несколько команд применяй вместе, при конфликте побеждает последняя. Неизвестную команду не выдумывай.">Скопировать</button></div><div class="box">Команды-ярлыки. Слэш-команда в сообщении задаёт режим ответа:
+/brief: не длиннее трёх предложений, без вступления
+/human: живая речь, без канцелярита и штампов
+/expert: как практик, с нюансами и типичными ошибками
+/critic: только слабые места и исправления, без похвалы
+/stepbystep: нумерованные шаги с проверкой каждого
+/eli5: объясни как пятилетнему, до пяти предложений
+/concise: сократи на треть без потери смысла
+/checklist: чек-лист в порядке выполнения
+/table: ответ таблицей
+/factcheck: отдели факты от утверждений
+Несколько команд применяй вместе, при конфликте побеждает последняя. Неизвестную команду не выдумывай.</div><ol><li>Создай текстовый файл commands.md и вставь в него определения из разделов с четвёртого по тринадцатый: каждый блок скопируй целиком.</li><li>Загрузи файл в проект и вставь инструкцию из блока «Короткая инструкция для поля проекта».</li><li>Проверь подключение в новом чате: напиши «/brief почему небо голубое». Ответ должен уложиться в три предложения.</li><li>Напиши «/eli5 что такое инфляция». Ответ на пять предложений говорит о том, что второй файл читается.</li></ol></div>
+<div class="sec"><h2 id="sec-2">3. Как комбинировать команды</h2><p>Одна команда даёт режим. Две-три в одном сообщении дают точный результат.</p><ul><li>Совет от эксперта коротко: /expert /brief про [ТЕМА].</li><li>Проверь свой текст жёстко: /critic /stepbystep [ТЕКСТ]. Получишь слабые места и порядок правок.</li><li>Продающий текст без воды: /copywriter /concise /human про [ПРОДУКТ].</li><li>Идеи и сразу отбор: /brainstorm /matrix [ЗАДАЧА].</li><li>Разбор чужой идеи: /assumptions /risks /devilsadvocate [ИДЕЯ].</li><li>Готовый ролик за один заход: /reels /script /hook про [ТЕМА].</li><li>Разбор рынка: /audience /competitor /market для [НИША].</li><li>Тренировка переговоров: /negotiate затем /roleplay, ты играешь клиента.</li><li>Данные в порядок: /analyst /table /json [ДАННЫЕ].</li></ul><div class="note">Порядок имеет значение. Команды-режимы вроде /brief и /human ставь в начало, команды-задачи вроде /copywriter в середину. При конфликте, например /brief и /detailed вместе, побеждает последняя.</div></div>
+<div class="sec"><h2 id="sec-3">4. Команды: роли и уровень ответа</h2><p>Команды 1-10. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Роли и уровень ответа, команды 1-10</span><button class="copy" data-text="/human = пиши как живой человек: разговорные обороты, разная длина фраз, конкретные примеры, без канцелярита, без штампов вроде «в современном мире» и «стоит отметить»
+/expert = отвечай как практик с многолетним опытом в теме: точные термины с короткими пояснениями, типичные ошибки новичков, нюансы, которых нет в популярных статьях
+/ceo = смотри глазами основателя бизнеса: деньги, время, риск и приоритеты; в конце назови решение, которое принял бы ты, и одно, чем пожертвовал бы
+/viral = предложи десять идей, которыми хочется делиться: для каждой назови эмоцию, которую она вызывает, и причину, почему человек перешлёт её другу
+/seo = оптимизируй текст под поиск: главный запрос в заголовке и первом абзаце, 5-8 сопутствующих запросов в подзаголовках, короткий мета-описание до 160 знаков, вопросы для блока FAQ
+/critic = найди слабые места: логические дыры, непроверенные утверждения, места, где читатель заскучает; к каждому дай исправление, хвалить не нужно
+/teacher = объясни ясно и просто, как хороший учитель: от знакомого к новому, один пример на идею, в конце два вопроса на проверку понимания
+/eli5 = объясни так, чтобы понял пятилетний: короткие слова, одна бытовая аналогия, не больше пяти предложений
+/brief = ответ не длиннее трёх предложений, без вступления и заключения
+/strategy = составь стратегический план на 6-12 месяцев: цель, три приоритета, этапы по кварталам, метрики для каждого этапа, главные риски и как их снять">Скопировать</button></div><div class="box">/human = пиши как живой человек: разговорные обороты, разная длина фраз, конкретные примеры, без канцелярита, без штампов вроде «в современном мире» и «стоит отметить»
+/expert = отвечай как практик с многолетним опытом в теме: точные термины с короткими пояснениями, типичные ошибки новичков, нюансы, которых нет в популярных статьях
+/ceo = смотри глазами основателя бизнеса: деньги, время, риск и приоритеты; в конце назови решение, которое принял бы ты, и одно, чем пожертвовал бы
+/viral = предложи десять идей, которыми хочется делиться: для каждой назови эмоцию, которую она вызывает, и причину, почему человек перешлёт её другу
+/seo = оптимизируй текст под поиск: главный запрос в заголовке и первом абзаце, 5-8 сопутствующих запросов в подзаголовках, короткий мета-описание до 160 знаков, вопросы для блока FAQ
+/critic = найди слабые места: логические дыры, непроверенные утверждения, места, где читатель заскучает; к каждому дай исправление, хвалить не нужно
+/teacher = объясни ясно и просто, как хороший учитель: от знакомого к новому, один пример на идею, в конце два вопроса на проверку понимания
+/eli5 = объясни так, чтобы понял пятилетний: короткие слова, одна бытовая аналогия, не больше пяти предложений
+/brief = ответ не длиннее трёх предложений, без вступления и заключения
+/strategy = составь стратегический план на 6-12 месяцев: цель, три приоритета, этапы по кварталам, метрики для каждого этапа, главные риски и как их снять</div></div>
+<div class="sec"><h2 id="sec-4">5. Команды: тексты и продажи</h2><p>Команды 11-20. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Тексты и продажи, команды 11-20</span><button class="copy" data-text="/copywriter = напиши продающий текст: заголовок, первая строка про боль читателя, выгоды вместо характеристик, один призыв в конце; три варианта заголовка на выбор
+/research = режим глубокого исследования: разбей вопрос на подвопросы, по каждому дай найденное и уровень уверенности, отдельно отметь, что спорно и что нельзя проверить без источников
+/brainstorm = накидай 15 идей без самоцензуры, от очевидных до безумных, потом отметь три самые сильные и объясни, чем они выделяются
+/promptengineer = улучши мой промпт: перепиши его с ролью, контекстом, задачей, форматом ответа и ограничениями; покажи итоговый промпт и список того, что ты добавил
+/summarize = выдели главное: пять пунктов по одному предложению, затем одна строка «итог»; фактов, которых нет в исходнике, не добавляй
+/simplify = разложи сложное на простое: разбей на 3-5 частей, каждую объясни одним предложением без терминов, термины вынеси в конец со значением
+/detailed = дай полное объяснение: определения, причины, механизм, примеры, исключения, что читать дальше; структура с подзаголовками
+/stepbystep = объясни по шагам: пронумерованный список, на каждом шаге что сделать и как проверить, что шаг выполнен
+/examples = приведи пять примеров из жизни разных областей, каждый в 2-3 предложения: ситуация, что сделали, что получилось
+/analyst = проанализируй данные: сначала что видно в цифрах, затем закономерности и выбросы, потом три вывода и что стоит проверить дополнительно; ничего не выдумывай">Скопировать</button></div><div class="box">/copywriter = напиши продающий текст: заголовок, первая строка про боль читателя, выгоды вместо характеристик, один призыв в конце; три варианта заголовка на выбор
+/research = режим глубокого исследования: разбей вопрос на подвопросы, по каждому дай найденное и уровень уверенности, отдельно отметь, что спорно и что нельзя проверить без источников
+/brainstorm = накидай 15 идей без самоцензуры, от очевидных до безумных, потом отметь три самые сильные и объясни, чем они выделяются
+/promptengineer = улучши мой промпт: перепиши его с ролью, контекстом, задачей, форматом ответа и ограничениями; покажи итоговый промпт и список того, что ты добавил
+/summarize = выдели главное: пять пунктов по одному предложению, затем одна строка «итог»; фактов, которых нет в исходнике, не добавляй
+/simplify = разложи сложное на простое: разбей на 3-5 частей, каждую объясни одним предложением без терминов, термины вынеси в конец со значением
+/detailed = дай полное объяснение: определения, причины, механизм, примеры, исключения, что читать дальше; структура с подзаголовками
+/stepbystep = объясни по шагам: пронумерованный список, на каждом шаге что сделать и как проверить, что шаг выполнен
+/examples = приведи пять примеров из жизни разных областей, каждый в 2-3 предложения: ситуация, что сделали, что получилось
+/analyst = проанализируй данные: сначала что видно в цифрах, затем закономерности и выбросы, потом три вывода и что стоит проверить дополнительно; ничего не выдумывай</div></div>
+<div class="sec"><h2 id="sec-5">6. Команды: анализ и решения</h2><p>Команды 21-30. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Анализ и решения, команды 21-30</span><button class="copy" data-text="/compare = сравни варианты по критериям, которые важны для моей задачи; сначала предложи критерии, затем сравни и назови победителя для моего случая
+/proscons = покажи плюсы и минусы двумя колонками, по 5 пунктов, затем условия, при которых плюсы перевешивают
+/debate = покажи обе стороны спора: сильнейшие аргументы каждой в её лучшей форме, где стороны сходятся, что решает исход
+/timeline = составь пошаговый график: даты или недели, что делается, кто отвечает, что считается результатом этапа
+/pitch = собери убедительный питч на 60 секунд: проблема, решение, почему сейчас, почему мы, чего просим; в конце три вопроса, которые зададут слушатели, с ответами
+/negotiate = подготовь тезисы для переговоров: моя цель и минимум, интересы другой стороны, три аргумента, две уступки, которые можно сделать, точка ухода
+/objection = отработай возражения: десять самых вероятных возражений клиента, к каждому короткий ответ и уточняющий вопрос
+/faq = составь частые вопросы: десять вопросов так, как их задаёт человек, с ответами по 2-3 предложения
+/glossary = объясни термины просто: каждый термин в одну строку без других терминов в определении, затем пример использования
+/outline = построй структуру: разделы и подразделы с одной строкой о содержимом каждого, порядок от общего к частному">Скопировать</button></div><div class="box">/compare = сравни варианты по критериям, которые важны для моей задачи; сначала предложи критерии, затем сравни и назови победителя для моего случая
+/proscons = покажи плюсы и минусы двумя колонками, по 5 пунктов, затем условия, при которых плюсы перевешивают
+/debate = покажи обе стороны спора: сильнейшие аргументы каждой в её лучшей форме, где стороны сходятся, что решает исход
+/timeline = составь пошаговый график: даты или недели, что делается, кто отвечает, что считается результатом этапа
+/pitch = собери убедительный питч на 60 секунд: проблема, решение, почему сейчас, почему мы, чего просим; в конце три вопроса, которые зададут слушатели, с ответами
+/negotiate = подготовь тезисы для переговоров: моя цель и минимум, интересы другой стороны, три аргумента, две уступки, которые можно сделать, точка ухода
+/objection = отработай возражения: десять самых вероятных возражений клиента, к каждому короткий ответ и уточняющий вопрос
+/faq = составь частые вопросы: десять вопросов так, как их задаёт человек, с ответами по 2-3 предложения
+/glossary = объясни термины просто: каждый термин в одну строку без других терминов в определении, затем пример использования
+/outline = построй структуру: разделы и подразделы с одной строкой о содержимом каждого, порядок от общего к частному</div></div>
+<div class="sec"><h2 id="sec-6">7. Команды: планы, обучение, карьера</h2><p>Команды 31-40. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Планы, обучение, карьера, команды 31-40</span><button class="copy" data-text="/plan = составь план действий: шаги в порядке выполнения, у каждого срок, ресурс и признак готовности
+/goals = разбей цели на шаги: цель, промежуточные результаты по месяцам, действия на ближайшие семь дней
+/habits = собери привычку по шагам: триггер, минимальное действие на две минуты, награда, план на первые три недели, что делать при срыве
+/flashcards = сделай карточки для запоминания: вопрос на одной стороне, ответ на другой, 15 карточек, формат «В: ... / О: ...»
+/interview = подготовь к собеседованию: десять вероятных вопросов для этой роли, по каждому структура ответа и одна типичная ошибка
+/resume = улучши резюме: перепиши каждый пункт опыта в формате «действие, результат, число», убери общие фразы, покажи что добавить
+/career = подскажи карьерное направление: три варианта с обоснованием по моим навыкам и интересам, первый шаг по каждому, что проверить за неделю
+/mentor = отвечай как наставник: сначала задай два вопроса, чтобы понять мою ситуацию, потом дай совет с опорой на мои ответы
+/coach = веди по шагам: задавай по одному вопросу, жди ответа, следующий вопрос строй на моём ответе, в конце подведи итог и назови действие
+/consultant = дай рекомендации консультанта: диагноз, три варианта решения с ценой и рисками, рекомендованный вариант, план внедрения на две недели">Скопировать</button></div><div class="box">/plan = составь план действий: шаги в порядке выполнения, у каждого срок, ресурс и признак готовности
+/goals = разбей цели на шаги: цель, промежуточные результаты по месяцам, действия на ближайшие семь дней
+/habits = собери привычку по шагам: триггер, минимальное действие на две минуты, награда, план на первые три недели, что делать при срыве
+/flashcards = сделай карточки для запоминания: вопрос на одной стороне, ответ на другой, 15 карточек, формат «В: ... / О: ...»
+/interview = подготовь к собеседованию: десять вероятных вопросов для этой роли, по каждому структура ответа и одна типичная ошибка
+/resume = улучши резюме: перепиши каждый пункт опыта в формате «действие, результат, число», убери общие фразы, покажи что добавить
+/career = подскажи карьерное направление: три варианта с обоснованием по моим навыкам и интересам, первый шаг по каждому, что проверить за неделю
+/mentor = отвечай как наставник: сначала задай два вопроса, чтобы понять мою ситуацию, потом дай совет с опорой на мои ответы
+/coach = веди по шагам: задавай по одному вопросу, жди ответа, следующий вопрос строй на моём ответе, в конце подведи итог и назови действие
+/consultant = дай рекомендации консультанта: диагноз, три варианта решения с ценой и рисками, рекомендованный вариант, план внедрения на две недели</div></div>
+<div class="sec"><h2 id="sec-7">8. Команды: редактура и тон</h2><p>Команды 41-50. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Редактура и тон, команды 41-50</span><button class="copy" data-text="/editor = улучши ясность и качество: покажи исправленный текст и список правок с причинами; смысл и голос автора не меняй
+/proofread = найди ошибки: орфография, пунктуация, согласование, повторы; выведи список «было, стало» без переписывания стиля
+/rewrite = перепиши лучше: сохрани смысл, улучши структуру и ритм, убери лишнее; дай один вариант и одну строку о том, что изменилось
+/professional = сделай текст деловым: нейтральный вежливый тон, без сленга и эмоций, чёткая структура, конкретные формулировки
+/casual = разговорный тон: как пишут знакомому, простые слова, допустимы короткие фразы и вводные слова, без канцелярита
+/friendly = тёплый дружелюбный тон: обращение на «ты» или «вы» по моему выбору, забота о читателе, без фамильярности
+/persuasive = сделай убедительнее: усили аргументы, добавь конкретику и пример, убери оговорки, закончи одним ясным призывом
+/concise = убери лишние слова: сократи текст на треть без потери смысла, сохрани все факты, покажи результат
+/polish = доведи до финала: проверь ритм, повторы, слова-паразиты и переходы между частями, верни готовую версию
+/tone = настрой тон текста: сначала определи текущий тон, затем перепиши в тоне, который я назову, с двумя вариантами интенсивности">Скопировать</button></div><div class="box">/editor = улучши ясность и качество: покажи исправленный текст и список правок с причинами; смысл и голос автора не меняй
+/proofread = найди ошибки: орфография, пунктуация, согласование, повторы; выведи список «было, стало» без переписывания стиля
+/rewrite = перепиши лучше: сохрани смысл, улучши структуру и ритм, убери лишнее; дай один вариант и одну строку о том, что изменилось
+/professional = сделай текст деловым: нейтральный вежливый тон, без сленга и эмоций, чёткая структура, конкретные формулировки
+/casual = разговорный тон: как пишут знакомому, простые слова, допустимы короткие фразы и вводные слова, без канцелярита
+/friendly = тёплый дружелюбный тон: обращение на «ты» или «вы» по моему выбору, забота о читателе, без фамильярности
+/persuasive = сделай убедительнее: усили аргументы, добавь конкретику и пример, убери оговорки, закончи одним ясным призывом
+/concise = убери лишние слова: сократи текст на треть без потери смысла, сохрани все факты, покажи результат
+/polish = доведи до финала: проверь ритм, повторы, слова-паразиты и переходы между частями, верни готовую версию
+/tone = настрой тон текста: сначала определи текущий тон, затем перепиши в тоне, который я назову, с двумя вариантами интенсивности</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-8">9. Команды: контент для площадок</h2><p>Команды 51-60. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Контент для площадок, команды 51-60</span><button class="copy" data-text="/storyteller = преврати факты в историю: герой, проблема, поворот, результат; факты не меняй и не добавляй, меняй только подачу
+/hook = придумай цепляющее начало: десять вариантов первой фразы до 12 слов, каждый бьёт в одну причину прочитать дальше; отметь лучшие три
+/headline = придумай заголовок: десять вариантов до 60 знаков, разные приёмы: цифра, вопрос, обещание, интрига; отметь лучшие три
+/caption = напиши подпись для соцсетей: первая строка-хук, 2-4 строки пользы, призыв одним действием, 3-5 хештегов по теме
+/linkedin = напиши пост для LinkedIn: первая строка-хук, короткие абзацы, личный опыт, вывод, вопрос к читателям в конце; до 1300 знаков
+/instagram = создай контент для Instagram: идея поста или карусели, текст по слайдам, подпись, призыв, 5 хештегов
+/youtube = создай контент для YouTube: три названия, описание с ключевыми словами, структура ролика по минутам, идея обложки
+/reels = придумай идеи коротких видео: десять идей, у каждой хук на 3 секунды, что показать, чем закончить
+/script = напиши сценарий видео: хук, подводка, суть, итог, призыв; в двух колонках «говорит человек» и «видит зритель», с таймкодами
+/email = напиши действенное письмо: тема до 50 знаков, первая строка о пользе для получателя, одна просьба, подпись; до 120 слов">Скопировать</button></div><div class="box">/storyteller = преврати факты в историю: герой, проблема, поворот, результат; факты не меняй и не добавляй, меняй только подачу
+/hook = придумай цепляющее начало: десять вариантов первой фразы до 12 слов, каждый бьёт в одну причину прочитать дальше; отметь лучшие три
+/headline = придумай заголовок: десять вариантов до 60 знаков, разные приёмы: цифра, вопрос, обещание, интрига; отметь лучшие три
+/caption = напиши подпись для соцсетей: первая строка-хук, 2-4 строки пользы, призыв одним действием, 3-5 хештегов по теме
+/linkedin = напиши пост для LinkedIn: первая строка-хук, короткие абзацы, личный опыт, вывод, вопрос к читателям в конце; до 1300 знаков
+/instagram = создай контент для Instagram: идея поста или карусели, текст по слайдам, подпись, призыв, 5 хештегов
+/youtube = создай контент для YouTube: три названия, описание с ключевыми словами, структура ролика по минутам, идея обложки
+/reels = придумай идеи коротких видео: десять идей, у каждой хук на 3 секунды, что показать, чем закончить
+/script = напиши сценарий видео: хук, подводка, суть, итог, призыв; в двух колонках «говорит человек» и «видит зритель», с таймкодами
+/email = напиши действенное письмо: тема до 50 знаков, первая строка о пользе для получателя, одна просьба, подпись; до 120 слов</div></div>
+<div class="sec"><h2 id="sec-9">10. Команды: продажи, бренд, рынок</h2><p>Команды 61-70. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Продажи, бренд, рынок, команды 61-70</span><button class="copy" data-text="/sales = напиши продающее сообщение: боль клиента, решение, доказательство, следующий шаг; до 100 слов, без давления
+/offer = составь сильный оффер: кому, какой результат, за какой срок, что входит, чем рискует клиент, почему стоит дороже или дешевле альтернатив; варианты формулировок
+/brand = собери сообщения бренда: миссия одной фразой, три ключевых сообщения, тон общения, слова, которыми пользуемся, и слова, которых избегаем
+/customer = посмотри глазами клиента: что он видит, о чём думает, чего боится, какие сомнения возникают на каждом шаге; в конце три места, где его теряем
+/audience = разбери целевую аудиторию: кто они, ситуации использования, боли, желания, возражения, где их найти; приведи три реальных фразы, которыми они описывают проблему
+/competitor = разбери конкурентов: что предлагают, как позиционируются, сильные и слабые стороны, незанятое место на рынке; данные, которых нет, помечай «нужно проверить»
+/market = оцени возможности рынка: кто платит, за что, сколько примерно, куда рынок движется, барьеры входа; оценки помечай как оценки
+/startup = думай как стратег стартапа: главная гипотеза, самый дешёвый способ её проверить, метрика успеха, порог отказа, что делать после результата
+/business = развей бизнес-идею: для кого, какая боль, как зарабатывает, первые десять клиентов, что нужно на старте, главный риск
+/pricing = построй стратегию цен: три варианта модели, ориентир по рынку, цена для каждого сегмента, как проверить цену на первых клиентах">Скопировать</button></div><div class="box">/sales = напиши продающее сообщение: боль клиента, решение, доказательство, следующий шаг; до 100 слов, без давления
+/offer = составь сильный оффер: кому, какой результат, за какой срок, что входит, чем рискует клиент, почему стоит дороже или дешевле альтернатив; варианты формулировок
+/brand = собери сообщения бренда: миссия одной фразой, три ключевых сообщения, тон общения, слова, которыми пользуемся, и слова, которых избегаем
+/customer = посмотри глазами клиента: что он видит, о чём думает, чего боится, какие сомнения возникают на каждом шаге; в конце три места, где его теряем
+/audience = разбери целевую аудиторию: кто они, ситуации использования, боли, желания, возражения, где их найти; приведи три реальных фразы, которыми они описывают проблему
+/competitor = разбери конкурентов: что предлагают, как позиционируются, сильные и слабые стороны, незанятое место на рынке; данные, которых нет, помечай «нужно проверить»
+/market = оцени возможности рынка: кто платит, за что, сколько примерно, куда рынок движется, барьеры входа; оценки помечай как оценки
+/startup = думай как стратег стартапа: главная гипотеза, самый дешёвый способ её проверить, метрика успеха, порог отказа, что делать после результата
+/business = развей бизнес-идею: для кого, какая боль, как зарабатывает, первые десять клиентов, что нужно на старте, главный риск
+/pricing = построй стратегию цен: три варианта модели, ориентир по рынку, цена для каждого сегмента, как проверить цену на первых клиентах</div></div>
+<div class="sec"><h2 id="sec-10">11. Команды: воронки, рост, контент-план</h2><p>Команды 71-80. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Воронки, рост, контент-план, команды 71-80</span><button class="copy" data-text="/funnel = собери воронку: этапы от первого касания до покупки, действие человека на каждом этапе, сообщение бота или письмо, метрика перехода
+/growth = найди точки роста: пять гипотез по влиянию и простоте проверки, отсортируй, первую расписать на неделю эксперимента
+/content = составь контент-стратегию: цель, аудитория, рубрики, форматы, частота, метрики, что делать при просадке
+/calendar = составь контент-план: таблица на 4 недели, дата, площадка, формат, тема, цель, призыв
+/ideas = дай свежие идеи: двадцать, сгруппированные по трём подходам, без повторов и общих фраз
+/creative = подумай нестандартно: возьми задачу и предложи пять решений из других областей, каждое с описанием, как применить
+/unpopular = оспорь привычные идеи: назови три общепринятых утверждения по теме, для каждого объясни, когда оно неверно, с примером
+/devilsadvocate = возрази и поспорь: соберись против моей позиции и приведи самые сильные возражения, потом скажи, какие из них стоит учесть
+/contrarian = покажи другие точки зрения: три взгляда, отличающихся от моего, каждый в лучшей своей форме, и что каждый предлагает делать
+/assumptions = найди скрытые допущения: список того, что должно быть правдой, чтобы мой план сработал, и как проверить каждое">Скопировать</button></div><div class="box">/funnel = собери воронку: этапы от первого касания до покупки, действие человека на каждом этапе, сообщение бота или письмо, метрика перехода
+/growth = найди точки роста: пять гипотез по влиянию и простоте проверки, отсортируй, первую расписать на неделю эксперимента
+/content = составь контент-стратегию: цель, аудитория, рубрики, форматы, частота, метрики, что делать при просадке
+/calendar = составь контент-план: таблица на 4 недели, дата, площадка, формат, тема, цель, призыв
+/ideas = дай свежие идеи: двадцать, сгруппированные по трём подходам, без повторов и общих фраз
+/creative = подумай нестандартно: возьми задачу и предложи пять решений из других областей, каждое с описанием, как применить
+/unpopular = оспорь привычные идеи: назови три общепринятых утверждения по теме, для каждого объясни, когда оно неверно, с примером
+/devilsadvocate = возрази и поспорь: соберись против моей позиции и приведи самые сильные возражения, потом скажи, какие из них стоит учесть
+/contrarian = покажи другие точки зрения: три взгляда, отличающихся от моего, каждый в лучшей своей форме, и что каждый предлагает делать
+/assumptions = найди скрытые допущения: список того, что должно быть правдой, чтобы мой план сработал, и как проверить каждое</div></div>
+<div class="sec"><h2 id="sec-11">12. Команды: проверка, причины, решения</h2><p>Команды 81-90. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Проверка, причины, решения, команды 81-90</span><button class="copy" data-text="/risks = найди возможные риски: десять рисков, для каждого вероятность, ущерб, ранний признак и что сделать заранее
+/factcheck = отдели факты от утверждений: разбери текст по предложениям, пометь «факт, можно проверить», «мнение» или «утверждение без опоры», к каждому факту скажи, где искать подтверждение
+/verify = покажи, что нужно проверить: список утверждений в моём тексте, которые могут оказаться неверными, и как проверить каждое
+/logic = проверь рассуждения: выпиши цепочку посылок и выводов, найди места, где вывод не следует из посылки, предложи исправление
+/rootcause = найди первопричину: пять раз спроси «почему» по цепочке и остановись на причине, на которую можно повлиять; назови действие
+/debug = найди проблему и исправь: воспроизведи ошибку по описанию, назови причину, дай исправленную версию и способ проверки
+/solution = предложи рабочие решения: три решения от простого к сложному, для каждого что нужно, сколько времени и что может сломаться
+/alternative = предложи варианты лучше: пять альтернатив моему подходу, чем каждая выигрывает и чем проигрывает
+/optimize = улучши текущий подход: найди три самых больших потери времени или качества и предложи изменение для каждой
+/automate = найди, что автоматизировать: разбей мой процесс на шаги, отметь повторяющиеся, предложи для каждого способ автоматизации и оценку сэкономленного времени">Скопировать</button></div><div class="box">/risks = найди возможные риски: десять рисков, для каждого вероятность, ущерб, ранний признак и что сделать заранее
+/factcheck = отдели факты от утверждений: разбери текст по предложениям, пометь «факт, можно проверить», «мнение» или «утверждение без опоры», к каждому факту скажи, где искать подтверждение
+/verify = покажи, что нужно проверить: список утверждений в моём тексте, которые могут оказаться неверными, и как проверить каждое
+/logic = проверь рассуждения: выпиши цепочку посылок и выводов, найди места, где вывод не следует из посылки, предложи исправление
+/rootcause = найди первопричину: пять раз спроси «почему» по цепочке и остановись на причине, на которую можно повлиять; назови действие
+/debug = найди проблему и исправь: воспроизведи ошибку по описанию, назови причину, дай исправленную версию и способ проверки
+/solution = предложи рабочие решения: три решения от простого к сложному, для каждого что нужно, сколько времени и что может сломаться
+/alternative = предложи варианты лучше: пять альтернатив моему подходу, чем каждая выигрывает и чем проигрывает
+/optimize = улучши текущий подход: найди три самых больших потери времени или качества и предложи изменение для каждой
+/automate = найди, что автоматизировать: разбей мой процесс на шаги, отметь повторяющиеся, предложи для каждого способ автоматизации и оценку сэкономленного времени</div></div>
+<div class="sec"><h2 id="sec-12">13. Команды: форматы ответа</h2><p>Команды 91-99. Скопируй блок целиком в файл commands.md.</p><div class="lblrow"><span class="lbl">Форматы ответа, команды 91-99</span><button class="copy" data-text="/template = сделай шаблон для повторов: универсальная форма с полями в квадратных скобках и пример заполнения
+/checklist = составь чек-лист: пункты в порядке выполнения, у каждого одна проверяемая формулировка, в конце пункт «готово, когда»
+/framework = собери структуру: название подхода, 3-5 элементов, зачем каждый, как применять на примере
+/matrix = сравни варианты в матрице: строки это варианты, столбцы критерии с весами, оценки от 1 до 5, итоговая сумма; вывод одной строкой
+/table = оформи в таблицу: подбери столбцы под данные, сохрани все значения, сверху одна строка о том, что показывает таблица
+/json = ответь в формате JSON: только валидный JSON без пояснений и комментариев, поля названы понятно, значения соответствуют типам
+/roleplay = разыграй реальную ситуацию: ты играешь [РОЛЬ] и ведёшь диалог со мной по одной реплике, после каждой моей реплики отвечай в роли, в конце разбор моих ошибок
+/reverse = иди от результата назад: опиши желаемый итог, затем шаги в обратном порядке, что должно быть сделано непосредственно перед каждым
+/ultimate = дай самый полный ответ: разбери тему со всех сторон, определения, механизм, примеры, спорные места, практический вывод; структура с подзаголовками">Скопировать</button></div><div class="box">/template = сделай шаблон для повторов: универсальная форма с полями в квадратных скобках и пример заполнения
+/checklist = составь чек-лист: пункты в порядке выполнения, у каждого одна проверяемая формулировка, в конце пункт «готово, когда»
+/framework = собери структуру: название подхода, 3-5 элементов, зачем каждый, как применять на примере
+/matrix = сравни варианты в матрице: строки это варианты, столбцы критерии с весами, оценки от 1 до 5, итоговая сумма; вывод одной строкой
+/table = оформи в таблицу: подбери столбцы под данные, сохрани все значения, сверху одна строка о том, что показывает таблица
+/json = ответь в формате JSON: только валидный JSON без пояснений и комментариев, поля названы понятно, значения соответствуют типам
+/roleplay = разыграй реальную ситуацию: ты играешь [РОЛЬ] и ведёшь диалог со мной по одной реплике, после каждой моей реплики отвечай в роли, в конце разбор моих ошибок
+/reverse = иди от результата назад: опиши желаемый итог, затем шаги в обратном порядке, что должно быть сделано непосредственно перед каждым
+/ultimate = дай самый полный ответ: разбери тему со всех сторон, определения, механизм, примеры, спорные места, практический вывод; структура с подзаголовками</div></div>
+<div class="sec"><h2 id="sec-13">14. Как добавить свою команду и что делать, когда команда не сработала</h2><p>Через месяц у тебя появятся свои ярлыки под повторяющиеся задачи, и работа станет заметно быстрее.</p><div class="lblrow"><span class="lbl">Шаблон своей команды</span><button class="copy" data-text="/[ИМЯ] = [ОДНО ПРЕДЛОЖЕНИЕ: КАК ОТВЕЧАТЬ, В КАКОМ ФОРМАТЕ, ЧЕГО НЕ ДЕЛАТЬ]
+
+Пример:
+/подписи = напиши подпись для поста: первая строка-хук до 8 слов, три строки пользы, призыв одним действием, без эмодзи и без хештегов">Скопировать</button></div><div class="box">/[ИМЯ] = [ОДНО ПРЕДЛОЖЕНИЕ: КАК ОТВЕЧАТЬ, В КАКОМ ФОРМАТЕ, ЧЕГО НЕ ДЕЛАТЬ]
+
+Пример:
+/подписи = напиши подпись для поста: первая строка-хук до 8 слов, три строки пользы, призыв одним действием, без эмодзи и без хештегов</div><ul><li>Команда не сработала. Открой файл commands.md и проверь, что определение стоит на своём месте и не обрезано.</li><li>Ответ получился длиннее или короче заданного. Уточни определение: добавь число предложений или слов и слово «строго».</li><li>Две команды спорят. Оставь одну или напиши в определении, какая из них важнее.</li><li>Нейросеть выдумывает команду. Проверь правило «неизвестную команду не выдумывай» в инструкции проекта.</li><li>Новый чат не знает команд. Ты вне проекта: открой чат внутри проекта.</li></ul><div class="note">Команды экономят время и выравнивают качество. Знаний модели они не добавляют: чего она не знает, того не узнает и по слэш-команде. Для фактов и цифр требуй источники.</div></div>
+<div class="sec"><h2>Читать дальше в блоге</h2><p>Эту тему я разбираю подробно в статье <a class="lnk" href="https://blog.vladimir-izhmukov.ru/guides/neyroseti-dlya-kontenta-spisok/">рабочий список нейросетей для контента</a>. Там же лежат остальные <a class="lnk" href="https://blog.vladimir-izhmukov.ru/neyroseti/">разборы про нейросети</a>.</p></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">1. Как работают эти команды на самом деле</a><a href="#sec-1">2. Три способа подключить</a><a href="#sec-2">3. Как комбинировать команды</a><a href="#sec-3">4. Команды: роли и уровень ответа</a><a href="#sec-4">5. Команды: тексты и продажи</a><a href="#sec-5">6. Команды: анализ и решения</a><a href="#sec-6">7. Команды: планы, обучение, карьера</a><a href="#sec-7">8. Команды: редактура и тон</a><a href="#sec-8">9. Команды: контент для площадок</a><a href="#sec-9">10. Команды: продажи, бренд, рынок</a><a href="#sec-10">11. Команды: воронки, рост, контент-план</a><a href="#sec-11">12. Команды: проверка, причины, решения</a><a href="#sec-12">13. Команды: форматы ответа</a><a href="#sec-13">14. Как добавить свою команду и что делать, когда команда не сработала</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
