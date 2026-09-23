@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Скилл автомонтажа для Claude Code: рилс из двух файлов и строки заметок</title><meta name="description" content="Скилл для Claude Code, который собирает рилс из двух файлов: видео с камеры и звука с петлички. Ты добавляешь строку заметок, а он сам сводит звук с картинкой, слышит каждое..."><meta property="og:description" content="Скилл для Claude Code, который собирает рилс из двух файлов: видео с камеры и звука с петлички. Ты добавляешь строку заметок, а он сам сводит звук с картинкой, слышит каждое..."><meta name="twitter:description" content="Скилл для Claude Code, который собирает рилс из двух файлов: видео с камеры и звука с петлички. Ты добавляешь строку заметок, а он сам сводит звук с картинкой, слышит каждое..."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-avtomontazh/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-avtomontazh/"><meta property="og:title" content="Скилл автомонтажа для Claude Code: рилс из двух файлов и строки заметок"><meta name="twitter:title" content="Скилл автомонтажа для Claude Code: рилс из двух файлов и строки заметок"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-video-i-montaj">Видео и монтаж</a></div>
+<h1>Скилл автомонтажа для Claude Code: рилс из двух файлов и строки заметок</h1>
+<p class="lead">Скилл для Claude Code, который собирает рилс из двух файлов: видео с камеры и звука с петлички. Ты добавляешь строку заметок, а он сам сводит звук с картинкой, слышит каждое слово, оставляет последний дубль, вырезает паузы, сверяет названия и цифры из твоей речи, рисует кадры кодом на Python, ставит их ровно на нужное слово, раскладывает звуки из твоей папки и проверяет готовый файл, пока тот не пройдёт без пауз, застывших и пустых кадров. Внутри файл скилла целиком, установка, команда запуска, объяснение, как он режет, чек-лист приёмки и чинилка.</p>
+<p class="meta">Скилл собран на открытых инструментах: FFmpeg, faster-whisper с разметкой времени каждого слова и Python с библиотекой Pillow. Шаблоны и сторонние монтажные движки ему не нужны. Работает в Claude Code на твоём компьютере: видео и звук остаются у тебя, в модель уходят только текст речи и команды. Для работы нужна подписка Claude Pro или выше.</p>
+<div class="how">Один раз проходишь установку из второго раздела и кладёшь скилл из третьего в папку навыков. Дальше на каждый ролик три действия: кладёшь два файла и заметку в папку, вставляешь команду запуска из пятого раздела, принимаешь результат по чек-листу из седьмого.</div>
+<div class="sec"><h2 id="sec-0">1. Что он делает и где его граница</h2><p>Прежде чем ставить, пойми, какой ролик получится. Так ты сразу поймёшь, подходит ли он под твой формат.</p><div class="grid2"><div class="cardb"><h3>Под что заточен</h3><p>Разговорный ролик: ты говоришь в камеру, а поверх речи в нужные моменты встают схемы, цифры, списки и подписи. Это формат экспертного блога.</p></div><div class="cardb"><h3>Что делает сам</h3><p>Сводит звук с видео, чистит речь от пауз и неудачных дублей, ставит субтитры по словам, рисует графику, раскладывает звуки, склеивает и проверяет результат.</p></div><div class="cardb"><h3>Что остаётся тебе</h3><p>Записать себя, написать строку заметок, посмотреть готовый ролик и попросить правки номерами сцен. Кинематографичные переходы и сложные эффекты он не делает.</p></div></div><div class="note">Скилл сверяет названия сервисов, имена и цифры из твоей речи поиском в интернете и приносит список расхождений. Решение, что исправлять, принимаешь ты. Он не переписывает твою речь и не вставляет цифры, которых ты не говорил.</div></div>
+<div class="sec"><h2 id="sec-1">2. Установка, двадцать минут один раз</h2><p>Нужны четыре вещи: Claude Code, FFmpeg, Python 3.10 или новее и распознавание речи faster-whisper.</p><div class="lblrow"><span class="lbl">Проверка, что уже стоит</span><button class="copy" data-text="claude --version
+ffmpeg -version
+python3 --version">Скопировать</button></div><div class="box">claude --version
+ffmpeg -version
+python3 --version</div><p>Claude Code ставится по инструкции на сайте Anthropic. FFmpeg на Windows ставится через winget, на Mac через Homebrew. Python бери с python.org, при установке на Windows отметь галочку Add to PATH.</p><div class="lblrow"><span class="lbl">FFmpeg на Windows</span><button class="copy" data-text="winget install Gyan.FFmpeg">Скопировать</button></div><div class="box">winget install Gyan.FFmpeg</div><div class="lblrow"><span class="lbl">FFmpeg на macOS</span><button class="copy" data-text="brew install ffmpeg">Скопировать</button></div><div class="box">brew install ffmpeg</div><div class="lblrow"><span class="lbl">Python-библиотеки для скилла</span><button class="copy" data-text="python3 -m pip install faster-whisper pillow numpy">Скопировать</button></div><div class="box">python3 -m pip install faster-whisper pillow numpy</div><div class="note">Распознавание речи идёт на твоём компьютере. На обычном ноутбуке без видеокарты трёхминутная запись распознаётся за несколько минут, это нормально. Модель скачается сама при первом запуске, около полутора гигабайт.</div></div>
+<div class="sec"><h2 id="sec-2">3. Скилл целиком</h2><p>Создай папку avtomontazh в папке навыков Claude Code и положи туда файл SKILL.md с текстом ниже. На Mac и Linux путь ~/.claude/skills/avtomontazh/SKILL.md, на Windows C:\Users\ИМЯ\.claude\skills\avtomontazh\SKILL.md.</p><div class="lblrow"><span class="lbl">Команда, которая создаст папку скилла (Mac и Linux)</span><button class="copy" data-text="mkdir -p ~/.claude/skills/avtomontazh">Скопировать</button></div><div class="box">mkdir -p ~/.claude/skills/avtomontazh</div><div class="lblrow"><span class="lbl">Файл SKILL.md</span><button class="copy" data-text="---
+name: avtomontazh
+description: Собирает вертикальный разговорный рилс из видео с камеры, звука с петлички и строки заметок. Вызывай, когда пользователь просит смонтировать ролик из папки с исходниками.
+---
+
+# Автомонтаж разговорного рилса
+
+Входные файлы в текущей папке: видео с камеры (*.mp4 или *.mov), звук с петлички (*.wav, *.m4a или *.mp3), файл notes.txt с заметками. Если какого-то файла нет, спроси о нём и не начинай работу.
+Рабочие файлы клади в папку work/, готовый ролик в out/reel.mp4. Все скрипты пиши сам на Python в папку work/ и запускай их. Шаблоны и сторонние монтажные движки не используй.
+
+## Шаг 1. Сведение звука
+1. Вытащи звук из видео камеры в work/cam.wav (моно, 16 кГц).
+2. Найди сдвиг между work/cam.wav и звуком петлички взаимной корреляцией на numpy по первым 60 секундам. Если в начале записи есть хлопок, ищи сдвиг по нему.
+3. Замени звук камеры звуком петлички с найденным сдвигом, сохрани work/synced.mp4. Выведи найденный сдвиг в миллисекундах.
+
+## Шаг 2. Распознавание по словам
+Распознай звук петлички через faster-whisper, модель medium, язык из notes.txt или русский, с параметром word_timestamps=True. Сохрани work/words.json: каждое слово с началом и концом в секундах.
+
+## Шаг 3. Чистка речи
+1. Найди дубли: если фраза или её начало повторяется, оставь ПОСЛЕДНЮЮ версию, предыдущие вырежи целиком.
+2. Паузы между словами длиннее 0,35 секунды сократи до 0,15 секунды.
+3. Слова-паразиты «э», «ээ», «м-м» вырежи. Смысловые слова не трогай никогда.
+4. Сохрани план нарезки в work/cuts.json и склей work/clean.mp4 через FFmpeg. Каждый стык с короткой звуковой склейкой 20 мс, чтобы не было щелчков.
+5. Перераспознай work/clean.mp4 тем же способом, получи новую разметку слов work/words_clean.json.
+
+## Шаг 4. Проверка фактов
+Выпиши из текста все названия сервисов, имена, цифры, даты и цены. Каждое проверь поиском. Составь work/facts.md: что сказано, что нашлось, источник. Ничего в речи не меняй. Если расхождение серьёзное, остановись и покажи пользователю список до рендера.
+
+## Шаг 5. Раскадровка
+Разбей речь на сцены по смыслу, по одной мысли на сцену. Для каждой сцены реши, что встаёт поверх видео: ничего, крупная цифра, список до трёх пунктов, схема из двух-трёх блоков со стрелками или подпись. Учитывай пожелания из notes.txt. Сохрани work/storyboard.md таблицей: номер сцены, время начала и конца, текст речи, что на экране, ключевое слово, на которое графика появляется.
+
+## Шаг 6. Графика кодом
+Нарисуй каждую графику через Pillow как PNG с прозрачным фоном 1080x1920. Правила: крупный жирный шрифт с кириллицей, не больше 7 слов на экране, всё внутри безопасной зоны (сверху 250 пикселей и снизу 420 пикселей свободны под интерфейс Instagram), один акцентный цвет из notes.txt или оранжевый #F0561D. Логотипы и чужие картинки не рисуй.
+
+## Шаг 7. Попадание в слово
+Каждая графика появляется в момент начала своего ключевого слова по work/words_clean.json, с появлением за 120 мс, и держится до конца мысли. Субтитры ставь по словам, группами по 2-4 слова, в нижней трети над безопасной зоной, текущее слово выделено акцентным цветом.
+
+## Шаг 8. Звуки
+Если в папке есть sfx/, поставь короткий звук на появление каждой графики и на смену сцены. Громкость звуков на 18 дБ ниже голоса. Если папки нет, пропусти шаг и скажи об этом в отчёте.
+
+## Шаг 9. Сборка
+Кадрируй видео в 1080x1920, 30 кадров в секунду, наложи графику, субтитры и звуки, выведи out/reel.mp4 в H.264, звук AAC 192 кбит/с, громкость приведи к -14 LUFS фильтром loudnorm.
+
+## Шаг 10. Самопроверка
+Прогони готовый файл через фильтры FFmpeg: silencedetect (порог -35 дБ, длительность 0,6 с), freezedetect (длительность 0,8 с), blackdetect (длительность 0,2 с). Найдена пауза, застывший или пустой кадр: найди причину в cuts.json или в графике, исправь и собери заново. Повторяй, пока все три проверки не пройдут чисто, но не больше пяти кругов.
+
+## Отчёт
+В конце выдай: длительность исходника и готового ролика, сколько дублей и пауз вырезано, список сцен с таймкодами, список фактов с пометкой проверено или расхождение, результат трёх проверок. Правки принимай номерами сцен и пересобирай только затронутые сцены.">Скопировать</button></div><div class="box">---
+name: avtomontazh
+description: Собирает вертикальный разговорный рилс из видео с камеры, звука с петлички и строки заметок. Вызывай, когда пользователь просит смонтировать ролик из папки с исходниками.
+---
+
+# Автомонтаж разговорного рилса
+
+Входные файлы в текущей папке: видео с камеры (*.mp4 или *.mov), звук с петлички (*.wav, *.m4a или *.mp3), файл notes.txt с заметками. Если какого-то файла нет, спроси о нём и не начинай работу.
+Рабочие файлы клади в папку work/, готовый ролик в out/reel.mp4. Все скрипты пиши сам на Python в папку work/ и запускай их. Шаблоны и сторонние монтажные движки не используй.
+
+## Шаг 1. Сведение звука
+1. Вытащи звук из видео камеры в work/cam.wav (моно, 16 кГц).
+2. Найди сдвиг между work/cam.wav и звуком петлички взаимной корреляцией на numpy по первым 60 секундам. Если в начале записи есть хлопок, ищи сдвиг по нему.
+3. Замени звук камеры звуком петлички с найденным сдвигом, сохрани work/synced.mp4. Выведи найденный сдвиг в миллисекундах.
+
+## Шаг 2. Распознавание по словам
+Распознай звук петлички через faster-whisper, модель medium, язык из notes.txt или русский, с параметром word_timestamps=True. Сохрани work/words.json: каждое слово с началом и концом в секундах.
+
+## Шаг 3. Чистка речи
+1. Найди дубли: если фраза или её начало повторяется, оставь ПОСЛЕДНЮЮ версию, предыдущие вырежи целиком.
+2. Паузы между словами длиннее 0,35 секунды сократи до 0,15 секунды.
+3. Слова-паразиты «э», «ээ», «м-м» вырежи. Смысловые слова не трогай никогда.
+4. Сохрани план нарезки в work/cuts.json и склей work/clean.mp4 через FFmpeg. Каждый стык с короткой звуковой склейкой 20 мс, чтобы не было щелчков.
+5. Перераспознай work/clean.mp4 тем же способом, получи новую разметку слов work/words_clean.json.
+
+## Шаг 4. Проверка фактов
+Выпиши из текста все названия сервисов, имена, цифры, даты и цены. Каждое проверь поиском. Составь work/facts.md: что сказано, что нашлось, источник. Ничего в речи не меняй. Если расхождение серьёзное, остановись и покажи пользователю список до рендера.
+
+## Шаг 5. Раскадровка
+Разбей речь на сцены по смыслу, по одной мысли на сцену. Для каждой сцены реши, что встаёт поверх видео: ничего, крупная цифра, список до трёх пунктов, схема из двух-трёх блоков со стрелками или подпись. Учитывай пожелания из notes.txt. Сохрани work/storyboard.md таблицей: номер сцены, время начала и конца, текст речи, что на экране, ключевое слово, на которое графика появляется.
+
+## Шаг 6. Графика кодом
+Нарисуй каждую графику через Pillow как PNG с прозрачным фоном 1080x1920. Правила: крупный жирный шрифт с кириллицей, не больше 7 слов на экране, всё внутри безопасной зоны (сверху 250 пикселей и снизу 420 пикселей свободны под интерфейс Instagram), один акцентный цвет из notes.txt или оранжевый #F0561D. Логотипы и чужие картинки не рисуй.
+
+## Шаг 7. Попадание в слово
+Каждая графика появляется в момент начала своего ключевого слова по work/words_clean.json, с появлением за 120 мс, и держится до конца мысли. Субтитры ставь по словам, группами по 2-4 слова, в нижней трети над безопасной зоной, текущее слово выделено акцентным цветом.
+
+## Шаг 8. Звуки
+Если в папке есть sfx/, поставь короткий звук на появление каждой графики и на смену сцены. Громкость звуков на 18 дБ ниже голоса. Если папки нет, пропусти шаг и скажи об этом в отчёте.
+
+## Шаг 9. Сборка
+Кадрируй видео в 1080x1920, 30 кадров в секунду, наложи графику, субтитры и звуки, выведи out/reel.mp4 в H.264, звук AAC 192 кбит/с, громкость приведи к -14 LUFS фильтром loudnorm.
+
+## Шаг 10. Самопроверка
+Прогони готовый файл через фильтры FFmpeg: silencedetect (порог -35 дБ, длительность 0,6 с), freezedetect (длительность 0,8 с), blackdetect (длительность 0,2 с). Найдена пауза, застывший или пустой кадр: найди причину в cuts.json или в графике, исправь и собери заново. Повторяй, пока все три проверки не пройдут чисто, но не больше пяти кругов.
+
+## Отчёт
+В конце выдай: длительность исходника и готового ролика, сколько дублей и пауз вырезано, список сцен с таймкодами, список фактов с пометкой проверено или расхождение, результат трёх проверок. Правки принимай номерами сцен и пересобирай только затронутые сцены.</div></div>
+<div class="sec"><h2 id="sec-3">4. Как записать исходники, чтобы он справился</h2><ol><li>Включи запись на камере и на петличке, потом хлопни в ладоши в кадре. По хлопку скилл сведёт звук с картинкой до кадра.</li><li>Снимай вертикально или горизонтально с запасом по краям: скилл кадрирует в 9:16 по центру.</li><li>Ошибся, начни фразу заново с начала предложения. Скилл оставит последнюю версию и вырежет предыдущие.</li><li>Не заботься о паузах между фразами. Они уйдут сами.</li><li>Положи в одну папку видео, звук с петлички и файл notes.txt. По желанию добавь папку sfx с короткими звуками: щелчок, свист, хлопок.</li></ol><div class="lblrow"><span class="lbl">Пример notes.txt, одна-две строки</span><button class="copy" data-text="Ролик про три ошибки в шапке профиля. Акцентный цвет #F0561D, на цифрах крупные числа, в конце схема «шапка, ролик, директ».">Скопировать</button></div><div class="box">Ролик про три ошибки в шапке профиля. Акцентный цвет #F0561D, на цифрах крупные числа, в конце схема «шапка, ролик, директ».</div></div>
+<div class="sec"><h2 id="sec-4">5. Команда запуска</h2><p>Открой терминал в папке с исходниками, запусти claude и вставь команду.</p><div class="lblrow"><span class="lbl">Запуск автомонтажа</span><button class="copy" data-text="Используй скилл avtomontazh. Исходники в этой папке. Сделай ролик по notes.txt. Перед рендером покажи мне раскадровку work/storyboard.md и список фактов work/facts.md и дождись моего «ок».">Скопировать</button></div><div class="box">Используй скилл avtomontazh. Исходники в этой папке. Сделай ролик по notes.txt. Перед рендером покажи мне раскадровку work/storyboard.md и список фактов work/facts.md и дождись моего «ок».</div><div class="lblrow"><span class="lbl">Правка после просмотра</span><button class="copy" data-text="Сцена 4: графика появляется на слово «шапка», а должна на слово «ошибка». Сцена 7: убери список, оставь одну цифру «3». Пересобери только эти сцены и снова прогони самопроверку.">Скопировать</button></div><div class="box">Сцена 4: графика появляется на слово «шапка», а должна на слово «ошибка». Сцена 7: убери список, оставь одну цифру «3». Пересобери только эти сцены и снова прогони самопроверку.</div><div class="note">Раскадровку проще поправить текстом, чем готовое видео. Одна минута на чтение storyboard.md экономит два круга рендера.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-5">6. Как он режет паузы и дубли</h2><p>Чтобы ты понимал, что происходит внутри, и мог поправить, если он отрезал лишнее.</p><p>faster-whisper отдаёт каждое слово с временем начала и конца с точностью до сотых долей секунды. Скилл идёт по этому списку и видит, где между словами тишина и где фраза начинается второй раз. Паузу он укорачивает до 0,15 секунды, чтобы речь звучала плотно, но живо. Повтор находит по совпадению первых слов фразы и оставляет последнюю версию, потому что обычно она самая чистая.</p><p>Все решения записываются в work/cuts.json: что вырезано и почему. Если он отрезал нужное, скажи номер фразы или цитату, и он вернёт кусок.</p><div class="lblrow"><span class="lbl">Вернуть вырезанное</span><button class="copy" data-text="В cuts.json ты вырезал фразу «[ЦИТАТА]» как дубль. Верни её, а вырежи предыдущую версию. Пересобери clean.mp4 и продолжи с шага 5.">Скопировать</button></div><div class="box">В cuts.json ты вырезал фразу «[ЦИТАТА]» как дубль. Верни её, а вырежи предыдущую версию. Пересобери clean.mp4 и продолжи с шага 5.</div></div>
+<div class="sec"><h2 id="sec-6">7. Чек-лист приёмки</h2><ul><li>Губы совпадают со звуком на первой и на последней фразе. Если к концу расходятся, проверь частоту кадров камеры и попроси пересвести звук.</li><li>Ни одно смысловое слово не вырезано. Прочитай work/cuts.json глазами.</li><li>Каждая графика появляется ровно на своём слове.</li><li>Текст на экране не заходит под кнопки Instagram справа и под подпись снизу.</li><li>Факты из work/facts.md проверены, расхождения ты принял или исправил.</li><li>Все три проверки из шага 10 чистые, это видно в отчёте.</li></ul></div>
+<div class="sec"><h2 id="sec-7">8. Чинилка</h2><div class="grid2"><div class="cardb"><h3>ffmpeg не найден</h3><p>FFmpeg поставлен, но терминал его не видит. Закрой и открой терминал заново, на Windows перезайди в систему.</p></div><div class="cardb"><h3>Звук уехал от губ</h3><p>Сдвиг найден неверно. Запиши хлопок в начале следующего дубля или скажи скиллу сдвиг вручную: «сдвинь звук на 120 мс раньше».</p></div><div class="cardb"><h3>Кириллица квадратиками</h3><p>У шрифта нет русских букв. Скажи скиллу путь к шрифту с кириллицей, например Inter или Montserrat, скачанному с Google Fonts.</p></div><div class="cardb"><h3>Распознавание очень долгое</h3><p>Попроси сменить модель faster-whisper на small. Точность чуть ниже, скорость выше в два-три раза.</p></div><div class="cardb"><h3>Самопроверка ходит по кругу</h3><p>После пяти кругов скилл остановится и покажет, что не проходит. Чаще всего это застывший кадр в исходнике: камера зависла на записи. Такой кусок проще перезаписать.</p></div></div></div>
+<div class="sec"><h2>Читать дальше в блоге</h2><p>Эту тему я разбираю подробно в статье <a class="lnk" href="https://blog.vladimir-izhmukov.ru/guides/reels-bez-semok-neyrosetyami/">как собрать Рилс без съёмок и монтажа</a>. Там же лежат остальные <a class="lnk" href="https://blog.vladimir-izhmukov.ru/instagram/">разборы про короткие ролики</a>.</p></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">1. Что он делает и где его граница</a><a href="#sec-1">2. Установка, двадцать минут один раз</a><a href="#sec-2">3. Скилл целиком</a><a href="#sec-3">4. Как записать исходники, чтобы он справился</a><a href="#sec-4">5. Команда запуска</a><a href="#sec-5">6. Как он режет паузы и дубли</a><a href="#sec-6">7. Чек-лист приёмки</a><a href="#sec-7">8. Чинилка</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
