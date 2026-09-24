@@ -3,4 +3,5 @@ Disallow: /files/Reels-
 Disallow: /files/sprint/
 Disallow: /nabor-start/
 Disallow: /chatgpt-ustanovka/
+Disallow: /karta-cvety/
 Sitemap: https://vladimir-izhmukov.ru/sitemap.xml
