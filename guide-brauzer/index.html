@@ -1,0 +1,428 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>ИИ-агент в браузере: 15 $ бесплатно в Browser Use, первая задача и восемь готовых заданий</title><meta name="description" content="ИИ-агент, который сам открывает сайты, кликает, заполняет поля и приносит результат таблицей. Как забрать 15 $ бесплатных кредитов в Browser Use, как поставить первую задачу..."><meta property="og:description" content="ИИ-агент, который сам открывает сайты, кликает, заполняет поля и приносит результат таблицей. Как забрать 15 $ бесплатных кредитов в Browser Use, как поставить первую задачу..."><meta name="twitter:description" content="ИИ-агент, который сам открывает сайты, кликает, заполняет поля и приносит результат таблицей. Как забрать 15 $ бесплатных кредитов в Browser Use, как поставить первую задачу..."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-brauzer/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-brauzer/"><meta property="og:title" content="ИИ-агент в браузере: 15 $ бесплатно в Browser Use, первая задача и восемь готовых заданий"><meta name="twitter:title" content="ИИ-агент в браузере: 15 $ бесплатно в Browser Use, первая задача и восемь готовых заданий"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-ai-instrumenty">AI-инструменты</a></div>
+<h1>ИИ-агент в браузере: 15 $ бесплатно в Browser Use, первая задача и восемь готовых заданий</h1>
+<p class="lead">ИИ-агент, который сам открывает сайты, кликает, заполняет поля и приносит результат таблицей. Как забрать 15 $ бесплатных кредитов в Browser Use, как поставить первую задачу, восемь готовых заданий под реальную работу и расчёт, на сколько хватит денег.</p>
+<p class="meta">Собрано по сайту и документации Browser Use на 24.09.2026: страница цен, раздел моделей и раздел оплаты. Цены сервис меняет, актуальные всегда на browser-use.com/pricing. Названия кнопок в кабинете иногда меняются, поэтому рядом с шагом написано, что искать по смыслу.</p>
+<div class="how">Идёшь сверху вниз. Регистрация занимает пару минут, первая задача ещё пять. Сначала ставишь задачи только на поиск и сбор данных, к действиям в своих аккаунтах переходишь, когда увидишь, как агент работает.</div>
+<div class="sec"><h2 id="sec-0">1. Что это и чем отличается от ChatGPT</h2><p>Browser Use это облачный браузер с ИИ внутри. Ты пишешь задачу обычными словами, агент открывает настоящий браузер, ходит по сайтам и делает то, что сделал бы человек за компьютером. Ты видишь его экран в реальном времени.</p><div class="grid2"><div class="cardb"><h3>Поручение вместо переписки</h3><p>Здесь нет привычного чата для болтовни. Каждое сообщение это задача: найти, сравнить, собрать, заполнить. Агент работает, пока не закончит, и отдаёт итог.</p></div><div class="cardb"><h3>Настоящие сайты</h3><p>Агент видит страницы так же, как ты: листает каталоги, открывает карточки, жмёт кнопки, переходит по ссылкам. Там, где у сайта нет удобной выгрузки, он собирает данные руками.</p></div><div class="cardb"><h3>Выбор модели</h3><p>Мозг агента можно менять: GPT-6 Astra, GPT-5.6, GPT-5.6 Luna, Claude Opus 5, Claude Sonnet 5, Gemini 3.6 Flash, Grok 4.5, MiniMax M3. От модели зависят качество и цена задачи.</p></div></div><h3>Что понадобится</h3><ul><li>Аккаунт Google, GitHub или Microsoft. Бесплатные 15 $ дают только при регистрации через них.</li><li>Компьютер с браузером. С телефона смотреть результат можно, ставить задачи удобнее с компьютера.</li><li>Карта не нужна. Для стартовых кредитов её не спрашивают.</li></ul><div class="note">Честно про модели. В документации сказано, что у аккаунтов без единого пополнения часть моделей закрыта, а пополнение от 5 $ открывает все. Какие именно доступны на бесплатных 15 $, сервис не публикует. Если нужной модели в списке нет, значит она откроется после первого пополнения.</div></div>
+<div class="sec"><h2 id="sec-1">2. Шаг 1. Забираем 15 $</h2><p>Кредиты выдают один раз на человека.</p><ul><li>Открой страницу регистрации по кнопке ниже.</li><li>Выбери вход через Google, GitHub или Microsoft. Регистрация по почте и паролю бонус может не дать.</li><li>После входа загляни в раздел оплаты или баланса (ищи Billing или Credits). Там должно стоять 15 $.</li><li>Если баланс нулевой, проверь, в каком проекте ты находишься: кредиты лежат на проекте, в который ты попал при регистрации.</li></ul><a class="linkbtn" href="https://cloud.browser-use.com/signup" target="_blank" rel="noopener">Регистрация в Browser Use</a><div class="note">Кредиты при регистрации разовые и каждый месяц не пополняются. Купленные позже кредиты не сгорают.</div></div>
+<div class="sec"><h2 id="sec-2">3. Шаг 2. Первая задача</h2><p>Начни с простого поиска. Так ты за пять минут увидишь, как агент думает и сколько списывает.</p><ul><li>В кабинете открой раздел задач (Tasks или Run an agent).</li><li>Выбери модель. Для первой пробы бери GPT-5.6 Luna: сервис сам советует её для большинства задач, и она в десятки раз дешевле GPT-6.</li><li>Вставь задачу из блока ниже и запусти.</li><li>Смотри живой экран: агент покажет, какие сайты открывает и что нажимает. В конце он пришлёт итог.</li><li>После задачи загляни в баланс и посмотри, сколько она стоила. Это твоя точка отсчёта.</li></ul><div class="lblrow"><span class="lbl">Первая задача на пробу</span><button class="copy" data-text="Найди в интернете 5 курсов по [тема, например: монтаж Reels] на русском языке, которые стартуют в ближайший месяц.
+
+Для каждого собери: название, школа, цена, дата старта, длительность, ссылка на страницу.
+
+Отдай итог таблицей. Цены бери только со страницы курса, если цены нет, так и напиши. Ничего не покупай и не оставляй заявок.">Скопировать</button></div><div class="box">Найди в интернете 5 курсов по [тема, например: монтаж Reels] на русском языке, которые стартуют в ближайший месяц.
+
+Для каждого собери: название, школа, цена, дата старта, длительность, ссылка на страницу.
+
+Отдай итог таблицей. Цены бери только со страницы курса, если цены нет, так и напиши. Ничего не покупай и не оставляй заявок.</div><h3>Формула задачи, которую агент выполняет с первого раза</h3><ul><li>Что найти или сделать, одним предложением.</li><li>Где искать: конкретные сайты или «в интернете».</li><li>Какие поля собрать, списком.</li><li>В каком виде отдать: таблица, список, текст.</li><li>Чего не делать: не покупать, не отправлять, не регистрироваться. Эту строку пиши всегда.</li></ul><div class="note">Чем точнее задача, тем меньше агент блуждает по сайтам и тем дешевле выходит. Размытая задача «найди что-нибудь про курсы» съедает кредиты впустую.</div></div>
+<div class="sec"><h2 id="sec-3">4. Восемь заданий под реальную работу</h2><p>Подставь своё в квадратные скобки. Все задания составлены так, чтобы агент только читал и собирал, без покупок и отправок.</p><div class="lblrow"><span class="lbl">1. Сравнение цен на товар</span><button class="copy" data-text="Найди [товар, модель] на сайтах [Ozon, Wildberries, Яндекс Маркет].
+
+Для каждого сайта собери: цена, скидка, срок доставки в [город], рейтинг продавца, число отзывов, ссылка.
+
+Отдай таблицей, отсортируй по итоговой цене с доставкой. В корзину ничего не клади.">Скопировать</button></div><div class="box">Найди [товар, модель] на сайтах [Ozon, Wildberries, Яндекс Маркет].
+
+Для каждого сайта собери: цена, скидка, срок доставки в [город], рейтинг продавца, число отзывов, ссылка.
+
+Отдай таблицей, отсортируй по итоговой цене с доставкой. В корзину ничего не клади.</div><div class="lblrow"><span class="lbl">2. Список конкурентов в нише</span><button class="copy" data-text="Найди 15 онлайн-школ или экспертов, которые продают [тема] в России.
+
+Для каждого: название, сайт, главный продукт, цена, чем заманивают на входе (бесплатный урок, гайд, марафон), ссылка на соцсети если есть на сайте.
+
+Отдай таблицей. В конце три строки: какие входные предложения повторяются чаще всего.">Скопировать</button></div><div class="box">Найди 15 онлайн-школ или экспертов, которые продают [тема] в России.
+
+Для каждого: название, сайт, главный продукт, цена, чем заманивают на входе (бесплатный урок, гайд, марафон), ссылка на соцсети если есть на сайте.
+
+Отдай таблицей. В конце три строки: какие входные предложения повторяются чаще всего.</div><div class="lblrow"><span class="lbl">3. Проверка своего сайта глазами клиента</span><button class="copy" data-text="Открой мой сайт [адрес] как новый посетитель с телефона.
+
+Пройди путь: главная, страница продукта [название], форма заявки. Форму не отправляй.
+
+Запиши всё, что мешает купить: медленные страницы, битые ссылки, непонятные кнопки, опечатки, пустые блоки. Отдай списком по порядку пути, у каждой проблемы ссылка на страницу.">Скопировать</button></div><div class="box">Открой мой сайт [адрес] как новый посетитель с телефона.
+
+Пройди путь: главная, страница продукта [название], форма заявки. Форму не отправляй.
+
+Запиши всё, что мешает купить: медленные страницы, битые ссылки, непонятные кнопки, опечатки, пустые блоки. Отдай списком по порядку пути, у каждой проблемы ссылка на страницу.</div><div class="lblrow"><span class="lbl">4. Разбор отзывов о продукте</span><button class="copy" data-text="Найди отзывы о [продукт или компания] на [отзовик, маркетплейс, Яндекс Карты]. Возьми последние 40.
+
+Сгруппируй: за что хвалят, на что жалуются, что просят добавить. У каждой группы число отзывов и две короткие цитаты.
+
+В конце одна строка: главная боль покупателей.">Скопировать</button></div><div class="box">Найди отзывы о [продукт или компания] на [отзовик, маркетплейс, Яндекс Карты]. Возьми последние 40.
+
+Сгруппируй: за что хвалят, на что жалуются, что просят добавить. У каждой группы число отзывов и две короткие цитаты.
+
+В конце одна строка: главная боль покупателей.</div><div class="lblrow"><span class="lbl">5. Подбор площадок для рекламы</span><button class="copy" data-text="Найди 20 Telegram-каналов по теме [тема] на [каталог каналов, например TGStat или Telemetr].
+
+Для каждого: название, ссылка, подписчики, средний охват поста, цена рекламы если указана.
+
+Отдай таблицей, отсортируй по охвату. Никому не пиши.">Скопировать</button></div><div class="box">Найди 20 Telegram-каналов по теме [тема] на [каталог каналов, например TGStat или Telemetr].
+
+Для каждого: название, ссылка, подписчики, средний охват поста, цена рекламы если указана.
+
+Отдай таблицей, отсортируй по охвату. Никому не пиши.</div><div class="lblrow"><span class="lbl">6. Сбор мероприятий</span><button class="copy" data-text="Найди конференции, митапы и выставки по теме [тема] в [город или онлайн] на [месяц].
+
+Для каждого: название, дата, место, цена участия, можно ли выступить спикером, ссылка.
+
+Отдай таблицей по датам. Ни на что не регистрируйся.">Скопировать</button></div><div class="box">Найди конференции, митапы и выставки по теме [тема] в [город или онлайн] на [месяц].
+
+Для каждого: название, дата, место, цена участия, можно ли выступить спикером, ссылка.
+
+Отдай таблицей по датам. Ни на что не регистрируйся.</div><div class="lblrow"><span class="lbl">7. Выгрузка каталога в таблицу</span><button class="copy" data-text="Открой [адрес страницы каталога].
+
+Пройди все страницы каталога и собери по каждой позиции: название, цена, наличие, ссылка.
+
+Отдай итог как таблицу для Excel. Если позиций больше 100, остановись на сотой и напиши, сколько осталось.">Скопировать</button></div><div class="box">Открой [адрес страницы каталога].
+
+Пройди все страницы каталога и собери по каждой позиции: название, цена, наличие, ссылка.
+
+Отдай итог как таблицу для Excel. Если позиций больше 100, остановись на сотой и напиши, сколько осталось.</div><div class="lblrow"><span class="lbl">8. Поиск вакансий или исполнителей</span><button class="copy" data-text="Найди на [hh.ru / Хабр Фриланс / Kwork] 10 предложений по запросу [например: монтажёр Reels, удалённо].
+
+Для каждого: имя или компания, цена или зарплата, опыт, пример работ если есть, ссылка.
+
+Отдай таблицей, отметь три лучших по соотношению цены и опыта. Никому не пиши и не откликайся.">Скопировать</button></div><div class="box">Найди на [hh.ru / Хабр Фриланс / Kwork] 10 предложений по запросу [например: монтажёр Reels, удалённо].
+
+Для каждого: имя или компания, цена или зарплата, опыт, пример работ если есть, ссылка.
+
+Отдай таблицей, отметь три лучших по соотношению цены и опыта. Никому не пиши и не откликайся.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-4">5. Сколько стоит задача и как растянуть 15 $</h2><p>Платишь за три вещи: работу модели, время браузера и трафик. Подписки нет, списывается только то, что потратил.</p><div class="grid2"><div class="cardb"><h3>Модель</h3><p>Цена токенов модели плюс 20% сервису, в таблице на сайте надбавка уже учтена. Самая дорогая статья расходов.</p></div><div class="cardb"><h3>Браузер</h3><p>2 цента за час, округление до минуты. На практике копейки.</p></div><div class="cardb"><h3>Трафик</h3><p>Прокси включены по умолчанию и стоят 5 $ за гигабайт. Тяжёлые сайты с картинками и видео расходуют заметно больше.</p></div></div><h3>Цена моделей за миллион токенов на входе и на выходе</h3><ul><li>GPT-5.6 Luna: 0,24 $ и 1,44 $. Рекомендует сам сервис, самая выгодная.</li><li>MiniMax M3: 0,36 $ и 1,44 $.</li><li>Gemini 3.6 Flash: 1,80 $ и 9 $.</li><li>Claude Sonnet 5: 2,40 $ и 12 $.</li><li>Claude Opus 5: 6 $ и 30 $.</li><li>GPT-5.6: 6 $ и 36 $.</li><li>GPT-6 Astra: 12 $ и 60 $. Самая дорогая, в 50 раз дороже Luna.</li></ul><p>Простой ориентир. Одна и та же задача на GPT-6 Astra стоит примерно в пятьдесят раз дороже, чем на Luna. Значит 15 $ на Luna хватит на десятки задач, а на GPT-6 на несколько. Точную цену своей задачи увидишь в балансе после первого запуска.</p><h3>Пять правил экономии</h3><ul><li>Начинай с Luna. На дорогую модель переходи, только если Luna не справилась с конкретной задачей.</li><li>Пиши точную задачу по формуле из шага 2. Каждый лишний сайт, который агент открыл наугад, стоит денег.</li><li>Ставь предел объёма: «не больше 20 позиций», «остановись на сотой». Без предела агент соберёт всё, что найдёт.</li><li>Не гоняй агента по видео и тяжёлым галереям без нужды: это трафик по 5 $ за гигабайт.</li><li>Если задача пошла не туда, останови её сразу, не жди конца.</li></ul></div>
+<div class="sec"><h2 id="sec-5">6. Безопасность</h2><p>Агент работает в облачном браузере сервиса. Всё, что ты ему даёшь, проходит через чужой компьютер.</p><ul><li>Не давай агенту пароли от почты, банка и основных соцсетей. Для задач с входом заведи отдельный рабочий аккаунт.</li><li>Не давай данные карты. Любую покупку делай сам после того, как агент нашёл лучший вариант.</li><li>В каждой задаче пиши, чего нельзя делать: не покупать, не отправлять, не регистрироваться.</li><li>Проверяй важный итог сам. Агент сообщает, что задача выполнена, но цену, дату и наличие перед решением открой по ссылке.</li><li>Храни ссылки и таблицы у себя. Результат в кабинете удобно смотреть, но рабочую копию сохрани в свой файл.</li></ul><h3>Если что-то не работает</h3><ul><li>Баланс нулевой после регистрации: ты зарегистрировался по почте и паролю или смотришь другой проект. Бонус дают за вход через Google, GitHub или Microsoft.</li><li>Нужной модели нет в списке: у аккаунтов без пополнения часть моделей закрыта. Открывается пополнением от 5 $.</li><li>Агент застрял на капче или входе: сайт защищается от роботов. Смени сайт в задаче или сделай этот шаг сам.</li><li>Итог неполный: в задаче не было предела или формата. Допиши поля и формат, запусти снова.</li></ul></div>
+<div class="sec"><h2>Читать дальше в блоге</h2><p>Эту тему я разбираю подробно в статье <a class="lnk" href="https://blog.vladimir-izhmukov.ru/guides/neyroseti-dlya-kontenta-spisok/">рабочий список нейросетей для контента</a>. Там же лежат остальные <a class="lnk" href="https://blog.vladimir-izhmukov.ru/neyroseti/">разборы про нейросети</a>.</p></div>
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">1. Что это и чем отличается от ChatGPT</a><a href="#sec-1">2. Шаг 1. Забираем 15 $</a><a href="#sec-2">3. Шаг 2. Первая задача</a><a href="#sec-3">4. Восемь заданий под реальную работу</a><a href="#sec-4">5. Сколько стоит задача и как растянуть 15 $</a><a href="#sec-5">6. Безопасность</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
