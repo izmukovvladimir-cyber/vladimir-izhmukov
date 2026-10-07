@@ -34,13 +34,18 @@ a{color:inherit}
 .narrow{max-width:760px;margin-left:auto;margin-right:auto}
 section{padding:56px 0}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line-gold);background:rgba(245,197,24,.06);padding:7px 12px;border-radius:999px}
-.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(255,59,59,.18)}
+.eyebrow .nw{white-space:nowrap}
+@media (max-width:420px){.eyebrow{font-size:11px;letter-spacing:.02em;padding:6px 10px;gap:7px}}
+@media (max-width:374px){.eyebrow{font-size:10px;letter-spacing:.01em;padding:6px 9px;gap:6px}}
+.eyebrow::before{flex:none;content:"";width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(255,59,59,.18)}
 h1{font-size:clamp(30px,8vw,58px);line-height:1.04;letter-spacing:-.02em;font-weight:900;margin:18px 0 18px}
 h2{font-size:clamp(24px,6vw,36px);line-height:1.15;letter-spacing:-.01em;font-weight:800;margin:0 0 24px;color:var(--fg)}
 h2 .k{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
 .gold{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .lead{font-size:clamp(17px,4.4vw,20px);color:#dcd8e4;margin:0 0 26px;max-width:580px}
 p{margin:0 0 14px}
+h1,h2,h3,.faq summary,.shot figcaption{text-wrap:balance}
+p,li{text-wrap:pretty}
 .mut{color:var(--mut)}
 
 /* buttons */
@@ -66,6 +71,8 @@ p{margin:0 0 14px}
 .result-card h2{font-size:clamp(20px,5vw,26px);color:var(--gold);margin-bottom:12px}
 .result-card p{margin:0;font-size:17px;line-height:1.65;color:#e4e0ea}
 
+/* result list */
+.does{margin:6px 0 18px;padding-left:22px;display:grid;gap:10px}.does li{line-height:1.5}.does b{color:var(--fg,#fff)}
 /* skills chips */
 .skills-lead{margin:18px 0 12px!important;font-weight:700;color:var(--fg)!important}
 .chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
@@ -111,8 +118,10 @@ p{margin:0 0 14px}
 /* screens */
 .screens{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--gut) 18px;margin:0 calc(-1 * var(--gut));scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .screens::-webkit-scrollbar{display:none}
-.phone{flex:0 0 78%;max-width:320px;scroll-snap-align:center;border-radius:34px;padding:9px;background:linear-gradient(160deg,#2b2733,#0f0d13);border:1px solid #2f2a38;box-shadow:0 24px 50px -20px rgba(0,0,0,.9),0 0 0 1px rgba(245,197,24,.06)}
-.phone img{border-radius:26px;width:100%;height:auto;aspect-ratio:390/760;background:#0e1621}
+.shot{flex:0 0 78%;max-width:300px;margin:0;scroll-snap-align:center}
+.shot figcaption{margin-top:12px;padding:0 4px;color:#dcd8e4;font-size:15px;line-height:1.45;text-align:center}
+.phone{border-radius:34px;padding:9px;background:linear-gradient(160deg,#2b2733,#0f0d13);border:1px solid #2f2a38;box-shadow:0 24px 50px -20px rgba(0,0,0,.9),0 0 0 1px rgba(245,197,24,.06)}
+.phone img{border-radius:26px;width:100%;height:auto;aspect-ratio:390/844;background:#0e1621}
 .dots{display:flex;justify-content:center;gap:8px;margin-top:4px}
 .dots span{width:8px;height:8px;border-radius:50%;background:#3a3446}
 .dots span.on{background:var(--gold)}
@@ -166,8 +175,8 @@ footer a:hover{color:var(--fg)}
   .hero-grid{grid-template-columns:1.15fr .85fr}
   .hero-phone{display:block;justify-self:center;width:300px;transform:rotate(2deg)}
   .hero-phone .phone{max-width:none}
-  .screens{overflow:visible;justify-content:center;padding:4px 0 10px;margin:0}
-  .phone{flex:0 0 300px}
+  .screens{display:grid;grid-template-columns:repeat(2,minmax(0,300px));justify-content:center;gap:36px 28px;overflow:visible;padding:4px 0 10px;margin:0}
+  .shot{max-width:none}
   .dots{display:none}
   .days{padding-left:40px}
   .day{padding:26px 26px}
@@ -177,6 +186,9 @@ footer a:hover{color:var(--fg)}
   .sticky{display:none}
   footer{padding-bottom:40px}
 }
+@media (min-width:1000px){
+  .screens{grid-template-columns:repeat(3,minmax(0,300px));gap:40px 32px}
+}
 </style>
 <script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript></head>
 <body>
@@ -185,16 +197,16 @@ footer a:hover{color:var(--fg)}
 <header class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Предзаказ первого потока · старт 20 октября</span>
+      <span class="eyebrow"><span>Предзаказ первого потока · <span class="nw">старт 20&nbsp;октября</span></span></span>
       <h1 class="gold">Свой ИИ-агент в твоём телефоне. Больше не нужно сидеть за компьютером</h1>
       <p class="lead">Один вечер ставишь его по пошаговой инструкции, без программиста. Дальше тебе больше не нужно сидеть за компьютером, как сейчас сидят все, кто работает с нейросетями. Надиктовал голосовое с прогулки, и агент сам делает задачу: разбирает дела, пишет тексты, ищет информацию и напоминает о встречах.</p>
       <div class="cta" id="hero-cta">
-        <a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Занять место за 1 490 ₽ <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Занять место за 1 490 ₽ <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <p class="price-line">Цена растёт: 1 490 ₽ до 13 октября, 2 490 ₽ с 14 по 19 октября, 5 990 ₽ со старта. Подписка Claude и сервер оплачиваются отдельно, около 25$ в месяц.</p>
+      <p class="price-line">Цена растёт: 1 490 ₽ до 13 октября, 2 490 ₽ с 14 по 19 октября, 5 990 ₽ со старта. Подписка Claude и сервер оплачиваются отдельно, около 25$ в месяц.</p>
     </div>
     <div class="hero-phone" aria-hidden="true">
-      <div class="phone"><img src="img/screen_voice_to_plan.webp" alt="" width="390" height="760"></div>
+      <div class="phone"><img src="img/screen_voice_to_plan.webp" alt="" width="390" height="844"></div>
     </div>
   </div>
 </header>
@@ -206,12 +218,21 @@ footer a:hover{color:var(--fg)}
   <div class="wrap narrow">
     <div class="result-card">
       <h2>ЧТО У ТЕБЯ БУДЕТ В ИТОГЕ</h2>
-      <p>Свой готовый ИИ-агент в Телеграме. Он живёт на твоём сервере и работает круглые сутки, даже когда ноутбук закрыт. Его память о тебе, твоём деле и ваших разговорах хранится у тебя на сервере, в твоих файлах. Ты пишешь ему в Телеграм текстом или голосовым, как сотруднику, и он делает задачи: разбирает голосовые в список дел, присылает план дня, напоминает о встречах, пишет черновики постов и ответов.</p>
+      <p>Свой ИИ-агент в Телеграме, который сам ходит и делает задачи. Он живёт на твоём сервере и работает круглые сутки, даже когда ноутбук закрыт. Его память о тебе, твоём деле и ваших разговорах хранится у тебя, в твоих файлах. Ты даёшь задачу голосовым, как сотруднику, а агент сам идёт её выполнять и присылает результат в тот же чат.</p>
+      <p class="skills-lead">Что он делает сам:</p>
+      <ol class="does">
+        <li><b>Ищет в интернете и разбирает сайты.</b> Надиктовал «найди десять конкурентов в моей нише и сравни цены», и получил таблицу.</li>
+        <li><b>Открывает сайты в браузере.</b> Заходит на нужную страницу, нажимает кнопки, заполняет формы и присылает тебе скрин того, что сделал. Сайты с капчей и входом по коду из СМС он не пройдёт, там нужен ты.</li>
+        <li><b>Работает по расписанию без тебя.</b> Каждое утро присылает план дня, проверяет твой сайт или канал и пишет, если что-то пошло не так.</li>
+        <li><b>Пишет и запускает программы на своём сервере.</b> Посчитать таблицу, собрать отчёт, переделать файл, собрать презентацию.</li>
+        <li><b>Ведёт твои дела.</b> Разбирает голосовые в список задач, напоминает о встречах, пишет черновики постов и ответов.</li>
+      </ol>
       <p class="skills-lead">Агент приходит к тебе не пустым. Установщик сразу ставит ему набор навыков:</p>
       <ul class="chips">
         <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/></svg>понимать голосовые</li>
         <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>ставить напоминания</li>
         <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>присылать план дня</li>
+        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>открывать сайты в браузере</li>
         <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>знакомиться с тобой и запоминать главное</li>
         <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>собирать презентации</li>
         <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>расшифровывать ролики с YouTube</li>
@@ -278,7 +299,7 @@ footer a:hover{color:var(--fg)}
 
       <!-- ДЕНЬ 1 И ДАЛЬШЕ -->
       <article class="day">
-        <h3>ДЕНЬ 1 И ДАЛЬШЕ. АГЕНТ РАБОТАЕТ НА ТЕБЯ</h3>
+        <h3>ДЕНЬ 1 И ДАЛЬШЕ. АГЕНТ РАБОТАЕТ НА ТЕБЯ</h3>
         <p>Пять готовых первых задач, которые ты вставляешь в тот же вечер:</p>
         <ol>
           <li>Надиктуешь всё, что нужно сделать завтра, и получишь список дел с первым шагом для каждой задачи.</li>
@@ -291,7 +312,7 @@ footer a:hover{color:var(--fg)}
 
       <!-- ПЕРВЫЕ 7 ДНЕЙ -->
       <article class="day">
-        <h3>ПЕРВЫЕ 7 ДНЕЙ. ПОДДЕРЖКА В ЧАТЕ</h3>
+        <h3>ПЕРВЫЕ 7 ДНЕЙ. ПОДДЕРЖКА В ЧАТЕ</h3>
         <p>Застрял на любом шаге, пишешь в чат потока, днём и ночью. Отвечает Дарья, мой обученный агент, она уже провела через установку десятки людей. Сложные случаи она передаёт мне, и за каждым чатом я смотрю лично.</p>
       </article>
 
@@ -300,12 +321,12 @@ footer a:hover{color:var(--fg)}
         <h3>БОНУСЫ ТОЛЬКО ДЛЯ ПРЕДЗАКАЗА</h3>
         <ul>
           <li>разбор первой недели в чате потока: смотрю, что ты повесил на агента, и даю три идеи, что ещё на него переложить;</li>
-          <li>готовый характер агента: шаблон его памяти о тебе, чтобы он с первого дня говорил с тобой по-человечески.</li>
+          <li>готовый характер агента: шаблон его памяти о тебе, чтобы он с первого дня говорил с тобой по‑человечески.</li>
         </ul>
       </article>
 
     </div>
-    <div class="cta"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Занять место за 1 490 ₽</a></div>
+    <div class="cta"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Занять место за 1 490 ₽</a></div>
   </div>
 </section>
 
@@ -314,11 +335,14 @@ footer a:hover{color:var(--fg)}
   <div class="wrap">
     <h2 class="narrow" style="text-align:left">КАК Я САМ ПОЛЬЗУЮСЬ АГЕНТАМИ</h2>
     <div class="screens" id="screens">
-      <div class="phone"><img src="img/screen_voice_to_plan.webp" width="390" height="760" loading="lazy" alt="Переписка с агентом-маркетологом в Телеграме: голосовое владельца и ответ агента планом из восьми пунктов"></div>
-      <div class="phone"><img src="img/screen_morning_plan.webp" width="390" height="760" loading="lazy" alt="Переписка с агентом-секретарём: утренний план дня, новая встреча записана и напоминание о ней"></div>
-      <div class="phone"><img src="img/screen_reminders.webp" width="390" height="760" loading="lazy" alt="Переписка с агентом-секретарём: голосовое о встрече вечером и три напоминания на следующий день"></div>
+      <figure class="shot"><div class="phone"><img src="img/screen_koder_reel.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-кодером: владелец присылает пример ролика и уходит спать, агент присылает готовый ролик и отчёт"></div><figcaption>Скинул Маркусу пример ролика и ушёл спать. Через 46 минут он прислал готовый ролик с моим цифровым двойником</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/screen_analyst_table.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-аналитиком: владелец просит вести финансовый учёт, агент ставит задачу кодеру и присылает готовую таблицу"></div><figcaption>Попросил Алана вести финансовый учёт. Он сам поставил задачу Маркусу и через полчаса собрал таблицу</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/screen_daria_morning_pack.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-маркетологом: утренняя подборка рилсов и каруселей двумя файлами и картинка к посту"></div><figcaption>Каждое утро Дарья сама присылает подборку: какие рилсы и карусели залетели за ночь и почему</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/screen_daria_carousel.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-маркетологом: просьба сделать ночью, план работ и готовая карусель из девяти слайдов"></div><figcaption>Попросил сделать ночью. К двум часам Дарья собрала пять каруселей со слайдами и текстами</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/screen_secretary_conflict.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-секретарём: два голосовых, агент находит накладку двух созвонов и переносит один"></div><figcaption>Лиза сама заметила, что два созвона встали на одно время, и по голосовому перенесла один</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/screen_voice_to_plan.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-маркетологом: голосовое владельца и ответ агента планом из восьми пунктов"></div><figcaption>Сказал голосом «нужна полная статистика». Дарья разложила это в план из 8 блоков и отдала Маркусу</figcaption></figure>
     </div>
-    <div class="dots" id="dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+    <div class="dots" id="dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span><span></span><span></span></div>
     <p class="screens-cap">Это настоящие переписки с моими агентами. У меня их целая команда, твой первый агент будет одним таким сотрудником.</p>
   </div>
 </section>
@@ -328,7 +352,7 @@ footer a:hover{color:var(--fg)}
   <div class="wrap narrow">
     <div class="when">
       <h2>КОГДА</h2>
-      <p>Сразу после оплаты попадаешь в чат потока и получаешь подготовку из дня 0, чтобы заранее оформить Claude и сервер. 20 октября получаешь инструкцию и установщик, ставишь агента за вечер, и с этого дня идут 7 дней поддержки.</p>
+      <p>Сразу после оплаты попадаешь в чат потока и получаешь подготовку из дня 0, чтобы заранее оформить Claude и сервер. 20 октября получаешь инструкцию и установщик, ставишь агента за вечер, и с этого дня идут 7 дней поддержки.</p>
     </div>
   </div>
 </section>
@@ -353,9 +377,9 @@ footer a:hover{color:var(--fg)}
     <div class="guar">
       <div class="ic" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
       <h2>ГАРАНТИЯ</h2>
-      <p>Если по инструкции и с поддержкой агент у тебя так и не заработал, я верну деньги. Плюс, как на всех моих продуктах, возврат в течение 14 дней.</p>
-      <p style="margin-bottom:0">Поток запускаю, если наберётся 10 участников. Если не наберётся, всем верну деньги. Мест 30, потому что за каждым агентом я смотрю лично.</p>
-      <div class="cta"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Занять место за 1 490 ₽</a></div>
+      <p>Если по инструкции и с поддержкой агент у тебя так и не заработал, я верну деньги. Плюс, как на всех моих продуктах, возврат в течение 14 дней.</p>
+      <p style="margin-bottom:0">Поток запускаю, если наберётся 10 участников. Если не наберётся, всем верну деньги. Мест 30, потому что за каждым агентом я смотрю лично.</p>
+      <div class="cta"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Занять место за 1 490 ₽</a></div>
     </div>
   </div>
 </section>
@@ -365,7 +389,7 @@ footer a:hover{color:var(--fg)}
   <div class="wrap narrow">
     <div class="box">
       <h2>КОМУ ЭТО ДЛЯ НАЧАЛА</h2>
-      <p>Это один личный агент. Целую команду агентов для бизнеса (маркетинг, аналитика, секретарь, кодеры, монтаж, воронки) я собираю под ключ за 300 000 ₽. Агент за вечер это первый сотрудник из такой команды, с него удобно начать и своими руками понять, как всё устроено.</p>
+      <p>Это один личный агент. Целую команду агентов для бизнеса (маркетинг, аналитика, секретарь, кодеры, монтаж, воронки) я собираю под ключ за 300 000 ₽. Агент за вечер это первый сотрудник из такой команды, с него удобно начать и своими руками понять, как всё устроено.</p>
     </div>
   </div>
 </section>
@@ -378,8 +402,8 @@ footer a:hover{color:var(--fg)}
     <details><summary>Смогу оплатить Claude из России?</summary><div class="a"><p>Под это в инструкции отдельная глава со способами, которые мы проверили сами. Если ни один не подойдёт, в чате поможем подобрать.</p></div></details>
     <details><summary>Зачем сервер?</summary><div class="a"><p>Без сервера агент засыпает, когда ты закрываешь ноутбук. С сервером он работает круглые сутки, это около 5$ в месяц.</p></div></details>
     <details><summary>Сколько времени займёт?</summary><div class="a"><p>Один вечер на установку. Между регистрацией в Claude и оплатой лучше сделать перерыв в один день, так аккаунт надёжнее.</p></div></details>
-    <details><summary>Что будет после 7 дней поддержки?</summary><div class="a"><p>Агент остаётся у тебя и работает дальше. Инструкция тоже остаётся у тебя.</p></div></details>
-    <div class="cta center" id="final-cta" style="align-items:center"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Занять место за 1 490 ₽</a></div>
+    <details><summary>Что будет после 7 дней поддержки?</summary><div class="a"><p>Агент остаётся у тебя и работает дальше. Инструкция тоже остаётся у тебя.</p></div></details>
+    <div class="cta center" id="final-cta" style="align-items:center"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Занять место за 1 490 ₽</a></div>
   </div>
 </section>
 
@@ -402,7 +426,7 @@ footer a:hover{color:var(--fg)}
 </div></div>
 
 
-<div class="sticky" id="sticky" aria-hidden="true"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener" tabindex="-1">Занять место за 1 490 ₽</a></div>
+<div class="sticky" id="sticky" aria-hidden="true"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener" tabindex="-1">Занять место за 1 490 ₽</a></div>
 
 <script>
 (function(){
