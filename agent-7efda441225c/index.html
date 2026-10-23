@@ -12,208 +12,355 @@
 <meta property="og:description" content="Свой ИИ-агент в твоём телефоне. Больше не нужно сидеть за компьютером.">
 <meta property="og:image" content="https://vladimir-izhmukov.ru/agent/img/og_agent.png">
 <meta property="og:locale" content="ru_RU">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#05080c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+/* Style reference: mediaroy.com (dark blue-black, amber accents, honeycomb wall, mono labels) */
 :root{
-  --bg:#000;--bg2:#07060a;--card:#0d0b12;--card2:#131019;--line:#24202e;--line-gold:#5a4a10;
-  --fg:#f3f1f7;--mut:#a9a3b8;--gold:#f5c518;--red:#ff3b3b;
-  --grad:linear-gradient(135deg,#ffd84d 0%,#f5c518 50%,#b8860b 100%);
-  --r:20px;--gut:16px;
+  --bg:#05080c;--surface:#0a1017;--surface-strong:#0e151e;--surface-raised:#121a24;
+  --fg:#f5f7fa;--lead:#adb5c0;--muted:#9aa4b2;--faint:#687383;
+  --line:rgba(201,216,232,.12);--line-warm:rgba(245,166,35,.28);
+  --amber:#f5a623;--amber-bright:#ffc057;--amber-soft:#d57a10;--btn-ink:#171009;--ok:#4fd487;
+  --grad-btn:linear-gradient(180deg,#ffc45f 0%,#f5a623 100%);
+  --grad-word:linear-gradient(90deg,#fff0c7 0%,#ffc057 55%,#ed8a19 100%);
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+  --gut:16px;--r:16px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
-.wrap{max-width:1080px;margin:0 auto;padding:0 var(--gut)}
-.narrow{max-width:760px;margin-left:auto;margin-right:auto}
-section{padding:56px 0}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line-gold);background:rgba(245,197,24,.06);padding:7px 12px;border-radius:999px}
-.eyebrow .nw{white-space:nowrap}
-@media (max-width:420px){.eyebrow{font-size:11px;letter-spacing:.02em;padding:6px 10px;gap:7px}}
-@media (max-width:374px){.eyebrow{font-size:10px;letter-spacing:.01em;padding:6px 9px;gap:6px}}
-.eyebrow::before{flex:none;content:"";width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(255,59,59,.18)}
-h1{font-size:clamp(30px,8vw,58px);line-height:1.04;letter-spacing:-.02em;font-weight:900;margin:18px 0 18px}
-h2{font-size:clamp(24px,6vw,36px);line-height:1.15;letter-spacing:-.01em;font-weight:800;margin:0 0 24px;color:var(--fg)}
-h2 .k{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
-.gold{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{font-size:clamp(17px,4.4vw,20px);color:#dcd8e4;margin:0 0 26px;max-width:580px}
 p{margin:0 0 14px}
 h1,h2,h3,.faq summary,.shot figcaption{text-wrap:balance}
 p,li{text-wrap:pretty}
-.price-steps{list-style:none;margin:6px 0 8px;padding:0;display:grid;gap:4px}.price-steps li{white-space:nowrap}.price-line p{margin:0}
-.price-steps .old-price{color:#8f8a99;margin-right:8px}.price-steps .price-note{white-space:normal;font-size:14px;color:#cfcad9}
+.wrap{max-width:1160px;margin:0 auto;padding:0 var(--gut);position:relative;z-index:2}
+.narrow{max-width:780px}
+section{padding:72px 0;position:relative}
 
-.mut{color:var(--mut)}
+/* honeycomb wall background */
+.hive{position:relative;isolation:isolate;overflow:hidden}
+.hive::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0 0v34' fill='none' stroke='%23c9d8e8' stroke-opacity='.07' stroke-width='1'/%3E%3C/svg%3E");
+  background-size:56px 100px;
+  -webkit-mask-image:radial-gradient(120% 90% at 50% 40%,#000 30%,transparent 85%);mask-image:radial-gradient(120% 90% at 50% 40%,#000 30%,transparent 85%)}
+.hive::after{content:"";position:absolute;inset:-10%;z-index:1;pointer-events:none;
+  background:radial-gradient(circle at 77% 30%,rgba(245,166,35,.13),transparent 18%),radial-gradient(circle at 12% 70%,rgba(218,126,21,.08),transparent 16%),radial-gradient(circle at 45% 90%,rgba(45,83,107,.10),transparent 22%);
+  animation:drift 24s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-3%,2%,0)}}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 14px var(--amber)}50%{opacity:.45;box-shadow:0 0 4px var(--amber)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes flow{from{background-position:0 0}to{background-position:0 40px}}
+@keyframes flowx{from{background-position:0 0}to{background-position:40px 0}}
+
+/* kicker + headings */
+.kicker{display:inline-flex;align-items:center;gap:10px;margin:0 0 16px;color:var(--amber-bright);font-size:11.5px;font-weight:780;letter-spacing:.14em;text-transform:uppercase;font-family:var(--mono)}
+.kicker::before{content:"";width:26px;height:1px;background:var(--amber);box-shadow:0 0 10px rgba(245,166,35,.6)}
+h1{margin:0 0 22px;font-size:clamp(38px,10.5vw,46px);line-height:.99;letter-spacing:-.055em;font-weight:770}
+h1 em,h2 em{font-style:normal;background:var(--grad-word);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{margin:0 0 22px;font-size:clamp(30px,8vw,40px);line-height:1.07;letter-spacing:-.04em;font-weight:740;color:var(--fg)}
+.lead{font-size:clamp(17px,4.4vw,19px);line-height:1.65;color:var(--lead);margin:0 0 28px;max-width:600px}
+.mut{color:var(--muted)}
 
 /* buttons */
-.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:58px;width:100%;max-width:420px;padding:16px 22px;border-radius:16px;
-  background:var(--grad);color:#000;font-weight:800;font-size:18px;text-decoration:none;letter-spacing:-.005em;
-  box-shadow:0 10px 30px -8px rgba(245,197,24,.55),inset 0 1px 0 rgba(255,255,255,.45);transition:transform .18s ease,box-shadow .18s ease}
-.btn:hover{transform:translateY(-1px);box-shadow:0 14px 36px -8px rgba(245,197,24,.7),inset 0 1px 0 rgba(255,255,255,.45)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;width:100%;max-width:420px;padding:15px 24px;border-radius:10px;
+  background:var(--grad-btn);color:var(--btn-ink);font-weight:720;font-size:17px;letter-spacing:-.01em;text-decoration:none;
+  box-shadow:0 12px 34px -12px rgba(245,166,35,.75),inset 0 1px 0 rgba(255,255,255,.45);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.05);box-shadow:0 16px 40px -12px rgba(245,166,35,.9),inset 0 1px 0 rgba(255,255,255,.45)}
 .btn:active{transform:translateY(1px)}
-.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .btn svg{flex:none}
-.cta{margin-top:28px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.btn-sm{min-height:42px;width:auto;padding:9px 16px;font-size:14.5px;border-radius:9px}
+.cta{margin-top:30px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.center{text-align:center}
 .center .cta{align-items:center}
 
+/* top bar */
+.topbar{position:sticky;top:0;z-index:40;background:rgba(5,8,12,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:760;letter-spacing:-.02em;font-size:16px;text-decoration:none}
+.brand .hex{width:30px;height:34px;flex:none;background:var(--grad-btn);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);box-shadow:0 0 18px rgba(245,166,35,.5);position:relative}
+.brand .hex::after{content:"";position:absolute;inset:3px;background:var(--bg);clip-path:inherit}
+.topbar .btn-sm{display:none}
+
 /* hero */
-.hero{padding:40px 0 48px;background:radial-gradient(120% 70% at 50% -10%,#2a2207 0%,rgba(13,11,18,.6) 45%,#000 75%);border-bottom:1px solid var(--line)}
-.hero-grid{display:grid;gap:36px;align-items:center}
-.price-line{margin-top:18px;font-size:15px;color:#cfcad9;max-width:440px;line-height:1.55;border-left:3px solid var(--red);padding-left:12px}
-.hero-phone{display:none}
+.hero{padding:56px 0 64px;border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;gap:44px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:11px;max-width:100%;margin:0 0 24px;padding:9px 14px;border-radius:999px;border:1px solid var(--line-warm);background:rgba(12,17,23,.76);color:#d9dde2;font-size:12.5px;box-shadow:inset 0 0 20px rgba(245,166,35,.04)}
+.eyebrow::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--amber-bright);box-shadow:0 0 14px var(--amber);animation:pulse 2.8s ease-in-out infinite}
+.price-card{margin-top:22px;max-width:440px;border:1px solid var(--line);background:rgba(10,16,23,.82);border-radius:14px;padding:16px 18px;font-size:14.5px;color:var(--lead);line-height:1.55}
+.price-card p{margin:0}
+.price-card .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:8px}
+.price-steps{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:6px}
+.price-steps li{white-space:nowrap}
+.price-steps .old-price{color:var(--faint);margin-right:10px;font-size:17px}
+.price-steps b{font-size:24px;letter-spacing:-.03em;color:var(--fg);font-weight:760}
+.price-steps .price-note{white-space:normal;font-size:13.5px;color:var(--muted);font-family:var(--mono)}
+.price-card .sep{border-top:1px solid var(--line);padding-top:12px}
+/* animated AI agent (behind hero content) */
+.hero-visual{display:block;position:absolute;top:-46px;right:12px;width:76px;z-index:-1;pointer-events:none}
+.hero-visual .frame{display:none}
+.agent{position:relative;width:76px;--walk:-18px;opacity:.92;pointer-events:none;animation:agWalk 12s ease-in-out infinite}
+.agent svg{display:block;width:100%;height:auto;overflow:visible}
+.ag-float{animation:agBob 3s ease-in-out infinite}
+.ag-shadow{transform-box:fill-box;transform-origin:center;animation:agShadow 3s ease-in-out infinite}
+.ag-eyes{transform-box:view-box;transform-origin:80px 89px;animation:agBlink 4.6s ease-in-out infinite}
+.ag-arm-l{transform-box:view-box;transform-origin:43px 130px;animation:agSwing 3s ease-in-out infinite}
+.ag-arm-r{transform-box:view-box;transform-origin:115px 130px;transform:rotate(8deg);animation:agPoint 12s ease-in-out infinite}
+.ag-holo{opacity:0;animation:agHolo 12s ease-in-out infinite}
+.ag-bubble{animation:agBubble 12s ease-in-out infinite}
+.ag-dots{animation:agDots 12s ease-in-out infinite}
+.ag-dots circle{transform-box:fill-box;transform-origin:center;animation:agDot .9s ease-in-out infinite}
+.ag-dots circle:nth-child(2){animation-delay:.15s}.ag-dots circle:nth-child(3){animation-delay:.3s}
+.ag-wave{opacity:0;animation:agWave 12s ease-in-out infinite}
+.ag-wave rect{transform-box:fill-box;transform-origin:center;animation:agBar .8s ease-in-out infinite}
+.ag-wave rect:nth-child(2){animation-delay:.1s}.ag-wave rect:nth-child(3){animation-delay:.2s}.ag-wave rect:nth-child(4){animation-delay:.3s}.ag-wave rect:nth-child(5){animation-delay:.4s}.ag-wave rect:nth-child(6){animation-delay:.5s}.ag-wave rect:nth-child(7){animation-delay:.6s}
+.ag-core,.ag-ant{animation:agGlow 2.4s ease-in-out infinite}
+.ag-jet{transform-box:fill-box;transform-origin:center;animation:agJet .5s ease-in-out infinite alternate}
+@keyframes agWalk{0%,100%{transform:translateX(0)}30%,70%{transform:translateX(var(--walk))}}
+@keyframes agBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes agShadow{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(.8);opacity:.3}}
+@keyframes agBlink{0%,90%,100%{transform:scaleY(1)}94%{transform:scaleY(.1)}}
+@keyframes agSwing{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(6deg)}}
+@keyframes agPoint{0%,32%{transform:rotate(8deg)}40%,64%{transform:rotate(-100deg)}72%,100%{transform:rotate(8deg)}}
+@keyframes agHolo{0%,40%{opacity:0}46%{opacity:.95}50%{opacity:.6}54%,62%{opacity:.95}66%,100%{opacity:0}}
+@keyframes agBubble{0%,3%{opacity:0;transform:translateY(4px)}7%,30%{opacity:1;transform:none}35%,72%{opacity:0;transform:translateY(4px)}76%,94%{opacity:1;transform:none}98%,100%{opacity:0;transform:translateY(4px)}}
+@keyframes agDots{0%,34%{opacity:1}36%,100%{opacity:0}}
+@keyframes agWave{0%,70%{opacity:0}74%,96%{opacity:1}100%{opacity:0}}
+@keyframes agDot{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(-3px);opacity:1}}
+@keyframes agBar{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+@keyframes agGlow{0%,100%{opacity:1}50%{opacity:.55}}
+@keyframes agJet{from{transform:scaleX(.85);opacity:.55}to{transform:scaleX(1.1);opacity:.9}}
+
+/* panel frame (mockup style) */
+.frame{position:relative;border-radius:22px;padding:14px;background:linear-gradient(180deg,rgba(14,21,30,.92),rgba(8,12,17,.92));border:1px solid var(--line-warm);box-shadow:0 40px 90px -40px rgba(0,0,0,.95),0 0 0 1px rgba(245,166,35,.05),0 0 60px -20px rgba(245,166,35,.25)}
+.frame .bar{display:flex;align-items:center;gap:7px;padding:2px 4px 12px}
+.frame .bar i{width:9px;height:9px;border-radius:50%;background:#1e2833}
+.frame .bar i:first-child{background:var(--amber-bright);box-shadow:0 0 10px var(--amber)}
+.frame .bar .ln{flex:1;height:8px;border-radius:4px;background:#121a24;margin-left:8px}
+
+.phone{border-radius:32px;padding:8px;background:linear-gradient(160deg,#1b2430,#0a0f15);border:1px solid #243040;box-shadow:0 24px 50px -20px rgba(0,0,0,.9)}
+.phone img{border-radius:25px;width:100%;height:auto;aspect-ratio:390/844;background:#0e1621}
 
 /* result */
-.result{padding:48px 0 8px}
-.result-card{border-radius:24px;padding:26px 22px;background:radial-gradient(120% 120% at 100% 0%,rgba(245,197,24,.14),transparent 55%),var(--card);border:1px solid var(--line-gold)}
-.result-card h2{font-size:clamp(20px,5vw,26px);color:var(--gold);margin-bottom:12px}
-.result-card p{margin:0;font-size:17px;line-height:1.65;color:#e4e0ea}
-
-/* result list */
-.does{margin:6px 0 18px;padding-left:22px;display:grid;gap:10px}.does li{line-height:1.5}.does b{color:var(--fg,#fff)}
-/* skills chips */
-.skills-lead{margin:18px 0 12px!important;font-weight:700;color:var(--fg)!important}
+.result-head{max-width:780px}
+.result-card{border:1px solid var(--line);border-radius:20px;padding:26px 22px;background:linear-gradient(180deg,rgba(10,16,23,.92),rgba(10,16,23,.75))}
+.result-card .intro{font-size:17px;line-height:1.7;color:#d6dce3;margin:0 0 6px;max-width:820px}
+.sublbl{margin:30px 0 14px!important;font-weight:740;color:var(--fg)!important;font-size:18px;letter-spacing:-.02em}
+.does{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:f}
+.does li{counter-increment:f;position:relative;border:1px solid var(--line);background:var(--surface-strong);border-radius:var(--r);padding:20px 18px 20px;color:var(--muted);line-height:1.55;font-size:15.5px;transition:border-color .2s ease,transform .2s ease}
+.does li:hover{border-color:var(--line-warm);transform:translateY(-2px)}
+.does li::after{content:"0" counter(f);position:absolute;right:16px;bottom:12px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+.does .fi{width:40px;height:40px;border-radius:10px;border:1px solid var(--line-warm);background:rgba(245,166,35,.06);display:flex;align-items:center;justify-content:center;color:var(--amber-bright);margin-bottom:16px}
+.does b{display:block;color:var(--fg);font-size:17.5px;letter-spacing:-.02em;margin-bottom:6px;font-weight:720}
 .chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.chips li{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;background:rgba(245,197,24,.08);border:1px solid var(--line-gold);color:#f1e7c2;font-size:14.5px;font-weight:600;line-height:1.25}
-.chips svg{color:var(--gold);flex:none}
+.chips li{display:inline-flex;align-items:center;gap:9px;padding:9px 13px;border-radius:8px;border:1px solid var(--line);background:rgba(18,26,36,.8);color:#d6dce3;font-size:14px;font-weight:550;line-height:1.25}
+.chips svg{color:var(--amber-bright);flex:none}
 
-/* phone block */
-.mobile-block{padding-top:40px}
-.mobile-block h2{font-size:clamp(28px,7.5vw,44px);margin-bottom:14px}
-.mobile-block .intro{color:#cfcad9;font-size:17px;margin-bottom:26px}
-.flow{list-style:none;margin:0;padding:0;display:grid;gap:14px;position:relative}
-.flow li{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;position:relative}
-.flow li:not(:last-child)::after{content:"";position:absolute;left:44px;bottom:-15px;width:2px;height:16px;background:var(--gold)}
-.flow .ico{flex:none;width:54px;height:54px;border-radius:16px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -10px rgba(245,197,24,.7)}
-.flow p{margin:0;color:#dcd8e4;font-size:16.5px;line-height:1.5;padding-top:3px}
-.flow b{display:block;color:var(--fg);font-size:19px;font-weight:800;margin-bottom:2px}
-.once{margin-top:18px;display:flex;gap:12px;align-items:center;border-radius:16px;padding:14px 16px;border:1px dashed rgba(255,59,59,.55);background:rgba(255,59,59,.06)}
-.once .ico-sm{color:var(--red);flex:none;display:flex}
-.once p{margin:0;font-weight:700;color:var(--fg)}
-.screens-cap{max-width:760px;margin:14px auto 0;color:#cfcad9;font-size:16.5px;text-align:center}
-#screens-block h2{max-width:760px;margin-left:auto;margin-right:auto}
+/* phone flow */
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:16px;position:relative}
+.flow li{position:relative;display:flex;gap:16px;align-items:flex-start;background:rgba(10,16,23,.88);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px}
+.flow li:not(:last-child)::after{content:"";position:absolute;left:37px;bottom:-17px;width:2px;height:18px;background:repeating-linear-gradient(180deg,var(--amber) 0 5px,transparent 5px 10px);background-size:2px 40px;animation:flow 1.6s linear infinite}
+.flow .ico{flex:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line-warm);background:rgba(245,166,35,.07);color:var(--amber-bright);display:flex;align-items:center;justify-content:center}
+.flow .n{display:block;font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.1em;margin-bottom:6px}
+.flow p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.55}
+.flow b{display:block;color:var(--fg);font-size:18px;font-weight:720;letter-spacing:-.02em;margin-bottom:4px}
+.once{margin-top:18px;display:flex;gap:12px;align-items:center;border-radius:12px;padding:14px 16px;border:1px solid var(--line-warm);background:rgba(245,166,35,.05)}
+.once .ok{flex:none;width:22px;height:22px;border-radius:50%;border:1px solid var(--amber);color:var(--amber-bright);display:flex;align-items:center;justify-content:center}
+.once p{margin:0;font-weight:600;color:var(--fg);font-size:15.5px}
 
-/* days timeline (main block) */
-.get{padding-top:48px}
-.get h2{font-size:clamp(28px,7.5vw,44px);margin-bottom:28px}
-.days{position:relative;display:grid;gap:18px;padding-left:26px}
-.days::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--gold),var(--line-gold) 70%,var(--red))}
-.day{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px}
-.day::before{content:"";position:absolute;left:-26px;top:22px;width:16px;height:16px;border-radius:50%;background:#000;border:3px solid var(--gold);box-shadow:0 0 0 4px rgba(245,197,24,.12)}
-.day h3{margin:0 0 12px;font-size:clamp(17px,4.6vw,21px);line-height:1.3;font-weight:900;letter-spacing:.01em;color:var(--gold)}
-.day p{color:#dcd8e4;margin:0 0 12px}
-.day p:last-child{margin-bottom:0}
-.day ol{list-style:none;margin:0;padding:0;counter-reset:d;display:grid;gap:10px}
-.day ol li{counter-increment:d;position:relative;padding-left:40px;color:#e4e0ea;line-height:1.55}
-.day ol li::before{content:counter(d);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:9px;background:var(--grad);color:#000;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
-.day.bonus{background:linear-gradient(135deg,rgba(255,59,59,.12),rgba(245,197,24,.06));border-color:rgba(255,59,59,.4)}
-.day.bonus::before{border-color:var(--red);box-shadow:0 0 0 4px rgba(255,59,59,.15)}
-.day.bonus h3{color:#fff}
-.day.bonus ul{margin:0;padding-left:20px}
-.day.bonus li{margin:8px 0;color:#e4e0ea}
-.day.bonus li::marker{color:var(--red)}
+/* days: steps list */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:16px;position:relative}
+.step{position:relative;display:block;border:1px solid var(--line);background:rgba(10,16,23,.88);border-radius:18px;padding:22px 18px}
+.step .num{width:44px;height:44px;border-radius:10px;border:1px solid var(--line-warm);background:rgba(245,166,35,.06);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:14px;color:var(--amber-bright);margin-bottom:14px}
+.step .tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-bright);margin:2px 0 6px}
+.step h3{margin:0 0 14px;font-size:clamp(20px,5.2vw,24px);line-height:1.2;letter-spacing:-.035em;font-weight:740}
+.step p{color:var(--muted);margin:0 0 12px}
+.step p:last-child{margin-bottom:0}
+.step ol{list-style:none;margin:0;padding:0;counter-reset:d;display:grid;gap:0}
+.step ol li{counter-increment:d;position:relative;padding:12px 0 12px 40px;color:#d6dce3;line-height:1.55;border-top:1px solid var(--line);font-size:15.5px}
+.step ol li::before{content:"0" counter(d);position:absolute;left:0;top:13px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--amber-bright)}
+.step.bonus{border-color:var(--line-warm);background:radial-gradient(120% 140% at 100% 0%,rgba(245,166,35,.12),transparent 55%),rgba(10,16,23,.9)}
+.step.bonus .num{background:var(--grad-btn);color:var(--btn-ink);border:0}
+.step.bonus ul{list-style:none;margin:0;padding:0}
+.step.bonus li{position:relative;padding:10px 0 10px 30px;color:#d6dce3;border-top:1px solid var(--line)}
+.step.bonus li::before{content:"";position:absolute;left:4px;top:18px;width:9px;height:9px;border-radius:50%;background:var(--amber-bright);box-shadow:0 0 10px var(--amber)}
 
 /* screens */
-.screens{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--gut) 18px;margin:0 calc(-1 * var(--gut));scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.screens-sec{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(180deg,#070b10,#05080c)}
+.screens{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px var(--gut) 18px;margin:0 calc(-1 * var(--gut));scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .screens::-webkit-scrollbar{display:none}
-.shot{flex:0 0 78%;max-width:300px;margin:0;scroll-snap-align:center}
-.shot figcaption{margin-top:12px;padding:0 4px;color:#dcd8e4;font-size:15px;line-height:1.45;text-align:center}
-.phone{border-radius:34px;padding:9px;background:linear-gradient(160deg,#2b2733,#0f0d13);border:1px solid #2f2a38;box-shadow:0 24px 50px -20px rgba(0,0,0,.9),0 0 0 1px rgba(245,197,24,.06)}
-.phone img{border-radius:26px;width:100%;height:auto;aspect-ratio:390/844;background:#0e1621}
+.shot{flex:0 0 78%;max-width:300px;margin:0;scroll-snap-align:center;border:1px solid var(--line);background:rgba(10,16,23,.9);border-radius:22px;padding:12px 12px 16px;transition:border-color .2s ease,transform .2s ease}
+.shot:hover{border-color:var(--line-warm);transform:translateY(-3px)}
+.shot figcaption{margin-top:14px;padding:0 4px;color:var(--muted);font-size:14.5px;line-height:1.5}
 .dots{display:flex;justify-content:center;gap:8px;margin-top:4px}
-.dots span{width:8px;height:8px;border-radius:50%;background:#3a3446}
-.dots span.on{background:var(--gold)}
+.dots span{width:7px;height:7px;border-radius:50%;background:#1e2833}
+.dots span.on{background:var(--amber-bright);box-shadow:0 0 10px var(--amber)}
+.screens-cap{max-width:760px;margin:22px 0 0;color:var(--lead);font-size:16px}
 
-/* when */
-.when{border:1px solid var(--line-gold);border-radius:20px;padding:22px 20px;background:var(--card);display:grid;gap:4px}
-.when h2{margin:0 0 8px;color:var(--gold)}
-.when p{margin:0;font-size:17px;color:#e4e0ea}
-
-/* costs */
-.costs{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:12px}
-.costs li{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;font-size:17px;font-weight:600;color:var(--fg)}
+/* when + costs */
+.duo{display:grid;gap:18px}
+.panel{border:1px solid var(--line);background:rgba(10,16,23,.9);border-radius:20px;padding:24px 20px}
+.panel.warm{border-color:var(--line-warm);background:radial-gradient(120% 120% at 0% 0%,rgba(245,166,35,.09),transparent 55%),rgba(10,16,23,.9)}
+.panel h2{font-size:clamp(26px,7vw,34px);margin-bottom:14px}
+.panel p{color:#d6dce3;font-size:16.5px;margin:0}
+.costs{list-style:none;margin:0 0 18px;padding:0}
+.costs li{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid var(--line);font-size:16px;font-weight:540;color:var(--fg)}
+.costs li:last-child{border-bottom:1px solid var(--line)}
+.costs li::after{content:"→";color:var(--amber-bright);flex:none;font-family:var(--mono)}
+.costs-note{font-size:14.5px}
 
 /* guarantee */
-.guar{background:radial-gradient(100% 120% at 0% 0%,rgba(245,197,24,.12),transparent 60%),var(--card);border:1px solid var(--line-gold);border-radius:24px;padding:28px 22px}
-.guar .ic{width:52px;height:52px;border-radius:14px;background:var(--grad);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.guar h2{margin-bottom:16px}
-.guar p{color:#dcd8e4;font-size:16.5px}
+.guar{position:relative;overflow:hidden;border:1px solid var(--line-warm);border-radius:24px;padding:32px 22px;background:radial-gradient(90% 120% at 100% 100%,rgba(245,166,35,.16),transparent 55%),linear-gradient(180deg,#0b121a,#070b10)}
+.guar .gic{width:64px;height:72px;margin-bottom:20px;position:relative;background:var(--grad-btn);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);display:flex;align-items:center;justify-content:center;animation:floaty 5.6s ease-in-out infinite}
+.guar .gic svg{position:relative;z-index:1}
+.guar p{color:#d6dce3;font-size:16.5px;max-width:640px}
 
-/* who (quiet) */
-.who{padding:28px 0}
-.who .box{border:1px solid var(--line);border-radius:18px;padding:18px 18px;background:var(--bg2)}
-.who h2{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:0 0 8px;font-weight:700}
-.who p{font-size:14.5px;color:var(--mut);margin:0;line-height:1.6}
+/* who */
+.who{padding:20px 0 40px}
+.who .box{border:1px dashed var(--line);border-radius:16px;padding:20px 20px;background:rgba(7,11,16,.8)}
+.who h2{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:700}
+.who p{font-size:14.5px;color:var(--muted);margin:0;line-height:1.65}
 
 /* faq */
-.faq details{border:1px solid var(--line);background:var(--card);border-radius:16px;margin:0 0 10px;transition:border-color .2s ease}
-.faq details[open]{border-color:var(--line-gold)}
-.faq summary{list-style:none;cursor:pointer;padding:18px 52px 18px 18px;font-weight:700;font-size:16.5px;position:relative;min-height:56px;display:flex;align-items:center}
+.faq details{border-top:1px solid var(--line);transition:background .2s ease}
+.faq details:last-of-type{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 52px 20px 0;font-weight:680;font-size:17px;letter-spacing:-.015em;position:relative;min-height:60px;display:flex;align-items:center}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"";position:absolute;right:20px;top:50%;width:10px;height:10px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:translateY(-70%) rotate(45deg);transition:transform .2s ease}
-.faq details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
-.faq summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:16px}
-.faq .a{padding:0 18px 18px;color:#cfcad9}
+.faq summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:8px;border:1px solid var(--line-warm);color:var(--amber-bright);font-family:var(--mono);font-size:16px;display:flex;align-items:center;justify-content:center;transition:transform .2s ease}
+.faq details[open] summary::after{content:"−";transform:translateY(-50%) rotate(180deg)}
+.faq summary:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:8px}
+.faq .a{padding:0 52px 20px 0;color:var(--muted)}
 .faq .a p{margin:0}
 
 /* footer */
-footer{border-top:1px solid var(--line);padding:28px 0 120px;color:var(--mut);font-size:14px}
+footer{border-top:1px solid var(--line);padding:28px 0 120px;color:var(--faint);font-size:14px}
 footer nav{display:flex;flex-wrap:wrap;gap:10px 22px}
-footer a{color:var(--mut);text-decoration:underline;text-underline-offset:3px;padding:6px 0}
+footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:6px 0}
 footer a:hover{color:var(--fg)}
 
 /* sticky cta (mobile) */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.92) 35%);transform:translateY(110%);transition:transform .25s ease}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(5,8,12,0),rgba(5,8,12,.94) 35%);transform:translateY(110%);transition:transform .25s ease}
 .sticky.show{transform:none}
-.sticky .btn{max-width:none;min-height:54px;font-size:17px}
+.sticky .btn{max-width:none;min-height:54px}
 
 @media (min-width:760px){
-  section{padding:80px 0}
-  .hero{padding:72px 0 80px}
-  .hero-grid{grid-template-columns:1.15fr .85fr}
-  .hero-phone{display:block;justify-self:center;width:300px;transform:rotate(2deg)}
-  .hero-phone .phone{max-width:none}
-  .screens{display:grid;grid-template-columns:repeat(2,minmax(0,300px));justify-content:center;gap:36px 28px;overflow:visible;padding:4px 0 10px;margin:0}
+  section{padding:120px 0}
+  h1{font-size:clamp(50px,5.4vw,74px);line-height:.96;letter-spacing:-.06em}
+  h2{font-size:clamp(36px,4vw,54px)}
+  .topbar .btn-sm{display:inline-flex}
+  .hero{padding:96px 0 110px}
+  .hero-grid{grid-template-columns:1.1fr .9fr;gap:56px}
+  .hero-visual{display:block;position:relative;top:auto;right:auto;z-index:auto;pointer-events:auto;justify-self:center;width:100%;max-width:380px}
+  .hero-visual .frame{display:block}
+  .agent{position:absolute;z-index:-1;width:150px;right:-60px;top:250px;--walk:-18px;opacity:1}
+  .agent svg{transform:scaleX(-1)}
+  .hero-visual .phone{animation:floaty 4.8s ease-in-out infinite}
+  .result-card{padding:40px}
+  .does{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .flow li{flex-direction:column;padding:24px}
+  .flow li:not(:last-child)::after{left:auto;right:-21px;bottom:auto;top:43px;width:22px;height:2px;background:repeating-linear-gradient(90deg,var(--amber) 0 5px,transparent 5px 10px);background-size:40px 2px;animation:flowx 1.6s linear infinite}
+  .step{display:grid;grid-template-columns:56px 1fr;gap:24px;padding:30px 30px}
+  .step .num{width:56px;height:56px;font-size:16px;margin-bottom:0}
+  .steps::before{content:"";position:absolute;left:58px;top:40px;bottom:40px;width:1px;background:linear-gradient(var(--amber),var(--line-warm) 70%,transparent);z-index:-1}
+  .screens{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;overflow:visible;padding:6px 0 10px;margin:0}
   .shot{max-width:none}
   .dots{display:none}
-  .days{padding-left:40px}
-  .day{padding:26px 26px}
-  .day::before{left:-40px}
-  .days::before{left:7px}
-  .guar{padding:40px}
+  .duo{grid-template-columns:.9fr 1.1fr;gap:22px;align-items:start}
+  .panel{padding:36px}
+  .guar{padding:56px}
+  .who{padding:20px 0 60px}
   .sticky{display:none}
   footer{padding-bottom:40px}
 }
-@media (min-width:1000px){
-  .screens{grid-template-columns:repeat(3,minmax(0,300px));gap:40px 32px}
+@media (min-width:1280px){
+  .agent{width:190px;right:-205px;top:220px;--walk:-22px}
+}
+@media (min-width:1040px){
+  .screens{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+  .does{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 </style>
 <script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript></head>
 <body>
 
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="hex" aria-hidden="true"></span>Агент за вечер</a>
+    <a class="btn btn-sm" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Забрать за 2 490 ₽</a>
+  </div>
+</div>
+
 <!-- ===== ГЕРОЙ ===== -->
-<header class="hero" id="top">
+<header class="hero hive" id="top">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow"><span>Доступ сразу после оплаты</span></span>
-      <h1 class="gold">Свой ИИ-агент за один вечер. Дальше просто говоришь ему голосом, и он делает</h1>
+      <span class="eyebrow">Доступ сразу после оплаты</span>
+      <h1>Свой ИИ-агент за один вечер. <em>Дальше просто говоришь ему голосом, и он делает</em></h1>
       <p class="lead">Свой агент в Телеграме, который работает круглые сутки: ищет информацию, пишет тексты, открывает сайты и ведёт твои дела. Ставишь его за один вечер по пошаговой инструкции, без программиста, а дальше просто надиктовываешь задачи голосовыми, где бы ты ни&nbsp;был.</p>
       <div class="cta" id="hero-cta">
-        <a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Забрать за 2 490 ₽ <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Забрать за 2 490 ₽ <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <div class="price-line"><p><b>Цена:</b></p>
+      <div class="price-card">
+        <p class="lbl">Цена:</p>
         <ul class="price-steps">
           <li><s class="old-price">3&nbsp;990&nbsp;₽</s> <b>2&nbsp;490&nbsp;₽</b></li>
           <li class="price-note">первые 24 часа после входа в&nbsp;бота</li>
         </ul>
-        <p>Подписка Claude и сервер оплачиваются отдельно, около 25$ в&nbsp;месяц.</p></div>
+        <p class="sep">Подписка Claude и сервер оплачиваются отдельно, около 25$ в&nbsp;месяц.</p>
+      </div>
     </div>
-    <div class="hero-phone" aria-hidden="true">
-      <div class="phone"><img src="img/screen_voice_to_plan.webp" alt="" width="390" height="844"></div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="agent">
+        <svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <defs>
+            <linearGradient id="agHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2836"/><stop offset="1" stop-color="#0b121a"/></linearGradient>
+            <linearGradient id="agBodyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16202b"/><stop offset="1" stop-color="#0a1017"/></linearGradient>
+            <linearGradient id="agBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc057" stop-opacity=".85"/><stop offset="1" stop-color="#f5a623" stop-opacity="0"/></linearGradient>
+            <radialGradient id="agJetG"><stop offset="0" stop-color="#ffc057"/><stop offset="1" stop-color="#f5a623" stop-opacity="0"/></radialGradient>
+            <filter id="agGlowF" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <ellipse class="ag-shadow" cx="80" cy="196" rx="30" ry="4" fill="#000" opacity=".55"/>
+          <g class="ag-float">
+            <g class="ag-bubble">
+              <rect x="94" y="4" width="62" height="28" rx="14" fill="#0e151e" stroke="#f5a623" stroke-opacity=".5"/>
+              <circle cx="98" cy="38" r="3" fill="#0e151e" stroke="#f5a623" stroke-opacity=".5"/>
+              <circle cx="92" cy="45" r="2" fill="#0e151e" stroke="#f5a623" stroke-opacity=".5"/>
+              <g class="ag-dots" fill="#ffc057"><circle cx="113" cy="18" r="3.5"/><circle cx="125" cy="18" r="3.5"/><circle cx="137" cy="18" r="3.5"/></g>
+              <g class="ag-wave" fill="#ffc057"><rect x="106" y="10" width="3" height="16" rx="1.5"/><rect x="112" y="10" width="3" height="16" rx="1.5"/><rect x="118" y="10" width="3" height="16" rx="1.5"/><rect x="124" y="10" width="3" height="16" rx="1.5"/><rect x="130" y="10" width="3" height="16" rx="1.5"/><rect x="136" y="10" width="3" height="16" rx="1.5"/><rect x="142" y="10" width="3" height="16" rx="1.5"/></g>
+            </g>
+            <ellipse class="ag-jet" cx="80" cy="181" rx="15" ry="6" fill="url(#agJetG)"/>
+            <line x1="80" y1="49" x2="80" y2="61" stroke="#2a3644" stroke-width="3" stroke-linecap="round"/>
+            <circle class="ag-ant" cx="80" cy="46" r="5" fill="#ffc057" filter="url(#agGlowF)"/>
+            <g class="ag-arm-l"><rect x="38" y="128" width="10" height="30" rx="5" fill="#121a24" stroke="#c9d8e8" stroke-opacity=".14"/><circle cx="43" cy="160" r="4.5" fill="#1e2833"/></g>
+            <g class="ag-arm-r">
+              <polygon class="ag-holo" points="115,166 98,226 132,226" fill="url(#agBeam)"/>
+              <rect x="110" y="128" width="10" height="32" rx="5" fill="#121a24" stroke="#c9d8e8" stroke-opacity=".14"/>
+              <circle cx="115" cy="162" r="5" fill="#ffc057" filter="url(#agGlowF)"/>
+            </g>
+            <rect x="72" y="116" width="16" height="8" rx="2" fill="#121a24"/>
+            <rect x="50" y="122" width="60" height="52" rx="18" fill="url(#agBodyG)" stroke="#f5a623" stroke-opacity=".32"/>
+            <circle cx="80" cy="142" r="11" fill="none" stroke="#ffc057" stroke-opacity=".35"/>
+            <circle class="ag-core" cx="80" cy="142" r="6.5" fill="#f5a623" filter="url(#agGlowF)"/>
+            <rect x="68" y="158" width="24" height="3" rx="1.5" fill="#1e2833"/>
+            <rect x="33" y="78" width="8" height="20" rx="4" fill="#121a24"/>
+            <rect x="119" y="78" width="8" height="20" rx="4" fill="#121a24"/>
+            <rect x="40" y="60" width="80" height="58" rx="22" fill="url(#agHead)" stroke="#f5a623" stroke-opacity=".38"/>
+            <rect x="50" y="72" width="60" height="34" rx="15" fill="#05080c" stroke="#c9d8e8" stroke-opacity=".12"/>
+            <g class="ag-eyes" fill="#ffc057" filter="url(#agGlowF)"><rect x="62" y="82" width="10" height="14" rx="5"/><rect x="88" y="82" width="10" height="14" rx="5"/></g>
+            <path d="M74 101q6 4 12 0" fill="none" stroke="#ffc057" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="frame">
+        <div class="bar"><i></i><i></i><i></i><span class="ln"></span></div>
+        <div class="phone"><img src="img/screen_voice_to_plan.webp" alt="" width="390" height="844"></div>
+      </div>
     </div>
   </div>
 </header>
@@ -221,170 +368,196 @@ footer a:hover{color:var(--fg)}
 <main>
 
 <!-- ===== БЛОК: ЧТО У ТЕБЯ БУДЕТ В ИТОГЕ ===== -->
-<section class="result" id="result">
-  <div class="wrap narrow">
+<section class="hive" id="result">
+  <div class="wrap">
+    <div class="result-head">
+      <span class="kicker">01</span>
+      <h2>Что у тебя будет <em>в итоге</em></h2>
+    </div>
     <div class="result-card">
-      <h2>ЧТО У ТЕБЯ БУДЕТ В ИТОГЕ</h2>
-      <p>Свой ИИ-агент в Телеграме, который сам ходит и делает задачи. Он живёт на твоём сервере и работает круглые сутки, даже когда ноутбук закрыт. Его память о тебе, твоём деле и ваших разговорах хранится у тебя, в твоих файлах. Ты даёшь задачу голосовым, как сотруднику, а агент сам идёт её выполнять и присылает результат в тот же чат.</p>
-      <p class="skills-lead">Что он делает сам:</p>
+      <p class="intro">Свой ИИ-агент в Телеграме, который сам ходит и делает задачи. Он живёт на твоём сервере и работает круглые сутки, даже когда ноутбук закрыт. Его память о тебе, твоём деле и ваших разговорах хранится у тебя, в твоих файлах. Ты даёшь задачу голосовым, как сотруднику, а агент сам идёт её выполнять и присылает результат в тот же чат.</p>
+      <p class="sublbl">Что он делает сам:</p>
       <ol class="does">
-        <li><b>Ищет в интернете и разбирает сайты.</b> Надиктовал «найди десять конкурентов в моей нише и сравни цены», и получил таблицу.</li>
-        <li><b>Открывает сайты в браузере.</b> Заходит на нужную страницу, нажимает кнопки, заполняет формы и присылает тебе скрин того, что сделал.</li>
-        <li><b>Пишет и запускает программы на своём сервере.</b> Посчитать таблицу, собрать отчёт, переделать файл, собрать презентацию.</li>
-        <li><b>Ведёт твои дела.</b> Разбирает голосовые в список задач, напоминает о встречах, пишет черновики постов и ответов.</li>
+        <li><span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><b>Ищет в интернете и разбирает сайты.</b> Надиктовал «найди десять конкурентов в моей нише и сравни цены», и получил таблицу.</li>
+        <li><span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span><b>Открывает сайты в браузере.</b> Заходит на нужную страницу, нажимает кнопки, заполняет формы и присылает тебе скрин того, что сделал.</li>
+        <li><span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span><b>Пишет и запускает программы на своём сервере.</b> Посчитать таблицу, собрать отчёт, переделать файл, собрать презентацию.</li>
+        <li><span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1 1 2-2M3.5 12l1 1 2-2M3.5 18l1 1 2-2"/></svg></span><b>Ведёт твои дела.</b> Разбирает голосовые в список задач, напоминает о встречах, пишет черновики постов и ответов.</li>
       </ol>
-      <p class="skills-lead">Агент приходит к тебе не пустым. Установщик сразу ставит ему набор навыков:</p>
+      <p class="sublbl">Агент приходит к тебе не пустым. Установщик сразу ставит ему набор навыков:</p>
       <ul class="chips">
-        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/></svg>понимать голосовые</li>
-        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>ставить напоминания</li>
-        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>открывать сайты в браузере</li>
-        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>знакомиться с тобой и запоминать главное</li>
-        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>собирать презентации</li>
-        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>расшифровывать ролики с YouTube</li>
+        <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/></svg>понимать голосовые</li>
+        <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>ставить напоминания</li>
+        <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>открывать сайты в браузере</li>
+        <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>знакомиться с тобой и запоминать главное</li>
+        <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>собирать презентации</li>
+        <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>расшифровывать ролики с YouTube</li>
       </ul>
     </div>
   </div>
 </section>
 
 <!-- ===== БЛОК: ВСЁ В ТВОЁМ ТЕЛЕФОНЕ ===== -->
-<section class="mobile-block" id="phone">
-  <div class="wrap narrow">
-    <h2><span class="gold">ВСЁ В ТВОЁМ ТЕЛЕФОНЕ</span></h2>
-    <p class="intro">Сейчас эксперты, которые работают с нейросетями, часами сидят за компьютером: открывают чат, объясняют задачу, копируют ответы, переносят их в документы. С агентом всё это переезжает в Телеграм на твоём телефоне.</p>
+<section id="phone">
+  <div class="wrap">
+    <span class="kicker">02</span>
+    <h2>Всё в твоём <em>телефоне</em></h2>
+    <p class="lead">Сейчас эксперты, которые работают с нейросетями, часами сидят за компьютером: открывают чат, объясняют задачу, копируют ответы, переносят их в документы. С агентом всё это переезжает в Телеграм на твоём телефоне.</p>
     <ol class="flow">
       <li>
-        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/><path d="M8 22h8"/></svg></span>
-        <p><b>Задачу даёшь голосовым,</b> где бы ты ни был: в машине, на прогулке, в очереди.</p>
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/><path d="M8 22h8"/></svg></span>
+        <p><span class="n" aria-hidden="true">01</span><b>Задачу даёшь голосовым,</b> где бы ты ни был: в машине, на прогулке, в очереди.</p>
       </li>
       <li>
-        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01"/><path d="M11 6.5h6M11 17.5h6"/></svg></span>
-        <p><b>Агент делает её сам</b> на своём сервере: пишет текст, собирает список дел, ищет информацию, готовит ответ.</p>
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01"/><path d="M11 6.5h6M11 17.5h6"/></svg></span>
+        <p><span class="n" aria-hidden="true">02</span><b>Агент делает её сам</b> на своём сервере: пишет текст, собирает список дел, ищет информацию, готовит ответ.</p>
       </li>
       <li>
-        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/></svg></span>
-        <p><b>Результат приходит в тот же чат,</b> и ты правишь его следующим голосовым.</p>
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/></svg></span>
+        <p><span class="n" aria-hidden="true">03</span><b>Результат приходит в тот же чат,</b> и ты правишь его следующим голосовым.</p>
       </li>
     </ol>
     <div class="once">
-      <span class="ico-sm" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
+      <span class="ok" aria-hidden="true"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
       <p>Компьютер понадобится один раз, в вечер установки. Дальше всё в телефоне.</p>
     </div>
   </div>
 </section>
 
 <!-- ===== БЛОК: ЧТО ВНУТРИ, ПО ДНЯМ (главный) ===== -->
-<section class="get" id="get">
+<section class="hive" id="get">
   <div class="wrap narrow">
-    <h2 class="gold">ЧТО ВНУТРИ, ПО ДНЯМ</h2>
-    <div class="days">
+    <span class="kicker">03</span>
+    <h2>Что внутри, <em>по дням</em></h2>
+    <div class="steps">
 
       <!-- ДЕНЬ 0 -->
-      <article class="day">
-        <h3>ДЕНЬ 0. ПОДГОТОВКА: ВСЁ, ГДЕ ОБЫЧНО ЗАСТРЕВАЮТ</h3>
-        <p>Здесь собраны рабочие обходные пути, которые мы сами проверили на себе:</p>
-        <ol>
-          <li>Как зарегистрироваться в Claude из России: какой VPN брать, какую страну выбрать и как проверить, что VPN не выдаёт твой настоящий адрес. Прыжки VPN между странами это самая частая причина блокировки аккаунта, и мы покажем, как этого избежать.</li>
-          <li>Как оплатить подписку Claude из России, если обычная карта не проходит.</li>
-          <li>Где купить сервер: даю ссылку на Aeza, где мы сами держим своих агентов. Оплачивается российской картой, а в инструкции указано, какой именно тариф брать.</li>
-          <li>Как подключиться к серверу с компьютера: одна команда, со скрином, что должно получиться.</li>
-        </ol>
+      <article class="step">
+        <span class="num" aria-hidden="true">01</span>
+        <div>
+          <p class="tag">День 0</p>
+          <h3>Подготовка: всё, где обычно застревают</h3>
+          <p>Здесь собраны рабочие обходные пути, которые мы сами проверили на себе:</p>
+          <ol>
+            <li>Как зарегистрироваться в Claude из России: какой VPN брать, какую страну выбрать и как проверить, что VPN не выдаёт твой настоящий адрес. Прыжки VPN между странами это самая частая причина блокировки аккаунта, и мы покажем, как этого избежать.</li>
+            <li>Как оплатить подписку Claude из России, если обычная карта не проходит.</li>
+            <li>Где купить сервер: даю ссылку на Aeza, где мы сами держим своих агентов. Оплачивается российской картой, а в инструкции указано, какой именно тариф брать.</li>
+            <li>Как подключиться к серверу с компьютера: одна команда, со скрином, что должно получиться.</li>
+          </ol>
+        </div>
       </article>
 
       <!-- ДЕНЬ 1 -->
-      <article class="day">
-        <h3>ДЕНЬ 1. ОДИН ВЕЧЕР: СТАВИШЬ АГЕНТА</h3>
-        <ol>
-          <li>Ставишь Claude на сервер по готовым командам, каждую копируешь одним касанием.</li>
-          <li>Вставляешь в Claude одну готовую команду установщика. Дальше Claude сам ведёт тебя по шагам и ставит агента, тебе остаётся отвечать на его вопросы.</li>
-          <li>Подключаешь агента к своему Телеграму.</li>
-          <li>Включаешь голосовые: агент начинает понимать твои аудио, это бесплатно.</li>
-          <li>Знакомишь агента с собой: он записывает в память, кто ты, чем занимаешься и как с тобой говорить.</li>
-        </ol>
+      <article class="step">
+        <span class="num" aria-hidden="true">02</span>
+        <div>
+          <p class="tag">День 1</p>
+          <h3>Один вечер: ставишь агента</h3>
+          <ol>
+            <li>Ставишь Claude на сервер по готовым командам, каждую копируешь одним касанием.</li>
+            <li>Вставляешь в Claude одну готовую команду установщика. Дальше Claude сам ведёт тебя по шагам и ставит агента, тебе остаётся отвечать на его вопросы.</li>
+            <li>Подключаешь агента к своему Телеграму.</li>
+            <li>Включаешь голосовые: агент начинает понимать твои аудио, это бесплатно.</li>
+            <li>Знакомишь агента с собой: он записывает в память, кто ты, чем занимаешься и как с тобой говорить.</li>
+          </ol>
+        </div>
       </article>
 
       <!-- ПОСЛЕ УСТАНОВКИ -->
-      <article class="day">
-        <h3>ПОСЛЕ УСТАНОВКИ. АГЕНТ РАБОТАЕТ НА ТЕБЯ</h3>
-        <p>Пять готовых первых задач, которые ты вставляешь в тот же вечер:</p>
-        <ol>
-          <li>Надиктуешь всё, что нужно сделать завтра, и получишь список дел с первым шагом для каждой задачи.</li>
-          <li>Попросишь напомнить о конкретном деле в нужное время, и напоминание придёт тебе в Телеграм.</li>
-          <li>Попросишь найти информацию по своей теме и получишь короткую выжимку со ссылками.</li>
-          <li>Дашь тему своего блога и получишь идеи постов с готовыми первыми строками.</li>
-          <li>Перешлёшь сообщение, на которое давно не можешь ответить, и получишь черновик ответа.</li>
-        </ol>
+      <article class="step">
+        <span class="num" aria-hidden="true">03</span>
+        <div>
+          <p class="tag">После установки</p>
+          <h3>Агент работает на тебя</h3>
+          <p>Пять готовых первых задач, которые ты вставляешь в тот же вечер:</p>
+          <ol>
+            <li>Надиктуешь всё, что нужно сделать завтра, и получишь список дел с первым шагом для каждой задачи.</li>
+            <li>Попросишь напомнить о конкретном деле в нужное время, и напоминание придёт тебе в Телеграм.</li>
+            <li>Попросишь найти информацию по своей теме и получишь короткую выжимку со ссылками.</li>
+            <li>Дашь тему своего блога и получишь идеи постов с готовыми первыми строками.</li>
+            <li>Перешлёшь сообщение, на которое давно не можешь ответить, и получишь черновик ответа.</li>
+          </ol>
+        </div>
       </article>
 
       <!-- ПЕРВЫЕ 7 ДНЕЙ -->
-      <article class="day">
-        <h3>ПЕРВЫЕ 7 ДНЕЙ. ПОДДЕРЖКА В ЧАТЕ</h3>
-        <p>Застрял на любом шаге, пишешь в чат поддержки, днём и ночью. Отвечает Дарья, мой обученный агент, она уже провела через установку десятки людей. Сложные случаи она передаёт мне, и за каждым чатом я смотрю лично.</p>
+      <article class="step">
+        <span class="num" aria-hidden="true">04</span>
+        <div>
+          <p class="tag">Первые 7 дней</p>
+          <h3>Поддержка в чате</h3>
+          <p>Застрял на любом шаге, пишешь в чат поддержки, днём и ночью. Отвечает Дарья, мой обученный агент, она уже провела через установку десятки людей. Сложные случаи она передаёт мне, и за каждым чатом я смотрю лично.</p>
+        </div>
       </article>
 
       <!-- БОНУСЫ -->
-      <article class="day bonus">
-        <h3>БОНУСЫ</h3>
-        <ul>
-          <li>разбор первой недели в чате поддержки: смотрю, что ты повесил на агента, и даю три идеи, что ещё на него переложить;</li>
-          <li>готовый характер агента: шаблон его памяти о тебе, чтобы он с первого дня говорил с тобой по‑человечески.</li>
-        </ul>
+      <article class="step bonus">
+        <span class="num" aria-hidden="true">05</span>
+        <div>
+          <h3>Бонусы</h3>
+          <ul>
+            <li>разбор первой недели в чате поддержки: смотрю, что ты повесил на агента, и даю три идеи, что ещё на него переложить;</li>
+            <li>готовый характер агента: шаблон его памяти о тебе, чтобы он с первого дня говорил с тобой по‑человечески.</li>
+          </ul>
+        </div>
       </article>
 
     </div>
-    <div class="cta"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Забрать за 2 490 ₽</a></div>
+    <div class="cta"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Забрать за 2 490 ₽</a></div>
   </div>
 </section>
 
 <!-- ===== БЛОК: КАК Я САМ ПОЛЬЗУЮСЬ АГЕНТАМИ (скрины) ===== -->
-<section id="screens-block" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+<section id="screens-block" class="screens-sec">
   <div class="wrap">
-    <h2 class="narrow" style="text-align:left">КАК Я САМ ПОЛЬЗУЮСЬ АГЕНТАМИ</h2>
+    <span class="kicker">04</span>
+    <h2>Как я сам пользуюсь <em>агентами</em></h2>
     <div class="screens" id="screens">
-      <figure class="shot"><div class="phone"><img src="img/screen_koder_reel.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-кодером: владелец присылает пример ролика и уходит спать, агент присылает готовый ролик и отчёт"></div><figcaption>Скинул Маркусу пример ролика и ушёл спать. Через 46 минут он прислал готовый ролик с моим цифровым двойником</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/screen_koder_reel.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-кодером: владелец присылает пример ролика и уходит спать, агент присылает готовый ролик и отчёт"></div><figcaption>Скинул Маркусу пример ролика и ушёл спать. Через 46 минут он прислал готовый ролик с моим цифровым двойником</figcaption></figure>
       <figure class="shot"><div class="phone"><img src="img/screen_analyst_table.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-аналитиком: владелец просит вести финансовый учёт, агент ставит задачу кодеру и присылает готовую таблицу"></div><figcaption>Попросил Алана вести финансовый учёт. Он сам поставил задачу Маркусу и через полчаса собрал таблицу</figcaption></figure>
       <figure class="shot"><div class="phone"><img src="img/screen_daria_morning_pack.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-маркетологом: утренняя подборка рилсов и каруселей двумя файлами и картинка к посту"></div><figcaption>Каждое утро Дарья сама присылает подборку: какие рилсы и карусели залетели за ночь и почему</figcaption></figure>
       <figure class="shot"><div class="phone"><img src="img/screen_daria_carousel.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-маркетологом: просьба сделать ночью, план работ и готовая карусель из девяти слайдов"></div><figcaption>Попросил сделать ночью. К двум часам Дарья собрала пять каруселей со слайдами и текстами</figcaption></figure>
       <figure class="shot"><div class="phone"><img src="img/screen_secretary_conflict.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-секретарём: два голосовых, агент находит накладку двух созвонов и переносит один"></div><figcaption>Лиза сама заметила, что два созвона встали на одно время, и по голосовому перенесла один</figcaption></figure>
-      <figure class="shot"><div class="phone"><img src="img/screen_voice_to_plan.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-маркетологом: голосовое владельца и ответ агента планом из восьми пунктов"></div><figcaption>Сказал голосом «нужна полная статистика». Дарья разложила это в план из 8 блоков и отдала Маркусу</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/screen_voice_to_plan.webp" width="390" height="844" loading="lazy" alt="Переписка с агентом-маркетологом: голосовое владельца и ответ агента планом из восьми пунктов"></div><figcaption>Сказал голосом «нужна полная статистика». Дарья разложила это в план из 8 блоков и отдала Маркусу</figcaption></figure>
     </div>
     <div class="dots" id="dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span><span></span><span></span></div>
     <p class="screens-cap">Это настоящие переписки с моими агентами. У меня их целая команда, твой первый агент будет одним таким сотрудником.</p>
   </div>
 </section>
 
-<!-- ===== БЛОК: КОГДА ===== -->
-<section id="when" style="padding-bottom:28px">
-  <div class="wrap narrow">
-    <div class="when">
-      <h2>КОГДА</h2>
-      <p>Сразу после оплаты попадаешь в чат поддержки и получаешь инструкцию и установщик. Ставишь агента за вечер, и с этого дня идут 7 дней поддержки.</p>
+<!-- ===== БЛОКИ: КОГДА + СКОЛЬКО СТОИТ СОДЕРЖАТЬ АГЕНТА ===== -->
+<section id="when" class="hive">
+  <div class="wrap">
+    <div class="duo">
+      <div class="panel warm">
+        <span class="kicker">05</span>
+        <h2>Когда</h2>
+        <p>Сразу после оплаты попадаешь в чат поддержки и получаешь инструкцию и установщик. Ставишь агента за вечер, и с этого дня идут 7 дней поддержки.</p>
+      </div>
+      <div class="panel" id="costs">
+        <span class="kicker">06</span>
+        <h2>Сколько стоит содержать агента</h2>
+        <ul class="costs">
+          <li>Сервер, на котором он живёт: около 5$ в месяц.</li>
+          <li>Подписка Claude Pro: 20$ в месяц.</li>
+          <li>Платный VPN, если у тебя его ещё нет: в инструкции написано, какой подходит.</li>
+          <li>Расшифровка голосовых: бесплатно, в пределах лимитов сервиса.</li>
+        </ul>
+        <p class="mut costs-note">Эти деньги идут сервисам напрямую, я на них ничего не зарабатываю.</p>
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- ===== БЛОК: СКОЛЬКО СТОИТ СОДЕРЖАТЬ АГЕНТА ===== -->
-<section id="costs" style="padding-top:28px">
-  <div class="wrap narrow">
-    <h2>СКОЛЬКО СТОИТ СОДЕРЖАТЬ АГЕНТА</h2>
-    <ul class="costs">
-      <li>Сервер, на котором он живёт: около 5$ в месяц.</li>
-      <li>Подписка Claude Pro: 20$ в месяц.</li>
-      <li>Платный VPN, если у тебя его ещё нет: в инструкции написано, какой подходит.</li>
-      <li>Расшифровка голосовых: бесплатно, в пределах лимитов сервиса.</li>
-    </ul>
-    <p class="mut">Эти деньги идут сервисам напрямую, я на них ничего не зарабатываю.</p>
   </div>
 </section>
 
 <!-- ===== БЛОК: ГАРАНТИЯ ===== -->
 <section id="guarantee" style="padding-top:0">
-  <div class="wrap narrow">
+  <div class="wrap">
     <div class="guar">
-      <div class="ic" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <h2>ГАРАНТИЯ</h2>
-      <p>Если по инструкции и с поддержкой агент у тебя так и не заработал, я верну деньги. Плюс, как на всех моих продуктах, возврат в течение 14 дней.</p>
+      <div class="gic" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#171009" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <span class="kicker">07</span>
+      <h2><em>Гарантия</em></h2>
+      <p>Если по инструкции и с поддержкой агент у тебя так и не заработал, я верну деньги. Плюс, как на всех моих продуктах, возврат в течение 14 дней.</p>
       <p style="margin-bottom:0">За каждым агентом я смотрю лично.</p>
-      <div class="cta"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Забрать за 2 490 ₽</a></div>
+      <div class="cta"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Забрать за 2 490 ₽</a></div>
     </div>
   </div>
 </section>
@@ -393,22 +566,23 @@ footer a:hover{color:var(--fg)}
 <section class="who">
   <div class="wrap narrow">
     <div class="box">
-      <h2>КОМУ ЭТО ДЛЯ НАЧАЛА</h2>
-      <p>Это один личный агент. Целую команду агентов для бизнеса (маркетинг, аналитика, секретарь, кодеры, монтаж, воронки) я собираю под ключ за 300 000 ₽. Агент за вечер это первый сотрудник из такой команды, с него удобно начать и своими руками понять, как всё устроено.</p>
+      <h2>Кому это для начала</h2>
+      <p>Это один личный агент. Целую команду агентов для бизнеса (маркетинг, аналитика, секретарь, кодеры, монтаж, воронки) я собираю под ключ за 300 000 ₽. Агент за вечер это первый сотрудник из такой команды, с него удобно начать и своими руками понять, как всё устроено.</p>
     </div>
   </div>
 </section>
 
 <!-- ===== БЛОК: ВОПРОСЫ ===== -->
-<section class="faq" id="faq">
+<section class="faq hive" id="faq">
   <div class="wrap narrow">
-    <h2>ВОПРОСЫ</h2>
+    <span class="kicker">08</span>
+    <h2>Вопросы</h2>
     <details><summary>Я не технарь, справлюсь?</summary><div class="a"><p>Каждый шаг показан картинкой, команды копируются одним касанием. Застрянешь, напишешь в чат поддержки. Если агент так и не заработает, верну деньги.</p></div></details>
     <details><summary>Смогу оплатить Claude из России?</summary><div class="a"><p>Под это в инструкции отдельная глава со способами, которые мы проверили сами. Если ни один не подойдёт, в чате поможем подобрать.</p></div></details>
     <details><summary>Зачем сервер?</summary><div class="a"><p>Без сервера агент засыпает, когда ты закрываешь ноутбук. С сервером он работает круглые сутки, это около 5$ в месяц.</p></div></details>
     <details><summary>Сколько времени займёт?</summary><div class="a"><p>Один вечер на установку. Между регистрацией в Claude и оплатой лучше сделать перерыв в один день, так аккаунт надёжнее.</p></div></details>
-    <details><summary>Что будет после 7 дней поддержки?</summary><div class="a"><p>Агент остаётся у тебя и работает дальше. Инструкция тоже остаётся у тебя.</p></div></details>
-    <div class="cta center" id="final-cta" style="align-items:center"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Забрать за 2 490 ₽</a></div>
+    <details><summary>Что будет после 7 дней поддержки?</summary><div class="a"><p>Агент остаётся у тебя и работает дальше. Инструкция тоже остаётся у тебя.</p></div></details>
+    <div class="cta center" id="final-cta" style="align-items:center"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener">Забрать за 2 490 ₽</a></div>
   </div>
 </section>
 
@@ -431,18 +605,18 @@ footer a:hover{color:var(--fg)}
 </div></div>
 
 
-<div class="sticky" id="sticky" aria-hidden="true"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener" tabindex="-1">Забрать за 2 490 ₽</a></div>
+<div class="sticky" id="sticky" aria-hidden="true"><a class="btn" href="https://t.me/izhmukov777_bot?start=agentzv" target="_blank" rel="noopener" tabindex="-1">Забрать за 2 490 ₽</a></div>
 
 <script>
 (function(){
   var sticky=document.getElementById('sticky');
   var hero=document.getElementById('hero-cta');
-  var fin=document.getElementById('izh-legal');
-  if('IntersectionObserver' in window&&sticky){
+  var fin=document.getElementById('izh-legal')||document.getElementById('final-cta');
+  if('IntersectionObserver' in window&&sticky&&hero){
     var heroVis=true,finVis=false;
     var upd=function(){var s=!heroVis&&!finVis;sticky.classList.toggle('show',s);sticky.setAttribute('aria-hidden',s?'false':'true');sticky.firstElementChild.tabIndex=s?0:-1;};
     new IntersectionObserver(function(e){heroVis=e[0].isIntersecting;upd();}).observe(hero);
-    new IntersectionObserver(function(e){finVis=e[0].isIntersecting;upd();}).observe(fin);
+    if(fin){new IntersectionObserver(function(e){finVis=e[0].isIntersecting;upd();}).observe(fin);}
   }
   var sc=document.getElementById('screens'),dots=document.querySelectorAll('#dots span');
   if(sc&&dots.length){
