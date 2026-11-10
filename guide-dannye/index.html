@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>SQL и анализ данных с ChatGPT: 5 промптов-преподавателей, план на 30 дней и разбор своих продаж в таблицах</title><meta name="description" content="Здесь все 5 промптов из карусели слово в слово, к каждому усиленная версия под твой уровень и твою цель, план обучения на 30 дней по уроку в день и бонус для..."><meta property="og:description" content="Здесь все 5 промптов из карусели слово в слово, к каждому усиленная версия под твой уровень и твою цель, план обучения на 30 дней по уроку в день и бонус для..."><meta name="twitter:description" content="Здесь все 5 промптов из карусели слово в слово, к каждому усиленная версия под твой уровень и твою цель, план обучения на 30 дней по уроку в день и бонус для..."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-dannye/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-dannye/"><meta property="og:title" content="SQL и анализ данных с ChatGPT: 5 промптов-преподавателей, план на 30 дней и разбор своих продаж в таблицах"><meta name="twitter:title" content="SQL и анализ данных с ChatGPT: 5 промптов-преподавателей, план на 30 дней и разбор своих продаж в таблицах"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-obucenie">Обучение</a></div>
+<h1>SQL и анализ данных с ChatGPT: 5 промптов-преподавателей, план на 30 дней и разбор своих продаж в таблицах</h1>
+<p class="lead">Здесь все 5 промптов из карусели слово в слово, к каждому усиленная версия под твой уровень и твою цель, план обучения на 30 дней по уроку в день и бонус для предпринимателей: 4 промпта, которые разбирают твои собственные продажи, средний чек, воронку и отток прямо в Google Таблицах или Excel. ChatGPT и Claude становятся преподавателем, который даёт урок, задачи на живых таблицах и разбирает твои ошибки, пока ты не начнёшь писать запросы сам.</p>
+<p class="meta">Внутри: 5 промптов из карусели и 5 усиленных версий под копирование, где тренироваться без установки программ, план на 30 дней с промптом на каждый день и еженедельной проверкой, 4 промпта для анализа своего бизнеса в таблицах и разбор ошибок, на которых бросают обучение.</p>
+<div class="how">Порядок простой. Промпт 1 или 4 ставишь первым, в зависимости от цели: SQL для работы с базами или анализ данных целиком. Промпты 2 и 3 подключаешь, когда базовые запросы уже получаются. Промпт 5 запускаешь последним, когда пора собирать портфолио. Каждый день занимаешься в одном и том же чате, чтобы нейросеть помнила, что ты уже прошёл.</div>
+<div class="p"><span class="num">1 из 5</span><h2>SQL с нуля</h2><p class="when">Первый день, если ты никогда не писал запросы к базе данных.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как опытный преподаватель SQL. Научи меня SQL с полного нуля до продвинутого уровня. Объясняй каждую тему на простых примерах, давай практические задания и реальные ситуации с базами данных. Давай по одному уроку за раз и проверяй, как я понял, прежде чем идти дальше.">Скопировать</button></div><div class="box">Действуй как опытный преподаватель SQL. Научи меня SQL с полного нуля до продвинутого уровня. Объясняй каждую тему на простых примерах, давай практические задания и реальные ситуации с базами данных. Давай по одному уроку за раз и проверяй, как я понял, прежде чем идти дальше.</div><p class="ex"><b>Пример:</b> Нейросеть объясняет, что такое таблица и строка, показывает первый SELECT на примере списка заказов и даёт 3 задания. Пока ты не ответишь, к следующей теме она не переходит.</p></div>
+<div class="p"><span class="num">2 из 5</span><h2>Запросы SQL как у про</h2><p class="when">Когда SELECT и WHERE уже пишешь без подсказок и хочешь дойти до JOIN и оконных функций.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как старший разработчик SQL. Научи меня SELECT, WHERE, JOIN, GROUP BY, HAVING, подзапросам и оконным функциям. Давай практические бизнес-задачи и постепенно повышай сложность. Разбирай мои ошибки и показывай, как решить лучше.">Скопировать</button></div><div class="box">Действуй как старший разработчик SQL. Научи меня SELECT, WHERE, JOIN, GROUP BY, HAVING, подзапросам и оконным функциям. Давай практические бизнес-задачи и постепенно повышай сложность. Разбирай мои ошибки и показывай, как решить лучше.</div><p class="ex"><b>Пример:</b> Задача «найди трёх клиентов с самой большой суммой покупок в каждом городе». Ты пишешь решение, получаешь разбор ошибки и вариант с оконной функцией.</p></div>
+<div class="p"><span class="num">3 из 5</span><h2>Практика на живых данных</h2><p class="when">Со второй недели, когда нужно набить руку на задачах, похожих на рабочие.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как профессиональный аналитик данных. Создай реалистичную базу данных компании с таблицами и примерами записей. Дай мне 20 задач на SQL по продажам, клиентам, среднему чеку и работе сотрудников. Проверяй мои запросы и объясняй, как их улучшить.">Скопировать</button></div><div class="box">Действуй как профессиональный аналитик данных. Создай реалистичную базу данных компании с таблицами и примерами записей. Дай мне 20 задач на SQL по продажам, клиентам, среднему чеку и работе сотрудников. Проверяй мои запросы и объясняй, как их улучшить.</div><p class="ex"><b>Пример:</b> Получаешь 4 связанные таблицы (клиенты, заказы, товары, сотрудники) с записями и 20 задач от простой к сложной. Решаешь по одной, после каждой разбор.</p></div>
+<div class="p"><span class="num">4 из 5</span><h2>Анализ данных с нуля</h2><p class="when">Если твоя цель шире SQL: научиться разбираться в цифрах целиком, от таблицы до вывода.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Научи меня анализу данных от новичка до продвинутого уровня. Пройди Excel и Google Таблицы, SQL, Python, статистику, чистку данных, визуализацию и бизнес-аналитику. Объясняй простыми словами, давай практические примеры и задания, которые я делаю сам.">Скопировать</button></div><div class="box">Научи меня анализу данных от новичка до продвинутого уровня. Пройди Excel и Google Таблицы, SQL, Python, статистику, чистку данных, визуализацию и бизнес-аналитику. Объясняй простыми словами, давай практические примеры и задания, которые я делаю сам.</div><p class="ex"><b>Пример:</b> Начинает со сводной таблицы и фильтров в Google Таблицах, доходит до чистки дублей, графиков и первых строк на Python. Каждое занятие заканчивается заданием, которое ты делаешь руками.</p></div>
+<div class="p"><span class="num">5 из 5</span><h2>Портфолио аналитика</h2><p class="when">Последняя неделя плана, когда пора показать навык работодателю или клиенту.</p><div class="lblrow"><span class="lbl">Промпт</span><button class="copy" data-text="Действуй как старший аналитик данных и карьерный наставник. Проведи меня через 3 реальных проекта по анализу данных на SQL, Excel и Python. Научи чистить данные, находить выводы, собирать дашборды и понятно показывать результаты. Помоги собрать портфолио, которое не стыдно показать работодателю или клиенту.">Скопировать</button></div><div class="box">Действуй как старший аналитик данных и карьерный наставник. Проведи меня через 3 реальных проекта по анализу данных на SQL, Excel и Python. Научи чистить данные, находить выводы, собирать дашборды и понятно показывать результаты. Помоги собрать портфолио, которое не стыдно показать работодателю или клиенту.</div><p class="ex"><b>Пример:</b> 3 проекта с постановкой задачи, грязными данными, вопросами бизнеса и требованиями к итогу. В конце помогает оформить каждый проект в короткий кейс: задача, что сделал, какой вывод получил.</p></div>
+<div class="sec"><h2 id="sec-0">1. Усиленные версии: подставь свой уровень и цель</h2><p>Промпты из карусели работают как есть. Усиленные версии ниже дают нейросети то, чего ей не хватает для точного урока: твой уровень, цель, сколько у тебя времени и на какой базе ты учишься. Квадратные скобки замени своими словами и отправь.</p><div class="lblrow"><span class="lbl">Промпт 1+. SQL с нуля под твою цель</span><button class="copy" data-text="Действуй как опытный преподаватель SQL. Мой уровень: [никогда не писал запросы / знаю SELECT]. Зачем мне SQL: [найти работу аналитиком / разбирать продажи своего бизнеса / понимать выгрузки на работе]. У меня есть [30-40] минут в день. Учимся на диалекте [SQLite, если тренируюсь в браузере / PostgreSQL / MySQL, если такая база на работе]. Сначала задай мне 3 коротких вопроса, чтобы понять, что я уже знаю, потом составь план на 10 уроков и покажи его. Дальше веди по одному уроку за раз: короткое объяснение на примере таблицы заказов, готовый запрос, который я запускаю сам, и 3 задания по нарастающей. Не переходи к следующему уроку, пока я не решу задания. Если я ошибся, не давай готовый ответ сразу, сначала дай подсказку.">Скопировать</button></div><div class="box">Действуй как опытный преподаватель SQL. Мой уровень: [никогда не писал запросы / знаю SELECT]. Зачем мне SQL: [найти работу аналитиком / разбирать продажи своего бизнеса / понимать выгрузки на работе]. У меня есть [30-40] минут в день. Учимся на диалекте [SQLite, если тренируюсь в браузере / PostgreSQL / MySQL, если такая база на работе]. Сначала задай мне 3 коротких вопроса, чтобы понять, что я уже знаю, потом составь план на 10 уроков и покажи его. Дальше веди по одному уроку за раз: короткое объяснение на примере таблицы заказов, готовый запрос, который я запускаю сам, и 3 задания по нарастающей. Не переходи к следующему уроку, пока я не решу задания. Если я ошибся, не давай готовый ответ сразу, сначала дай подсказку.</div><div class="lblrow"><span class="lbl">Промпт 2+. Тренер по сложным запросам</span><button class="copy" data-text="Действуй как старший разработчик SQL, который проводит собеседования аналитиков. Диалект: [SQLite / PostgreSQL / MySQL]. Опиши мне базу интернет-магазина из 4 таблиц: клиенты, заказы, позиции заказа, товары, с названиями столбцов. Дальше давай по одной задаче в таком порядке: JOIN двух таблиц, JOIN трёх таблиц, GROUP BY с HAVING, подзапрос, CASE, оконные функции ROW_NUMBER, RANK, SUM OVER и LAG. Каждую задачу формулируй как просьбу руководителя, без подсказки, какую конструкцию использовать. После моего ответа: правильно или нет, где ошибка, как написать короче и быстрее, и одна похожая задача на закрепление.">Скопировать</button></div><div class="box">Действуй как старший разработчик SQL, который проводит собеседования аналитиков. Диалект: [SQLite / PostgreSQL / MySQL]. Опиши мне базу интернет-магазина из 4 таблиц: клиенты, заказы, позиции заказа, товары, с названиями столбцов. Дальше давай по одной задаче в таком порядке: JOIN двух таблиц, JOIN трёх таблиц, GROUP BY с HAVING, подзапрос, CASE, оконные функции ROW_NUMBER, RANK, SUM OVER и LAG. Каждую задачу формулируй как просьбу руководителя, без подсказки, какую конструкцию использовать. После моего ответа: правильно или нет, где ошибка, как написать короче и быстрее, и одна похожая задача на закрепление.</div><div class="lblrow"><span class="lbl">Промпт 3+. База, которую можно запустить</span><button class="copy" data-text="Действуй как профессиональный аналитик данных. Создай реалистичную базу компании [какая компания: кофейня / онлайн-школа / магазин одежды] на SQLite: таблицы клиенты, заказы, товары, сотрудники, по 30-50 записей, с правдоподобными пропусками и парой дублей, как в настоящих выгрузках. Отдай одним блоком скрипт CREATE TABLE и INSERT, который я вставлю в sqliteonline.com и запущу. Потом дай 20 задач по продажам, клиентам, среднему чеку и работе сотрудников, от простой к сложной, по одной за раз. Я присылаю запрос и результат, который получил, ты проверяешь и объясняешь, как его улучшить.">Скопировать</button></div><div class="box">Действуй как профессиональный аналитик данных. Создай реалистичную базу компании [какая компания: кофейня / онлайн-школа / магазин одежды] на SQLite: таблицы клиенты, заказы, товары, сотрудники, по 30-50 записей, с правдоподобными пропусками и парой дублей, как в настоящих выгрузках. Отдай одним блоком скрипт CREATE TABLE и INSERT, который я вставлю в sqliteonline.com и запущу. Потом дай 20 задач по продажам, клиентам, среднему чеку и работе сотрудников, от простой к сложной, по одной за раз. Я присылаю запрос и результат, который получил, ты проверяешь и объясняешь, как его улучшить.</div><div class="lblrow"><span class="lbl">Промпт 4+. Анализ данных по шагам</span><button class="copy" data-text="Научи меня анализу данных от новичка до продвинутого уровня. Моя цель: [работа аналитиком / разбираться в цифрах своего бизнеса]. Работаю в [Google Таблицах / Excel]. Иди по порядку: таблицы и сводные, чистка данных, формулы ВПР и ИНДЕКС с ПОИСКПОЗ, графики, SQL, основы статистики (среднее, медиана, разброс, выбросы), Python с библиотекой pandas, бизнес-аналитика. На каждую тему дай учебную таблицу прямо в ответе, задание на 20 минут и критерий, по которому я сам проверю, что сделал правильно. Объясняй простыми словами, термины расшифровывай при первом упоминании.">Скопировать</button></div><div class="box">Научи меня анализу данных от новичка до продвинутого уровня. Моя цель: [работа аналитиком / разбираться в цифрах своего бизнеса]. Работаю в [Google Таблицах / Excel]. Иди по порядку: таблицы и сводные, чистка данных, формулы ВПР и ИНДЕКС с ПОИСКПОЗ, графики, SQL, основы статистики (среднее, медиана, разброс, выбросы), Python с библиотекой pandas, бизнес-аналитика. На каждую тему дай учебную таблицу прямо в ответе, задание на 20 минут и критерий, по которому я сам проверю, что сделал правильно. Объясняй простыми словами, термины расшифровывай при первом упоминании.</div><div class="lblrow"><span class="lbl">Промпт 5+. Портфолио, которое читают</span><button class="copy" data-text="Действуй как старший аналитик данных и карьерный наставник. Я хочу [работу аналитиком / первых клиентов на фрилансе] в сфере [ритейл / маркетинг / финансы / твоя сфера]. Предложи 3 проекта на открытых данных с Kaggle или на данных, которые я соберу сам: один на SQL, один в Excel или Google Таблицах, один на Python. Для каждого: вопрос бизнеса, где взять данные, какие шаги чистки понадобятся, какие 3-5 выводов надо найти и какой дашборд собрать. Веди меня по одному проекту, проверяй мои результаты. В конце помоги оформить каждый проект на одну страницу: задача, данные, что сделал, главный вывод, что бы я посоветовал бизнесу.">Скопировать</button></div><div class="box">Действуй как старший аналитик данных и карьерный наставник. Я хочу [работу аналитиком / первых клиентов на фрилансе] в сфере [ритейл / маркетинг / финансы / твоя сфера]. Предложи 3 проекта на открытых данных с Kaggle или на данных, которые я соберу сам: один на SQL, один в Excel или Google Таблицах, один на Python. Для каждого: вопрос бизнеса, где взять данные, какие шаги чистки понадобятся, какие 3-5 выводов надо найти и какой дашборд собрать. Веди меня по одному проекту, проверяй мои результаты. В конце помоги оформить каждый проект на одну страницу: задача, данные, что сделал, главный вывод, что бы я посоветовал бизнесу.</div><div class="note">Где тренироваться без установки программ. SQL запускай на sqliteonline.com или db-fiddle.com: вставил скрипт базы от нейросети, нажал Run, получил таблицу. ChatGPT умеет сам выполнять Python в чате, поэтому может создать учебную базу и показать результат твоего запроса, но привычка запускать руками нужна тебе, без неё навык не появится.</div><a class="linkbtn" href="https://sqliteonline.com" target="_blank" rel="noopener">Открыть sqliteonline.com</a></div>
+<div class="sec"><h2 id="sec-1">2. План на 30 дней: урок в день</h2><p>Самая частая причина, почему обучение по чату заканчивается на третий день, это отсутствие плана. Ниже готовая сетка на 30 дней по 30-40 минут. Работай в одном чате или одном проекте ChatGPT, чтобы история уроков была перед глазами у тебя и у нейросети.</p><div class="grid2"><div class="cardb"><h3>Дни 1-7. Основа SQL</h3><ul><li>SELECT, FROM, LIMIT</li><li>WHERE, AND, OR, IN, LIKE</li><li>ORDER BY и сортировка</li><li>COUNT, SUM, AVG, MIN, MAX</li><li>GROUP BY</li><li>HAVING</li><li>День 7: проверка недели</li></ul></div><div class="cardb"><h3>Дни 8-14. Запросы как у про</h3><ul><li>JOIN двух и трёх таблиц</li><li>LEFT JOIN и пустые значения</li><li>Подзапросы</li><li>CASE и даты</li><li>Оконные функции</li><li>Задачи 1-10 из промпта 3</li><li>День 14: проверка недели</li></ul></div><div class="cardb"><h3>Дни 15-21. Таблицы и Python</h3><ul><li>Сводные таблицы</li><li>Чистка: дубли, пропуски, форматы</li><li>ВПР и ИНДЕКС с ПОИСКПОЗ</li><li>Графики и дашборд в Google Таблицах</li><li>Python: pandas, загрузка и фильтры</li><li>Задачи 11-20 из промпта 3</li><li>День 21: проверка недели</li></ul></div><div class="cardb"><h3>Дни 22-30. Статистика и портфолио</h3><ul><li>Среднее, медиана, выбросы</li><li>Проект 1 на SQL</li><li>Проект 2 в таблицах</li><li>Проект 3 на Python</li><li>Оформление проектов</li><li>День 30: итоговый экзамен</li></ul></div></div><div class="lblrow"><span class="lbl">Промпт на каждый день: открывает урок</span><button class="copy" data-text="Сегодня день [номер] из 30 по плану: [тема дня из сетки]. Вчера я прошёл [тема вчера], ошибался в [где ошибался, если было]. Дай урок на 30-40 минут: короткое объяснение на примере, один разобранный пример и 3 задания по нарастающей. Последнее задание сделай на тему вчерашней ошибки. Жди моих ответов по одному, потом скажи, что повторить завтра.">Скопировать</button></div><div class="box">Сегодня день [номер] из 30 по плану: [тема дня из сетки]. Вчера я прошёл [тема вчера], ошибался в [где ошибался, если было]. Дай урок на 30-40 минут: короткое объяснение на примере, один разобранный пример и 3 задания по нарастающей. Последнее задание сделай на тему вчерашней ошибки. Жди моих ответов по одному, потом скажи, что повторить завтра.</div><div class="lblrow"><span class="lbl">Промпт в конце недели: проверка без подсказок</span><button class="copy" data-text="Устрой мне проверку недели по темам: [темы недели]. Дай 8 задач без подсказок, от простой к сложной, по одной за раз. Мне нельзя смотреть прошлые уроки. После всех 8 поставь оценку по каждой теме: уверенно, с ошибками, не понял. По темам с ошибками составь 2 дня повторения и только потом веди меня дальше по плану.">Скопировать</button></div><div class="box">Устрой мне проверку недели по темам: [темы недели]. Дай 8 задач без подсказок, от простой к сложной, по одной за раз. Мне нельзя смотреть прошлые уроки. После всех 8 поставь оценку по каждой теме: уверенно, с ошибками, не понял. По темам с ошибками составь 2 дня повторения и только потом веди меня дальше по плану.</div><div class="note">Пропустил день, не начинай сначала. Отправь промпт дня с той темой, на которой остановился, и сдвинь сетку. Тридцать уроков за шесть недель дадут больше, чем десять уроков за первую неделю и тишина потом.</div></div>
+<div class="sec"><h2 id="sec-2">3. Бонус для предпринимателей: свои цифры в Google Таблицах и Excel</h2><p>Учиться на учебной базе полезно, но самый ценный набор данных у предпринимателя уже лежит в кассе, CRM или платёжном сервисе. Выгрузи продажи за последние 6-12 месяцев в таблицу и отдай её ChatGPT или Claude: обе нейросети читают файлы xlsx и csv и считают по ним.</p><ol><li>Подготовь столбцы: дата, номер клиента, товар или тариф, сумма, источник клиента (откуда пришёл). Если есть, добавь этап воронки или статус заявки.</li><li>Удали имена, телефоны и почты клиентов, оставь только номер. Личные данные покупателей в чужой сервис не загружай, номера достаточно для любого расчёта ниже.</li><li>Прикрепи файл к сообщению и отправь первый промпт. Каждый следующий отправляй в том же чате, чтобы нейросеть держала таблицу в памяти.</li><li>Цифры из ответа сверь с таблицей хотя бы в двух местах. Нейросеть иногда неверно читает столбец или формат даты, проверка занимает две минуты.</li></ol><div class="lblrow"><span class="lbl">Промпт Б1. Продажи: что растёт и что падает</span><button class="copy" data-text="Действуй как аналитик малого бизнеса. В файле мои продажи за [период]: столбцы [перечисли столбцы]. Сначала проверь данные: пропуски, дубли, странные суммы, и скажи, что исправить. Потом посчитай продажи по неделям и месяцам, найди 3 самых сильных и 3 самых слабых периода и предположи причины, которые я могу проверить. Покажи топ-10 товаров по сумме и по количеству продаж и долю каждого. Ничего не придумывай: если для вывода не хватает данных, так и напиши, каких. В конце дай формулы или шаги для сводной таблицы в [Google Таблицах / Excel], чтобы я повторял этот отчёт сам каждый месяц.">Скопировать</button></div><div class="box">Действуй как аналитик малого бизнеса. В файле мои продажи за [период]: столбцы [перечисли столбцы]. Сначала проверь данные: пропуски, дубли, странные суммы, и скажи, что исправить. Потом посчитай продажи по неделям и месяцам, найди 3 самых сильных и 3 самых слабых периода и предположи причины, которые я могу проверить. Покажи топ-10 товаров по сумме и по количеству продаж и долю каждого. Ничего не придумывай: если для вывода не хватает данных, так и напиши, каких. В конце дай формулы или шаги для сводной таблицы в [Google Таблицах / Excel], чтобы я повторял этот отчёт сам каждый месяц.</div><div class="lblrow"><span class="lbl">Промпт Б2. Средний чек: что его тянет вниз</span><button class="copy" data-text="По этой же таблице посчитай средний чек по месяцам, по источникам клиентов и по товарам. Покажи рядом медиану, если среднее и медиана сильно расходятся, объясни, какие покупки искажают картину. Найди, у каких источников и в какие месяцы средний чек ниже обычного, и какие товары чаще покупают вместе. Дай 3 гипотезы, как поднять средний чек, к каждой: какую цифру смотреть через месяц, чтобы понять, сработало или нет. Формулы для [Google Таблиц / Excel] в конце.">Скопировать</button></div><div class="box">По этой же таблице посчитай средний чек по месяцам, по источникам клиентов и по товарам. Покажи рядом медиану, если среднее и медиана сильно расходятся, объясни, какие покупки искажают картину. Найди, у каких источников и в какие месяцы средний чек ниже обычного, и какие товары чаще покупают вместе. Дай 3 гипотезы, как поднять средний чек, к каждой: какую цифру смотреть через месяц, чтобы понять, сработало или нет. Формулы для [Google Таблиц / Excel] в конце.</div><div class="lblrow"><span class="lbl">Промпт Б3. Воронка: на каком шаге теряю людей</span><button class="copy" data-text="Мои этапы воронки: [например: заявка, ответили, консультация, счёт, оплата]. В файле по каждому клиенту указан этап, до которого он дошёл, и источник. Посчитай, сколько людей на каждом этапе, конверсию из этапа в этап и общую конверсию из заявки в оплату. Сравни источники между собой. Найди шаг с самой большой потерей и предложи 3 вещи, которые проверить на этом шаге. Если этапы в таблице записаны по-разному, сначала приведи их к одному виду и покажи, что объединил.">Скопировать</button></div><div class="box">Мои этапы воронки: [например: заявка, ответили, консультация, счёт, оплата]. В файле по каждому клиенту указан этап, до которого он дошёл, и источник. Посчитай, сколько людей на каждом этапе, конверсию из этапа в этап и общую конверсию из заявки в оплату. Сравни источники между собой. Найди шаг с самой большой потерей и предложи 3 вещи, которые проверить на этом шаге. Если этапы в таблице записаны по-разному, сначала приведи их к одному виду и покажи, что объединил.</div><div class="lblrow"><span class="lbl">Промпт Б4. Отток: кто перестал покупать</span><button class="copy" data-text="По таблице продаж найди клиентов, которые покупали больше одного раза, и посчитай долю повторных покупок. Разбей клиентов по месяцу первой покупки и покажи, сколько из каждой группы вернулись через 1, 2 и 3 месяца. Составь список номеров клиентов, которые покупали регулярно, но не покупают дольше [60 / 90] дней. Скажи, чем они отличаются от тех, кто остался: товар первой покупки, источник, сумма. Предложи текст короткого сообщения, которым я верну их, без скидки в лоб.">Скопировать</button></div><div class="box">По таблице продаж найди клиентов, которые покупали больше одного раза, и посчитай долю повторных покупок. Разбей клиентов по месяцу первой покупки и покажи, сколько из каждой группы вернулись через 1, 2 и 3 месяца. Составь список номеров клиентов, которые покупали регулярно, но не покупают дольше [60 / 90] дней. Скажи, чем они отличаются от тех, кто остался: товар первой покупки, источник, сумма. Предложи текст короткого сообщения, которым я верну их, без скидки в лоб.</div><div class="note">Нейросеть считает быстро и уверенно ошибается, если в таблице мусор. Поэтому первый промпт всегда начинается с проверки данных. Решение по деньгам принимаешь ты, цифры для него дают твои таблицы.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-3">4. Ошибки, на которых бросают</h2><ul><li>Читать уроки без заданий. Объяснение понятно, пока его читаешь, через день от него ничего не остаётся. Навык появляется только от запроса, который ты написал и запустил сам.</li><li>Просить сразу весь курс одним ответом. Получишь длинную простыню, которую не дочитаешь. Держи правило из промптов: один урок за раз и проверка перед следующим.</li><li>Не называть диалект. Функции дат и некоторые конструкции в SQLite, PostgreSQL и MySQL пишутся по-разному, и запрос из ответа падает с ошибкой. Назови свою базу в первом сообщении.</li><li>Верить ответу без запуска. Модель может написать запрос, который выглядит правильно и возвращает не то. Запускай каждый запрос и сверяй результат с тем, что ожидал.</li><li>Загружать таблицы с именами и телефонами клиентов. Для анализа достаточно номера клиента, личные данные оставь у себя.</li><li>Каждый день начинать новый чат. Нейросеть забывает, где ты ошибался, и снова объясняет то, что ты уже знаешь. Один чат или один проект на всё обучение.</li><li>Собирать портфолио только из учебных задач. Работодатель и клиент смотрят на вопрос бизнеса и вывод. Один проект на твоих или открытых данных с понятным выводом сильнее десяти решённых упражнений.</li></ul><div class="note">Эти промпты научат тебя считать и видеть, где бизнес теряет людей и деньги. Как привести в этот бизнес поток новых клиентов через контент и нейросети, я разбираю в Reels Challenge и Лаборатории для экспертов.</div></div>
+<style>.endq{margin:34px 0 8px;padding:22px 24px;border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:14px;background:var(--surface)}.endq p{margin:0 0 14px;font-weight:600;font-size:16px;line-height:1.5;color:var(--text)}.endb{display:flex;flex-direction:column;gap:10px}.endbtn{display:block;text-align:center;font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 18px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent)}.endbtn:hover{opacity:.85}</style><div class="endq"><p>Ты дочитал до конца, значит тебе правда интересно. Выбери, что дальше, и я отвечу тебе в чате лично:</p><div class="endb"><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-razbor" target="_blank" rel="noopener">Разбери мой блог</a><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-agent" target="_blank" rel="noopener">Хочу так же, с агентом</a><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-vopros" target="_blank" rel="noopener">Остался вопрос по гайду</a></div></div>
+
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">1. Усиленные версии: подставь свой уровень и цель</a><a href="#sec-1">2. План на 30 дней: урок в день</a><a href="#sec-2">3. Бонус для предпринимателей: свои цифры в Google Таблицах и Excel</a><a href="#sec-3">4. Ошибки, на которых бросают</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
