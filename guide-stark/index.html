@@ -1,0 +1,419 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>7 open source репо с GitHub для бизнеса на ИИ: установка</title><meta name="description" content="Клон приложения, сайт по ссылке, видеореклама промптом, ИИ-поддержка, CRM с онлайн-подписью, счета и ИИ-директор: установка по шагам и как связать в одну систему."><meta property="og:description" content="Клон приложения, сайт по ссылке, видеореклама промптом, ИИ-поддержка, CRM с онлайн-подписью, счета и ИИ-директор: установка по шагам и как связать в одну систему."><meta name="twitter:description" content="Клон приложения, сайт по ссылке, видеореклама промптом, ИИ-поддержка, CRM с онлайн-подписью, счета и ИИ-директор: установка по шагам и как связать в одну систему."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-stark/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-stark/"><meta property="og:title" content="7 open source репо с GitHub для бизнеса на ИИ: установка"><meta name="twitter:title" content="7 open source репо с GitHub для бизнеса на ИИ: установка"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-vajbkoding">Вайбкодинг</a></div>
+<h1>7 репо с GitHub, чтобы собрать бизнес на ИИ: установка по шагам и как связать их в одну систему</h1>
+<p class="lead">Все 7 репо из карусели: что делает каждое, ссылка, что нужно для установки, команды по шагам и честная строка о том, где платишь. Команды взяты из официальных README и документации, каждую ссылку мы открыли 12 ноября 2026 года. В конце схема, как связать семь программ в один бизнес, который работает на ИИ.</p>
+<p class="meta">Внутри: Replica, Open Lovable, HyperFrames, Dify, Odoo, Invoice Ninja и Paperclip. У каждого требования (ключ нейросети, сервер, Docker), установка по шагам, готовый первый промпт или настройка и что из этого платное. Плюс путь клиента через всю систему, что связано само и что через API, и с чего начать одному.</p>
+<div class="sec"><h2 id="sec-0">Перед стартом: что поставить один раз и сколько это стоит</h2><p>Семь репо закрывают семь участков бизнеса: продукт, сайт, реклама, поддержка, продажи, счета и управление. Ставить все семь в первый же вечер не нужно. Поставь базу ниже, потом бери репо под задачу, которая горит у тебя сейчас.</p><h3>База на компьютер, ставится один раз</h3><ul><li>Git. Нужен, чтобы скачивать репо командой git clone. Страница загрузки: git-scm.com.</li><li>Node.js версии 24.11 или новее. HyperFrames просит от 22, Paperclip от 24.11, поэтому ставь сразу свежую, и она подойдёт всем. Страница загрузки: nodejs.org.</li><li>Python 3.8 или новее. Нужен инструментам Replica. На Mac и Linux он обычно уже стоит, проверь командой python3 --version.</li><li>Docker Desktop. На нём живут Dify, Odoo и Invoice Ninja: одна команда поднимает программу вместе с базой данных. Страница загрузки: docker.com.</li><li>Claude Code. Это ИИ-агент в терминале, через него работают Replica, HyperFrames и агенты Paperclip. Установка описана на docs.claude.com.</li></ul><h3>Где вводить команды</h3><ul><li>Строки, которые начинаются с косой черты (/plugin ...), вводишь внутри Claude Code, в окне чата с ним.</li><li>Всё остальное (git, npx, pnpm, docker, openssl) вводишь в обычном терминале: Терминал на Mac, PowerShell на Windows.</li><li>Команда cd папка переводит терминал в эту папку. Следующие команды выполняй там же, по порядку, не перескакивая.</li><li>Адрес вида http://localhost:3000 открываешь в браузере на том же компьютере, где запустил программу.</li></ul><h3>Честно про деньги</h3><p>Код у всех семи открытый, скачать и поставить его ничего не стоит. Деньги уходят в трёх местах, и лучше знать их заранее.</p><ul><li>Нейросеть внутри. Claude Code работает по подписке или по ключу Anthropic. Open Lovable, Dify и Paperclip тоже просят ключ нейросети, за ключ платишь по тарифу провайдера.</li><li>Сервер. Пока пробуешь, всё крутится на твоём компьютере. Чтобы бот поддержки, CRM и счета были доступны клиентам круглые сутки, нужен сервер. Dify просит минимум 2 ядра и 4 ГБ памяти.</li><li>Платные надстройки. У Firecrawl, HyperFrames Studio, Dify Cloud, Odoo и Invoice Ninja есть платные тарифы. Где они нужны и где можно обойтись, сказано у каждого репо ниже.</li></ul><div class="note">Важно для России. Claude, ChatGPT и Gemini официально не работают с российскими пользователями, Stripe и PayPal не принимают российские карты. Ключи и оплату этих сервисов оформить из России напрямую нельзя. Где есть замена, она указана у конкретного репо.</div></div>
+<div class="sec"><h2 id="sec-1">01. Replica: клонирует приложение, которое тебе нравится</h2><p>Шаг 1, продукт. Одиннадцать скиллов для Claude Code: разбирают чужое приложение на экраны и функции, пересобирают твою версию с нуля, тестируют её на баги и читают отзывы пользователей оригинала, чтобы ты исправил то, за что его ругают. Лицензия MIT, 9,1 тысячи звёзд.</p><h3>Что нужно</h3><ul><li>Claude Code (подписка Claude или ключ Anthropic).</li><li>Python 3.8 или новее. Ставить через pip ничего не нужно.</li><li>Отдельные ключи и регистрация самим скиллам не нужны.</li></ul><h3>Установка</h3><p>Открой Claude Code в папке будущего проекта и введи две строки по очереди.</p><div class="lblrow"><span class="lbl">Replica: установка плагином (внутри Claude Code)</span><button class="copy" data-text="/plugin marketplace add Jakeschincariol/replica-skill
+/plugin install replica-skill@replica-skill">Скопировать</button></div><div class="box">/plugin marketplace add Jakeschincariol/replica-skill
+/plugin install replica-skill@replica-skill</div><p>Плагином скиллы называются с приставкой, например /replica-skill:replica-recon. Хочешь короткие имена вида /replica-recon, ставь копированием папок в терминале:</p><div class="lblrow"><span class="lbl">Replica: установка копированием (в терминале)</span><button class="copy" data-text="git clone https://github.com/Jakeschincariol/replica-skill.git
+cp -r replica-skill/replica-* ~/.claude/skills/">Скопировать</button></div><div class="box">git clone https://github.com/Jakeschincariol/replica-skill.git
+cp -r replica-skill/replica-* ~/.claude/skills/</div><h3>Как запускать</h3><p>Скиллы идут цепочкой, каждый читает то, что записал предыдущий, в папку replica/ внутри проекта:</p><ol><li>/replica-recon с адресом приложения: экраны, сценарии, модель данных и таблица функций features.csv.</li><li>/replica-architect: стек, схема базы, порядок сборки.</li><li>/replica-design: цвета, шрифты, отступы и компоненты в виде токенов.</li><li>/replica-build: сборка экран за экраном.</li><li>/replica-backend: вход, база, оплата, интеграции.</li><li>/replica-test: прогон всех сценариев и список багов по важности.</li><li>/replica-diff: процент совпадения с оригиналом и чего не хватает.</li><li>/replica-entrepreneur: что пользователи оригинала ненавидят в отзывах, с ссылками на каждый отзыв.</li><li>/replica-brand: новое имя, палитра, логотип и чистка кода от следов оригинала.</li><li>/replica-launch: лендинг, цены, описание для магазина приложений.</li><li>/replica-deploy: проверка перед выпуском и выкладка на твой домен.</li></ol><div class="lblrow"><span class="lbl">Первый запрос в Claude Code</span><button class="copy" data-text="/replica-skill:replica-entrepreneur [адрес приложения, которое хочешь повторить]
+Собери, за что пользователи ругают это приложение в отзывах, и скажи, стоит ли делать свою версию и под каким углом.">Скопировать</button></div><div class="box">/replica-skill:replica-entrepreneur [адрес приложения, которое хочешь повторить]
+Собери, за что пользователи ругают это приложение в отзывах, и скажи, стоит ли делать свою версию и под каким углом.</div><div class="note">Начни с /replica-entrepreneur. Он за один запуск показывает, есть ли смысл клонировать: если в отзывах нет повторяющихся жалоб, твоей версии нечем отличаться.</div><div class="note">Границы, которые скилл держит сам: он пересобирает функции и логику работы, код, логотип, тексты и контент оригинала не копирует. Перед запуском обязателен ребрендинг, без чистой проверки /replica-deploy не выпустит. Перед продажей проверь товарный знак своего названия.</div><a class="linkbtn" href="https://github.com/Jakeschincariol/replica-skill" target="_blank" rel="noopener">Replica: страница на GitHub</a></div>
+<div class="sec"><h2 id="sec-2">02. Open Lovable: вставил ссылку, получил сайт</h2><p>Шаг 2, сайт. Даёшь ссылку на сайт, который нравится, программа читает страницу и собирает рабочую копию на React. Дальше в чате с ИИ переделываешь её в свой лендинг. Сделали команда Firecrawl, лицензия MIT, 28,9 тысячи звёзд.</p><h3>Что нужно</h3><ul><li>Node.js и pnpm (подойдёт и обычный npm).</li><li>Ключ Firecrawl, без него не работает. Бесплатный тариф даёт 1000 кредитов в месяц, это до 1000 прочитанных страниц, дальше от 16 $ в месяц при оплате за год (цены на 12.11.2026).</li><li>Ключ одной нейросети на выбор: Gemini, Anthropic, OpenAI или Groq.</li><li>Песочница, где собирается сайт: Vercel (по умолчанию) или E2B.</li></ul><h3>Установка</h3><div class="lblrow"><span class="lbl">Open Lovable: скачать и поставить</span><button class="copy" data-text="git clone https://github.com/firecrawl/open-lovable.git
+cd open-lovable
+pnpm install">Скопировать</button></div><div class="box">git clone https://github.com/firecrawl/open-lovable.git
+cd open-lovable
+pnpm install</div><p>В папке open-lovable создай файл .env.local и впиши ключи. Минимальный набор: Firecrawl, одна нейросеть и песочница.</p><div class="lblrow"><span class="lbl">Файл .env.local</span><button class="copy" data-text="FIRECRAWL_API_KEY=[твой ключ Firecrawl]
+ANTHROPIC_API_KEY=[ключ нейросети, или GEMINI_API_KEY / OPENAI_API_KEY / GROQ_API_KEY]
+SANDBOX_PROVIDER=vercel">Скопировать</button></div><div class="box">FIRECRAWL_API_KEY=[твой ключ Firecrawl]
+ANTHROPIC_API_KEY=[ключ нейросети, или GEMINI_API_KEY / OPENAI_API_KEY / GROQ_API_KEY]
+SANDBOX_PROVIDER=vercel</div><p>Для песочницы Vercel выполни в той же папке vercel link, потом vercel env pull: так ключ доступа к песочнице подтянется в файл сам. Вместо Vercel можно взять E2B: SANDBOX_PROVIDER=e2b и строка E2B_API_KEY с ключом из e2b.dev.</p><div class="lblrow"><span class="lbl">Open Lovable: запуск</span><button class="copy" data-text="pnpm dev">Скопировать</button></div><div class="box">pnpm dev</div><p>Открой http://localhost:3000, вставь ссылку на сайт-образец и дальше пиши правки обычным языком.</p><div class="lblrow"><span class="lbl">Первая правка после копии</span><button class="copy" data-text="Оставь структуру и порядок блоков. Замени все тексты, картинки и логотип на мои: [название продукта], [кому он нужен], [главная выгода], [цена], [кнопка ведёт на адрес]. Чужие тексты и фото не оставляй.">Скопировать</button></div><div class="box">Оставь структуру и порядок блоков. Замени все тексты, картинки и логотип на мои: [название продукта], [кому он нужен], [главная выгода], [цена], [кнопка ведёт на адрес]. Чужие тексты и фото не оставляй.</div><div class="note">Копия нужна как каркас. Тексты, фотографии и логотип оригинала принадлежат его владельцу, на своём сайте их заменяешь полностью.</div><div class="note">Платное: ключ Firecrawl сверх бесплатных кредитов и ключ нейросети. Сам Open Lovable бесплатный. Если нужен готовый облачный сервис без установки, авторы сами отправляют на Lovable.dev, он платный.</div><a class="linkbtn" href="https://github.com/firecrawl/open-lovable" target="_blank" rel="noopener">Open Lovable: страница на GitHub</a></div>
+<div class="sec"><h2 id="sec-3">03. HyperFrames: видеореклама по одному промпту</h2><p>Шаг 3, реклама. Описываешь ролик словами, ИИ-агент собирает сцены, титры и моушн-графику в HTML и рендерит готовый MP4. Выпустила компания HeyGen, лицензия Apache 2.0, 83,3 тысячи звёзд.</p><h3>Что нужно</h3><ul><li>Node.js 22 или новее.</li><li>FFmpeg, программа для сборки видео. Mac: brew install ffmpeg, Windows: страница загрузки на ffmpeg.org.</li><li>Claude Code, если хочешь делать ролики промптом. Без агента работает ручной режим через команды.</li></ul><h3>Установка в Claude Code</h3><p>В обычном терминале, в папке видеопроекта:</p><div class="lblrow"><span class="lbl">HyperFrames: установка плагина (в терминале)</span><button class="copy" data-text="claude plugin marketplace add heygen-com/hyperframes
+claude plugin install hyperframes@hyperframes">Скопировать</button></div><div class="box">claude plugin marketplace add heygen-com/hyperframes
+claude plugin install hyperframes@hyperframes</div><p>Дальше запускаешь claude и пишешь задачу через /hyperframes:hyperframes. Агент сам планирует ролик, пишет HTML, проверяет, показывает превью и рендерит.</p><div class="lblrow"><span class="lbl">Промпт на рекламный ролик</span><button class="copy" data-text="/hyperframes:hyperframes Сделай вертикальный рекламный ролик 1080x1920 на 15 секунд для [продукт].
+Секунды 0-3: крупный заголовок [боль клиента одной фразой].
+Секунды 3-10: три коротких титра с выгодами: [выгода 1], [выгода 2], [выгода 3], каждый появляется с анимацией.
+Секунды 10-15: [цена или оффер] и призыв [что сделать].
+Цвета бренда [цвета], шрифт крупный и читаемый на телефоне, тихая фоновая музыка. Отрендери в MP4.">Скопировать</button></div><div class="box">/hyperframes:hyperframes Сделай вертикальный рекламный ролик 1080x1920 на 15 секунд для [продукт].
+Секунды 0-3: крупный заголовок [боль клиента одной фразой].
+Секунды 3-10: три коротких титра с выгодами: [выгода 1], [выгода 2], [выгода 3], каждый появляется с анимацией.
+Секунды 10-15: [цена или оффер] и призыв [что сделать].
+Цвета бренда [цвета], шрифт крупный и читаемый на телефоне, тихая фоновая музыка. Отрендери в MP4.</div><h3>Ручной режим, без агента</h3><div class="lblrow"><span class="lbl">HyperFrames: проект, превью и рендер</span><button class="copy" data-text="npx hyperframes init my-video
+cd my-video
+npx hyperframes preview
+npx hyperframes render">Скопировать</button></div><div class="box">npx hyperframes init my-video
+cd my-video
+npx hyperframes preview
+npx hyperframes render</div><p>preview открывает ролик в браузере и обновляет его при каждой правке, render сохраняет MP4.</p><div class="note">Платное: сам движок и рендер на твоём компьютере бесплатные. Тариф Pro в HyperFrames Studio добавляет видео, голоса и музыку от моделей HeyGen, на нём же работают скиллы /reverse-any-video и /style-sampling. Для обычной рекламы с титрами и графикой он не нужен.</div><a class="linkbtn" href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener">HyperFrames: страница на GitHub</a></div>
+<div class="sec"><h2 id="sec-4">04. Dify: ИИ отвечает твоим клиентам по твоим документам</h2><p>Шаг 4, поддержка. Загружаешь документы, прайс и ответы на частые вопросы, собираешь бота, который отвечает по ним, и ставишь его чатом на сайт. 161 тысяча звёзд, самая большая платформа из семи.</p><h3>Что нужно</h3><ul><li>Компьютер или сервер минимум с 2 ядрами и 4 ГБ памяти.</li><li>Docker с Docker Compose версии 2.35 или новее и OpenSSL.</li><li>Ключ нейросети. Dify подключает сотни моделей, включая любые совместимые с OpenAI API и модели, которые крутятся на твоём же сервере (например, через Ollama).</li></ul><h3>Установка</h3><p>Номер свежей версии смотри на странице релизов Dify, на 12 ноября 2026 это 1.19.0.</p><div class="lblrow"><span class="lbl">Dify: скачать</span><button class="copy" data-text="git clone --branch 1.19.0 --depth 1 https://github.com/langgenius/dify.git
+cd dify/docker
+cp .env.example .env
+openssl rand -hex 32">Скопировать</button></div><div class="box">git clone --branch 1.19.0 --depth 1 https://github.com/langgenius/dify.git
+cd dify/docker
+cp .env.example .env
+openssl rand -hex 32</div><p>Последняя команда выдаст длинную строку. Открой файл .env, найди DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN и вставь эту строку после знака равно. Остальное в файле не трогай.</p><div class="lblrow"><span class="lbl">Dify: запуск</span><button class="copy" data-text="docker compose up -d
+docker compose ps --all">Скопировать</button></div><div class="box">docker compose up -d
+docker compose ps --all</div><p>Когда сервисы показывают Up или healthy, открой http://localhost/install и создай аккаунт администратора. Служба init_permissions должна завершиться с кодом 0, это нормально.</p><h3>Бот поддержки за пять шагов</h3><ol><li>В настройках, в разделе провайдеров моделей, подключи ключ нейросети или локальную модель.</li><li>В разделе Knowledge создай базу знаний и загрузи документы: прайс, условия, ответы на частые вопросы. PDF и презентации Dify читает сам.</li><li>В Studio создай приложение типа Chatbot и подключи к нему эту базу знаний.</li><li>Впиши инструкцию ниже в поле инструкций приложения и проверь бота вопросами, которые тебе задают клиенты.</li><li>Нажми Publish, потом Embed: Dify выдаст код чат-кнопки. Вставь его на свой сайт, и в углу страницы появится чат.</li></ol><div class="lblrow"><span class="lbl">Инструкция для бота поддержки</span><button class="copy" data-text="Ты консультант компании [название]. Отвечай клиентам только по загруженным документам.
+Если ответа в документах нет, честно скажи об этом и предложи оставить контакт: [телефон или ссылка].
+Цены называй только из прайса, скидок и сроков от себя не обещай.
+Пиши коротко, по-русски, на ты, без сложных терминов.
+Когда клиент готов купить, дай ссылку: [адрес оплаты или заявки].">Скопировать</button></div><div class="box">Ты консультант компании [название]. Отвечай клиентам только по загруженным документам.
+Если ответа в документах нет, честно скажи об этом и предложи оставить контакт: [телефон или ссылка].
+Цены называй только из прайса, скидок и сроков от себя не обещай.
+Пиши коротко, по-русски, на ты, без сложных терминов.
+Когда клиент готов купить, дай ссылку: [адрес оплаты или заявки].</div><div class="note">Платное: своя установка бесплатная, платишь за ключ нейросети и сервер. Dify Cloud, где ставить ничего не надо, работает по тарифам на dify.ai/pricing. Лицензия разрешает ставить Dify для своего бизнеса, а продавать его как облачный сервис для многих клиентов и убирать логотип Dify из интерфейса без отдельного договора нельзя.</div><a class="linkbtn" href="https://github.com/langgenius/dify" target="_blank" rel="noopener">Dify: страница на GitHub</a></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-5">05. Odoo: заявка, коммерческое предложение и подпись онлайн</h2><p>Шаг 5, продажи. Набор бизнес-приложений: CRM, продажи, склад, счета, сайт. Здесь берём два: CRM и Продажи. Заявки падают в воронку, предложение уходит клиенту в один клик, клиент подписывает его онлайн, и после подписи предложение само становится подтверждённым заказом. 55,7 тысячи звёзд.</p><h3>Что нужно</h3><ul><li>Docker.</li><li>Около получаса на первую настройку.</li></ul><h3>Установка по официальной инструкции образа Odoo в Docker</h3><p>Сначала база данных, потом сам Odoo. Слово volume в командах значит, что данные сохранятся, даже если контейнер удалить.</p><div class="lblrow"><span class="lbl">Odoo: база данных</span><button class="copy" data-text="docker run -d -v odoo-db:/var/lib/postgresql/data -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15">Скопировать</button></div><div class="box">docker run -d -v odoo-db:/var/lib/postgresql/data -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15</div><div class="lblrow"><span class="lbl">Odoo: запуск</span><button class="copy" data-text="docker run -v odoo-data:/var/lib/odoo -d -p 8069:8069 --name odoo --link db:db -t odoo">Скопировать</button></div><div class="box">docker run -v odoo-data:/var/lib/odoo -d -p 8069:8069 --name odoo --link db:db -t odoo</div><p>Открой http://localhost:8069, создай базу: название, свою почту, пароль и русский язык.</p><h3>Подпись коммерческого предложения онлайн</h3><ol><li>В разделе Приложения установи CRM и Продажи.</li><li>Продажи, Настройки, блок про предложения и заказы: включи Online Signature (онлайн-подпись) и сохрани.</li><li>В CRM открой заявку и создай из неё коммерческое предложение.</li><li>Отправь его клиенту по почте одной кнопкой.</li><li>Клиент открывает предложение по ссылке, жмёт кнопку подписи и расписывается: автоматически, мышкой или загрузкой картинки.</li><li>После подписи заказ подтверждается, а продавцу сразу приходит уведомление.</li></ol><div class="note">Платное: версия Community, которую ставишь по командам выше, бесплатная, и онлайн-подпись предложения в ней работает. Часть приложений, например отдельное приложение Sign для подписи любых документов и конструктор Studio, есть только в платной Enterprise.</div><div class="note">Odoo умеет выставлять счета сам. Если продажи и счета хочешь держать в одной программе, Invoice Ninja из шага 6 можно не ставить.</div><a class="linkbtn" href="https://github.com/odoo/odoo" target="_blank" rel="noopener">Odoo: страница на GitHub</a><a class="linkbtn" href="https://www.odoo.com/documentation/19.0/applications/sales/sales/sales_quotations/get_signature_to_validate.html" target="_blank" rel="noopener">Odoo: инструкция по онлайн-подписи</a></div>
+<div class="sec"><h2 id="sec-6">06. Invoice Ninja: счета, регулярные списания и оплата картой</h2><p>Шаг 6, счета. Коммерческие предложения, счета, регулярные счета на подписку, расходы и проекты в одном кабинете. У клиента свой портал, где он видит счета и оплачивает их. 10,6 тысячи звёзд.</p><h3>Что нужно</h3><ul><li>Самый быстрый путь: облачная версия на invoiceninja.com, есть бесплатный тариф, ставить ничего не надо.</li><li>Своя установка: Docker и около часа на настройку.</li><li>Платёжный шлюз, если хочешь принимать оплату картой прямо из счёта: Stripe, PayPal или другой из списка в настройках.</li></ul><h3>Своя установка через Docker</h3><div class="lblrow"><span class="lbl">Invoice Ninja: скачать</span><button class="copy" data-text="git clone https://github.com/invoiceninja/dockerfiles.git -b debian
+cd dockerfiles/debian">Скопировать</button></div><div class="box">git clone https://github.com/invoiceninja/dockerfiles.git -b debian
+cd dockerfiles/debian</div><div class="lblrow"><span class="lbl">Invoice Ninja: сгенерировать ключ</span><button class="copy" data-text="docker run --rm -it invoiceninja/invoiceninja-debian php artisan key:generate --show">Скопировать</button></div><div class="box">docker run --rm -it invoiceninja/invoiceninja-debian php artisan key:generate --show</div><p>Открой файл .env в той же папке и заполни четыре строки. Ключ из прошлой команды вставляешь целиком, вместе с началом base64. Потеряешь APP_KEY, потеряешь доступ к данным, сохрани его отдельно.</p><div class="lblrow"><span class="lbl">Строки в .env</span><button class="copy" data-text="APP_URL=http://in.localhost:8003/
+APP_KEY=[ключ из прошлой команды]
+IN_USER_EMAIL=[твоя почта для входа]
+IN_PASSWORD=[твой пароль]">Скопировать</button></div><div class="box">APP_URL=http://in.localhost:8003/
+APP_KEY=[ключ из прошлой команды]
+IN_USER_EMAIL=[твоя почта для входа]
+IN_PASSWORD=[твой пароль]</div><div class="lblrow"><span class="lbl">Invoice Ninja: запуск</span><button class="copy" data-text="docker compose up -d">Скопировать</button></div><div class="box">docker compose up -d</div><p>Открой адрес из APP_URL и войди с почтой и паролем из файла. Если их не задать, программа поставит почту admin@example.com и пароль changeme!, поэтому заполняй до первого запуска. При настройке базы адрес сервера базы mysql.</p><h3>Первый счёт</h3><ol><li>Заведи клиента.</li><li>Создай коммерческое предложение и отправь его. Когда клиент его примет, переведи предложение в счёт кнопкой конвертации.</li><li>Для абонентской платы сделай регулярный счёт: программа сама выставляет его каждый месяц.</li><li>В настройках онлайн-платежей подключи шлюз, тогда в письме со счётом у клиента появится кнопка оплаты.</li></ol><div class="note">Про оплату из России: Stripe и PayPal не принимают российские карты. Если клиенты в России, счёт оплачивается по реквизитам, а в Invoice Ninja ты отмечаешь платёж вручную.</div><div class="note">Платное: облачная версия бесплатна на базовом тарифе, тариф Pro от 14 $ в месяц. Своя установка бесплатная, все функции Pro и Enterprise в ней уже есть, лицензия Elastic разрешает пользоваться для своего бизнеса. Убрать логотип Invoice Ninja из того, что видят клиенты, стоит 40 $ в год.</div><a class="linkbtn" href="https://github.com/invoiceninja/invoiceninja" target="_blank" rel="noopener">Invoice Ninja: страница на GitHub</a></div>
+<div class="sec"><h2 id="sec-7">07. Paperclip: ИИ-директор над всеми агентами</h2><p>Шаг 7, управление. Ставишь компании одну цель и нанимаешь команду из ИИ-агентов: директор, техдиректор, маркетолог. Директор пишет стратегию, ты её утверждаешь, дальше агенты делят работу на задачи и отчитываются в одной панели. 113 тысяч звёзд, лицензия MIT.</p><h3>Что нужно</h3><ul><li>Node.js 24.11 или новее.</li><li>Ключ Anthropic (для агентов на Claude) или OpenAI (для агентов на Codex).</li><li>Для агентов на Claude: Claude Code, установленный на том же компьютере.</li></ul><h3>Установка</h3><div class="lblrow"><span class="lbl">Paperclip: установка и первый запуск</span><button class="copy" data-text="npx paperclipai@latest onboard --yes">Скопировать</button></div><div class="box">npx paperclipai@latest onboard --yes</div><p>Команда скачает и настроит всё сама, база данных создаётся автоматически. Панель открывается в браузере, обычно по адресу http://localhost:3100. Хочешь, чтобы Paperclip остался на компьютере и обновлялся одной командой, поставь его так: npx paperclipai install.</p><h3>Первая компания за пять минут</h3><ol><li>Создай компанию и впиши цель.</li><li>Найми первого агента, директора. Выбери, на чём он работает: Claude Code или Codex.</li><li>До включения работы задай бюджет на агента и на компанию. При 100% бюджета Paperclip сам ставит агентов на паузу.</li><li>Директор прочитает цель и пришлёт стратегию на утверждение.</li><li>Утверди, и на доске появятся первые задачи. Дальше нанимаешь остальных: маркетолога, техдиректора, кого нужно.</li></ol><div class="lblrow"><span class="lbl">Цель компании для директора</span><button class="copy" data-text="Цель: [продукт] для [кому] приносит [число] продаж в месяц к [дата].
+Что уже есть: сайт [адрес], бот поддержки на сайте, CRM с заявками, счета.
+Ограничения: бюджет на рекламу [сумма] в месяц, публикации и любые платежи только после моего утверждения.
+Каждую пятницу присылай отчёт: что сделано, что дало заявки, что предлагаешь на следующую неделю.">Скопировать</button></div><div class="box">Цель: [продукт] для [кому] приносит [число] продаж в месяц к [дата].
+Что уже есть: сайт [адрес], бот поддержки на сайте, CRM с заявками, счета.
+Ограничения: бюджет на рекламу [сумма] в месяц, публикации и любые платежи только после моего утверждения.
+Каждую пятницу присылай отчёт: что сделано, что дало заявки, что предлагаешь на следующую неделю.</div><div class="note">Платное: сам Paperclip бесплатный. Платишь за модели, на которых работают агенты. По оценке из документации Paperclip, пробный запуск обходится в 5-20 $, активная компания в 20-100 $ в месяц. Поэтому бюджеты ставишь до первого запуска.</div><a class="linkbtn" href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener">Paperclip: страница на GitHub</a><a class="linkbtn" href="https://docs.paperclip.ing/guides/getting-started/five-minute-path/" target="_blank" rel="noopener">Paperclip: пошаговый старт в документации</a></div>
+<div class="sec"><h2 id="sec-8">Как связать семь репо в один бизнес на ИИ</h2><p>По отдельности это семь программ. Бизнесом они становятся, когда выход одной становится входом следующей. Ниже путь клиента от первого касания до оплаты и кто на каком участке работает.</p><h3>Путь клиента через систему</h3><ol><li>Продукт. Replica разбирает приложение, на которое есть спрос, и /replica-entrepreneur находит, за что его ругают пользователи. Это твоё отличие и твой оффер.</li><li>Сайт. Open Lovable собирает каркас лендинга по сайту, который тебе нравится, ты заменяешь тексты и картинки на свой оффер.</li><li>Реклама. HyperFrames делает вертикальные ролики с этим оффером, ты выкладываешь их и ведёшь людей на сайт.</li><li>Поддержка. Чат Dify стоит на том же лендинге и отвечает на вопросы о цене, сроках и условиях по твоим документам. Когда человек готов, бот даёт ссылку на заявку.</li><li>Продажи. Заявка попадает в CRM Odoo, оттуда клиенту уходит коммерческое предложение, он подписывает его онлайн, и заказ подтверждается.</li><li>Счета. Invoice Ninja (или сам Odoo) выставляет счёт и, если это подписка, повторяет его каждый месяц.</li><li>Управление. Paperclip держит цель и раздаёт задачи агентам: маркетолог делает новые ролики, техдиректор правит сайт и бота, директор раз в неделю присылает тебе отчёт.</li></ol><h3>Что связано само, а что связываешь ты</h3><ul><li>Само: чат Dify встаёт на любой сайт куском кода из кнопки Embed. Подпись и подтверждение заказа в Odoo работают внутри одной программы.</li><li>Через API: у Dify, Odoo и Invoice Ninja есть открытые API, то есть другие программы и агенты могут создавать в них заявки, предложения и счета. Связку пишет агент: даёшь Claude Code адрес документации API и описываешь, что куда передать.</li><li>Через Paperclip: агентам подключаются сервисы и твои MCP-серверы, а права ставятся тремя режимами: разрешено, спросить меня, выключено. Деньги, публикации и письма клиентам ставь в режим спросить меня.</li></ul><div class="lblrow"><span class="lbl">Задача агенту на связку сайта и CRM</span><button class="copy" data-text="На моём лендинге [адрес или папка проекта] есть форма заявки. Сделай так, чтобы каждая заявка создавала лид в моём Odoo по адресу [адрес Odoo] через его внешний API. Поля: имя, телефон, почта, комментарий. Логин и пароль Odoo возьми из переменных окружения, в код их не пиши. Проверь отправкой тестовой заявки и покажи мне лид в CRM.">Скопировать</button></div><div class="box">На моём лендинге [адрес или папка проекта] есть форма заявки. Сделай так, чтобы каждая заявка создавала лид в моём Odoo по адресу [адрес Odoo] через его внешний API. Поля: имя, телефон, почта, комментарий. Логин и пароль Odoo возьми из переменных окружения, в код их не пиши. Проверь отправкой тестовой заявки и покажи мне лид в CRM.</div><h3>С чего начать, если ты один</h3><ol><li>Неделя 1. Dify на свой текущий сайт или в соцсети: бот снимает с тебя однотипные вопросы с первого дня, и это самая быстрая отдача из семи.</li><li>Неделя 2. Odoo или Invoice Ninja: заявки и счета перестают жить в переписке и заметках.</li><li>Неделя 3. Open Lovable и HyperFrames: новый лендинг и первые рекламные ролики под твой оффер.</li><li>Потом Paperclip. Директор над агентами имеет смысл, когда участки уже работают и есть что делегировать. Поставишь его первым, он будет управлять пустотой и тратить бюджет.</li><li>Replica бери отдельно, в тот момент, когда ищешь новый продукт.</li></ol><div class="note">Где это ломается чаще всего: всё стоит на твоём ноутбуке, и клиенты не видят бота и счета, когда ноутбук закрыт. Как только система начала приносить заявки, переноси Dify, Odoo и Invoice Ninja на сервер, команды установки там те же самые.</div></div>
+<style>.endq{margin:34px 0 8px;padding:22px 24px;border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:14px;background:var(--surface)}.endq p{margin:0 0 14px;font-weight:600;font-size:16px;line-height:1.5;color:var(--text)}.endb{display:flex;flex-direction:column;gap:10px}.endbtn{display:block;text-align:center;font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 18px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent)}.endbtn:hover{opacity:.85}</style><div class="endq"><p>Ты дочитал до конца, значит тебе правда интересно. Выбери, что дальше, и я отвечу тебе в чате лично:</p><div class="endb"><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-razbor" target="_blank" rel="noopener">Разбери мой блог</a><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-agent" target="_blank" rel="noopener">Хочу так же, с агентом</a><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-vopros" target="_blank" rel="noopener">Остался вопрос по гайду</a></div></div>
+
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Перед стартом: что поставить один раз и сколько это стоит</a><a href="#sec-1">01. Replica: клонирует приложение, которое тебе нравится</a><a href="#sec-2">02. Open Lovable: вставил ссылку, получил сайт</a><a href="#sec-3">03. HyperFrames: видеореклама по одному промпту</a><a href="#sec-4">04. Dify: ИИ отвечает твоим клиентам по твоим документам</a><a href="#sec-5">05. Odoo: заявка, коммерческое предложение и подпись онлайн</a><a href="#sec-6">06. Invoice Ninja: счета, регулярные списания и оплата картой</a><a href="#sec-7">07. Paperclip: ИИ-директор над всеми агентами</a><a href="#sec-8">Как связать семь репо в один бизнес на ИИ</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
