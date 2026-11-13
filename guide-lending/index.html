@@ -1,0 +1,686 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>5 промптов для сайта: нейросеть собирает лендинг одним файлом</title><meta name="description" content="Готовые промпты для Claude и других нейросетей: одностраничный сайт одним HTML-файлом с анимацией первого экрана. Как запустить, переделать под себя и выложить."><meta property="og:description" content="Готовые промпты для Claude и других нейросетей: одностраничный сайт одним HTML-файлом с анимацией первого экрана. Как запустить, переделать под себя и выложить."><meta name="twitter:description" content="Готовые промпты для Claude и других нейросетей: одностраничный сайт одним HTML-файлом с анимацией первого экрана. Как запустить, переделать под себя и выложить."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-lending/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-lending/"><meta property="og:title" content="5 промптов для сайта: нейросеть собирает лендинг одним файлом"><meta name="twitter:title" content="5 промптов для сайта: нейросеть собирает лендинг одним файлом"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-vajbkoding">Вайбкодинг</a></div>
+<h1>5 промптов, по которым нейросеть собирает сайт одним файлом: студия, кофейня, арт-студия, клиника и ИИ-сервис</h1>
+<p class="lead">Пять промптов из карусели целиком. Каждый собирает готовый одностраничный сайт одним файлом: с живым первым экраном, секциями, адаптацией под телефон. Ниже сами промпты, как их запустить и как переделать любой сайт под себя.</p>
+<p class="meta">5 промптов для нейросети, по которым собирается сайт одним HTML-файлом: студия с галактикой из частиц, кофейня, арт-студия со стеной телевизоров, клиника со спиралью ДНК и ИИ-сервис. Плюс шесть промптов, чтобы переделать сайт под свой бренд и выложить в интернет.</p>
+<div class="sec"><h2 id="sec-0">Как собрать сайт по любому из пяти промптов</h2><p>От пустой страницы до открытого сайта проходит несколько минут. Порядок один и тот же.</p><ol><li>Открой Claude или другую сильную нейросеть, которая умеет писать код, и начни новый чат. Я проверял эти промпты на Claude: каждый из пяти собрал рабочий сайт с первой попытки.</li><li>Нажми «Скопировать» у промпта и отправь его одним сообщением целиком. Строки в квадратных скобках это данные бренда: оставь как есть, чтобы увидеть сайт из карусели, или сразу впиши свои.</li><li>Нейросеть пришлёт код одного файла, это около тысячи строк. Часто она сразу показывает сайт в окне рядом с чатом.</li><li>Если окна нет, скопируй код, вставь в пустой текстовый файл, сохрани с именем index.html и открой двойным щелчком в браузере.</li><li>Интернет нужен только для шрифтов. Картинок и библиотек в этих сайтах нет, вся графика нарисована кодом, поэтому файл весит мало и открывается быстро.</li><li>Сайт каждый раз выходит немного другим, потому что код пишется заново. Что-то не понравилось, пиши правку словами в тот же чат.</li></ol><div class="note">Начни с того сайта, который ближе к твоей нише по настроению, тема значения не имеет. Клиника легко становится сайтом психолога, кофейня превращается в витрину любого товара, студия в портфолио эксперта.</div></div>
+<div class="sec"><h2 id="sec-1">Пять промптов</h2><p>Те же пять сайтов, что на слайдах. Каждый промпт самодостаточный, в нём весь сайт: настроение, цвета, шрифты, первый экран, секции и движение.</p><h3>01. Орбита, сайт студии</h3><p>Тёмный сайт студии с галактикой из точек на первом экране. Галактика собирается при загрузке, вращается и расступается под курсором. Ниже услуги, сетка проектов, процесс, отзыв и подвал с крупным призывом. Подойдёт студии, агентству, продюсеру, эксперту с портфолио.</p><div class="lblrow"><span class="lbl">Промпт 01: Орбита, сайт студии</span><button class="copy" data-text="Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Орбита]
+Чем занимается: [студия брендинга и цифрового дизайна]
+Главная фраза: [Делаем бренды, на которые хочется смотреть]
+Город и почта: [Москва, hello@orbita.studio]
+
+Настроение: ночное небо, тишина, дорогой минимализм. Фон почти чёрный #07070B, текст молочный #F2F0EA, один акцент сиреневый #C9A7FF. Заголовки шрифтом Unbounded, основной текст шрифтом Manrope.
+
+Первый экран на всю высоту окна. За текстом canvas с облаком из 6000 мелких точек, белых и сиреневых, разного размера и яркости. Точки собраны в спиральную галактику, которая занимает две трети экрана: яркое плотное ядро и три хорошо читаемых рукава. Она медленно вращается, у самых крупных точек лёгкое свечение. При загрузке облако за две секунды собирается из рассыпанных точек. Точки рядом с курсором разлетаются в стороны и плавно возвращаются на место. Поверх облака: тонкое меню (слева «Проекты», «Студия», «Процесс», по центру название, справа «Журнал», «О нас», «Написать»), слева по центру экрана главная фраза крупно в три строки, кеглем около 6 процентов ширины окна, внизу подсказка «листай» с тонкой линией, которая пульсирует.
+
+Секции ниже:
+1. «Что мы делаем». Четыре направления крупным списком с номерами 01, 02, 03, 04. При наведении строка сдвигается вправо, подсвечивается акцентом, справа появляется короткое описание.
+2. «Проекты». Шесть карточек сеткой три на два. Вместо фотографий у каждой свой абстрактный градиент с шумом, нарисованный CSS. При наведении карточка приподнимается, а градиент медленно плывёт. У каждой название проекта, тип работы и год.
+3. «Процесс». Четыре шага горизонтальной лентой. Тонкая линия под шагами закрашивается акцентом по мере прокрутки.
+4. Отзыв клиента одной крупной фразой на весь экран, под ней имя и должность.
+5. Подвал. Огромная фраза «Расскажи о проекте», кнопка с почтой, город, год и три ссылки на соцсети.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения. На компьютере курсор заменён маленьким кружком, который увеличивается над ссылками.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.">Скопировать</button></div><div class="box">Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Орбита]
+Чем занимается: [студия брендинга и цифрового дизайна]
+Главная фраза: [Делаем бренды, на которые хочется смотреть]
+Город и почта: [Москва, hello@orbita.studio]
+
+Настроение: ночное небо, тишина, дорогой минимализм. Фон почти чёрный #07070B, текст молочный #F2F0EA, один акцент сиреневый #C9A7FF. Заголовки шрифтом Unbounded, основной текст шрифтом Manrope.
+
+Первый экран на всю высоту окна. За текстом canvas с облаком из 6000 мелких точек, белых и сиреневых, разного размера и яркости. Точки собраны в спиральную галактику, которая занимает две трети экрана: яркое плотное ядро и три хорошо читаемых рукава. Она медленно вращается, у самых крупных точек лёгкое свечение. При загрузке облако за две секунды собирается из рассыпанных точек. Точки рядом с курсором разлетаются в стороны и плавно возвращаются на место. Поверх облака: тонкое меню (слева «Проекты», «Студия», «Процесс», по центру название, справа «Журнал», «О нас», «Написать»), слева по центру экрана главная фраза крупно в три строки, кеглем около 6 процентов ширины окна, внизу подсказка «листай» с тонкой линией, которая пульсирует.
+
+Секции ниже:
+1. «Что мы делаем». Четыре направления крупным списком с номерами 01, 02, 03, 04. При наведении строка сдвигается вправо, подсвечивается акцентом, справа появляется короткое описание.
+2. «Проекты». Шесть карточек сеткой три на два. Вместо фотографий у каждой свой абстрактный градиент с шумом, нарисованный CSS. При наведении карточка приподнимается, а градиент медленно плывёт. У каждой название проекта, тип работы и год.
+3. «Процесс». Четыре шага горизонтальной лентой. Тонкая линия под шагами закрашивается акцентом по мере прокрутки.
+4. Отзыв клиента одной крупной фразой на весь экран, под ней имя и должность.
+5. Подвал. Огромная фраза «Расскажи о проекте», кнопка с почтой, город, год и три ссылки на соцсети.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения. На компьютере курсор заменён маленьким кружком, который увеличивается над ссылками.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.</div><div class="note">Галактика выглядит бледно: напиши в тот же чат «сделай ядро галактики ярче и плотнее, рукава заметнее, точек вдвое больше».</div><h3>02. Обжарка, сайт кофейни</h3><p>Тёплый тёмный сайт кофейни. Стакан и пачка зерна нарисованы кодом, покачиваются и следят за курсором, над стаканом идёт пар. Ниже сорта с нотами вкуса, меню с ценами и схема, как дойти. Подойдёт любому заведению и любому товару, который можно поставить в кадр.</p><div class="lblrow"><span class="lbl">Промпт 02: Обжарка, сайт кофейни</span><button class="copy" data-text="Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Обжарка]
+Чем занимается: [кофейня и своя обжарка зерна]
+Главная фраза: [Медленная обжарка. Быстрое утро]
+Адрес: [Казань, Баумана 12]
+Часы работы: [каждый день с 8 до 22]
+
+Настроение: тёмная тёплая кофейня вечером, пятно света от лампы, крафтовая упаковка. Фон тёмно-коричневый #120C08 с тёплым радиальным пятном света #5A2E12 справа, текст кремовый #F3E9DC, акцент карамельный #D9A066. Заголовки шрифтом Playfair Display, основной текст шрифтом Inter, мелкие подписи заглавными буквами с разрядкой.
+
+Первый экран на всю высоту окна. Справа стоит предметная композиция, нарисованная SVG: чёрный бумажный стакан с крышкой и кремовая пачка зерна с отогнутым верхом. На обоих предметах название бренда, на пачке ещё мелкие строки про сорт и дату обжарки. Предметы слегка наклонены, под ними мягкая тень, они медленно покачиваются и чуть смещаются вслед за курсором с разной глубиной. Над стаканом поднимается пар: 150 полупрозрачных частиц на canvas, которые плывут вверх и растворяются. Слева главная фраза в две строки, по одному предложению на строку, кеглем около 5 процентов ширины окна, под ней одна строка описания и две кнопки: «Смотреть меню» и «Как нас найти». Сверху тонкое меню: название слева, справа «Зерно», «Меню», «О нас», «Адрес».
+
+Секции ниже:
+1. «Зерно недели». Три карточки сортов: страна и регион, три ноты вкуса кружками своего цвета, шкала обжарки из пяти делений, вес пачки и кнопка «В корзину». Сама корзина не нужна, кнопка меняет надпись на «Добавлено».
+2. «Как мы жарим». Три шага в ряд с тонкими линейными иконками SVG: отбор зерна, обжарка малыми партиями, отдых зерна перед продажей.
+3. «Меню». Две колонки, кофе и не кофе. Позиция слева, цена справа, между ними пунктирная линия. При наведении позиция подсвечивается акцентом.
+4. Бегущая строка во всю ширину с повторяющейся фразой «свежая обжарка каждую неделю».
+5. «Заходи». Адрес и часы работы крупно, рядом схема квартала, нарисованная линиями SVG, с отметкой кофейни. Ниже подвал с соцсетями.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.">Скопировать</button></div><div class="box">Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Обжарка]
+Чем занимается: [кофейня и своя обжарка зерна]
+Главная фраза: [Медленная обжарка. Быстрое утро]
+Адрес: [Казань, Баумана 12]
+Часы работы: [каждый день с 8 до 22]
+
+Настроение: тёмная тёплая кофейня вечером, пятно света от лампы, крафтовая упаковка. Фон тёмно-коричневый #120C08 с тёплым радиальным пятном света #5A2E12 справа, текст кремовый #F3E9DC, акцент карамельный #D9A066. Заголовки шрифтом Playfair Display, основной текст шрифтом Inter, мелкие подписи заглавными буквами с разрядкой.
+
+Первый экран на всю высоту окна. Справа стоит предметная композиция, нарисованная SVG: чёрный бумажный стакан с крышкой и кремовая пачка зерна с отогнутым верхом. На обоих предметах название бренда, на пачке ещё мелкие строки про сорт и дату обжарки. Предметы слегка наклонены, под ними мягкая тень, они медленно покачиваются и чуть смещаются вслед за курсором с разной глубиной. Над стаканом поднимается пар: 150 полупрозрачных частиц на canvas, которые плывут вверх и растворяются. Слева главная фраза в две строки, по одному предложению на строку, кеглем около 5 процентов ширины окна, под ней одна строка описания и две кнопки: «Смотреть меню» и «Как нас найти». Сверху тонкое меню: название слева, справа «Зерно», «Меню», «О нас», «Адрес».
+
+Секции ниже:
+1. «Зерно недели». Три карточки сортов: страна и регион, три ноты вкуса кружками своего цвета, шкала обжарки из пяти делений, вес пачки и кнопка «В корзину». Сама корзина не нужна, кнопка меняет надпись на «Добавлено».
+2. «Как мы жарим». Три шага в ряд с тонкими линейными иконками SVG: отбор зерна, обжарка малыми партиями, отдых зерна перед продажей.
+3. «Меню». Две колонки, кофе и не кофе. Позиция слева, цена справа, между ними пунктирная линия. При наведении позиция подсвечивается акцентом.
+4. Бегущая строка во всю ширину с повторяющейся фразой «свежая обжарка каждую неделю».
+5. «Заходи». Адрес и часы работы крупно, рядом схема квартала, нарисованная линиями SVG, с отметкой кофейни. Ниже подвал с соцсетями.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.</div><div class="note">Под свой товар поменяй одну фразу в описании первого экрана: вместо стакана и пачки напиши, что стоит в кадре, например «флакон духов и коробка».</div><h3>03. Плёнка, сайт арт-студии</h3><p>Тёмная комната со стеной старых телевизоров. На экранах шум, настроечные полосы и помехи, в углах счётчик кадров и тайм-код, работы листаются лентой как плёнка. Подойдёт видеографу, монтажёру, музыканту, продакшену, любому проекту с характером.</p><div class="lblrow"><span class="lbl">Промпт 03: Плёнка, сайт арт-студии</span><button class="copy" data-text="Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Плёнка]
+Чем занимается: [студия айдентики, арт-дирекшена и сайтов]
+Главная фраза: [Возвращаем старому новую жизнь]
+Почта: [hello@plenka.studio]
+
+Настроение: тёмная комната со старыми телевизорами, зелёноватое свечение экранов, ощущение видеокассеты. Фон #050807, текст светло-серый #E6E9E4, акцент холодный зелёный #5CFFB0. Заголовки узким высоким шрифтом Oswald заглавными буквами, служебные подписи моноширинным JetBrains Mono.
+
+Первый экран на всю высоту окна. На canvas девять старых ламповых телевизоров разного размера, они расставлены по краям кадра под разными углами и уходят в глубину, центр свободен под текст. У каждого тёмный корпус со скруглённым выпуклым экраном. На экранах идёт своё: на трёх телевизионный шум из случайных пикселей, на двух цветные настроечные полосы, на двух медленно переливающийся градиент, на двух бегущая горизонтальная полоса помех. Экраны подсвечивают темноту вокруг себя и слегка мерцают. Телевизор под курсором разгорается ярче. Поверх всей страницы тонкие строки развёртки и едва заметное зерно. В центре главная фраза в две строки. В углах служебные надписи: слева сверху счётчик кадров в секунду, справа сверху мигающая красная точка и «REC», слева снизу сегодняшняя дата, справа снизу бегущий тайм-код. Сверху по центру три маленькие кнопки-таблетки: «Услуги», «Работы», «Контакт». Под фразой две кнопки: «Начать проект» и «Смотреть работы». Курсор на компьютере заменён тонким крестиком.
+
+Секции ниже:
+1. «Что мы делаем». Три колонки услуг, у каждой номер моноширинным шрифтом, название и четыре пункта.
+2. «Работы». Горизонтальная лента из шести кадров, которая листается перетаскиванием мышью и пальцем. Кадры оформлены как плёнка с перфорацией по краям, внутри каждого свой градиент с зерном, название проекта и год.
+3. Бегущая строка крупными контурными буквами с главной фразой.
+4. «Как идёт работа». Четыре шага вертикальной шкалой, у каждого тайм-код вместо номера.
+5. Подвал. Крупная почта, которая копируется по клику и показывает «Скопировано», города и соцсети.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения. Заголовки секций при появлении один раз коротко дёргаются помехой, как при плохом сигнале.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.">Скопировать</button></div><div class="box">Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Плёнка]
+Чем занимается: [студия айдентики, арт-дирекшена и сайтов]
+Главная фраза: [Возвращаем старому новую жизнь]
+Почта: [hello@plenka.studio]
+
+Настроение: тёмная комната со старыми телевизорами, зелёноватое свечение экранов, ощущение видеокассеты. Фон #050807, текст светло-серый #E6E9E4, акцент холодный зелёный #5CFFB0. Заголовки узким высоким шрифтом Oswald заглавными буквами, служебные подписи моноширинным JetBrains Mono.
+
+Первый экран на всю высоту окна. На canvas девять старых ламповых телевизоров разного размера, они расставлены по краям кадра под разными углами и уходят в глубину, центр свободен под текст. У каждого тёмный корпус со скруглённым выпуклым экраном. На экранах идёт своё: на трёх телевизионный шум из случайных пикселей, на двух цветные настроечные полосы, на двух медленно переливающийся градиент, на двух бегущая горизонтальная полоса помех. Экраны подсвечивают темноту вокруг себя и слегка мерцают. Телевизор под курсором разгорается ярче. Поверх всей страницы тонкие строки развёртки и едва заметное зерно. В центре главная фраза в две строки. В углах служебные надписи: слева сверху счётчик кадров в секунду, справа сверху мигающая красная точка и «REC», слева снизу сегодняшняя дата, справа снизу бегущий тайм-код. Сверху по центру три маленькие кнопки-таблетки: «Услуги», «Работы», «Контакт». Под фразой две кнопки: «Начать проект» и «Смотреть работы». Курсор на компьютере заменён тонким крестиком.
+
+Секции ниже:
+1. «Что мы делаем». Три колонки услуг, у каждой номер моноширинным шрифтом, название и четыре пункта.
+2. «Работы». Горизонтальная лента из шести кадров, которая листается перетаскиванием мышью и пальцем. Кадры оформлены как плёнка с перфорацией по краям, внутри каждого свой градиент с зерном, название проекта и год.
+3. Бегущая строка крупными контурными буквами с главной фразой.
+4. «Как идёт работа». Четыре шага вертикальной шкалой, у каждого тайм-код вместо номера.
+5. Подвал. Крупная почта, которая копируется по клику и показывает «Скопировано», города и соцсети.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения. Заголовки секций при появлении один раз коротко дёргаются помехой, как при плохом сигнале.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.</div><div class="note">Это самый тяжёлый из пяти. Если страница подтормаживает, напиши «обновляй шум на экранах через кадр и уменьши его разрешение вдвое».</div><h3>04. Генома, сайт клиники</h3><p>Светлый спокойный сайт со спиралью ДНК из точек, которая медленно вращается. Ниже направления, шаги приёма, врачи, вопросы и форма записи. Подойдёт клинике, психологу, нутрициологу, косметологу, любому эксперту, которому важно доверие.</p><div class="lblrow"><span class="lbl">Промпт 04: Генома, сайт клиники</span><button class="copy" data-text="Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Генома]
+Чем занимается: [клиника генетической диагностики и превентивной медицины]
+Главная фраза: [Медицина, которая начинается с понимания]
+Телефон и адрес: [+7 900 000-00-00, Санкт-Петербург, Лесной проспект 20]
+
+Настроение: светлая спокойная клиника, много воздуха, никакого больничного синего. Фон светлый серо-мятный #EEF3F0, текст тёмный графит #1D2A26, акцент глубокий зелёный #1F6B5C, второй цвет оливковый #9BB068. Заголовки и текст шрифтом Golos Text, заголовки полужирные, крупные, со слегка сжатым межбуквенным интервалом.
+
+Первый экран на всю высоту окна. Сверху сплошная зелёная полоса шапки высотой 72px, она закреплена при прокрутке: название слева, меню справа («Направления», «Приём», «Врачи», «Вопросы», «Запись»). Ниже на canvas большая двойная спираль ДНК из 5000 мелких точек зелёного и оливкового цвета. Она идёт по диагонали из правого верхнего угла в нижний центр и медленно вращается вокруг своей оси: считай точки в трёх измерениях, две нити по синусу и косинусу плюс перемычки между ними, ближние точки крупнее и плотнее, дальние мельче и прозрачнее. Вокруг спирали рассыпана лёгкая пыль из точек, которая медленно дрейфует. Рядом с курсором точки мягко расступаются. Слева по центру мелкая подпись заглавными «О клинике», под ней главная фраза крупно в две строки, строка описания и кнопка «Записаться на приём».
+
+Секции ниже:
+1. «Направления». Шесть карточек сеткой три на два на белом фоне со скруглением 20px: линейная иконка SVG, название, две строки описания, ссылка «Подробнее» со стрелкой. При наведении карточка получает зелёную рамку, стрелка сдвигается.
+2. «Как проходит приём». Четыре шага в ряд, соединённые тонкой линией с точками. Линия прорисовывается по мере прокрутки.
+3. «Врачи». Четыре карточки: вместо фотографии круг с инициалами на мягком градиенте, имя, специальность, стаж.
+4. «Вопросы». Пять вопросов аккордеоном, открывается один за раз, плюс плавно превращается в минус.
+5. «Запись». Форма на зелёном фоне: имя, телефон, удобное время, кнопка. Данные никуда не отправляются, после нажатия форма сменяется сообщением «Заявка принята, перезвоним в течение дня». Ниже подвал с адресом, телефоном и часами работы.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.">Скопировать</button></div><div class="box">Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Генома]
+Чем занимается: [клиника генетической диагностики и превентивной медицины]
+Главная фраза: [Медицина, которая начинается с понимания]
+Телефон и адрес: [+7 900 000-00-00, Санкт-Петербург, Лесной проспект 20]
+
+Настроение: светлая спокойная клиника, много воздуха, никакого больничного синего. Фон светлый серо-мятный #EEF3F0, текст тёмный графит #1D2A26, акцент глубокий зелёный #1F6B5C, второй цвет оливковый #9BB068. Заголовки и текст шрифтом Golos Text, заголовки полужирные, крупные, со слегка сжатым межбуквенным интервалом.
+
+Первый экран на всю высоту окна. Сверху сплошная зелёная полоса шапки высотой 72px, она закреплена при прокрутке: название слева, меню справа («Направления», «Приём», «Врачи», «Вопросы», «Запись»). Ниже на canvas большая двойная спираль ДНК из 5000 мелких точек зелёного и оливкового цвета. Она идёт по диагонали из правого верхнего угла в нижний центр и медленно вращается вокруг своей оси: считай точки в трёх измерениях, две нити по синусу и косинусу плюс перемычки между ними, ближние точки крупнее и плотнее, дальние мельче и прозрачнее. Вокруг спирали рассыпана лёгкая пыль из точек, которая медленно дрейфует. Рядом с курсором точки мягко расступаются. Слева по центру мелкая подпись заглавными «О клинике», под ней главная фраза крупно в две строки, строка описания и кнопка «Записаться на приём».
+
+Секции ниже:
+1. «Направления». Шесть карточек сеткой три на два на белом фоне со скруглением 20px: линейная иконка SVG, название, две строки описания, ссылка «Подробнее» со стрелкой. При наведении карточка получает зелёную рамку, стрелка сдвигается.
+2. «Как проходит приём». Четыре шага в ряд, соединённые тонкой линией с точками. Линия прорисовывается по мере прокрутки.
+3. «Врачи». Четыре карточки: вместо фотографии круг с инициалами на мягком градиенте, имя, специальность, стаж.
+4. «Вопросы». Пять вопросов аккордеоном, открывается один за раз, плюс плавно превращается в минус.
+5. «Запись». Форма на зелёном фоне: имя, телефон, удобное время, кнопка. Данные никуда не отправляются, после нажатия форма сменяется сообщением «Заявка принята, перезвоним в течение дня». Ниже подвал с адресом, телефоном и часами работы.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.</div><div class="note">Форма в этом сайте ничего не отправляет, она показывает, как выглядит запись. Чтобы заявки приходили к тебе, возьми промпт «Подключить заявки» из раздела про доводку.</div><h3>05. Контур, сайт ИИ-сервиса</h3><p>Тёмно-синий сайт технологичного продукта. Голова из светящихся точек поворачивается и реагирует на курсор, по ней пробегают волны света. Ниже возможности, схема работы с бегущими импульсами, тарифы и вопросы. Подойдёт онлайн-сервису, курсу, боту, приложению.</p><div class="lblrow"><span class="lbl">Промпт 05: Контур, сайт ИИ-сервиса</span><button class="copy" data-text="Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Контур]
+Чем занимается: [сервис ИИ-помощников для малого бизнеса]
+Главная фраза: [Интеллект, который работает на тебя]
+Почта: [team@kontur-ai.ru]
+
+Настроение: глубокий космос, холодный свет, технология будущего без кислотных цветов. Фон тёмно-синий #030B2A с радиальным свечением #0A2A8A в центре, текст белый с голубым оттенком #EAF1FF, акцент электрический синий #2F7BFF, второй цвет коралловый #FF4D5E. Заголовки шрифтом Onest, служебные подписи моноширинным IBM Plex Mono заглавными.
+
+Первый экран на всю высоту окна. На canvas голова и плечи человека с центром на 70 процентах ширины окна, собранные из 9000 светящихся точек. Строй фигуру в трёх измерениях: череп как вытянутый эллипсоид, отдельными выступами нос, подбородок и ухо, шея цилиндром, плечи широкой дугой. Точки распредели по поверхности, вращай всю фигуру вокруг вертикальной оси плавным покачиванием от профиля до трёх четвертей и проецируй на экран с перспективой. Верх головы синий, к шее и плечам цвет переходит в коралловый. Ближние точки ярче и крупнее, по поверхности снизу вверх каждые несколько секунд пробегает волна яркости. Рядом с курсором точки отлетают от поверхности и возвращаются. На фоне тонкая сетка из вертикальных и горизонтальных линий с прозрачностью 6 процентов. Слева главная фраза крупно в три строки, под ней строка описания, кнопка «Попробовать» и ссылка «Как это работает». Сверху меню моноширинным шрифтом: «Платформа», «Решения», «Тарифы», «Вопросы».
+
+Секции ниже:
+1. «Что умеет». Три карточки на тёмном стекле с тонкой светящейся рамкой: иконка из точек, название, три строки описания. При наведении рамка разгорается, по ней пробегает блик.
+2. «Как это работает». Схема из четырёх узлов, соединённых линиями SVG, по линиям бегут светящиеся импульсы. Под каждым узлом подпись шага.
+3. «Тарифы». Три карточки, средняя выделена акцентом и чуть крупнее. В каждой название, цена в месяц, пять пунктов с галочками и кнопка.
+4. «Вопросы». Шесть вопросов аккордеоном.
+5. Финальный экран. Крупная фраза «Начни с одного помощника», поле для почты и кнопка «Получить доступ», после нажатия надпись «Готово, проверь почту». Данные никуда не отправляются. Ниже подвал.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.">Скопировать</button></div><div class="box">Ты опытный креативный фронтенд-разработчик и арт-директор. Собери одностраничный сайт в одном файле index.html, который открывается в браузере двойным щелчком.
+
+Данные бренда, подставь их в сайт без квадратных скобок:
+Название: [Контур]
+Чем занимается: [сервис ИИ-помощников для малого бизнеса]
+Главная фраза: [Интеллект, который работает на тебя]
+Почта: [team@kontur-ai.ru]
+
+Настроение: глубокий космос, холодный свет, технология будущего без кислотных цветов. Фон тёмно-синий #030B2A с радиальным свечением #0A2A8A в центре, текст белый с голубым оттенком #EAF1FF, акцент электрический синий #2F7BFF, второй цвет коралловый #FF4D5E. Заголовки шрифтом Onest, служебные подписи моноширинным IBM Plex Mono заглавными.
+
+Первый экран на всю высоту окна. На canvas голова и плечи человека с центром на 70 процентах ширины окна, собранные из 9000 светящихся точек. Строй фигуру в трёх измерениях: череп как вытянутый эллипсоид, отдельными выступами нос, подбородок и ухо, шея цилиндром, плечи широкой дугой. Точки распредели по поверхности, вращай всю фигуру вокруг вертикальной оси плавным покачиванием от профиля до трёх четвертей и проецируй на экран с перспективой. Верх головы синий, к шее и плечам цвет переходит в коралловый. Ближние точки ярче и крупнее, по поверхности снизу вверх каждые несколько секунд пробегает волна яркости. Рядом с курсором точки отлетают от поверхности и возвращаются. На фоне тонкая сетка из вертикальных и горизонтальных линий с прозрачностью 6 процентов. Слева главная фраза крупно в три строки, под ней строка описания, кнопка «Попробовать» и ссылка «Как это работает». Сверху меню моноширинным шрифтом: «Платформа», «Решения», «Тарифы», «Вопросы».
+
+Секции ниже:
+1. «Что умеет». Три карточки на тёмном стекле с тонкой светящейся рамкой: иконка из точек, название, три строки описания. При наведении рамка разгорается, по ней пробегает блик.
+2. «Как это работает». Схема из четырёх узлов, соединённых линиями SVG, по линиям бегут светящиеся импульсы. Под каждым узлом подпись шага.
+3. «Тарифы». Три карточки, средняя выделена акцентом и чуть крупнее. В каждой название, цена в месяц, пять пунктов с галочками и кнопка.
+4. «Вопросы». Шесть вопросов аккордеоном.
+5. Финальный экран. Крупная фраза «Начни с одного помощника», поле для почты и кнопка «Получить доступ», после нажатия надпись «Готово, проверь почту». Данные никуда не отправляются. Ниже подвал.
+
+Движение страницы: каждая секция проявляется и поднимается на 30px, когда доходит до экрана (IntersectionObserver), прокрутка плавная, у ссылок и кнопок аккуратные состояния наведения.
+
+Технические требования:
+1. Один файл index.html, весь CSS и JavaScript внутри. Никаких внешних библиотек, сборки и картинок: всё рисуется кодом (canvas 2D, SVG, CSS-градиенты).
+2. Шрифты подключи с Google Fonts, с кириллицей, и укажи запасной системный шрифт, чтобы страница жила и без интернета.
+3. Анимация идёт через requestAnimationFrame и рассчитана на 60 кадров в секунду на обычном ноутбуке. Учитывай devicePixelRatio, чтобы точки были резкими. Текст первого экрана виден сразу, он проявляется за первую секунду и не ждёт конца анимации.
+4. Адаптив: на ширине до 768px сетки складываются в одну колонку, горизонтальные ленты и схемы становятся вертикальными, меню прячется в кнопку, заголовки уменьшаются и не вылезают за экран. Число частиц и плотность шума там вдвое меньше, а canvas уходит под текст с прозрачностью 50 процентов. Всё, что на компьютере появляется по наведению, на сенсорном экране показано сразу.
+5. При настройке prefers-reduced-motion замирает всё: canvas рисует один готовый кадр, бегущие строки стоят, секции видны сразу.
+6. Все тексты на русском, осмысленные, без «lorem ipsum». Чего нет в данных бренда, придумай в том же тоне. Пункты меню ведут якорями на секции страницы, пункту без своей секции назначь ближайшую по смыслу. Ссылки на соцсети оставь заглушками.
+7. Пришли полный код файла целиком, без пропусков и сокращений.</div><div class="note">Голова получилась угловатой: напиши «сгладь форму головы, добавь лоб, скулы и затылок, точек сделай в полтора раза больше».</div></div>
+<div class="sec"><h2 id="sec-2">Как переделать сайт под себя</h2><p>Отправляй эти промпты в тот же чат, где уже собран сайт. Квадратные скобки заменяешь своим.</p><div class="lblrow"><span class="lbl">Свой бренд, тексты и цвета</span><button class="copy" data-text="Действуй как арт-директор и фронтенд-разработчик. Переделай этот сайт под мой бренд и пришли полный код файла index.html целиком.
+
+Название: [название]
+Чем занимаюсь: [одной фразой, например: психолог, работаю с тревогой и выгоранием]
+Для кого: [кто клиент, например: женщины 28-40, руководители]
+Главная фраза первого экрана: [фраза, или напиши «предложи три варианта и поставь лучший»]
+Цвета: [два-три цвета словами или кодами, или «подбери под нишу»]
+Контакты: [телеграм, почта, город]
+
+Что сделать: замени название, все тексты и подписи под мою нишу, перекрась сайт в мои цвета, сохрани раскладку и анимацию первого экрана. Выдуманные цены, имена и отзывы убери, на их месте оставь понятные пометки в квадратных скобках, я впишу свои. Если данных мало, не спрашивай, сделай разумный вариант и в конце ответа перечисли списком, что мне нужно заменить руками.">Скопировать</button></div><div class="box">Действуй как арт-директор и фронтенд-разработчик. Переделай этот сайт под мой бренд и пришли полный код файла index.html целиком.
+
+Название: [название]
+Чем занимаюсь: [одной фразой, например: психолог, работаю с тревогой и выгоранием]
+Для кого: [кто клиент, например: женщины 28-40, руководители]
+Главная фраза первого экрана: [фраза, или напиши «предложи три варианта и поставь лучший»]
+Цвета: [два-три цвета словами или кодами, или «подбери под нишу»]
+Контакты: [телеграм, почта, город]
+
+Что сделать: замени название, все тексты и подписи под мою нишу, перекрась сайт в мои цвета, сохрани раскладку и анимацию первого экрана. Выдуманные цены, имена и отзывы убери, на их месте оставь понятные пометки в квадратных скобках, я впишу свои. Если данных мало, не спрашивай, сделай разумный вариант и в конце ответа перечисли списком, что мне нужно заменить руками.</div><div class="lblrow"><span class="lbl">Добавить секцию</span><button class="copy" data-text="Добавь в этот сайт новую секцию и пришли полный код файла целиком.
+
+Секция: [например: «Тарифы» из трёх карточек, «Отзывы» из четырёх цитат, «Обо мне» с текстом и кругом под фото]
+Где стоит: [после какой секции]
+Содержание: [перечисли пункты или вставь готовый текст]
+
+Оформи её теми же шрифтами, цветами, отступами и анимацией появления, что у соседних секций, и добавь пункт в меню. Остальной код не меняй.">Скопировать</button></div><div class="box">Добавь в этот сайт новую секцию и пришли полный код файла целиком.
+
+Секция: [например: «Тарифы» из трёх карточек, «Отзывы» из четырёх цитат, «Обо мне» с текстом и кругом под фото]
+Где стоит: [после какой секции]
+Содержание: [перечисли пункты или вставь готовый текст]
+
+Оформи её теми же шрифтами, цветами, отступами и анимацией появления, что у соседних секций, и добавь пункт в меню. Остальной код не меняй.</div><div class="lblrow"><span class="lbl">Подключить заявки</span><button class="copy" data-text="Сделай так, чтобы кнопки и формы на этом сайте приводили человека ко мне. Пришли полный код файла целиком.
+
+Куда вести: [ссылка на телеграм, например https://t.me/имя, или ссылка на бота, или почта]
+Текст на главной кнопке: [например: Записаться на разбор]
+
+Все кнопки с призывом веди на эту ссылку в новой вкладке. Форму с полями замени одной крупной кнопкой с этим текстом и строкой под ней, что отвечаю лично. Никаких серверов и сторонних сервисов не подключай.">Скопировать</button></div><div class="box">Сделай так, чтобы кнопки и формы на этом сайте приводили человека ко мне. Пришли полный код файла целиком.
+
+Куда вести: [ссылка на телеграм, например https://t.me/имя, или ссылка на бота, или почта]
+Текст на главной кнопке: [например: Записаться на разбор]
+
+Все кнопки с призывом веди на эту ссылку в новой вкладке. Форму с полями замени одной крупной кнопкой с этим текстом и строкой под ней, что отвечаю лично. Никаких серверов и сторонних сервисов не подключай.</div><div class="lblrow"><span class="lbl">Проверить на телефоне</span><button class="copy" data-text="Проверь этот сайт для экрана шириной 390px и исправь всё, что там ломается: текст, который вылезает за экран, слишком мелкие кнопки, анимацию, которая перекрывает текст, горизонтальную прокрутку страницы. Заголовок первого экрана должен читаться целиком без прокрутки. Пришли полный код файла целиком и в конце списком, что именно исправлено.">Скопировать</button></div><div class="box">Проверь этот сайт для экрана шириной 390px и исправь всё, что там ломается: текст, который вылезает за экран, слишком мелкие кнопки, анимацию, которая перекрывает текст, горизонтальную прокрутку страницы. Заголовок первого экрана должен читаться целиком без прокрутки. Пришли полный код файла целиком и в конце списком, что именно исправлено.</div><div class="lblrow"><span class="lbl">Если что-то сломалось</span><button class="copy" data-text="Я открыл файл, и вот что вижу: [опиши словами, например: чёрный экран, нет анимации, текст поверх текста, кнопка не нажимается]. Найди причину в коде, исправь и пришли полный код файла целиком. Перед кодом одной строкой напиши, в чём была ошибка.">Скопировать</button></div><div class="box">Я открыл файл, и вот что вижу: [опиши словами, например: чёрный экран, нет анимации, текст поверх текста, кнопка не нажимается]. Найди причину в коде, исправь и пришли полный код файла целиком. Перед кодом одной строкой напиши, в чём была ошибка.</div><div class="note">Правки отправляй по одной. Пять просьб в одном сообщении нейросеть выполняет хуже, чем пять сообщений подряд. И каждый раз проси код целиком, иначе она пришлёт кусок, который придётся вставлять руками.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-3">Как выложить сайт в интернет</h2><p>Готовый сайт это один файл, поэтому ему подходит самый простой хостинг. Библиотека, которую ты сейчас читаешь, лежит на GitHub Pages.</p><div class="lblrow"><span class="lbl">Пошаговая публикация</span><button class="copy" data-text="Объясни по шагам, как выложить один файл index.html в интернет, чтобы сайт открывался по ссылке. Я не программист.
+
+Где хочу разместить: [например: GitHub Pages, или «посоветуй способ без оплаты»]
+Свой домен: [есть, такой-то / нет]
+
+Дай нумерованный список действий: куда зайти, что нажать, куда перетащить файл, где взять ссылку. Если есть домен, отдельным списком, как его привязать. В конце напиши, как потом заменить файл новой версией.">Скопировать</button></div><div class="box">Объясни по шагам, как выложить один файл index.html в интернет, чтобы сайт открывался по ссылке. Я не программист.
+
+Где хочу разместить: [например: GitHub Pages, или «посоветуй способ без оплаты»]
+Свой домен: [есть, такой-то / нет]
+
+Дай нумерованный список действий: куда зайти, что нажать, куда перетащить файл, где взять ссылку. Если есть домен, отдельным списком, как его привязать. В конце напиши, как потом заменить файл новой версией.</div><p>Красивый сайт сам людей не приводит. Он нужен, когда человеку уже есть откуда прийти: из ролика, из карусели, из канала. Как я собираю этот поток короткими роликами, разбираю в канале @Ai_realshift.</p></div>
+<style>.endq{margin:34px 0 8px;padding:22px 24px;border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:14px;background:var(--surface)}.endq p{margin:0 0 14px;font-weight:600;font-size:16px;line-height:1.5;color:var(--text)}.endb{display:flex;flex-direction:column;gap:10px}.endbtn{display:block;text-align:center;font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 18px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent)}.endbtn:hover{opacity:.85}</style><div class="endq"><p>Ты дочитал до конца, значит тебе правда интересно. Выбери, что дальше, и я отвечу тебе в чате лично:</p><div class="endb"><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-razbor" target="_blank" rel="noopener">Разбери мой блог</a><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-agent" target="_blank" rel="noopener">Хочу так же, с агентом</a><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-vopros" target="_blank" rel="noopener">Остался вопрос по гайду</a></div></div>
+
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Как собрать сайт по любому из пяти промптов</a><a href="#sec-1">Пять промптов</a><a href="#sec-2">Как переделать сайт под себя</a><a href="#sec-3">Как выложить сайт в интернет</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
