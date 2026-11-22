@@ -1,0 +1,644 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Промпты для ChatGPT: 5 шпаргалок, 25 готовых промптов</title><meta name="description" content="25 готовых промптов для ChatGPT: бизнес, контент, учёба, работа и карьера, и шпаргалка для денег: платная услуга, цена, первые клиенты."><meta property="og:description" content="25 готовых промптов для ChatGPT: бизнес, контент, учёба, работа и карьера, и шпаргалка для денег: платная услуга, цена, первые клиенты."><meta name="twitter:description" content="25 готовых промптов для ChatGPT: бизнес, контент, учёба, работа и карьера, и шпаргалка для денег: платная услуга, цена, первые клиенты."><link rel="canonical" href="https://vladimir-izhmukov.ru/guide-zapret/"><meta property="og:url" content="https://vladimir-izhmukov.ru/guide-zapret/"><meta property="og:title" content="Промпты для ChatGPT: 5 шпаргалок, 25 готовых промптов"><meta name="twitter:title" content="Промпты для ChatGPT: 5 шпаргалок, 25 готовых промптов"><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Владимир Ижмуков"><meta name="twitter:card" content="summary"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(110633946,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});</script><noscript><div><img src='https://mc.yandex.ru/watch/110633946' style='position:absolute;left:-9999px' alt=''></div></noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"><style>
+:root{
+--accent:#bff03a;--accent-ink:#16180f;--ink:#16180f;--offwhite:#ffffff;
+--bg-light:#f6f4ec;--bg-dark:#14150f;
+--bg:var(--bg-light);--text:#1c1c1f;--muted:#6b7280;--surface:#ffffff;
+--card-bg:rgba(0,0,0,.035);--card-border:rgba(0,0,0,.10);--hair:rgba(0,0,0,.08);
+--dot:rgba(0,0,0,.05);--shadow:0 10px 30px rgba(0,0,0,.10);
+--font-display:'Inter Tight',system-ui,sans-serif;
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-mono:'JetBrains Mono',ui-monospace,monospace;
+--font-serif:'PT Serif',Georgia,serif;
+}
+:root[data-theme=dark]{
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:var(--bg-dark);--text:#f4f4f5;--muted:#9ca3af;--surface:#1a1a1c;
+--card-bg:rgba(255,255,255,.05);--card-border:rgba(255,255,255,.12);--hair:rgba(255,255,255,.10);
+--dot:rgba(255,255,255,.05);--shadow:0 10px 30px rgba(0,0,0,.45);
+}
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--font-mono)}
+/* ============ header ============ */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--hair)}
+.hd-in{height:66px;max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:24px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.04em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;flex:none;white-space:nowrap}
+.logo .sq{width:8px;height:8px;background:var(--accent);border:1.5px solid var(--ink);display:inline-block;margin:0 5px 0 3px}
+:root[data-theme=dark] .logo .sq{border-color:rgba(255,255,255,.7)}
+.hd-nav{display:flex;align-items:center;gap:22px;font-size:14px;flex:none}
+.hd-nav a{color:var(--muted);position:relative;padding:4px 1px;transition:color .15s;white-space:nowrap}
+.hd-nav a:hover{color:var(--text)}
+.hd-nav a.cur{color:var(--text);font-weight:600}
+.hd-nav a.cur::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;background:var(--text);opacity:.8}
+.sp{flex:1}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.tgl{width:34px;height:34px;border:1px solid var(--hair);border-radius:9px;display:grid;place-items:center;color:var(--text);background:none;cursor:pointer;padding:0;transition:border-color .15s}
+.tgl:hover{border-color:var(--muted)}
+.tgl svg{display:block;width:15px;height:15px}
+.tgl .ic-sun{display:none}
+:root[data-theme=dark] .tgl .ic-sun{display:block}
+:root[data-theme=dark] .tgl .ic-moon{display:none}
+.hd-btn{font-family:var(--font-display);font-size:14px;font-weight:600;padding:10px 17px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);transition:transform .12s;flex:none}
+.hd-btn:hover{transform:translateY(-1px)}
+.hd-btn .ar{transition:transform .15s}
+.hd-btn:hover .ar{transform:translateX(3px)}
+:root[data-theme=dark] .hd-btn{border-color:var(--accent)}
+/* ============ shell ============ */
+.wrap{max-width:1340px;margin:0 auto;padding:0 44px 60px}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.eyebrow .dot{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .eyebrow .dot{outline-color:rgba(255,255,255,.35)}
+/* ============ hero ============ */
+.hero{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:var(--ink);color:#f5f5f0;position:relative;min-height:340px;display:flex}
+/* the cover art already carries the dot-grid, the lime bloom and the dark left half the
+   headline sits on, so the CSS grid/glow layers stay off (two of each only muddies it) */
+.hero .art{position:absolute;inset:0;background:var(--ink) url('/media/hero-kb.jpg') center right/cover no-repeat}
+/* /about/ reuses the hero card, but its column is half the width of the index, so the copy
+   cannot lie ON the portrait (it landed straight on his face). The art takes the right half,
+   the copy the left, and a fade on the art's left edge stitches the two together */
+.hero.about-hero{min-height:420px}
+.hero.about-hero .art{left:auto;right:0;width:50%;background:url('/media/about-vladimir.jpg') right center/cover no-repeat;
+-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,#000 44%)}
+.hero.about-hero .txt{max-width:50%;background:none}
+.hero.about-hero h1{font-size:32px;max-width:12ch}
+.hero.about-hero .desc{font-size:15px;max-width:30ch}
+@media(max-width:760px){
+/* stacked: portrait on top as a band, copy under it on solid ink, nothing overlaps */
+.hero.about-hero{display:block;padding-top:210px}
+.hero.about-hero .art{left:0;right:0;width:100%;height:230px;background-position:center 22%;
+-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.hero.about-hero .txt{max-width:100%;padding-top:6px}
+.hero.about-hero h1{font-size:27px;max-width:none}
+.hero.about-hero .desc{max-width:none}
+}
+.hero .grid{display:none}
+.hero .glow{display:none}
+/* scrim keeps the copy on dark whatever the glow does behind it (on narrow screens the
+   glow otherwise floods the whole card and the title lands on bright lime) */
+.hero .txt{position:relative;z-index:2;padding:44px 44px 38px;display:flex;flex-direction:column;max-width:760px;
+background:linear-gradient(100deg,color-mix(in srgb,var(--ink) 88%,transparent) 0%,color-mix(in srgb,var(--ink) 55%,transparent) 62%,transparent 100%)}
+.hero .eyebrow{color:var(--accent)}
+/* hero is always the dark ink card, so its title must not follow --text (black on black in light theme) */
+.hero h1{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:18px 0 14px;max-width:17ch;color:#f5f5f0}
+.hero .desc{font-size:16px;line-height:1.55;color:rgba(245,245,240,.72);max-width:52ch;margin:0}
+.hero .read{margin-top:auto;padding-top:30px;display:inline-flex;align-items:center;gap:14px;color:#fbfbf8;cursor:pointer;align-self:flex-start}
+.hero .read .circ{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none;transition:transform .15s}
+.hero .read:hover .circ{transform:translateX(3px)}
+.hero .read .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+/* ============ search ============ */
+/* the codeword box. while Instagram DM is blocked the funnel cannot deliver a magnet,
+   so the caption sends people here and they type the same word into this field. it has
+   to be the first thing seen under the hero, hence the size and the accent border. */
+/* the sticky header would otherwise cover the label when we land here via ?q= or the
+   hero button, so keep its height as scroll margin */
+.srch{margin:34px 0 0;padding-top:24px;border-top:1px solid var(--hair);scroll-margin-top:84px}
+.srch-l{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 10px}
+.srch-w{position:relative;display:flex;align-items:center}
+.srch-w .ic{position:absolute;left:18px;width:17px;height:17px;flex:none;opacity:.55;pointer-events:none}
+#q{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;color:var(--text);background:var(--card-bg);
+border:1.5px solid var(--card-border);border-radius:999px;padding:16px 52px 16px 46px;outline:none;transition:border-color .15s}
+#q::placeholder{color:var(--muted)}
+#q:focus{border-color:var(--ink)}
+:root[data-theme=dark] #q:focus{border-color:var(--accent)}
+.srch-x{position:absolute;right:8px;width:34px;height:34px;border:0;border-radius:50%;background:none;color:var(--muted);
+font-size:19px;line-height:1;cursor:pointer;display:none;place-items:center;font-family:inherit}
+.srch-x:hover{color:var(--text)}
+.srch-x.on{display:grid}
+@media(max-width:640px){#q{font-size:16px;padding:14px 46px 14px 42px}}
+/* ============ tabs ============ */
+/* grid, not flex-wrap: inline chips left a ragged right edge and one orphan on the
+   second row. auto-fit + minmax(240px) resolves to exactly 5 columns on a 1440 shell
+   (avail 1352px: 6 cols would need 240*6+8*5=1480), so 10 chips read as a deliberate
+   5+5 block. Narrow screens re-solve to 4/3/2 columns via the overrides below. */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:20px 0 0}
+.tab{font-size:13px;font-weight:500;padding:9px 14px;border-radius:999px;border:1px solid var(--card-border);color:var(--muted);background:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0}
+.tab:hover{color:var(--text);border-color:var(--muted)}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+:root[data-theme=dark] .tab.on{border-color:var(--accent)}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin:18px 0 14px}
+/* ============ cards ============ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{border:1px solid var(--card-border);border-radius:14px;padding:18px;background:var(--card-bg);display:flex;flex-direction:column;gap:9px;min-height:158px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+:root[data-theme=dark] .card:hover{border-color:var(--accent)}
+.card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.card .tag .d{width:7px;height:7px;background:var(--accent);outline:1px solid var(--ink);display:inline-block;flex:none}
+:root[data-theme=dark] .card .tag .d{outline-color:rgba(255,255,255,.35)}
+.card .ct{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--text)}
+.card .cd{font-size:13.5px;color:var(--muted);line-height:1.5;flex:1;margin:0}
+.card .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.empty{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--muted);padding:30px 0}
+/* ============ article ============ */
+.page{max-width:760px;margin:0 auto;padding:34px 44px 60px}
+.pcol{min-width:0}
+/* ============ toc: long guides only (4+ sections), shell adds .has-toc ============ */
+/* the reading column keeps the exact measure of a short guide (672px = 760 minus the
+   44px gutters), the menu hangs to its right and the pair is centered together, so a
+   long guide reads at the same width as a short one. */
+.page.has-toc{max-width:1180px;display:grid;grid-template-columns:minmax(0,672px) 200px;gap:44px;justify-content:center;align-items:start}
+/* padding-top 0 so «На странице» sits on the breadcrumb line of the article column */
+.toc{position:sticky;top:66px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;font-size:12.5px;padding:0 0 24px}
+.toc .h{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-left:13px}
+/* the marker gutter is always reserved (transparent border), so switching sections
+   recolors in place instead of nudging the text. NB: .toc scrolls on the y axis, which
+   makes the x axis a scroll box too, so a negative margin here would be clipped away. */
+.toc a{display:block;color:var(--muted);padding:5px 0 5px 11px;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);font-weight:600;border-left-color:var(--accent)}
+.toc{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-track{background:transparent}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:10px}
+:root[data-theme=dark] .toc{scrollbar-color:rgba(255,255,255,.2) transparent}
+:root[data-theme=dark] .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+/* anchor lands below the sticky header, not under it */
+.sec h2[id]{scroll-margin-top:86px}
+/* no room for a side column: fall back to the plain reading page */
+@media(max-width:1100px){
+.page.has-toc{display:block;max-width:760px}
+.toc{display:none}
+}
+.bc{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.bc a:hover{color:var(--text)}
+h1{font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0 0 6px;color:var(--text)}
+.lead{font-family:var(--font-serif);font-size:20px;line-height:1.5;font-weight:700;color:var(--text);border-left:3px solid var(--accent);padding-left:18px;margin:20px 0 22px}
+.meta{font-family:var(--font-mono);font-size:11px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--hair);margin-bottom:26px}
+.how{border:1px solid var(--card-border);border-radius:12px;background:var(--surface);padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.56;color:var(--text)}
+/* book-style contents: guides split into parts ("parts" in content json) */
+.book{border:1.5px solid var(--ink);border-radius:14px;background:var(--card-bg);padding:20px 22px;margin:22px 0}
+.book .h{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 12px}
+.book .bpart{padding:12px 0;border-top:1px solid var(--card-border)}
+.book .bph{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text)}
+.book .bph .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:13px}
+.book .bpart p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:6px 0 8px}
+.book ol{margin:6px 0 0;padding-left:22px;font-size:15px;line-height:1.6}
+.book ol a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--card-border)}
+.part-h{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;margin:40px 0 4px;scroll-margin-top:86px}
+.part-h .n{display:inline-block;background:var(--accent);color:var(--accent-ink);border:1.5px solid var(--ink);border-radius:8px;padding:2px 10px;margin-right:10px;font-size:16px;vertical-align:middle}
+.part-d{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 6px}
+.p,.sec{border:1px solid var(--card-border);border-radius:14px;background:var(--card-bg);padding:20px;margin:18px 0}
+.p .num{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:1px solid var(--ink);padding:3px 10px;margin-bottom:10px}
+:root[data-theme=dark] .p .num{border-color:var(--accent)}
+.p h2{font-family:var(--font-display);font-size:20px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.p .when{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.sec h2{font-family:var(--font-display);font-size:22px;margin:0 0 10px;font-weight:700;letter-spacing:-.015em}
+.sec h3{font-family:var(--font-display);font-size:17px;margin:18px 0 6px;font-weight:700}
+.sec p,.p p{font-size:15.5px;line-height:1.66;margin:10px 0}
+.sec ol,.sec ul{margin:8px 0;padding-left:22px;font-size:15.5px;line-height:1.66}
+.sec li{margin:0 0 7px}
+.sec li::marker{color:var(--muted)}
+.lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.lbl{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.box{font-family:var(--font-mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;white-space:pre-wrap;line-height:1.6;color:var(--text);overflow-x:auto}
+.copy{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:none;border:1px solid var(--card-border);border-radius:8px;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--ink);font-weight:600}
+.ex{font-size:14px;color:var(--muted);margin-top:12px}
+.ex b{color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.cardb{background:var(--surface);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.cardb h3{font-family:var(--font-display);margin:0 0 6px;font-size:16px}
+.cardb ul,.cardb ol{padding-left:18px;margin:6px 0;font-size:14.5px}
+.cardb p{font-size:14.5px;margin:6px 0}
+.quote{font-family:var(--font-serif);font-style:italic;color:var(--text);opacity:.85;border-left:3px solid var(--accent);padding-left:14px;margin:14px 0;font-size:15.5px}
+.note{font-size:14.5px;line-height:1.56;color:var(--text);background:var(--surface);border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0}
+.linkbtn{display:inline-block;margin:12px 0 4px;font-weight:600;font-size:15px;color:var(--text);word-break:break-word;border-bottom:2px solid var(--accent)}
+.lnk{color:var(--text);font-weight:600;border-bottom:2px solid var(--accent)}
+.lnk:hover{opacity:.75}
+.blogx{max-width:760px;margin:34px auto 0}
+.blogx .sec h3{margin:18px 0 4px}
+.blogx .sec ul{margin:4px 0 0}
+.linkbtn:hover{opacity:.75}
+.mid{margin:26px 0;text-align:center}
+.mid a{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+:root[data-theme=dark] .mid a{background:var(--surface);border-color:var(--accent);color:var(--text)}
+/* ============ CTA ============ */
+.cta{margin:40px 0 6px;padding:30px 32px;border-radius:18px;background:var(--ink);color:#f5f5f0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:10px 10px}
+.cta .ttl{font-family:var(--font-display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}
+.cta .sub{font-size:14.5px;line-height:1.55;color:rgba(245,245,240,.68);margin:0 0 20px;max-width:60ch}
+.cta .eyebrow{color:var(--accent)}
+.cta-btn{font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent);display:inline-flex;align-items:center;gap:9px}
+.cta-btn:hover{transform:translateY(-1px)}
+/* ============ footer ============ */
+.ft{border-top:1px solid var(--hair);background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:9px 9px;padding:36px 0 26px}
+.ft-in{max-width:1340px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ft-in .logo{font-size:17px}
+.ft-links{display:flex;gap:20px;font-size:13.5px;color:var(--text);opacity:.82}
+.ft-links a:hover{opacity:1}
+.ft-bot{max-width:1340px;margin:20px auto 0;padding:16px 44px 0;border-top:1px solid var(--hair);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* ============ responsive ============ */
+@media(max-width:900px){
+.hd-in,.wrap,.ft-in,.ft-bot{padding-left:20px;padding-right:20px}
+.page{padding:26px 20px 50px}
+/* narrow: the copy sits ON the artwork (no room to dodge it), so the scrim goes near-opaque
+   under the text and only clears near the bottom edge, where the art can breathe */
+.hero .txt{padding:30px 24px 26px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 94%,transparent) 0%,color-mix(in srgb,var(--ink) 88%,transparent) 68%,color-mix(in srgb,var(--ink) 60%,transparent) 100%)}
+.hero .art{background-position:72% center}
+.hero h1{font-size:29px}
+.hero{min-height:0}
+h1{font-size:28px}
+.grid2{grid-template-columns:1fr}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+@media(max-width:700px){
+.hd-in{height:60px;gap:12px}
+.hd-nav{display:none}
+.logo{font-size:16px}
+.hd-btn{font-size:12.5px;padding:9px 13px}
+.cards{grid-template-columns:1fr}
+.cta{padding:24px 20px}
+.cta .ttl{font-size:21px}
+.lead{font-size:18px}
+.ft-in{gap:14px}
+}
+/* phone: logo + toggle + CTA must all survive on a 390px bar, so tighten the type
+   and let the CTA label clamp instead of pushing the button off the screen */
+@media(max-width:460px){
+.hd-in{gap:8px;padding:0 14px}
+.logo{font-size:12.5px}
+.hd-btn{font-size:11px;padding:8px 10px;gap:5px;min-width:0}
+.hd-btn .lb{display:block;max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgl{width:32px;height:32px}
+.wrap,.ft-in,.ft-bot{padding-left:14px;padding-right:14px}
+.page{padding:22px 14px 44px}
+/* phone: 2 even columns. 3 would starve the longest label ("Образ и внешность")
+   and force a mid-word wrap inside the pill. */
+.tabs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}
+.tab{font-size:12.5px;padding:9px 8px}
+}
+</style>
+<script>
+(function(){
+  var d=document.documentElement;
+  function set(t){d.setAttribute('data-theme',t);}
+  var q=(location.search.match(/[?&]theme=(dark|light)/)||[])[1];
+  var s=null;try{s=localStorage.getItem('vi-theme');}catch(e){}
+  set(q||s||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tgl');if(!b)return;
+    var n=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    set(n);try{localStorage.setItem('vi-theme',n);}catch(err){}
+  });
+})();
+</script>
+</head><body><header class="hd"><div class="hd-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><nav class="hd-nav"><a href="/">Все материалы</a><a href="/about/">Обо мне</a></nav><span class="sp"></span><div class="tools"><button class="tgl" type="button" aria-label="Сменить тему"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button><a class="hd-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/"><span class="lb">С чего начать в соцсетях</span><span class="ar">&#8594;</span></a></div></div></header>
+<main class="page has-toc">
+<article class="pcol">
+<div class="bc"><a href="/#cat-nejroseti-i-prompty">Нейросети и промпты</a></div>
+<h1>Запрещённые промпты для ChatGPT: пять шпаргалок и 25 готовых промптов</h1>
+<p class="lead">Все пять шпаргалок из ролика целиком: бизнес, контент, учёба, работа и карьера, плюс пятая, для денег, которую я в ролик не поставил. В каждой пять промптов: короткая строка, как на экране, и полный текст, который можно сразу вставить в ChatGPT.</p>
+<p class="meta">25 готовых промптов для ChatGPT в пяти шпаргалках: бизнес, контент, учёба, работа и карьера, и шпаргалка для денег, которая поможет найти платную услугу, назначить цену и первых клиентов.</p>
+<div class="how">Выбери шпаргалку под задачу, скопируй полный промпт, замени слова в квадратных скобках своими и отправь. Одна задача, один чат.</div>
+<div class="sec"><h2 id="sec-0">Почему эти промпты работают</h2><p>Обычно человек пишет ChatGPT одну строчку вроде «придумай идею для бизнеса» и получает ответ, который подошёл бы кому угодно. В каждом полном промпте ниже есть то, чего в такой строчке нет.</p><ol><li>Твои данные в квадратных скобках. Чем подробнее ты их заполнишь, тем точнее ответ будет про тебя.</li><li>Понятное задание: что именно сделать и в каком порядке.</li><li>Формат ответа: таблица, список, план по дням или готовый текст, чтобы результат сразу шёл в дело.</li><li>Проверка на честность: где нужно, промпт просит нейросеть сначала задать вопросы или не выдумывать факты.</li></ol><div class="note">Короткую строку со шпаргалки тоже можно отправить как есть, она сработает. Полная версия просто даёт ответ в несколько раз точнее. Если скобку нечем заполнить, удали её, нейросеть уточнит сама.</div></div>
+<div class="sec"><h2 id="sec-1">1. Бизнес</h2><p>Пять промптов для решений, где на кону твои деньги и время: идея, воронка, выбор, встреча с клиентом и разбор переписки.</p><h3>1. Проверь идею</h3><p>Строка со шпаргалки: «Назови три риска и способ проверить каждый.»</p><div class="lblrow"><span class="lbl">Полный промпт: Проверь идею</span><button class="copy" data-text="Ты опытный предприниматель и смотришь на мою идею глазами человека, который вложит в неё свои деньги. Идея: [опиши в 2-3 предложениях, что продаёшь, кому и за сколько].
+
+Назови три главных риска, из-за которых эта идея может не окупиться. Для каждого риска напиши:
+1) почему он реален именно в моём случае;
+2) самый дешёвый способ проверить его за 7 дней и в пределах [бюджет на проверку];
+3) какой результат проверки значит «идём дальше», а какой значит «стоп».
+
+Если тебе не хватает данных, сначала задай до пяти уточняющих вопросов и дождись ответа. Хвалить идею не нужно, мне важна честная оценка.">Скопировать</button></div><div class="box">Ты опытный предприниматель и смотришь на мою идею глазами человека, который вложит в неё свои деньги. Идея: [опиши в 2-3 предложениях, что продаёшь, кому и за сколько].
+
+Назови три главных риска, из-за которых эта идея может не окупиться. Для каждого риска напиши:
+1) почему он реален именно в моём случае;
+2) самый дешёвый способ проверить его за 7 дней и в пределах [бюджет на проверку];
+3) какой результат проверки значит «идём дальше», а какой значит «стоп».
+
+Если тебе не хватает данных, сначала задай до пяти уточняющих вопросов и дождись ответа. Хвалить идею не нужно, мне важна честная оценка.</div><h3>2. Найди узкое место</h3><p>Строка со шпаргалки: «По моим цифрам найди шаг, где теряются клиенты.»</p><div class="lblrow"><span class="lbl">Полный промпт: Найди узкое место</span><button class="copy" data-text="Вот цифры моей воронки за [период]:
+- увидели рекламу или контент: [число]
+- перешли в профиль, на сайт или в бота: [число]
+- оставили заявку или написали: [число]
+- дошли до разговора или консультации: [число]
+- купили: [число], средний чек [сумма]
+
+Посчитай конверсию каждого шага в следующий и покажи таблицей. Найди один шаг, где я теряю больше всего людей по сравнению с обычными цифрами для ниши [ниша]. Назови три самые вероятные причины потерь на этом шаге и к каждой одно действие, которое я успею сделать на этой неделе. В конце посчитай, сколько продаж добавится, если конверсия этого шага вырастет в полтора раза.">Скопировать</button></div><div class="box">Вот цифры моей воронки за [период]:
+- увидели рекламу или контент: [число]
+- перешли в профиль, на сайт или в бота: [число]
+- оставили заявку или написали: [число]
+- дошли до разговора или консультации: [число]
+- купили: [число], средний чек [сумма]
+
+Посчитай конверсию каждого шага в следующий и покажи таблицей. Найди один шаг, где я теряю больше всего людей по сравнению с обычными цифрами для ниши [ниша]. Назови три самые вероятные причины потерь на этом шаге и к каждой одно действие, которое я успею сделать на этой неделе. В конце посчитай, сколько продаж добавится, если конверсия этого шага вырастет в полтора раза.</div><h3>3. Сравни варианты</h3><p>Строка со шпаргалки: «Сделай таблицу затрат, рисков и выгоды.»</p><div class="lblrow"><span class="lbl">Полный промпт: Сравни варианты</span><button class="copy" data-text="Мне нужно выбрать между вариантами: [вариант А], [вариант Б], [вариант В]. Контекст: [бюджет, сроки, что для меня важнее всего].
+
+Сделай таблицу. В строках варианты, в колонках: стартовые затраты, затраты в месяц, время до первого результата, главный риск, вероятность этого риска (низкая, средняя, высокая), ожидаемая выгода через 3 и через 12 месяцев. Где точной цифры нет, дай вилку и пометь её словом «оценка».
+
+Под таблицей напиши, какой вариант выбрал бы ты на моём месте и почему, и что должно случиться, чтобы ты передумал.">Скопировать</button></div><div class="box">Мне нужно выбрать между вариантами: [вариант А], [вариант Б], [вариант В]. Контекст: [бюджет, сроки, что для меня важнее всего].
+
+Сделай таблицу. В строках варианты, в колонках: стартовые затраты, затраты в месяц, время до первого результата, главный риск, вероятность этого риска (низкая, средняя, высокая), ожидаемая выгода через 3 и через 12 месяцев. Где точной цифры нет, дай вилку и пометь её словом «оценка».
+
+Под таблицей напиши, какой вариант выбрал бы ты на моём месте и почему, и что должно случиться, чтобы ты передумал.</div><h3>4. Подготовь встречу</h3><p>Строка со шпаргалки: «Составь повестку и пять вопросов к клиенту.»</p><div class="lblrow"><span class="lbl">Полный промпт: Подготовь встречу</span><button class="copy" data-text="Завтра у меня встреча с клиентом. Кто он: [компания, должность, чем занимается]. Что я хочу продать или обсудить: [предмет]. Длительность: [минут]. Что я уже о нём знаю: [факты].
+
+Составь повестку по минутам: знакомство, его ситуация, моё предложение, следующие шаги. Дай пять открытых вопросов, на которые нельзя ответить «да» или «нет»: они должны помочь понять его настоящую задачу, бюджет и кто принимает решение. Добавь три возражения, которые он скорее всего скажет, и короткий ответ на каждое. В конце напиши одну фразу, которой я закрою встречу на конкретный следующий шаг с датой.">Скопировать</button></div><div class="box">Завтра у меня встреча с клиентом. Кто он: [компания, должность, чем занимается]. Что я хочу продать или обсудить: [предмет]. Длительность: [минут]. Что я уже о нём знаю: [факты].
+
+Составь повестку по минутам: знакомство, его ситуация, моё предложение, следующие шаги. Дай пять открытых вопросов, на которые нельзя ответить «да» или «нет»: они должны помочь понять его настоящую задачу, бюджет и кто принимает решение. Добавь три возражения, которые он скорее всего скажет, и короткий ответ на каждое. В конце напиши одну фразу, которой я закрою встречу на конкретный следующий шаг с датой.</div><h3>5. Разбери письмо</h3><p>Строка со шпаргалки: «Выпиши решения, сроки и открытые вопросы.»</p><div class="lblrow"><span class="lbl">Полный промпт: Разбери письмо</span><button class="copy" data-text="Ниже переписка [письмо, цепочка писем или расшифровка созвона]. Разбери её на три блока:
+1) Решения: о чём уже договорились и кто отвечает за каждое.
+2) Сроки: все даты и дедлайны списком по порядку.
+3) Открытые вопросы: что осталось неясным и от кого ждём ответа.
+
+Если договорённость где-то звучит размыто, пометь это и предложи формулировку, которую можно отправить на подтверждение. В конце напиши короткое письмо-резюме для всех участников на 5-7 строк.
+
+Текст:
+[вставь сюда]">Скопировать</button></div><div class="box">Ниже переписка [письмо, цепочка писем или расшифровка созвона]. Разбери её на три блока:
+1) Решения: о чём уже договорились и кто отвечает за каждое.
+2) Сроки: все даты и дедлайны списком по порядку.
+3) Открытые вопросы: что осталось неясным и от кого ждём ответа.
+
+Если договорённость где-то звучит размыто, пометь это и предложи формулировку, которую можно отправить на подтверждение. В конце напиши короткое письмо-резюме для всех участников на 5-7 строк.
+
+Текст:
+[вставь сюда]</div></div>
+<div class="sec"><h2 id="sec-2">2. Контент</h2><p>Пять промптов для блога: первая фраза, сценарий, твой голос, один пост в трёх форматах и чистка текста.</p><h3>1. Придумай хуки</h3><p>Строка со шпаргалки: «Дай пять первых фраз для моей темы.»</p><div class="lblrow"><span class="lbl">Полный промпт: Придумай хуки</span><button class="copy" data-text="Я веду блог про [тема] для [кто моя аудитория]. Тема ролика: [о чём ролик].
+
+Дай 5 первых фраз для ролика, каждая до 12 слов. Используй пять разных приёмов: вопрос в боль, неожиданная цифра, спорное утверждение, «ошибка, которую делают все», начало истории. Каждая фраза должна быть понятна человеку, который листает ленту и видит меня первый раз.
+
+Под каждым хуком одной строкой объясни, почему человек остановится. Потом выбери лучший и дай к нему ещё 3 варианта формулировки.">Скопировать</button></div><div class="box">Я веду блог про [тема] для [кто моя аудитория]. Тема ролика: [о чём ролик].
+
+Дай 5 первых фраз для ролика, каждая до 12 слов. Используй пять разных приёмов: вопрос в боль, неожиданная цифра, спорное утверждение, «ошибка, которую делают все», начало истории. Каждая фраза должна быть понятна человеку, который листает ленту и видит меня первый раз.
+
+Под каждым хуком одной строкой объясни, почему человек остановится. Потом выбери лучший и дай к нему ещё 3 варианта формулировки.</div><h3>2. Собери сценарий</h3><p>Строка со шпаргалки: «Разбей идею на хук, пример и вывод.»</p><div class="lblrow"><span class="lbl">Полный промпт: Собери сценарий</span><button class="copy" data-text="Идея ролика: [идея]. Длина: [30-60] секунд. Формат: [говорю в кадр или голос за кадром].
+
+Разбей идею на сценарий из четырёх частей:
+1) Хук на первые 3 секунды.
+2) Пример: одна конкретная история, цифра или ситуация, в которой зритель узнает себя.
+3) Вывод: одна мысль, которую человек унесёт с собой.
+4) Призыв к одному действию.
+
+Пиши разговорным языком, как я сказал бы это другу. Рядом с каждой частью укажи, что показывать в кадре и сколько секунд она длится. Весь текст до [число] слов.">Скопировать</button></div><div class="box">Идея ролика: [идея]. Длина: [30-60] секунд. Формат: [говорю в кадр или голос за кадром].
+
+Разбей идею на сценарий из четырёх частей:
+1) Хук на первые 3 секунды.
+2) Пример: одна конкретная история, цифра или ситуация, в которой зритель узнает себя.
+3) Вывод: одна мысль, которую человек унесёт с собой.
+4) Призыв к одному действию.
+
+Пиши разговорным языком, как я сказал бы это другу. Рядом с каждой частью укажи, что показывать в кадре и сколько секунд она длится. Весь текст до [число] слов.</div><h3>3. Поймай мой тон</h3><p>Строка со шпаргалки: «Разбери три моих текста и предложи правила стиля.»</p><div class="lblrow"><span class="lbl">Полный промпт: Поймай мой тон</span><button class="copy" data-text="Ниже три моих текста, которые хорошо зашли аудитории. Разбери их и составь мой гид по стилю:
+- длина предложений и ритм;
+- слова и обороты, которые я повторяю;
+- как я обращаюсь к читателю;
+- как начинаю и как заканчиваю;
+- чего в моих текстах не бывает никогда.
+
+Оформи это как 10 правил, у каждого пример из моих текстов. Потом напиши по этим правилам короткий пост на тему [тема], чтобы я проверил, похоже ли на меня. Дальше в этом чате пиши всё только по этим правилам.
+
+Текст 1: [вставь]
+Текст 2: [вставь]
+Текст 3: [вставь]">Скопировать</button></div><div class="box">Ниже три моих текста, которые хорошо зашли аудитории. Разбери их и составь мой гид по стилю:
+- длина предложений и ритм;
+- слова и обороты, которые я повторяю;
+- как я обращаюсь к читателю;
+- как начинаю и как заканчиваю;
+- чего в моих текстах не бывает никогда.
+
+Оформи это как 10 правил, у каждого пример из моих текстов. Потом напиши по этим правилам короткий пост на тему [тема], чтобы я проверил, похоже ли на меня. Дальше в этом чате пиши всё только по этим правилам.
+
+Текст 1: [вставь]
+Текст 2: [вставь]
+Текст 3: [вставь]</div><h3>4. Переупакуй идею</h3><p>Строка со шпаргалки: «Преврати пост в рилс, карусель и письмо.»</p><div class="lblrow"><span class="lbl">Полный промпт: Переупакуй идею</span><button class="copy" data-text="Вот мой пост: [вставь текст].
+
+Переупакуй его в три формата и сохрани главную мысль:
+1) Сценарий рилса на 30-45 секунд: хук, суть, призыв и что показывать в кадре.
+2) Карусель на 7 слайдов: на каждом слайде до 20 слов, первый цепляет, последний зовёт к действию.
+3) Письмо для рассылки: тема, 3 варианта первой строки и текст до 1500 знаков.
+
+В каждом формате заходи в тему с разного угла, чтобы человек, который увидит все три, каждый раз узнавал что-то новое.">Скопировать</button></div><div class="box">Вот мой пост: [вставь текст].
+
+Переупакуй его в три формата и сохрани главную мысль:
+1) Сценарий рилса на 30-45 секунд: хук, суть, призыв и что показывать в кадре.
+2) Карусель на 7 слайдов: на каждом слайде до 20 слов, первый цепляет, последний зовёт к действию.
+3) Письмо для рассылки: тема, 3 варианта первой строки и текст до 1500 знаков.
+
+В каждом формате заходи в тему с разного угла, чтобы человек, который увидит все три, каждый раз узнавал что-то новое.</div><h3>5. Убери воду</h3><p>Строка со шпаргалки: «Сократи текст на треть и сохрани смысл.»</p><div class="lblrow"><span class="lbl">Полный промпт: Убери воду</span><button class="copy" data-text="Сократи текст ниже минимум на треть. Правила:
+- сохрани все факты, цифры и примеры;
+- убери повторы, вводные слова, общие фразы и то, что читатель и так знает;
+- длинное предложение дели, если в нём больше одной мысли;
+- мой голос и обращение к читателю оставь как есть.
+
+Выдай сокращённую версию, а под ней список того, что ты убрал, чтобы я мог вернуть важное. В конце напиши, сколько знаков было и сколько стало.
+
+Текст:
+[вставь]">Скопировать</button></div><div class="box">Сократи текст ниже минимум на треть. Правила:
+- сохрани все факты, цифры и примеры;
+- убери повторы, вводные слова, общие фразы и то, что читатель и так знает;
+- длинное предложение дели, если в нём больше одной мысли;
+- мой голос и обращение к читателю оставь как есть.
+
+Выдай сокращённую версию, а под ней список того, что ты убрал, чтобы я мог вернуть важное. В конце напиши, сколько знаков было и сколько стало.
+
+Текст:
+[вставь]</div></div>
+<div class="sec"><h2 id="sec-3">3. Учёба</h2><p>Пять промптов, с которыми ChatGPT становится репетитором: проверяет, объясняет, ищет ошибку, делает карточки и даёт практику.</p><h3>1. Проверь меня</h3><p>Строка со шпаргалки: «Задай пять вопросов по теме. Ответы пока не раскрывай.»</p><div class="lblrow"><span class="lbl">Полный промпт: Проверь меня</span><button class="copy" data-text="Я изучаю [тема], мой уровень: [новичок, средний, продвинутый]. Проверь, как я понял материал.
+
+Задавай по одному вопросу, всего пять, от простого к сложному. Ответы не раскрывай, пока я не отвечу сам. После каждого моего ответа скажи, верно или нет. Если неверно, объясни ошибку в 2-3 предложениях и дай подсказку.
+
+После пятого вопроса подведи итог: что я знаю уверенно, где плаваю и что повторить в первую очередь.">Скопировать</button></div><div class="box">Я изучаю [тема], мой уровень: [новичок, средний, продвинутый]. Проверь, как я понял материал.
+
+Задавай по одному вопросу, всего пять, от простого к сложному. Ответы не раскрывай, пока я не отвечу сам. После каждого моего ответа скажи, верно или нет. Если неверно, объясни ошибку в 2-3 предложениях и дай подсказку.
+
+После пятого вопроса подведи итог: что я знаю уверенно, где плаваю и что повторить в первую очередь.</div><h3>2. Объясни проще</h3><p>Строка со шпаргалки: «Объясни правило на одном бытовом примере.»</p><div class="lblrow"><span class="lbl">Полный промпт: Объясни проще</span><button class="copy" data-text="Объясни мне [правило, понятие или формулу] так, будто мне 14 лет и я слышу об этом впервые.
+
+Сначала одно предложение: что это и зачем нужно. Потом один бытовой пример (кухня, магазин, дорога, деньги в кошельке), на котором правило становится очевидным. Потом тот же пример научным языком, чтобы я связал одно с другим. В конце дай мне одну задачку на это правило и дождись моего ответа.">Скопировать</button></div><div class="box">Объясни мне [правило, понятие или формулу] так, будто мне 14 лет и я слышу об этом впервые.
+
+Сначала одно предложение: что это и зачем нужно. Потом один бытовой пример (кухня, магазин, дорога, деньги в кошельке), на котором правило становится очевидным. Потом тот же пример научным языком, чтобы я связал одно с другим. В конце дай мне одну задачку на это правило и дождись моего ответа.</div><h3>3. Найди ошибку</h3><p>Строка со шпаргалки: «Покажи первый неверный шаг в моём решении.»</p><div class="lblrow"><span class="lbl">Полный промпт: Найди ошибку</span><button class="copy" data-text="Ниже задача и моё решение по шагам. Найди ПЕРВЫЙ шаг, где я ошибся. Правильное решение целиком не пиши.
+
+Покажи:
+1) номер шага с ошибкой;
+2) что именно в нём неверно;
+3) какое правило или факт я нарушил;
+4) подсказку, как исправить этот шаг.
+
+Дальше я доделаю сам и пришлю, ты проверишь снова.
+
+Задача: [вставь]
+Моё решение: [вставь по шагам]">Скопировать</button></div><div class="box">Ниже задача и моё решение по шагам. Найди ПЕРВЫЙ шаг, где я ошибся. Правильное решение целиком не пиши.
+
+Покажи:
+1) номер шага с ошибкой;
+2) что именно в нём неверно;
+3) какое правило или факт я нарушил;
+4) подсказку, как исправить этот шаг.
+
+Дальше я доделаю сам и пришлю, ты проверишь снова.
+
+Задача: [вставь]
+Моё решение: [вставь по шагам]</div><h3>4. Сделай карточки</h3><p>Строка со шпаргалки: «Преврати конспект в пары «вопрос и ответ».»</p><div class="lblrow"><span class="lbl">Полный промпт: Сделай карточки</span><button class="copy" data-text="Преврати мой конспект в карточки для запоминания. Каждая карточка это короткий вопрос и ответ до 25 слов, один факт на карточку.
+
+Сделай 20-30 карточек и раздели их на три уровня: определения, связи между понятиями, применение на примерах. Выдай таблицей из двух колонок «Вопрос» и «Ответ», чтобы я мог скопировать её в Anki или Quizlet.
+
+Конспект:
+[вставь]">Скопировать</button></div><div class="box">Преврати мой конспект в карточки для запоминания. Каждая карточка это короткий вопрос и ответ до 25 слов, один факт на карточку.
+
+Сделай 20-30 карточек и раздели их на три уровня: определения, связи между понятиями, применение на примерах. Выдай таблицей из двух колонок «Вопрос» и «Ответ», чтобы я мог скопировать её в Anki или Quizlet.
+
+Конспект:
+[вставь]</div><h3>5. Спланируй практику</h3><p>Строка со шпаргалки: «Дай семь коротких заданий от простого к сложному.»</p><div class="lblrow"><span class="lbl">Полный промпт: Спланируй практику</span><button class="copy" data-text="Я учу [навык или тему]. Сейчас умею: [что уже получается]. Через неделю хочу уметь: [цель]. В день готов тратить [минут].
+
+Дай 7 заданий, по одному на день, от простого к сложному. У каждого задания время 15-30 минут, понятный признак «сделано» и типичная ошибка новичка на этом шаге. Седьмое задание итоговое, оно собирает всё, что было за неделю. Решать задания за меня не надо: я буду присылать результаты сюда, а ты проверяй.">Скопировать</button></div><div class="box">Я учу [навык или тему]. Сейчас умею: [что уже получается]. Через неделю хочу уметь: [цель]. В день готов тратить [минут].
+
+Дай 7 заданий, по одному на день, от простого к сложному. У каждого задания время 15-30 минут, понятный признак «сделано» и типичная ошибка новичка на этом шаге. Седьмое задание итоговое, оно собирает всё, что было за неделю. Решать задания за меня не надо: я буду присылать результаты сюда, а ты проверяй.</div></div>
+<div class="mid"><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></div>
+<div class="sec"><h2 id="sec-4">4. Работа и карьера</h2><p>Пять промптов для поиска работы и роста: собеседование, резюме, выбор между предложениями, разговор о повышении и ответ рекрутеру.</p><h3>1. Отрепетируй интервью</h3><p>Строка со шпаргалки: «Задавай вопросы по вакансии и оцени мои ответы.»</p><div class="lblrow"><span class="lbl">Полный промпт: Отрепетируй интервью</span><button class="copy" data-text="Ты руководитель, который нанимает на эту вакансию: [вставь текст вакансии]. Мой опыт: [кратко].
+
+Проведи со мной собеседование. Задавай по одному вопросу, всего 8: про опыт, про конкретные случаи из работы, два неудобных вопроса и один про ожидания по зарплате. После каждого моего ответа поставь оценку от 1 до 10, скажи, что прозвучало сильно и что слабо, и покажи, как ответить лучше по схеме: ситуация, задача, мои действия, результат с цифрой.
+
+В конце дай общий вердикт: позвал бы ты меня на следующий этап и что мне подтянуть.">Скопировать</button></div><div class="box">Ты руководитель, который нанимает на эту вакансию: [вставь текст вакансии]. Мой опыт: [кратко].
+
+Проведи со мной собеседование. Задавай по одному вопросу, всего 8: про опыт, про конкретные случаи из работы, два неудобных вопроса и один про ожидания по зарплате. После каждого моего ответа поставь оценку от 1 до 10, скажи, что прозвучало сильно и что слабо, и покажи, как ответить лучше по схеме: ситуация, задача, мои действия, результат с цифрой.
+
+В конце дай общий вердикт: позвал бы ты меня на следующий этап и что мне подтянуть.</div><h3>2. Обнови резюме</h3><p>Строка со шпаргалки: «Адаптируй резюме под вакансию. Не добавляй факты.»</p><div class="lblrow"><span class="lbl">Полный промпт: Обнови резюме</span><button class="copy" data-text="Ниже моё резюме и текст вакансии. Адаптируй резюме под эту вакансию.
+
+Правила:
+- не добавляй опыт, навыки и цифры, которых нет в моём резюме;
+- подними наверх то, что совпадает с требованиями вакансии;
+- перепиши пункты опыта через результат: что сделал и что это дало;
+- используй ключевые слова из вакансии, чтобы резюме прошло автоматический отбор.
+
+После резюме дай список: какие требования вакансии у меня закрыты, какие нет и что можно честно добавить, если я это действительно делал.
+
+Резюме: [вставь]
+Вакансия: [вставь]">Скопировать</button></div><div class="box">Ниже моё резюме и текст вакансии. Адаптируй резюме под эту вакансию.
+
+Правила:
+- не добавляй опыт, навыки и цифры, которых нет в моём резюме;
+- подними наверх то, что совпадает с требованиями вакансии;
+- перепиши пункты опыта через результат: что сделал и что это дало;
+- используй ключевые слова из вакансии, чтобы резюме прошло автоматический отбор.
+
+После резюме дай список: какие требования вакансии у меня закрыты, какие нет и что можно честно добавить, если я это действительно делал.
+
+Резюме: [вставь]
+Вакансия: [вставь]</div><h3>3. Сравни офферы</h3><p>Строка со шпаргалки: «Выдели различия в условиях и рисках.»</p><div class="lblrow"><span class="lbl">Полный промпт: Сравни офферы</span><button class="copy" data-text="У меня [два или три] предложения о работе. Условия каждого: [вставь].
+
+Сделай таблицу сравнения: сумма на руки в месяц, бонусы и как они считаются, формат работы, испытательный срок, рост через год, стабильность компании, что прописано в договоре и что обещано только на словах. Отдельно выпиши риски каждого предложения и вопросы, которые стоит задать до подписания.
+
+Мои приоритеты: [что для меня важнее всего]. С учётом приоритетов скажи, какое предложение сильнее.">Скопировать</button></div><div class="box">У меня [два или три] предложения о работе. Условия каждого: [вставь].
+
+Сделай таблицу сравнения: сумма на руки в месяц, бонусы и как они считаются, формат работы, испытательный срок, рост через год, стабильность компании, что прописано в договоре и что обещано только на словах. Отдельно выпиши риски каждого предложения и вопросы, которые стоит задать до подписания.
+
+Мои приоритеты: [что для меня важнее всего]. С учётом приоритетов скажи, какое предложение сильнее.</div><h3>4. Собери аргументы</h3><p>Строка со шпаргалки: «Сгруппируй мои результаты для разговора о повышении.»</p><div class="lblrow"><span class="lbl">Полный промпт: Собери аргументы</span><button class="copy" data-text="Я хочу попросить [повышение зарплаты или должности]. Мои результаты за [период]: [перечисли всё, что сделал, как есть, даже мелочи].
+
+Сгруппируй результаты в три блока: что я принёс компании в деньгах или сэкономленном времени, какую ответственность взял сверх своих обязанностей, чему научился и что теперь умею. Где можно, переведи в цифры.
+
+Потом напиши план разговора с руководителем на 10 минут: с чего начать, как назвать желаемую сумму и что ответить на «сейчас нет бюджета». Тон спокойный и уверенный, без давления.">Скопировать</button></div><div class="box">Я хочу попросить [повышение зарплаты или должности]. Мои результаты за [период]: [перечисли всё, что сделал, как есть, даже мелочи].
+
+Сгруппируй результаты в три блока: что я принёс компании в деньгах или сэкономленном времени, какую ответственность взял сверх своих обязанностей, чему научился и что теперь умею. Где можно, переведи в цифры.
+
+Потом напиши план разговора с руководителем на 10 минут: с чего начать, как назвать желаемую сумму и что ответить на «сейчас нет бюджета». Тон спокойный и уверенный, без давления.</div><h3>5. Напиши письмо</h3><p>Строка со шпаргалки: «Составь короткий ответ рекрутеру с моими вопросами.»</p><div class="lblrow"><span class="lbl">Полный промпт: Напиши письмо</span><button class="copy" data-text="Мне написал рекрутер: [вставь его сообщение]. Мне это [интересно или пока сомневаюсь]. Хочу узнать: [зарплатная вилка, формат, задачи, сроки].
+
+Напиши короткий ответ до 600 знаков: поблагодари, в двух предложениях скажи, чем мой опыт подходит, и задай мои вопросы списком. Тон вежливый и деловой. Дай два варианта: для мессенджера и для почты, у второго придумай тему письма.">Скопировать</button></div><div class="box">Мне написал рекрутер: [вставь его сообщение]. Мне это [интересно или пока сомневаюсь]. Хочу узнать: [зарплатная вилка, формат, задачи, сроки].
+
+Напиши короткий ответ до 600 знаков: поблагодари, в двух предложениях скажи, чем мой опыт подходит, и задай мои вопросы списком. Тон вежливый и деловой. Дай два варианта: для мессенджера и для почты, у второго придумай тему письма.</div></div>
+<div class="sec"><h2 id="sec-5">5. Для денег (её не было в ролике)</h2><p>Пятая шпаргалка, которую я оставил для бота. Пять промптов идут по порядку и складываются в один путь: найти, за что тебе заплатят, назначить цену, написать первое сообщение, собрать первых клиентов и продать им ещё раз. Делай их в одном чате, тогда каждый следующий ответ опирается на предыдущий.</p><h3>1. Найди платную услугу</h3><p>Строка со шпаргалки: «Из моих навыков собери три услуги, за которые платят.»</p><div class="lblrow"><span class="lbl">Полный промпт: Найди платную услугу</span><button class="copy" data-text="Помоги мне найти, за что мне могут платить уже сейчас. Что я умею: [навыки, профессия, хобби]. Опыт: [сколько лет и где]. Сколько часов в неделю готов на это тратить: [часы]. С кем мне приятно работать: [кто эти люди].
+
+Сначала задай мне 7 вопросов о том, какие задачи я уже решал для других людей и за что меня благодарили. Дождись ответов.
+
+Потом предложи 3 платные услуги. Для каждой напиши: кто конкретно платит, какую его проблему я решаю, результат для клиента одним предложением и как продать услугу первый раз без сайта и рекламы. Выбери одну, которую проще всего продать в ближайшие 14 дней, и объясни почему.">Скопировать</button></div><div class="box">Помоги мне найти, за что мне могут платить уже сейчас. Что я умею: [навыки, профессия, хобби]. Опыт: [сколько лет и где]. Сколько часов в неделю готов на это тратить: [часы]. С кем мне приятно работать: [кто эти люди].
+
+Сначала задай мне 7 вопросов о том, какие задачи я уже решал для других людей и за что меня благодарили. Дождись ответов.
+
+Потом предложи 3 платные услуги. Для каждой напиши: кто конкретно платит, какую его проблему я решаю, результат для клиента одним предложением и как продать услугу первый раз без сайта и рекламы. Выбери одну, которую проще всего продать в ближайшие 14 дней, и объясни почему.</div><h3>2. Назначь цену</h3><p>Строка со шпаргалки: «Посчитай цену, ниже которой работать нельзя.»</p><div class="lblrow"><span class="lbl">Полный промпт: Назначь цену</span><button class="copy" data-text="Услуга: [что делаю]. Клиент: [кто]. Сколько часов уходит на один заказ вместе с перепиской и правками: [часы]. Расходы на один заказ: [сервисы, материалы]. Сколько хочу получать в месяц: [сумма]. Сколько заказов в месяц реально возьму: [число].
+
+Посчитай:
+1) минимальную цену заказа, ниже которой я работаю себе в убыток;
+2) рыночную вилку для [город или онлайн] и объясни, откуда эти цифры;
+3) три пакета: базовый, стандарт и максимум, с составом каждого. Стандарт сделай самым выгодным для клиента, его будут брать чаще всего.
+
+В конце дай одну фразу, которой я назову цену в переписке спокойно и без оправданий.">Скопировать</button></div><div class="box">Услуга: [что делаю]. Клиент: [кто]. Сколько часов уходит на один заказ вместе с перепиской и правками: [часы]. Расходы на один заказ: [сервисы, материалы]. Сколько хочу получать в месяц: [сумма]. Сколько заказов в месяц реально возьму: [число].
+
+Посчитай:
+1) минимальную цену заказа, ниже которой я работаю себе в убыток;
+2) рыночную вилку для [город или онлайн] и объясни, откуда эти цифры;
+3) три пакета: базовый, стандарт и максимум, с составом каждого. Стандарт сделай самым выгодным для клиента, его будут брать чаще всего.
+
+В конце дай одну фразу, которой я назову цену в переписке спокойно и без оправданий.</div><h3>3. Напиши первое сообщение</h3><p>Строка со шпаргалки: «Составь сообщение, на которое ответят.»</p><div class="lblrow"><span class="lbl">Полный промпт: Напиши первое сообщение</span><button class="copy" data-text="Я предлагаю [услуга] для [кто клиент]. Клиент получает: [результат]. Пишу человеку, которого [нашёл в соцсетях, знаю лично или увидел его запрос в чате].
+
+Напиши первое сообщение до 500 знаков. Правила: начни с его ситуации, о себе одна строка, один конкретный пример результата, в конце простой вопрос, на который легко ответить. Без «здравствуйте, меня зовут», без прайса в первом сообщении и без давления.
+
+Дай 3 варианта: знакомому, незнакомцу по его посту и человеку, который сам искал исполнителя. Добавь одно короткое повторное сообщение на случай, если он молчит 3 дня.">Скопировать</button></div><div class="box">Я предлагаю [услуга] для [кто клиент]. Клиент получает: [результат]. Пишу человеку, которого [нашёл в соцсетях, знаю лично или увидел его запрос в чате].
+
+Напиши первое сообщение до 500 знаков. Правила: начни с его ситуации, о себе одна строка, один конкретный пример результата, в конце простой вопрос, на который легко ответить. Без «здравствуйте, меня зовут», без прайса в первом сообщении и без давления.
+
+Дай 3 варианта: знакомому, незнакомцу по его посту и человеку, который сам искал исполнителя. Добавь одно короткое повторное сообщение на случай, если он молчит 3 дня.</div><h3>4. Найди первых клиентов</h3><p>Строка со шпаргалки: «Дай план, где взять 10 первых клиентов за две недели.»</p><div class="lblrow"><span class="lbl">Полный промпт: Найди первых клиентов</span><button class="copy" data-text="Моя услуга: [что]. Цена: [сумма]. Клиент: [кто]. Бюджет на рекламу: [нет или сколько].
+
+Составь план на 14 дней, как найти первых 10 клиентов. Включи:
+1) где мои клиенты уже собираются и обсуждают свою проблему: типы чатов, каналов и площадок, запросы для поиска;
+2) категории знакомых, которым стоит рассказать об услуге, чтобы я быстро вспомнил 20 человек;
+3) один пост о запуске услуги для моих соцсетей;
+4) сколько сообщений в день писать и как вести учёт в простой таблице.
+
+Разбей план по дням, на каждый день не больше часа работы.">Скопировать</button></div><div class="box">Моя услуга: [что]. Цена: [сумма]. Клиент: [кто]. Бюджет на рекламу: [нет или сколько].
+
+Составь план на 14 дней, как найти первых 10 клиентов. Включи:
+1) где мои клиенты уже собираются и обсуждают свою проблему: типы чатов, каналов и площадок, запросы для поиска;
+2) категории знакомых, которым стоит рассказать об услуге, чтобы я быстро вспомнил 20 человек;
+3) один пост о запуске услуги для моих соцсетей;
+4) сколько сообщений в день писать и как вести учёт в простой таблице.
+
+Разбей план по дням, на каждый день не больше часа работы.</div><h3>5. Продай ещё раз</h3><p>Строка со шпаргалки: «Придумай, что предложить тому, кто уже купил.»</p><div class="lblrow"><span class="lbl">Полный промпт: Продай ещё раз</span><button class="copy" data-text="Мой клиент купил [услугу или продукт] за [сумма] и получил [результат]. Мои догадки, что ему может понадобиться дальше: [если есть].
+
+Предложи 5 вариантов следующей покупки: дополнение, продолжение, сопровождение по подписке, пакет подороже с выгодой для клиента и предложение для его знакомых. Для каждого напиши цену, когда предлагать (сразу, через неделю или через месяц) и текст предложения до 400 знаков.
+
+Выбери вариант, который купят вероятнее всего, и напиши, как в том же сообщении попросить отзыв и рекомендацию, чтобы это звучало естественно.">Скопировать</button></div><div class="box">Мой клиент купил [услугу или продукт] за [сумма] и получил [результат]. Мои догадки, что ему может понадобиться дальше: [если есть].
+
+Предложи 5 вариантов следующей покупки: дополнение, продолжение, сопровождение по подписке, пакет подороже с выгодой для клиента и предложение для его знакомых. Для каждого напиши цену, когда предлагать (сразу, через неделю или через месяц) и текст предложения до 400 знаков.
+
+Выбери вариант, который купят вероятнее всего, и напиши, как в том же сообщении попросить отзыв и рекомендацию, чтобы это звучало естественно.</div></div>
+<div class="sec"><h2 id="sec-6">С чего начать сегодня</h2><ol><li>Открой ту шпаргалку, где у тебя сейчас самая горящая задача, и сделай один промпт до конца.</li><li>Если хочешь, чтобы навыки начали приносить деньги, пройди пятую шпаргалку по порядку в одном чате, это займёт около часа.</li><li>Удачные ответы сохраняй себе: через неделю у тебя будет своя библиотека под твою работу.</li></ol><p>Как я встраиваю нейросети в контент и продажи на своих проектах, разбираю в канале @Ai_realshift.</p></div>
+<style>.endq{margin:34px 0 8px;padding:22px 24px;border:1px solid var(--card-border);border-left:3px solid var(--accent);border-radius:14px;background:var(--surface)}.endq p{margin:0 0 14px;font-weight:600;font-size:16px;line-height:1.5;color:var(--text)}.endb{display:flex;flex-direction:column;gap:10px}.endbtn{display:block;text-align:center;font-family:var(--font-display);font-size:15px;font-weight:600;padding:13px 18px;border-radius:999px;background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent)}.endbtn:hover{opacity:.85}</style><div class="endq"><p>Ты дочитал до конца, значит тебе правда интересно. Выбери, что дальше, и я отвечу тебе в чате лично:</p><div class="endb"><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-razbor" target="_blank" rel="noopener">Разбери мой блог</a><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-agent" target="_blank" rel="noopener">Хочу так же, с агентом</a><a class="endbtn" href="https://t.me/izhmukov777_bot?start=end-vopros" target="_blank" rel="noopener">Остался вопрос по гайду</a></div></div>
+
+<div class="cta"><span class="eyebrow"><i class="dot"></i>Следующий шаг</span><div class="ttl">Хочешь так же, но под свой блог и продукт?</div><p class="sub">Я собрал систему, по которой обычный человек запускает блог с нуля и набирает аудиторию без съёмок, монтажа и команды. Внутри разбор, с которого стартовал сам.</p><a class="cta-btn" href="https://vladimir-izhmukov.ru/reels-chatgpt/">Открыть разбор: с чего начать<span class="ar">&#8594;</span></a></div>
+</article>
+<aside class="toc"><div class="h">На странице</div><a href="#sec-0">Почему эти промпты работают</a><a href="#sec-1">1. Бизнес</a><a href="#sec-2">2. Контент</a><a href="#sec-3">3. Учёба</a><a href="#sec-4">4. Работа и карьера</a><a href="#sec-5">5. Для денег (её не было в ролике)</a><a href="#sec-6">С чего начать сегодня</a></aside>
+</main>
+<footer class="ft"><div class="ft-in"><a class="logo" href="/">Владимир<i class="sq"></i>Ижмуков</a><span class="sp"></span><nav class="ft-links"><a href="/">Все материалы</a><a href="/about/">Обо мне</a><a href="/oferta/">Оферта</a><a href="/policy/">Политика</a><a href="https://blog.vladimir-izhmukov.ru/">Блог</a><a href="https://vladimir-izhmukov.ru/reels-chatgpt/">С чего начать в соцсетях</a></nav></div><div class="ft-bot">Владимир Ижмуков · @reelsmentor_ai · канал @Ai_realshift</div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    navigator.clipboard.writeText(b.getAttribute('data-text')).then(function(){
+      var o=b.textContent;b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a');
+  var heads=Array.prototype.slice.call(document.querySelectorAll('.sec h2[id]'));
+  if(!links.length||!heads.length)return;
+  function mark(){
+    var cur=0;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top<=90)cur=i;else break;
+    }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  }
+  // The observer fires exactly when a heading crosses the band under the header, which
+  // is exactly when the active section can change. The class is then set from geometry
+  // so a section taller than the band (most of them) never leaves the menu blank.
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(mark,{rootMargin:'-86px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){io.observe(h);});
+  }else{
+    window.addEventListener('scroll',mark,{passive:true});
+  }
+  mark();
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    var h=a.getAttribute('href'),el=document.getElementById(h.slice(1));
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',h);
+  });});
+})();
+</script>
+</body></html>
